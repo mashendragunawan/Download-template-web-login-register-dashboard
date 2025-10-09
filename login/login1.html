@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Halaman Login Kreatif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff6b6b, #ffa36c, #ffe66d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
+        }
+
+        .login-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* ===== STYLE UNTUK SETIAP LOGIN YANG UNIK ===== */
+
+        /* Login 1 - Glass Morphism 3D */
+        .login-1 {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float3D 6s ease-in-out infinite;
+            box-shadow: 
+                0 25px 45px rgba(0,0,0,0.1),
+                inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        @keyframes float3D {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        .login-1::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Login 2 - Cyberpunk Neon */
+        .login-2 {
+            background: #0a0a0a;
+            border: 2px solid #00ffff;
+            border-radius: 0;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: cyberGlow 2s ease-in-out infinite alternate;
+            box-shadow: 
+                0 0 20px #00ffff,
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        @keyframes cyberGlow {
+            from {
+                box-shadow: 
+                    0 0 20px #00ffff,
+                    inset 0 0 20px rgba(0, 255, 255, 0.1);
+            }
+            to {
+                box-shadow: 
+                    0 0 40px #00ffff,
+                    0 0 60px #00ffff,
+                    inset 0 0 30px rgba(0, 255, 255, 0.2);
+            }
+        }
+
+        .login-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: cyberScan 3s linear infinite;
+        }
+
+        @keyframes cyberScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Login 3 - Liquid Morph */
+        .login-3 {
+            background: linear-gradient(45deg, #ff6b6b, #ffa36c, #ffe66d);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            animation: liquidMorph 8s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes liquidMorph {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        }
+
+        .login-3::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Login 4 - Holographic */
+        .login-4 {
+            background: linear-gradient(135deg, 
+                rgba(255,0,128,0.8),
+                rgba(0,255,255,0.8),
+                rgba(255,255,0,0.8));
+            background-size: 200% 200%;
+            border-radius: 15px;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            animation: hologram 4s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes hologram {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: hue-rotate(180deg);
+            }
+        }
+
+        .login-4::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: white;
+            animation: scanLine 2s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Login 5 - Space Galaxy */
+        .login-5 {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
+                #0f0c29;
+            border-radius: 15px;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: spaceFloat 10s ease-in-out infinite;
+        }
+
+        @keyframes spaceFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        .login-5::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: stars 20s linear infinite;
+        }
+
+        @keyframes stars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-1350px); }
+        }
+
+        /* Login 6 - Retro Game */
+        .login-6 {
+            background: #2d1b69;
+            border: 4px solid #ff00ff;
+            border-radius: 0;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: retroFlicker 0.1s infinite;
+        }
+
+        @keyframes retroFlicker {
+            0%, 100% { border-color: #ff00ff; }
+            50% { border-color: #00ffff; }
+        }
+
+        .login-6::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 255, 0.1) 2px,
+                    rgba(255, 0, 255, 0.1) 4px
+                );
+            animation: scanRetro 0.5s linear infinite;
+        }
+
+        @keyframes scanRetro {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100%); }
+        }
+
+        /* Login 7 - Liquid Metal */
+        .login-7 {
+            background: linear-gradient(135deg, #434343, #000000);
+            border-radius: 15px;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: metalReflect 3s ease-in-out infinite;
+        }
+
+        @keyframes metalReflect {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(255,255,255,0.2),
+                    inset 0 0 20px rgba(255,255,255,0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(255,255,255,0.4),
+                    inset 0 0 30px rgba(255,255,255,0.2);
+            }
+        }
+
+        .login-7::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: metalShine 3s ease-in-out infinite;
+        }
+
+        @keyframes metalShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Login 8 - Psychedelic */
+        .login-8 {
+            background: 
+                conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            border-radius: 50% 20% / 10% 40%;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            animation: psychedelicSpin 4s linear infinite, morphShape 6s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes psychedelicSpin {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes morphShape {
+            0%, 100% { border-radius: 50% 20% / 10% 40%; }
+            25% { border-radius: 60% 40% / 30% 50%; }
+            50% { border-radius: 30% 60% / 70% 30%; }
+            75% { border-radius: 40% 40% / 40% 60%; }
+        }
+
+        /* Login 9 - Glitch Art */
+        .login-9 {
+            background: #000;
+            border: none;
+            border-radius: 0;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: glitch 0.3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .login-9::before,
+        .login-9::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            mix-blend-mode: difference;
+        }
+
+        .login-9::before {
+            animation: glitchBefore 0.3s infinite;
+            transform: translate(2px, 0);
+        }
+
+        .login-9::after {
+            animation: glitchAfter 0.3s infinite;
+            transform: translate(-2px, 0);
+        }
+
+        @keyframes glitchBefore {
+            0%, 100% { transform: translate(2px, 0); }
+            50% { transform: translate(-2px, 0); }
+        }
+
+        @keyframes glitchAfter {
+            0%, 100% { transform: translate(-2px, 0); }
+            50% { transform: translate(2px, 0); }
+        }
+
+        /* Login 10 - Floating Islands */
+        .login-10 {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 15px;
+            padding: 40px;
+            width: 380px;
+            min-height: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: islandFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes islandFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                border-radius: 15px;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(1deg);
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+            50% { 
+                transform: translateY(-5px) rotate(-1deg);
+                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+            }
+            75% { 
+                transform: translateY(-10px) rotate(0.5deg);
+                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+            }
+        }
+
+        .login-10::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: cloudFloat 20s linear infinite;
+        }
+
+        @keyframes cloudFloat {
+            0% { transform: translateX(-100px) translateY(0); }
+            50% { transform: translateX(100px) translateY(-20px); }
+            100% { transform: translateX(-100px) translateY(0); }
+        }
+
+        .login-10::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: cloudFloat 15s linear infinite reverse;
+        }
+
+        /* Common Styles untuk semua login */
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: currentColor;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: rgba(255,255,255,0.8);
+            z-index: 2;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            z-index: 1;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .forgot-password:hover {
+            color: white;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: auto;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .signup-link a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: white;
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .login-1, .login-2, .login-3, .login-4, .login-5,
+            .login-6, .login-7, .login-8, .login-9, .login-10 {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>10 Halaman Login Kreatif & Unik</h1>
+        <p style="color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Setiap desain memiliki karakter dan animasi yang berbeda</p>
+    </div>
+
+    <div class="login-container">
+        <!-- Login 1 - Glass Morphism 3D -->
+        <div class="login-1">
+            <h2 class="page-title">Glass 3D</h2>
+            <div class="form-group">
+                <label for="username1">Username</label>
+                <input type="text" id="username1" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password1">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password1" placeholder="Enter your password">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember1">
+                    <label for="remember1">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button class="login-btn" style="background: linear-gradient(45deg, #667eea, #764ba2);">Login to System</button>
+            <div class="signup-link">
+                <p>New user? <a href="#">Create account</a></p>
+            </div>
+        </div>
+
+        <!-- Login 2 - Cyberpunk Neon -->
+        <div class="login-2">
+            <h2 class="page-title">Cyberpunk</h2>
+            <div class="form-group">
+                <label for="username2">User ID</label>
+                <input type="text" id="username2" placeholder="Enter user ID">
+            </div>
+            <div class="form-group">
+                <label for="password2">Access Code</label>
+                <div class="password-container">
+                    <input type="password" id="password2" placeholder="Enter access code">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember2">
+                    <label for="remember2">Save session</label>
+                </div>
+                <a href="#" class="forgot-password">Recover access</a>
+            </div>
+            <button class="login-btn" style="background: #00ffff; color: #000;">System Access</button>
+            <div class="signup-link">
+                <p>No access? <a href="#">Request ID</a></p>
+            </div>
+        </div>
+
+        <!-- Login 3 - Liquid Morph -->
+        <div class="login-3">
+            <h2 class="page-title" style="color: #333;">Liquid UI</h2>
+            <div class="form-group">
+                <label for="username3" style="color: #333;">Username</label>
+                <input type="text" id="username3" placeholder="Enter username" style="color: #333; background: rgba(255,255,255,0.8);">
+            </div>
+            <div class="form-group">
+                <label for="password3" style="color: #333;">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password3" placeholder="Enter password" style="color: #333; background: rgba(255,255,255,0.8);">
+                    <button type="button" class="toggle-password" style="color: #333;"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember3">
+                    <label for="remember3" style="color: #333;">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password" style="color: #333;">Forgot password?</a>
+            </div>
+            <button class="login-btn" style="background: #333; color: white;">Fluid Login</button>
+            <div class="signup-link">
+                <p style="color: #333;">New here? <a href="#" style="color: #333;">Join flow</a></p>
+            </div>
+        </div>
+
+        <!-- Login 4 - Holographic -->
+        <div class="login-4">
+            <h2 class="page-title">Hologram</h2>
+            <div class="form-group">
+                <label for="username4">Username</label>
+                <input type="text" id="username4" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password4">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password4" placeholder="Enter password">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember4">
+                    <label for="remember4">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button class="login-btn" style="background: linear-gradient(45deg, #ff0080, #00ffff);">Holo Access</button>
+            <div class="signup-link">
+                <p>New user? <a href="#">Activate</a></p>
+            </div>
+        </div>
+
+        <!-- Login 5 - Space Galaxy -->
+        <div class="login-5">
+            <h2 class="page-title">Space Portal</h2>
+            <div class="form-group">
+                <label for="username5">Astro ID</label>
+                <input type="text" id="username5" placeholder="Enter Astro ID">
+            </div>
+            <div class="form-group">
+                <label for="password5">Galactic Key</label>
+                <div class="password-container">
+                    <input type="password" id="password5" placeholder="Enter galactic key">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember5">
+                    <label for="remember5">Remember orbit</label>
+                </div>
+                <a href="#" class="forgot-password">Lost in space?</a>
+            </div>
+            <button class="login-btn" style="background: linear-gradient(45deg, #667eea, #764ba2);">Warp Drive</button>
+            <div class="signup-link">
+                <p>New astronaut? <a href="#">Join mission</a></p>
+            </div>
+        </div>
+
+        <!-- Login 6 - Retro Game -->
+        <div class="login-6">
+            <h2 class="page-title">Retro Game</h2>
+            <div class="form-group">
+                <label for="username6">Player Name</label>
+                <input type="text" id="username6" placeholder="Enter player name">
+            </div>
+            <div class="form-group">
+                <label for="password6">Game Code</label>
+                <div class="password-container">
+                    <input type="password" id="password6" placeholder="Enter game code">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember6">
+                    <label for="remember6">Save game</label>
+                </div>
+                <a href="#" class="forgot-password">Game over?</a>
+            </div>
+            <button class="login-btn" style="background: #ff00ff; color: white;">Start Game</button>
+            <div class="signup-link">
+                <p>New player? <a href="#">Press Start</a></p>
+            </div>
+        </div>
+
+        <!-- Login 7 - Liquid Metal -->
+        <div class="login-7">
+            <h2 class="page-title">Metal Core</h2>
+            <div class="form-group">
+                <label for="username7">Metal ID</label>
+                <input type="text" id="username7" placeholder="Enter metal ID">
+            </div>
+            <div class="form-group">
+                <label for="password7">Alloy Key</label>
+                <div class="password-container">
+                    <input type="password" id="password7" placeholder="Enter alloy key">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember7">
+                    <label for="remember7">Forge memory</label>
+                </div>
+                <a href="#" class="forgot-password">Melted key?</a>
+            </div>
+            <button class="login-btn" style="background: linear-gradient(45deg, #434343, #000000); color: white;">Forge Access</button>
+            <div class="signup-link">
+                <p>New alloy? <a href="#">Smelt now</a></p>
+            </div>
+        </div>
+
+        <!-- Login 8 - Psychedelic -->
+        <div class="login-8">
+            <h2 class="page-title">Psychedelic</h2>
+            <div class="form-group">
+                <label for="username8">Rainbow ID</label>
+                <input type="text" id="username8" placeholder="Enter rainbow ID">
+            </div>
+            <div class="form-group">
+                <label for="password8">Color Key</label>
+                <div class="password-container">
+                    <input type="password" id="password8" placeholder="Enter color key">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember8">
+                    <label for="remember8">Trip memory</label>
+                </div>
+                <a href="#" class="forgot-password">Lost colors?</a>
+            </div>
+            <button class="login-btn" style="background: white; color: black;">Start Trip</button>
+            <div class="signup-link">
+                <p>New vibe? <a href="#">Join rainbow</a></p>
+            </div>
+        </div>
+
+        <!-- Login 9 - Glitch Art -->
+        <div class="login-9">
+            <h2 class="page-title">Glitch Zone</h2>
+            <div class="form-group">
+                <label for="username9">Glitch ID</label>
+                <input type="text" id="username9" placeholder="Enter glitch ID">
+            </div>
+            <div class="form-group">
+                <label for="password9">Error Code</label>
+                <div class="password-container">
+                    <input type="password" id="password9" placeholder="Enter error code">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember9">
+                    <label for="remember9">Cache error</label>
+                </div>
+                <a href="#" class="forgot-password">System crash?</a>
+            </div>
+            <button class="login-btn" style="background: #ff0000; color: white;">Force Login</button>
+            <div class="signup-link">
+                <p>New glitch? <a href="#">Corrupt data</a></p>
+            </div>
+        </div>
+
+        <!-- Login 10 - Floating Islands -->
+        <div class="login-10">
+            <h2 class="page-title">Sky Islands</h2>
+            <div class="form-group">
+                <label for="username10">Cloud ID</label>
+                <input type="text" id="username10" placeholder="Enter cloud ID">
+            </div>
+            <div class="form-group">
+                <label for="password10">Sky Key</label>
+                <div class="password-container">
+                    <input type="password" id="password10" placeholder="Enter sky key">
+                    <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember10">
+                    <label for="remember10">Remember flight</label>
+                </div>
+                <a href="#" class="forgot-password">Lost altitude?</a>
+            </div>
+            <button class="login-btn" style="background: linear-gradient(45deg, #74b9ff, #0984e3);">Take Flight</button>
+            <div class="signup-link">
+                <p>New flyer? <a href="#">Get wings</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 Creative Login Designs - No More Boring Interfaces!</p>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const passwordInput = this.parentElement.querySelector('input');
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Change icon
+                this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+            });
+        });
+
+        // Form submission dengan animasi
+        document.querySelectorAll('.login-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Simpan teks asli tombol
+                const originalText = this.textContent;
+                const originalBg = this.style.background;
+                
+                // Ubah teks tombol dan nonaktifkan
+                this.textContent = 'Authenticating...';
+                this.disabled = true;
+                this.style.background = 'linear-gradient(45deg, #00b894, #00a085)';
+                
+                // Simulasi proses login
+                setTimeout(() => {
+                    // Kembalikan teks asli dan aktifkan tombol
+                    this.textContent = 'Access Granted!';
+                    
+                    // Kembalikan ke keadaan semula setelah 1.5 detik
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.disabled = false;
+                        this.style.background = originalBg;
+                    }, 1500);
+                }, 2000);
+            });
+        });
+
+        // Efek hover tambahan untuk input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            });
+            
+            input.addEventListener('mouseleave', function() {
+                if (!this.matches(':focus')) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

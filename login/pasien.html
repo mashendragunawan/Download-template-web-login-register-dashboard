@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Pasien - CPPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .hospital-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        
+        .doc-type {
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #f1f5f9;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .section-content {
+            padding: 15px;
+        }
+        
+        /* Vital Signs Grid */
+        .vital-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        
+        .vital-item {
+            text-align: center;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+        
+        .vital-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        
+        .vital-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+        
+        /* Diagnosis Tags */
+        .diagnosis-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .diagnosis-tag {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #dbeafe;
+        }
+        
+        .diagnosis-tag.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fde68a;
+        }
+        
+        .diagnosis-tag.danger {
+            background: #fef2f2;
+            color: #991b1b;
+            border-color: #fecaca;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        
+        .action-icon {
+            color: #3b82f6;
+            font-size: 14px;
+        }
+        
+        /* Footer Note */
+        .footer-note {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #92400e;
+        }
+        
+        /* List Styles */
+        .content-list {
+            list-style: none;
+        }
+        
+        .content-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .content-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .vital-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .vital-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="hospital-name">PESAWAT FAREBNE</div>
+            <div class="doc-type">Catatan Perkembangan Pasien (CPPT) - FIM INIJIRI</div>
+        </div>
+        
+        <!-- Keluhan Utama -->
+        <div class="section">
+            <div class="section-header">Keluhan Utama</div>
+            <div class="section-content">
+                <ul class="content-list">
+                    <li>Went Lauki Belirkenliği</li>
+                    <li>Müali, muntan etkileşimi</li>
+                    <li>Bahatı kimlik belirkenliği</li>
+                    <li>Dönemi makar mesle şekilde</li>
+                    <li>Plasten mergansı, banyak piktare karara sakinaya sahip olup, nakit makar bedruru, piston metası takıl karara parçabilme</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Tanda Vital -->
+        <div class="section">
+            <div class="section-header">Tanda-Tanda Vital</div>
+            <div class="section-content">
+                <div class="vital-grid">
+                    <div class="vital-item">
+                        <div class="vital-value">CM</div>
+                        <div class="vital-label">Kısıtadırlar</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">2010</div>
+                        <div class="vital-label">Saata Nyeri</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">100%</div>
+                        <div class="vital-label">TD</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">51</div>
+                        <div class="vital-label">RH</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">20</div>
+                        <div class="vital-label">PB</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">36,7</div>
+                        <div class="vital-label">Sıhı</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-value">96</div>
+                        <div class="vital-label">SpO2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pemeriksaan Fisik -->
+        <div class="section">
+            <div class="section-header">Pemeriksaan Fisik</div>
+            <div class="section-content">
+                <div><strong>Kepala:</strong> Kaydığında artesiniz, Saksa teknikler, NCH (L), pirsel bir başarılıyı (c), bibi ralanma (v)</div>
+                <div style="margin-top: 10px;"><strong>Leher:</strong> NPV-24cm, güncel tekrar (c), ACB Co/L (c), Birder (c)</div>
+                <div style="margin-top: 10px;"><strong>Thorax:</strong> Benital genel etmekte, Trembla Lauki normal</div>
+                <div style="margin-top: 10px;"><strong>Paru:</strong> Rebiscus (c), SD: Rebiscus, Vac Servi, Rhohol kasar sözde oyunluğu (c)</div>
+                <div style="margin-top: 10px;"><strong>Jantung:</strong> Balba-balba şahiliği metabolite (c) (c), gelip (c)</div>
+                <div style="margin-top: 10px;"><strong>Abdomen:</strong> Cerimburg, BU (c) meningüst, tembet, Scopel, NT (c) EPSpatrium</div>
+                <div style="margin-top: 10px;"><strong>Ekstremitas:</strong> Aturul hangisi, CNT <2 daha, edema +/-/+</div>
+            </div>
+        </div>
+        
+        <!-- Diagnosis -->
+        <div class="section">
+            <div class="section-header">Diagnosis Kerja</div>
+            <div class="section-content">
+                <div class="diagnosis-tags">
+                    <div class="diagnosis-tag">Defensal Söküne</div>
+                    <div class="diagnosis-tag">CHF</div>
+                    <div class="diagnosis-tag warning">CMD</div>
+                    <div class="diagnosis-tag danger">ANEMIA EC PERDARANIM</div>
+                    <div class="diagnosis-tag">UXAB PETITIONI EC GASTROPAIN READ</div>
+                    <div class="diagnosis-tag danger">AKI</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rencana Terapi -->
+        <div class="section">
+            <div class="section-header">Rencana Terapi</div>
+            <div class="section-content">
+                <div><strong>Terapi Lanjutan:</strong> dünden Permits Limitı [Hapısı SOAP]</div>
+                <div style="margin-top: 8px;"><strong>Dokumen PDF:</strong> Templ Laujul sensal PDF - Eriny Yo iyetten ay</div>
+            </div>
+        </div>
+        
+        <!-- Catatan Footer -->
+        <div class="footer-note">
+            <strong>Catatan:</strong> Dokumentasi ini menggunakan format SOAP dengan pendekatan Charting By Exception (CBE).
+        </div>
+        
+        <!-- Aksi Cepat -->
+        <div class="section">
+            <div class="section-header">Aksi Cepat</div>
+            <div class="section-content">
+                <div class="quick-actions">
+                    <div class="action-btn">
+                        <span class="action-icon">📋</span>
+                        <span>Permintaan Lab</span>
+                    </div>
+                    <div class="action-btn">
+                        <span class="action-icon">📷</span>
+                        <span>Permintaan Radiologi</span>
+                    </div>
+                    <div class="action-btn">
+                        <span class="action-icon">📄</span>
+                        <span>DRM PDF</span>
+                    </div>
+                    <div class="action-btn">
+                        <span class="action-icon">👨‍⚕️</span>
+                        <span>Form Konsul</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interaksi sederhana untuk tombol aksi
+        document.querySelectorAll('.action-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const actionText = this.textContent.trim();
+                alert(`Membuka: ${actionText}`);
+            });
+        });
+        
+        // Interaksi untuk diagnosis tags
+        document.querySelectorAll('.diagnosis-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const diagnosis = this.textContent;
+                alert(`Detail Diagnosis: ${diagnosis}`);
+            });
+        });
+    </script>
+</body>
+</html>

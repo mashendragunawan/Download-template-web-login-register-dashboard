@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Panggil Antrian Modern</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.4;
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            height: calc(100vh - 200px);
+        }
+        
+        .doctor-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-top: 4px solid #3498db;
+        }
+        
+        .doctor-header {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .doctor-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .doctor-name i {
+            color: #3498db;
+        }
+        
+        .practice-time {
+            background-color: #e8f4fc;
+            color: #2980b9;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .patient-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .patient-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .patient-list::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+        
+        .patient-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            border-left: 3px solid #3498db;
+        }
+        
+        .patient-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .patient-id {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .patient-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #7f8c8d;
+        }
+        
+        .detail-value {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .current-time {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        /* Warna berbeda untuk setiap dokter */
+        .doctor-section:nth-child(1) {
+            border-top-color: #3498db;
+        }
+        
+        .doctor-section:nth-child(2) {
+            border-top-color: #e74c3c;
+        }
+        
+        .doctor-section:nth-child(3) {
+            border-top-color: #2ecc71;
+        }
+        
+        .doctor-section:nth-child(4) {
+            border-top-color: #f39c12;
+        }
+        
+        .doctor-section:nth-child(5) {
+            border-top-color: #9b59b6;
+        }
+        
+        @media (max-width: 1200px) {
+            .doctors-grid {
+                grid-template-columns: repeat(3, 1fr);
+                height: auto;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .doctors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-list-alt"></i> Daftar Panggil Antrian</h1>
+            <div class="subtitle">Sistem Informasi Antrian Modern - 5 Dokter</div>
+        </header>
+        
+        <div class="doctors-grid">
+            <!-- Dokter 1 -->
+            <div class="doctor-section">
+                <div class="doctor-header">
+                    <div class="doctor-name"><i class="fas fa-user-md"></i> DAVIN TAKARYANTO</div>
+                    <div class="practice-time">07:00 - 10:30</div>
+                </div>
+                
+                <div class="patient-list">
+                    <div class="patient-card">
+                        <div class="patient-id">90366151 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">IF-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">27-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">57882630 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">IF-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">29-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">67667321 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">08-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-time">
+                    <i class="far fa-clock"></i> <span id="time1">07:45:22</span>
+                </div>
+            </div>
+            
+            <!-- Dokter 2 -->
+            <div class="doctor-section">
+                <div class="doctor-header">
+                    <div class="doctor-name"><i class="fas fa-user-md"></i> ARIEF RIDHA</div>
+                    <div class="practice-time">15:00 - 19:00</div>
+                </div>
+                
+                <div class="patient-list">
+                    <div class="patient-card">
+                        <div class="patient-id">77667321 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">08-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">68641102 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">08-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">86902982 <span class="status-badge status-pending">SEP Belum</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">09-09-2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">RM:</span>
+                                <span class="detail-value">5221</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-time">
+                    <i class="far fa-clock"></i> <span id="time2">15:30:45</span>
+                </div>
+            </div>
+            
+            <!-- Dokter 3 -->
+            <div class="doctor-section">
+                <div class="doctor-header">
+                    <div class="doctor-name"><i class="fas fa-user-md"></i> ANITA RAMLIE</div>
+                    <div class="practice-time">09:00 - 13:00</div>
+                </div>
+                
+                <div class="patient-list">
+                    <div class="patient-card">
+                        <div class="patient-id">53672819 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">IF-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">28-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">78291034 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">28-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">44563219 <span class="status-badge status-pending">SEP Belum</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">29-09-2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">RM:</span>
+                                <span class="detail-value">6734</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-time">
+                    <i class="far fa-clock"></i> <span id="time3">10:15:33</span>
+                </div>
+            </div>
+            
+            <!-- Dokter 4 -->
+            <div class="doctor-section">
+                <div class="doctor-header">
+                    <div class="doctor-name"><i class="fas fa-user-md"></i> BUDI SANTOSO</div>
+                    <div class="practice-time">08:00 - 12:00</div>
+                </div>
+                
+                <div class="patient-list">
+                    <div class="patient-card">
+                        <div class="patient-id">88901234 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">IF-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">27-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">55673829 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">28-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">33456781 <span class="status-badge status-pending">SEP Belum</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">29-09-2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">RM:</span>
+                                <span class="detail-value">4455</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-time">
+                    <i class="far fa-clock"></i> <span id="time4">09:45:12</span>
+                </div>
+            </div>
+            
+            <!-- Dokter 5 -->
+            <div class="doctor-section">
+                <div class="doctor-header">
+                    <div class="doctor-name"><i class="fas fa-user-md"></i> CITRA DEWI</div>
+                    <div class="practice-time">10:00 - 14:00</div>
+                </div>
+                
+                <div class="patient-list">
+                    <div class="patient-card">
+                        <div class="patient-id">77889900 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">IF-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">27-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">11223344 <span class="status-badge status-completed">SEP</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-1</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">28-09-2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-id">55667788 <span class="status-badge status-pending">SEP Belum</span></div>
+                        <div class="patient-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Jenis:</span>
+                                <span class="detail-value">JP-2</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Poli:</span>
+                                <span class="detail-value">MKN</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tanggal:</span>
+                                <span class="detail-value">29-09-2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">RM:</span>
+                                <span class="detail-value">8899</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-time">
+                    <i class="far fa-clock"></i> <span id="time5">11:20:05</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            &copy; 2025 Sistem Antrian Modern. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        // Fungsi untuk memperbarui waktu secara real-time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            
+            // Update waktu untuk setiap dokter (disesuaikan dengan jam praktek)
+            document.getElementById('time1').textContent = timeString;
+            document.getElementById('time2').textContent = timeString;
+            document.getElementById('time3').textContent = timeString;
+            document.getElementById('time4').textContent = timeString;
+            document.getElementById('time5').textContent = timeString;
+        }
+        
+        // Perbarui waktu setiap detik
+        setInterval(updateTime, 1000);
+        updateTime(); // Panggil sekali saat pertama kali load
+    </script>
+</body>
+</html>
