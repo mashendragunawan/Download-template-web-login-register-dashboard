@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - KUNIK JANTUNG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .hospital-brand {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .hospital-brand h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .hospital-brand p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-section {
+            margin: 20px 0;
+        }
+
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 20px 10px;
+            opacity: 0.6;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: rgba(255,255,255,0.3);
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.15);
+            border-left-color: #fff;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .nav-item span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left .welcome {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .header-left .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .date-time {
+            text-align: right;
+        }
+
+        .date-time .date {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .date-time .time {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 30px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 4px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .stat-card.patient { border-color: #3b82f6; }
+        .stat-card.finance { border-color: #10b981; }
+        .stat-card.medicine { border-color: #ef4444; }
+        .stat-card.lab { border-color: #8b5cf6; }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .stat-card.patient .stat-icon { background: #3b82f6; }
+        .stat-card.finance .stat-icon { background: #10b981; }
+        .stat-card.medicine .stat-icon { background: #ef4444; }
+        .stat-card.lab .stat-icon { background: #8b5cf6; }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .stat-change {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .stat-change.positive { color: #10b981; }
+        .stat-change.negative { color: #ef4444; }
+
+        /* Main Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container, .activity-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #3b82f6;
+        }
+
+        .view-all {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Activity List */
+        .activity-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 -16px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .activity-icon.patient { background: #3b82f6; }
+        .activity-icon.lab { background: #8b5cf6; }
+        .activity-icon.medicine { background: #ef4444; }
+        .activity-icon.finance { background: #10b981; }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1e293b;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Quick Actions */
+        .quick-section {
+            margin-bottom: 40px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #f1f5f9;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .action-card:hover .action-icon {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .action-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .action-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Alerts */
+        .alerts-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            transition: transform 0.2s ease;
+        }
+
+        .alert-item:hover {
+            transform: translateX(5px);
+        }
+
+        .alert-item.critical {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .alert-icon {
+            font-size: 20px;
+            color: #f59e0b;
+        }
+
+        .alert-item.critical .alert-icon {
+            color: #ef4444;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1e293b;
+        }
+
+        .alert-desc {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .top-header {
+                padding: 15px 20px;
+            }
+            
+            .dashboard-content {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="hospital-brand">
+            <h1>KUNIK JANTUNG</h1>
+            <p>Tasna Medika Bandung</p>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="nav-section">
+            <div class="nav-title">Menu Utama</div>
+            <div class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-file-medical"></i>
+                <span>Rekam Medis</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Keuangan</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-warehouse"></i>
+                <span>Gudang Besar</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-boxes"></i>
+                <span>Gudang Kecil</span>
+            </div>
+        </div>
+
+        <!-- Medical Services -->
+        <div class="nav-section">
+            <div class="nav-title">Layanan Medis</div>
+            <div class="nav-item">
+                <i class="fas fa-user-injured"></i>
+                <span>Pasien Rawat Jalan</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-procedures"></i>
+                <span>Rawat Inap</span>
+                <div class="nav-badge">3</div>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-stethoscope"></i>
+                <span>Dokter</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-heartbeat"></i>
+                <span>ICCU</span>
+                <div class="nav-badge">5</div>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-vial"></i>
+                <span>Laboratorium</span>
+            </div>
+        </div>
+
+        <!-- Support Services -->
+        <div class="nav-section">
+            <div class="nav-title">Layanan Pendukung</div>
+            <div class="nav-item">
+                <i class="fas fa-prescription"></i>
+                <span>Apotik</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-x-ray"></i>
+                <span>Radiologi</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-utensils"></i>
+                <span>Gizi</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-cash-register"></i>
+                <span>Kasir</span>
+            </div>
+        </div>
+
+        <!-- System -->
+        <div class="nav-section">
+            <div class="nav-title">Sistem</div>
+            <div class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Setup</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Laporan</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user-shield"></i>
+                <span>Admin</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <div class="welcome">Selamat Datang,</div>
+                <div class="user-name">Dr. Hendra Pratama</div>
+            </div>
+            <div class="header-right">
+                <div class="date-time">
+                    <div class="date" id="current-date">Senin, 06 Oktober 2025</div>
+                    <div class="time" id="current-time">00:00:00</div>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar">HP</div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <h1 class="page-title">
+                <i class="fas fa-chart-line"></i>
+                Dashboard Produktivitas
+            </h1>
+            <p class="page-subtitle">Ringkasan aktivitas dan performa rumah sakit hari ini</p>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card patient">
+                    <div class="stat-header">
+                        <div class="stat-title">Total Pasien Hari Ini</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">142</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        18% dari kemarin
+                    </div>
+                </div>
+
+                <div class="stat-card finance">
+                    <div class="stat-header">
+                        <div class="stat-title">Pendapatan Bulanan</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">Rp 2.8M</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        12% dari bulan lalu
+                    </div>
+                </div>
+
+                <div class="stat-card medicine">
+                    <div class="stat-header">
+                        <div class="stat-title">Resep Tertunda</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-clock"></i>
+                        5 resep menunggu >2 jam
+                    </div>
+                </div>
+
+                <div class="stat-card lab">
+                    <div class="stat-header">
+                        <div class="stat-title">Tes Lab Menunggu</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">15</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-exclamation-circle"></i>
+                        3 hasil tertunda
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Activity -->
+            <div class="dashboard-grid">
+                <div class="chart-container">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Grafik Kunjungan Pasien
+                        </h3>
+                        <div class="view-all">Lihat Detail</div>
+                    </div>
+                    <div style="height: 300px; background: #f8fafc; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-weight: 500;">
+                        <i class="fas fa-chart-line" style="font-size: 48px; margin-right: 15px;"></i>
+                        Chart: Trend Kunjungan 7 Hari Terakhir
+                    </div>
+                </div>
+
+                <div class="activity-container">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-bell"></i>
+                            Aktivitas Terbaru
+                        </h3>
+                        <div class="view-all">Lihat Semua</div>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon patient">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Pasien Baru - Dr. Ahmad</div>
+                                <div class="activity-time">10:25 AM - Poli Umum</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon lab">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Hasil Lab Siap - Sari</div>
+                                <div class="activity-time">09:45 AM - Laboratorium</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon medicine">
+                                <i class="fas fa-prescription"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Resep Baru - Dr. Budi</div>
+                                <div class="activity-time">09:30 AM - Apotik</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon finance">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Pembayaran Selesai</div>
+                                <div class="activity-time">09:15 AM - Kasir</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        Akses Cepat
+                    </h3>
+                </div>
+                <div class="quick-actions">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="action-title">Rekam Medis Baru</div>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-prescription"></i>
+                        </div>
+                        <div class="action-title">Resep Obat</div>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="action-title">Permintaan Lab</div>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <div class="action-title">Radiologi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Peringatan Sistem
+                </h3>
+            </div>
+            <div class="alerts-container">
+                <div class="alert-item critical">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Stok Obat Menipis</div>
+                        <div class="alert-desc">Aspirin 80mg tersisa 12 strip - Segera restock</div>
+                    </div>
+                </div>
+                <div class="alert-item">
+                    <div class="alert-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Dokter Jaga Hari Ini</div>
+                        <div class="alert-desc">Dr. Sari (Pagi), Dr. Budi (Sore), Dr. Ahmad (Malam)</div>
+                    </div>
+                </div>
+                <div class="alert-item">
+                    <div class="alert-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Janji Temu Besok</div>
+                        <div class="alert-desc">15 pasien telah membuat janji untuk besok</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Update real-time clock
+        function updateClock() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const date = now.toLocaleDateString('id-ID', options);
+            const time = now.toLocaleTimeString('id-ID');
+            
+            document.getElementById('current-date').textContent = date;
+            document.getElementById('current-time').textContent = time;
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Add interactivity to nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show loading state
+                const title = this.querySelector('span').textContent;
+                document.querySelector('.page-title').innerHTML = 
+                    `<i class="fas fa-chart-line"></i>${title}`;
+            });
+        });
+
+        // Add interactivity to action cards
+        document.querySelectorAll('.action-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const action = this.querySelector('.action-title').textContent;
+                alert(`Membuka: ${action}`);
+            });
+        });
+
+        // Mobile menu toggle (for responsive)
+        function toggleMobileMenu() {
+            document.querySelector('.sidebar').classList.toggle('mobile-open');
+        }
+    </script>
+</body>
+</html>

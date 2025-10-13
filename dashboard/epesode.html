@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #FF0000;
+            --dark-bg: #0F0F0F;
+            --dark-secondary: #272727;
+            --dark-text: #F1F1F1;
+            --dark-hover: #3D3D3D;
+            --light-bg: #FFFFFF;
+            --light-secondary: #F9F9F9;
+            --light-text: #0F0F0F;
+            --light-hover: #F2F2F2;
+            --gray-text: #AAAAAA;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--dark-bg);
+            padding: 12px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            margin-bottom: 18px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+            margin-right: 5px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .sidebar-section {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--dark-secondary);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-item:hover {
+            background-color: var(--dark-hover);
+        }
+
+        .sidebar-item.active {
+            background-color: var(--dark-hover);
+        }
+
+        .sidebar-item i {
+            margin-right: 24px;
+            font-size: 18px;
+        }
+
+        .sidebar-item span {
+            font-size: 14px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 12px;
+            margin-top: 12px;
+        }
+
+        .sign-in-card {
+            padding: 16px;
+            margin: 12px;
+            border: 1px solid var(--dark-secondary);
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .sign-in-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 12px;
+            padding: 10px 16px;
+            background-color: var(--dark-secondary);
+            color: #3EA6FF;
+            border: 1px solid var(--dark-secondary);
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sign-in-btn:hover {
+            background-color: var(--dark-hover);
+        }
+
+        .sign-in-btn i {
+            margin-right: 8px;
+        }
+
+        .explore-section {
+            padding: 0 12px;
+        }
+
+        .explore-item {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 8px 8px 0;
+            background-color: var(--dark-secondary);
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .explore-item:hover {
+            background-color: var(--dark-hover);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 60%;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: var(--dark-bg);
+            border: 1px solid var(--dark-secondary);
+            border-radius: 20px 0 0 20px;
+            color: var(--dark-text);
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--dark-secondary);
+            border-radius: 0 20px 20px 0;
+            color: var(--gray-text);
+            cursor: pointer;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions i {
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background-color: var(--dark-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .video-info {
+            display: flex;
+            padding: 0 8px;
+        }
+
+        .channel-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--dark-secondary);
+            margin-right: 12px;
+        }
+
+        .video-details {
+            flex: 1;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .channel-name {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin-bottom: 4px;
+        }
+
+        .video-stats {
+            font-size: 14px;
+            color: var(--gray-text);
+        }
+
+        .shorts-section {
+            margin: 40px 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .section-header i {
+            color: var(--primary);
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .short-card {
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .short-thumbnail {
+            width: 100%;
+            height: 320px;
+            background-color: var(--dark-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .short-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .short-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .short-stats {
+            font-size: 14px;
+            color: var(--gray-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 72px;
+            }
+            
+            .sidebar-item span, 
+            .section-title, 
+            .sign-in-card,
+            .explore-section {
+                display: none;
+            }
+            
+            .sidebar-item {
+                justify-content: center;
+                padding: 16px 0;
+            }
+            
+            .sidebar-item i {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-left: 72px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .search-bar {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fab fa-youtube"></i>
+            <span>YouTube</span>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-play-circle"></i>
+                <span>Shorts</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-bell"></i>
+                <span>Subscriptions</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-item">
+                <i class="fas fa-user-circle"></i>
+                <span>You</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </div>
+        </div>
+        
+        <div class="sign-in-card">
+            <p>Sign in to like videos, comment, and subscribe.</p>
+            <div class="sign-in-btn">
+                <i class="fas fa-user-circle"></i>
+                <span>Sign in</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="section-title">Explore</div>
+            <div class="explore-section">
+                <div class="explore-item">Music</div>
+                <div class="explore-item">Movies</div>
+                <div class="explore-item">Gaming</div>
+                <div class="explore-item">News</div>
+                <div class="explore-item">Sports</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="section-title">More from YouTube</div>
+            <div class="sidebar-item">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube Premium</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="explore-section">
+                <div class="explore-item">Kebab turkey</div>
+                <div class="explore-item">Kebabs</div>
+                <div class="explore-item">Street food</div>
+                <div class="explore-item">Mountains</div>
+                <div class="explore-item">4K resolution</div>
+                <div class="explore-item">Islands</div>
+                <div class="explore-item">Oven</div>
+                <div class="explore-item">Rural areas</div>
+                <div class="explore-item">Podcasts</div>
+                <div class="explore-item">Camping</div>
+                <div class="explore-item">Live</div>
+                <div class="explore-item">Gaming</div>
+                <div class="explore-item">News</div>
+                <div class="explore-item">Woodworking</div>
+                <div class="explore-item">Ancis</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-nav">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <i class="fas fa-video"></i>
+                <i class="fas fa-bell"></i>
+                <div class="user-avatar"></div>
+            </div>
+        </div>
+        
+        <!-- Regular Videos -->
+        <div class="content-grid">
+            <div class="video-card">
+                <div class="thumbnail">
+                    <div class="duration">22:44</div>
+                </div>
+                <div class="video-info">
+                    <div class="channel-avatar"></div>
+                    <div class="video-details">
+                        <div class="video-title">The Most Beautiful Mountain Road in Austria | Epic Groseglockner Summer Drive</div>
+                        <div class="channel-name">Scenic Drive Vision</div>
+                        <div class="video-stats">486K views • 3 months ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="thumbnail">
+                    <div class="duration">15:32</div>
+                </div>
+                <div class="video-info">
+                    <div class="channel-avatar"></div>
+                    <div class="video-details">
+                        <div class="video-title">Mykonos, Greece | 4K HDR Walking Tour</div>
+                        <div class="channel-name">Touristice</div>
+                        <div class="video-stats">368K views • 2 months ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="thumbnail">
+                    <div class="duration">10:15</div>
+                </div>
+                <div class="video-info">
+                    <div class="channel-avatar"></div>
+                    <div class="video-details">
+                        <div class="video-title">Satu SeriUDIO - Official Music Video</div>
+                        <div class="channel-name">Music Channel</div>
+                        <div class="video-stats">125K views • 1 week ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shorts Section -->
+        <div class="shorts-section">
+            <div class="section-header">
+                <i class="fas fa-play-circle"></i>
+                <h2>Shorts</h2>
+            </div>
+            <div class="shorts-grid">
+                <div class="short-card">
+                    <div class="short-thumbnail"></div>
+                    <div class="short-title">Best Turkish Food Compilation | Street Food, Baker & Restaurant</div>
+                    <div class="short-stats">567K views</div>
+                </div>
+                
+                <div class="short-card">
+                    <div class="short-thumbnail"></div>
+                    <div class="short-title">Amazing Woodworking Skills You Need to See</div>
+                    <div class="short-stats">321K views</div>
+                </div>
+                
+                <div class="short-card">
+                    <div class="short-thumbnail"></div>
+                    <div class="short-title">Camping in the Most Beautiful Mountains</div>
+                    <div class="short-stats">445K views</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script for sidebar item selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Add hover effect to video cards
+            const videoCards = document.querySelectorAll('.video-card, .short-card');
+            
+            videoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Support Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #7f8c8d;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 70px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            color: var(--text);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--primary);
+            color: white;
+            transition: var(--transition);
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        .sidebar-header {
+            padding: 20px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar.collapsed .logo-text {
+            display: none;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .sidebar-menu {
+            padding: 15px 0;
+        }
+
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar.collapsed .menu-title {
+            display: none;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: var(--secondary);
+            color: white;
+            border-left: 4px solid var(--accent);
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar.collapsed .menu-text {
+            display: none;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .sidebar.collapsed .badge {
+            display: none;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .main-content.expanded {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .bg-primary { background: rgba(52, 152, 219, 0.1); color: var(--secondary); }
+        .bg-success { background: rgba(46, 204, 113, 0.1); color: var(--success); }
+        .bg-warning { background: rgba(243, 156, 18, 0.1); color: var(--warning); }
+        .bg-danger { background: rgba(231, 76, 60, 0.1); color: var(--danger); }
+
+        .recent-tickets {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-open { background: rgba(52, 152, 219, 0.1); color: var(--secondary); }
+        .status-pending { background: rgba(243, 156, 18, 0.1); color: var(--warning); }
+        .status-resolved { background: rgba(46, 204, 113, 0.1); color: var(--success); }
+        .status-closed { background: rgba(149, 165, 166, 0.1); color: #95a5a6; }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: var(--sidebar-collapsed-width);
+            }
+            
+            .sidebar:not(.collapsed) {
+                width: var(--sidebar-width);
+            }
+            
+            .main-content {
+                margin-left: var(--sidebar-collapsed-width);
+            }
+            
+            .main-content.expanded {
+                margin-left: 0;
+            }
+            
+            .sidebar.collapsed .menu-text,
+            .sidebar.collapsed .logo-text,
+            .sidebar.collapsed .menu-title,
+            .sidebar.collapsed .badge {
+                display: block;
+            }
+            
+            .sidebar:not(.collapsed) {
+                box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">IT</div>
+            <div class="logo-text">IT Support</div>
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-title">Menu Utama</div>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-tachometer-alt menu-icon"></i>
+                <span class="menu-text">Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-ticket-alt menu-icon"></i>
+                <span class="menu-text">Tiket</span>
+                <span class="badge">12</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-desktop menu-icon"></i>
+                <span class="menu-text">Inventaris</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users menu-icon"></i>
+                <span class="menu-text">Klien</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-bar menu-icon"></i>
+                <span class="menu-text">Laporan</span>
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-title">Manajemen</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-tools menu-icon"></i>
+                <span class="menu-text">Perbaikan</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-network-wired menu-icon"></i>
+                <span class="menu-text">Jaringan</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-server menu-icon"></i>
+                <span class="menu-text">Server</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-shield-alt menu-icon"></i>
+                <span class="menu-text">Keamanan</span>
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-title">Lainnya</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog menu-icon"></i>
+                <span class="menu-text">Pengaturan</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-question-circle menu-icon"></i>
+                <span class="menu-text">Bantuan</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <h1 class="page-title">Dashboard IT Support</h1>
+            <div class="user-info">
+                <div class="user-avatar">TS</div>
+                <span>Teknisi Support</span>
+            </div>
+        </div>
+        
+        <div class="dashboard-cards">
+            <div class="card">
+                <div class="card-icon bg-primary">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="card-title">Tiket Terbuka</div>
+                <div class="card-value">24</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon bg-warning">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="card-title">Dalam Proses</div>
+                <div class="card-value">12</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon bg-success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="card-title">Tiket Selesai</div>
+                <div class="card-value">48</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon bg-danger">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="card-title">Prioritas Tinggi</div>
+                <div class="card-value">5</div>
+            </div>
+        </div>
+        
+        <div class="recent-tickets">
+            <h2 class="section-title">Tiket Terbaru</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Tiket</th>
+                        <th>Subjek</th>
+                        <th>Klien</th>
+                        <th>Prioritas</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#IT-2023-0456</td>
+                        <td>Laptop tidak bisa menyala</td>
+                        <td>Budi Santoso</td>
+                        <td>Tinggi</td>
+                        <td><span class="status status-open">Terbuka</span></td>
+                    </tr>
+                    <tr>
+                        <td>#IT-2023-0455</td>
+                        <td>Printer tidak terdeteksi</td>
+                        <td>Sari Indah</td>
+                        <td>Sedang</td>
+                        <td><span class="status status-pending">Dalam Proses</span></td>
+                    </tr>
+                    <tr>
+                        <td>#IT-2023-0454</td>
+                        <td>Email tidak bisa dikirim</td>
+                        <td>Rizki Pratama</td>
+                        <td>Tinggi</td>
+                        <td><span class="status status-open">Terbuka</span></td>
+                    </tr>
+                    <tr>
+                        <td>#IT-2023-0453</td>
+                        <td>Software instalasi</td>
+                        <td>Dewi Anggraini</td>
+                        <td>Rendah</td>
+                        <td><span class="status status-resolved">Selesai</span></td>
+                    </tr>
+                    <tr>
+                        <td>#IT-2023-0452</td>
+                        <td>Koneksi internet lambat</td>
+                        <td>Agus Setiawan</td>
+                        <td>Sedang</td>
+                        <td><span class="status status-closed">Ditutup</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+                
+                // Ubah ikon tombol toggle
+                const icon = toggleBtn.querySelector('i');
+                if (sidebar.classList.contains('collapsed')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-chevron-right');
+                } else {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Tambahkan event listener untuk item menu
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Hapus kelas active dari semua item
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    // Tambahkan kelas active ke item yang diklik
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

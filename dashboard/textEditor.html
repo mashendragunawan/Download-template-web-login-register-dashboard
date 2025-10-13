@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Editor - Auto Run</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Panel Editor - VS Code Theme */
+        .editor-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            border-right: 1px solid #3e3e3e;
+        }
+
+        .editor-header {
+            padding: 12px 20px;
+            background: #2d2d2d;
+            border-bottom: 1px solid #3e3e3e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .editor-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-icon {
+            width: 16px;
+            height: 16px;
+            background: #519aba;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+        }
+
+        .auto-run-indicator {
+            font-size: 11px;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .editor-container {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 100%;
+            background: #1e1e1e;
+            border-right: 1px solid #3e3e3e;
+            padding: 20px 10px;
+            font-family: 'Cascadia Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6e7681;
+            text-align: right;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .code-editor {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            padding: 20px 20px 20px 60px;
+            font-family: 'Cascadia Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            color: #d4d4d4;
+            tab-size: 4;
+        }
+
+        /* Panel Preview */
+        .preview-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .preview-header {
+            padding: 12px 20px;
+            background: #f3f3f3;
+            border-bottom: 1px solid #e1e1e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .status {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .preview-content {
+            flex: 1;
+            background: white;
+            overflow: auto;
+        }
+
+        /* Scrollbar Styling */
+        .code-editor::-webkit-scrollbar {
+            width: 14px;
+        }
+
+        .code-editor::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        .code-editor::-webkit-scrollbar-thumb {
+            background: #424242;
+            border-radius: 7px;
+        }
+
+        .code-editor::-webkit-scrollbar-thumb:hover {
+            background: #4f4f4f;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .editor-panel, .preview-panel {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Panel Editor Kiri -->
+        <div class="editor-panel">
+            <div class="editor-header">
+                <div class="editor-title">
+                    <div class="file-icon">⋮</div>
+                    index.html
+                </div>
+                <div class="auto-run-indicator">
+                    <div class="dot"></div>
+                    Auto Run Active
+                </div>
+            </div>
+            <div class="editor-container">
+                <div class="line-numbers" id="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30</div>
+                <textarea class="code-editor" id="html-editor" placeholder="Ketik kode HTML di sini...">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .typing-effect {
+            border-right: 3px solid #fff;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #fff; }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1 class="typing-effect" id="hello-text"&gt;&lt;/h1&gt;
+        &lt;p&gt;Live Editor dengan Auto Run&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        // Animasi typing effect
+        const title = document.getElementById('hello-text');
+        const text = 'Hello World!';
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                title.textContent = text.substring(0, index + 1);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Mulai animasi
+        setTimeout(typeWriter, 500);
+        
+        // Reset dan ulang animasi setiap 3 detik
+        setInterval(() => {
+            index = 0;
+            title.textContent = '';
+            setTimeout(typeWriter, 500);
+        }, 3000);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+            </div>
+        </div>
+        
+        <!-- Panel Preview Kanan -->
+        <div class="preview-panel">
+            <div class="preview-header">
+                <div class="preview-title">Live Preview</div>
+                <div class="status" id="status">Ready</div>
+            </div>
+            <div class="preview-content" id="preview">
+                <!-- Preview akan ditampilkan di sini -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let debounceTimer;
+        let lastUpdate = Date.now();
+
+        function runCode() {
+            const htmlCode = document.getElementById('html-editor').value;
+            const preview = document.getElementById('preview');
+            const status = document.getElementById('status');
+            
+            // Update status
+            status.textContent = 'Updating...';
+            lastUpdate = Date.now();
+            
+            // Buat iframe untuk preview yang aman
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            
+            // Kosongkan preview dan tambahkan iframe
+            preview.innerHTML = '';
+            preview.appendChild(iframe);
+            
+            // Tulis kode ke iframe
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write(htmlCode);
+            iframeDoc.close();
+            
+            // Update status setelah render
+            setTimeout(() => {
+                status.textContent = `Last update: ${new Date().toLocaleTimeString()}`;
+            }, 100);
+        }
+
+        function updateLineNumbers() {
+            const textarea = document.getElementById('html-editor');
+            const lineNumbers = document.getElementById('line-numbers');
+            const lines = textarea.value.split('\n').length;
+            
+            let numbers = '';
+            for (let i = 1; i <= Math.max(lines, 30); i++) {
+                numbers += i + '<br>';
+            }
+            lineNumbers.innerHTML = numbers;
+        }
+
+        function debounceRunCode() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(runCode, 300); // Delay 300ms
+        }
+
+        // Event listeners
+        document.getElementById('html-editor').addEventListener('input', function() {
+            updateLineNumbers();
+            debounceRunCode();
+        });
+
+        document.getElementById('html-editor').addEventListener('scroll', function() {
+            document.getElementById('line-numbers').scrollTop = this.scrollTop;
+        });
+
+        // Jalankan kode pertama kali saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLineNumbers();
+            runCode();
+            
+            // Auto run setiap 2 detik untuk memastikan update
+            setInterval(() => {
+                const timeSinceLastUpdate = Date.now() - lastUpdate;
+                if (timeSinceLastUpdate > 2000) {
+                    runCode();
+                }
+            }, 2000);
+        });
+
+        // Auto update line numbers saat resize
+        window.addEventListener('resize', updateLineNumbers);
+    </script>
+</body>
+</html>

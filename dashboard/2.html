@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+    <div class="container">
+        <div class="glow"></div>
+        <div class="particles" id="particles"></div>
+        <div class="subtitle">
+            Di Buat Dengan html css murni
+        </div>
+    </div>
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        const particlescount =50;
+
+        for (let i = 0; 1 < particlescount; i++){
+            const particles = document.createElement('div');
+            particles.classList.add('particles')
+
+            particles.style.left = '${Match.random()* 15}s';
+        }
+    </script>
+</body>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: linear-gradient(135deg, #0f0c29, #24243e);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+    }
+    .continer{
+        position: relative;
+        perspective: 100px;
+    }
+    .hello-world{
+        font-size: 900;
+    }
+</style>
+</html>
