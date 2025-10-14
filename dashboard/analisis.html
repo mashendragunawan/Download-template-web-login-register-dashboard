@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop UI dengan CSS Class Toggles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .drag-drop-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .drag-drop-area {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .drag-container, .drop-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .drag-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 100px;
+        }
+
+        .drag-item {
+            padding: 1rem;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: grab;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .drag-item:hover {
+            border-color: #cbd5e0;
+            background: #edf2f7;
+        }
+
+        .drag-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #667eea;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .drag-content {
+            flex: 1;
+        }
+
+        .drag-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .drag-desc {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .drag-preview {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 6px;
+            opacity: 0.8;
+            z-index: -1;
+        }
+
+        /* Drag Start State */
+        .drag-item.dragging {
+            cursor: grabbing;
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 
+                0 10px 25px -5px rgba(0, 0, 0, 0.2),
+                0 0 0 2px #667eea;
+            z-index: 1000;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .drag-item.dragging .drag-preview {
+            display: block;
+            animation: preview-pulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: scale(1.05) rotate(2deg) translateY(0px); }
+            50% { transform: scale(1.05) rotate(2deg) translateY(-5px); }
+        }
+
+        @keyframes preview-pulse {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+
+        /* Drop Zone Styles */
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .drop-zones {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .drop-zone {
+            min-height: 150px;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .drop-zone p {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .drop-zone .hint {
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+
+        /* Drop Zone - Drag Over State */
+        .drop-zone.drag-over {
+            background: linear-gradient(135deg, #ebf4ff, #f0fff4);
+            border-color: #68d391;
+            border-style: solid;
+            box-shadow: 
+                0 0 0 3px rgba(104, 211, 145, 0.1),
+                inset 0 2px 4px rgba(104, 211, 145, 0.1);
+            animation: zone-pulse 1s ease-in-out infinite;
+        }
+
+        .drop-zone.drag-over::before {
+            content: "🎯 Drop Here!";
+            display: block;
+            font-weight: bold;
+            color: #68d391;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes zone-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Drop Zone - Will Accept State */
+        .drop-zone.will-accept {
+            background: linear-gradient(135deg, #fff8eb, #fff0f0);
+            border-color: #f6ad55;
+            animation: accept-pulse 0.5s ease-in-out;
+        }
+
+        .drop-zone.will-accept::before {
+            content: "✅ Release to Drop!";
+            color: #f6ad55;
+        }
+
+        @keyframes accept-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Drop Zone - Invalid Target */
+        .drop-zone.invalid-target {
+            background: #fff5f5;
+            border-color: #fc8181;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .drop-zone.invalid-target::before {
+            content: "❌ Cannot Drop Here";
+            color: #fc8181;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Success Feedback */
+        .drag-item.success-drop {
+            animation: success-bounce 0.6s ease-out;
+            background: linear-gradient(135deg, #c6f6d5, #b2f5ea);
+            border-color: #68d391;
+        }
+
+        @keyframes success-bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Ghost/Drag Image Effect */
+        .drag-item.ghost {
+            opacity: 0.4;
+            transform: scale(0.9);
+            filter: blur(1px);
+            transition: all 0.2s ease;
+        }
+
+        /* Dropped Items in Zones */
+        .dropped-item {
+            padding: 0.75rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropped-item .drag-icon {
+            background: #68d391;
+        }
+
+        /* Instructions Panel */
+        .instructions {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+        }
+
+        .instructions h2 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instruction-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem;
+        }
+
+        .instruction-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Drag & Drop UI dengan CSS Class Toggles</h1>
+        <p class="subtitle">Seret dan lepas item ke zona target - semua feedback visual diatur oleh CSS</p>
+        
+        <div class="drag-drop-area">
+            <div class="drag-container">
+                <h2 class="section-title">
+                    <i>📦</i> Item yang Dapat Diseret
+                </h2>
+                <div class="drag-items" id="dragItems">
+                    <div class="drag-item" draggable="true" data-id="1" data-type="document">
+                        <div class="drag-preview"></div>
+                        <div class="drag-icon">📄</div>
+                        <div class="drag-content">
+                            <div class="drag-title">Laporan Keuangan</div>
+                            <div class="drag-desc">File Excel dengan data Q3 2023</div>
+                        </div>
+                    </div>
+                    <div class="drag-item" draggable="true" data-id="2" data-type="image">
+                        <div class="drag-preview"></div>
+                        <div class="drag-icon">🖼️</div>
+                        <div class="drag-content">
+                            <div class="drag-title">Grafik Analisis</div>
+                            <div class="drag-desc">Visualisasi data penjualan</div>
+                        </div>
+                    </div>
+                    <div class="drag-item" draggable="true" data-id="3" data-type="document">
+                        <div class="drag-preview"></div>
+                        <div class="drag-icon">📊</div>
+                        <div class="drag-content">
+                            <div class="drag-title">Presentasi Strategi</div>
+                            <div class="drag-desc">Slide deck untuk rapat direksi</div>
+                        </div>
+                    </div>
+                    <div class="drag-item" draggable="true" data-id="4" data-type="archive">
+                        <div class="drag-preview"></div>
+                        <div class="drag-icon">📦</div>
+                        <div class="drag-content">
+                            <div class="drag-title">Arsip Proyek</div>
+                            <div class="drag-desc">Dokumentasi proyek sebelumnya</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="drop-container">
+                <h2 class="section-title">
+                    <i>🎯</i> Zona Target
+                </h2>
+                <div class="drop-zones">
+                    <div class="drop-zone" data-zone="A" data-accepts="document,image">
+                        <p>Zona Verifikasi</p>
+                        <p class="hint">Menerima: Dokumen & Gambar</p>
+                        <div class="dropped-items" id="zoneA"></div>
+                    </div>
+                    <div class="drop-zone" data-zone="B" data-accepts="archive">
+                        <p>Zona Arsip</p>
+                        <p class="hint">Menerima: Arsip saja</p>
+                        <div class="dropped-items" id="zoneB"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2><i>💡</i> Cara Kerja CSS Class Toggles</h2>
+            <div class="instruction-list">
+                <div class="instruction-item">
+                    <div class="instruction-icon">1</div>
+                    <div>
+                        <strong>JavaScript hanya menangani class</strong><br>
+                        Menambah/hapus class CSS berdasarkan event drag & drop
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">2</div>
+                    <div>
+                        <strong>CSS menangani semua feedback visual</strong><br>
+                        Transisi, animasi, dan perubahan style diatur oleh CSS
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">3</div>
+                    <div>
+                        <strong>State yang berbeda dengan class berbeda</strong><br>
+                        .dragging, .drag-over, .success-drop, dll
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">4</div>
+                    <div>
+                        <strong>Validasi drop dengan class</strong><br>
+                        .will-accept untuk target valid, .invalid-target untuk tidak valid
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="dragCount">0</div>
+                    <div class="stat-label">Item Diseret</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="dropCount">0</div>
+                    <div class="stat-label">Berhasil Dijatuhkan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="rejectCount">0</div>
+                    <div class="stat-label">Ditolak</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class DragDropManager {
+            constructor() {
+                this.draggedItem = null;
+                this.dragCount = 0;
+                this.dropCount = 0;
+                this.rejectCount = 0;
+                this.init();
+            }
+
+            init() {
+                const dragItems = document.querySelectorAll('.drag-item');
+                const dropZones = document.querySelectorAll('.drop-zone');
+
+                // Drag Events
+                dragItems.forEach(item => {
+                    item.addEventListener('dragstart', this.handleDragStart.bind(this));
+                    item.addEventListener('dragend', this.handleDragEnd.bind(this));
+                });
+
+                // Drop Zone Events
+                dropZones.forEach(zone => {
+                    zone.addEventListener('dragover', this.handleDragOver.bind(this));
+                    zone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                    zone.addEventListener('drop', this.handleDrop.bind(this));
+                });
+
+                // Update stats display
+                this.updateStats();
+            }
+
+            handleDragStart(e) {
+                this.draggedItem = e.target.closest('.drag-item');
+                if (!this.draggedItem) return;
+                
+                // Add visual feedback classes
+                this.draggedItem.classList.add('dragging');
+                
+                // Create ghost effect on other items
+                document.querySelectorAll('.drag-item').forEach(item => {
+                    if (item !== this.draggedItem) {
+                        item.classList.add('ghost');
+                    }
+                });
+
+                // Set drag data
+                e.dataTransfer.setData('text/plain', this.draggedItem.dataset.id);
+                e.dataTransfer.effectAllowed = 'move';
+                
+                // Increment drag counter
+                this.dragCount++;
+                this.updateStats();
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                
+                const dropZone = e.target.closest('.drop-zone');
+                if (!dropZone) return;
+
+                // Remove any existing state classes
+                this.clearDropZoneStates();
+                
+                // Check if drop is valid
+                const isValid = this.validateDrop(dropZone);
+                
+                if (isValid) {
+                    dropZone.classList.add('drag-over');
+                    
+                    // Add will-accept class when specifically over valid target
+                    const isOverTarget = this.isOverDropTarget(e, dropZone);
+                    if (isOverTarget) {
+                        dropZone.classList.add('will-accept');
+                    }
+                } else {
+                    dropZone.classList.add('invalid-target');
+                }
+            }
+
+            handleDragLeave(e) {
+                const dropZone = e.target.closest('.drop-zone');
+                if (!dropZone) return;
+
+                // Only remove classes if not dragging over children
+                if (!dropZone.contains(e.relatedTarget)) {
+                    this.clearDropZoneStates();
+                }
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                
+                const dropZone = e.target.closest('.drop-zone');
+                if (!dropZone || !this.validateDrop(dropZone)) {
+                    this.rejectCount++;
+                    this.updateStats();
+                    this.clearAllStates();
+                    return;
+                }
+
+                // Success feedback
+                this.draggedItem.classList.remove('dragging');
+                this.draggedItem.classList.add('success-drop');
+                
+                // Perform the drop
+                this.performDrop(this.draggedItem, dropZone);
+                
+                // Clear all states
+                this.clearAllStates();
+                
+                // Remove success class after animation
+                setTimeout(() => {
+                    this.draggedItem.classList.remove('success-drop');
+                    this.draggedItem.style.display = 'none'; // Hide original item
+                }, 600);
+                
+                // Update counters
+                this.dropCount++;
+                this.updateStats();
+            }
+
+            handleDragEnd() {
+                this.clearAllStates();
+                this.draggedItem = null;
+            }
+
+            // Helper Methods
+            validateDrop(dropZone) {
+                const itemType = this.draggedItem.dataset.type;
+                const zoneAccepts = dropZone.dataset.accepts;
+                
+                return zoneAccepts.includes(itemType);
+            }
+
+            isOverDropTarget(e, dropZone) {
+                const rect = dropZone.getBoundingClientRect();
+                return (
+                    e.clientY > rect.top + rect.height * 0.25 &&
+                    e.clientY < rect.top + rect.height * 0.75
+                );
+            }
+
+            performDrop(item, dropZone) {
+                const droppedItemsContainer = dropZone.querySelector('.dropped-items');
+                const clone = item.cloneNode(true);
+                
+                // Remove drag-specific classes and attributes
+                clone.classList.remove('dragging', 'success-drop', 'ghost');
+                clone.removeAttribute('draggable');
+                clone.classList.add('dropped-item');
+                
+                // Update the icon to show success
+                const icon = clone.querySelector('.drag-icon');
+                if (icon) {
+                    icon.textContent = '✅';
+                    icon.style.background = '#68d391';
+                }
+                
+                // Add to drop zone
+                droppedItemsContainer.appendChild(clone);
+            }
+
+            clearDropZoneStates() {
+                document.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.classList.remove('drag-over', 'will-accept', 'invalid-target');
+                });
+            }
+
+            clearAllStates() {
+                this.clearDropZoneStates();
+                document.querySelectorAll('.drag-item').forEach(item => {
+                    item.classList.remove('dragging', 'ghost', 'success-drop');
+                });
+            }
+
+            updateStats() {
+                document.getElementById('dragCount').textContent = this.dragCount;
+                document.getElementById('dropCount').textContent = this.dropCount;
+                document.getElementById('rejectCount').textContent = this.rejectCount;
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new DragDropManager();
+        });
+    </script>
+</body>
+</html>

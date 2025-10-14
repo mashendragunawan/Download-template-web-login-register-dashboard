@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Web: HTML & CSS</title>
+    <style>
+        /* Reset dan gaya dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            background-color: rgba(255, 255, 255, 0.3);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            background-color: #ffdd40;
+            height: 100%;
+            width: 10%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .main-content {
+            flex: 3;
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .module-list {
+            list-style: none;
+        }
+        
+        .module-item {
+            padding: 15px;
+            border-left: 4px solid #e0e0e0;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .module-item:hover {
+            background-color: #f0f5ff;
+            border-left-color: #6a11cb;
+        }
+        
+        .module-item.active {
+            background-color: #e8f0fe;
+            border-left-color: #2575fc;
+            font-weight: 600;
+        }
+        
+        .module-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .module-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        h2 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        h3 {
+            color: #6a11cb;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+        
+        .code-comment {
+            color: #75715e;
+        }
+        
+        .code-tag {
+            color: #f92672;
+        }
+        
+        .code-attr {
+            color: #a6e22e;
+        }
+        
+        .code-value {
+            color: #e6db74;
+        }
+        
+        .example-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .example-result {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 1px dashed #ccc;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #1c65e0;
+        }
+        
+        button.prev {
+            background-color: #6a11cb;
+        }
+        
+        button.prev:hover {
+            background-color: #580da8;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Tutorial Web: HTML & CSS</h1>
+            <p class="subtitle">Panduan lengkap untuk mempelajari pembuatan website dari dasar hingga menengah</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Dasar</span>
+                    <span>Menengah</span>
+                    <span>Lanjutan</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <aside class="sidebar">
+                <h2>Modul Pembelajaran</h2>
+                <ul class="module-list">
+                    <li class="module-item active" data-module="1">
+                        <div class="module-title">1. Pengenalan HTML</div>
+                        <div class="module-desc">Struktur dasar dan elemen HTML</div>
+                    </li>
+                    <li class="module-item" data-module="2">
+                        <div class="module-title">2. Format Teks & Tautan</div>
+                        <div class="module-desc">Heading, paragraf, dan hyperlink</div>
+                    </li>
+                    <li class="module-item" data-module="3">
+                        <div class="module-title">3. Gambar & Media</div>
+                        <div class="module-desc">Menampilkan gambar dan konten multimedia</div>
+                    </li>
+                    <li class="module-item" data-module="4">
+                        <div class="module-title">4. Daftar & Tabel</div>
+                        <div class="module-desc">Membuat list dan tabel data</div>
+                    </li>
+                    <li class="module-item" data-module="5">
+                        <div class="module-title">5. Formulir HTML</div>
+                        <div class="module-desc">Input, textarea, select, dan button</div>
+                    </li>
+                    <li class="module-item" data-module="6">
+                        <div class="module-title">6. Pengenalan CSS</div>
+                        <div class="module-desc">Selektor, properti, dan nilai</div>
+                    </li>
+                    <li class="module-item" data-module="7">
+                        <div class="module-title">7. Box Model & Layout</div>
+                        <div class="module-desc">Margin, padding, border, dan display</div>
+                    </li>
+                    <li class="module-item" data-module="8">
+                        <div class="module-title">8. Flexbox</div>
+                        <div class="module-desc">Layout modern dengan Flexbox</div>
+                    </li>
+                    <li class="module-item" data-module="9">
+                        <div class="module-title">9. CSS Grid</div>
+                        <div class="module-desc">Sistem layout dua dimensi</div>
+                    </li>
+                    <li class="module-item" data-module="10">
+                        <div class="module-title">10. Responsive Design</div>
+                        <div class="module-desc">Media queries dan unit relatif</div>
+                    </li>
+                </ul>
+            </aside>
+            
+            <main class="main-content">
+                <div id="module-content">
+                    <h2>1. Pengenalan HTML</h2>
+                    <p>HTML (HyperText Markup Language) adalah bahasa markup standar untuk membuat halaman web. HTML mendeskripsikan struktur halaman web menggunakan elemen-elemen yang ditandai dengan tag.</p>
+                    
+                    <h3>Struktur Dasar HTML</h3>
+                    <p>Setiap dokumen HTML memiliki struktur dasar yang terdiri dari:</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Deklarasi tipe dokumen --&gt;</span><br>
+                        <span class="code-tag">&lt;!DOCTYPE</span> <span class="code-attr">html</span><span class="code-tag">&gt;</span><br>
+                        <span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"id"</span><span class="code-tag">&gt;</span><br>
+                        <span class="code-tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;title&gt;</span>Judul Halaman<span class="code-tag">&lt;/title&gt;</span><br>
+                        <span class="code-tag">&lt;/head&gt;</span><br>
+                        <span class="code-tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-comment">&lt;!-- Konten halaman akan ditampilkan di sini --&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span>Ini adalah Heading<span class="code-tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;p&gt;</span>Ini adalah paragraf.<span class="code-tag">&lt;/p&gt;</span><br>
+                        <span class="code-tag">&lt;/body&gt;</span><br>
+                        <span class="code-tag">&lt;/html&gt;</span>
+                    </div>
+                    
+                    <h3>Elemen HTML Dasar</h3>
+                    <p>HTML terdiri dari elemen-elemen yang ditandai dengan tag pembuka dan penutup:</p>
+                    
+                    <div class="example-box">
+                        <h4>Contoh:</h4>
+                        <div class="code-example">
+                            <span class="code-tag">&lt;h1&gt;</span>Judul Utama<span class="code-tag">&lt;/h1&gt;</span><br>
+                            <span class="code-tag">&lt;p&gt;</span>Ini adalah paragraf.<span class="code-tag">&lt;/p&gt;</span><br>
+                            <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://example.com"</span><span class="code-tag">&gt;</span>Tautan<span class="code-tag">&lt;/a&gt;</span><br>
+                            <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"gambar.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"Deskripsi gambar"</span><span class="code-tag">&gt;</span>
+                        </div>
+                        
+                        <h4>Hasil:</h4>
+                        <div class="example-result">
+                            <h1>Judul Utama</h1>
+                            <p>Ini adalah paragraf.</p>
+                            <a href="#">Tautan</a><br>
+                            <img src="https://via.placeholder.com/150" alt="Deskripsi gambar">
+                        </div>
+                    </div>
+                    
+                    <h3>Atribut HTML</h3>
+                    <p>Atribut memberikan informasi tambahan tentang elemen HTML. Atribut selalu ditulis dalam tag pembuka.</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Atribut href pada elemen a --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://example.com"</span><span class="code-tag">&gt;</span>Kunjungi Contoh<span class="code-tag">&lt;/a&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Atribut src dan alt pada elemen img --&gt;</span><br>
+                        <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"gambar.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"Deskripsi gambar"</span><span class="code-tag">&gt;</span>
+                    </div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="prev" id="prev-btn">Sebelumnya</button>
+                    <button id="next-btn">Selanjutnya</button>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Tutorial Web HTML & CSS. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data modul
+        const modules = [
+            {
+                title: "1. Pengenalan HTML",
+                content: `
+                    <h2>1. Pengenalan HTML</h2>
+                    <p>HTML (HyperText Markup Language) adalah bahasa markup standar untuk membuat halaman web. HTML mendeskripsikan struktur halaman web menggunakan elemen-elemen yang ditandai dengan tag.</p>
+                    
+                    <h3>Struktur Dasar HTML</h3>
+                    <p>Setiap dokumen HTML memiliki struktur dasar yang terdiri dari:</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Deklarasi tipe dokumen --&gt;</span><br>
+                        <span class="code-tag">&lt;!DOCTYPE</span> <span class="code-attr">html</span><span class="code-tag">&gt;</span><br>
+                        <span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"id"</span><span class="code-tag">&gt;</span><br>
+                        <span class="code-tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;title&gt;</span>Judul Halaman<span class="code-tag">&lt;/title&gt;</span><br>
+                        <span class="code-tag">&lt;/head&gt;</span><br>
+                        <span class="code-tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-comment">&lt;!-- Konten halaman akan ditampilkan di sini --&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span>Ini adalah Heading<span class="code-tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;p&gt;</span>Ini adalah paragraf.<span class="code-tag">&lt;/p&gt;</span><br>
+                        <span class="code-tag">&lt;/body&gt;</span><br>
+                        <span class="code-tag">&lt;/html&gt;</span>
+                    </div>
+                    
+                    <h3>Elemen HTML Dasar</h3>
+                    <p>HTML terdiri dari elemen-elemen yang ditandai dengan tag pembuka dan penutup:</p>
+                    
+                    <div class="example-box">
+                        <h4>Contoh:</h4>
+                        <div class="code-example">
+                            <span class="code-tag">&lt;h1&gt;</span>Judul Utama<span class="code-tag">&lt;/h1&gt;</span><br>
+                            <span class="code-tag">&lt;p&gt;</span>Ini adalah paragraf.<span class="code-tag">&lt;/p&gt;</span><br>
+                            <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://example.com"</span><span class="code-tag">&gt;</span>Tautan<span class="code-tag">&lt;/a&gt;</span><br>
+                            <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"gambar.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"Deskripsi gambar"</span><span class="code-tag">&gt;</span>
+                        </div>
+                        
+                        <h4>Hasil:</h4>
+                        <div class="example-result">
+                            <h1>Judul Utama</h1>
+                            <p>Ini adalah paragraf.</p>
+                            <a href="#">Tautan</a><br>
+                            <img src="https://via.placeholder.com/150" alt="Deskripsi gambar">
+                        </div>
+                    </div>
+                    
+                    <h3>Atribut HTML</h3>
+                    <p>Atribut memberikan informasi tambahan tentang elemen HTML. Atribut selalu ditulis dalam tag pembuka.</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Atribut href pada elemen a --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://example.com"</span><span class="code-tag">&gt;</span>Kunjungi Contoh<span class="code-tag">&lt;/a&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Atribut src dan alt pada elemen img --&gt;</span><br>
+                        <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"gambar.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"Deskripsi gambar"</span><span class="code-tag">&gt;</span>
+                    </div>
+                `
+            },
+            {
+                title: "2. Format Teks & Tautan",
+                content: `
+                    <h2>2. Format Teks & Tautan</h2>
+                    <p>HTML menyediakan berbagai elemen untuk memformat teks dan membuat tautan ke halaman lain atau bagian dalam halaman yang sama.</p>
+                    
+                    <h3>Elemen Teks Dasar</h3>
+                    
+                    <div class="example-box">
+                        <h4>Contoh:</h4>
+                        <div class="code-example">
+                            <span class="code-tag">&lt;h1&gt;</span>Heading 1<span class="code-tag">&lt;/h1&gt;</span><br>
+                            <span class="code-tag">&lt;h2&gt;</span>Heading 2<span class="code-tag">&lt;/h2&gt;</span><br>
+                            <span class="code-tag">&lt;h3&gt;</span>Heading 3<span class="code-tag">&lt;/h3&gt;</span><br>
+                            <span class="code-tag">&lt;p&gt;</span>Ini adalah paragraf biasa.<span class="code-tag">&lt;/p&gt;</span><br>
+                            <span class="code-tag">&lt;strong&gt;</span>Teks tebal (penting)<span class="code-tag">&lt;/strong&gt;</span><br>
+                            <span class="code-tag">&lt;em&gt;</span>Teks miring (penekanan)<span class="code-tag">&lt;/em&gt;</span><br>
+                            <span class="code-tag">&lt;u&gt;</span>Teks bergaris bawah<span class="code-tag">&lt;/u&gt;</span><br>
+                            <span class="code-tag">&lt;mark&gt;</span>Teks ditandai<span class="code-tag">&lt;/mark&gt;</span><br>
+                            <span class="code-tag">&lt;small&gt;</span>Teks kecil<span class="code-tag">&lt;/small&gt;</span><br>
+                            <span class="code-tag">&lt;sub&gt;</span>Subskrip<span class="code-tag">&lt;/sub&gt;</span><br>
+                            <span class="code-tag">&lt;sup&gt;</span>Superskrip<span class="code-tag">&lt;/sup&gt;</span>
+                        </div>
+                        
+                        <h4>Hasil:</h4>
+                        <div class="example-result">
+                            <h1>Heading 1</h1>
+                            <h2>Heading 2</h2>
+                            <h3>Heading 3</h3>
+                            <p>Ini adalah paragraf biasa.</p>
+                            <p><strong>Teks tebal (penting)</strong></p>
+                            <p><em>Teks miring (penekanan)</em></p>
+                            <p><u>Teks bergaris bawah</u></p>
+                            <p><mark>Teks ditandai</mark></p>
+                            <p><small>Teks kecil</small></p>
+                            <p>H<sub>2</sub>O (Subskrip)</p>
+                            <p>X<sup>2</sup> (Superskrip)</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Hyperlink (Tautan)</h3>
+                    <p>Elemen <code>&lt;a&gt;</code> digunakan untuk membuat hyperlink. Atribut <code>href</code> menentukan URL tujuan.</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Tautan ke halaman eksternal --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://www.example.com"</span><span class="code-tag">&gt;</span>Kunjungi Contoh<span class="code-tag">&lt;/a&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Tautan ke halaman dalam situs yang sama --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"tentang.html"</span><span class="code-tag">&gt;</span>Halaman Tentang<span class="code-tag">&lt;/a&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Tautan untuk mengirim email --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"mailto:email@example.com"</span><span class="code-tag">&gt;</span>Kirim Email<span class="code-tag">&lt;/a&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Tautan dengan target baru --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"https://www.example.com"</span> <span class="code-attr">target</span>=<span class="code-value">"_blank"</span><span class="code-tag">&gt;</span>Buka di Tab Baru<span class="code-tag">&lt;/a&gt;</span>
+                    </div>
+                    
+                    <h3>Tautan ke Bagian dalam Halaman</h3>
+                    <p>Kita dapat membuat tautan yang mengarah ke bagian tertentu dalam halaman yang sama menggunakan ID.</p>
+                    
+                    <div class="code-example">
+                        <span class="code-comment">&lt;!-- Bagian dengan ID --&gt;</span><br>
+                        <span class="code-tag">&lt;h2</span> <span class="code-attr">id</span>=<span class="code-value">"bagian1"</span><span class="code-tag">&gt;</span>Bagian 1<span class="code-tag">&lt;/h2&gt;</span><br>
+                        <span class="code-tag">&lt;p&gt;</span>Konten bagian 1...<span class="code-tag">&lt;/p&gt;</span><br><br>
+                        
+                        <span class="code-comment">&lt;!-- Tautan ke bagian tersebut --&gt;</span><br>
+                        <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"#bagian1"</span><span class="code-tag">&gt;</span>Pergi ke Bagian 1<span class="code-tag">&lt;/a&gt;</span>
+                    </div>
+                `
+            },
+            // Modul-modul lainnya akan ditambahkan di sini
+        ];
+
+        // Inisialisasi variabel
+        let currentModule = 0;
+        const moduleItems = document.querySelectorAll('.module-item');
+        const moduleContent = document.getElementById('module-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress');
+
+        // Fungsi untuk memperbarui konten modul
+        function updateModuleContent() {
+            moduleContent.innerHTML = modules[currentModule].content;
+            updateActiveModule();
+            updateProgress();
+        }
+
+        // Fungsi untuk memperbarui modul aktif di sidebar
+        function updateActiveModule() {
+            moduleItems.forEach((item, index) => {
+                if (index === currentModule) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Fungsi untuk memperbarui progress bar
+        function updateProgress() {
+            const progress = ((currentModule + 1) / modules.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Event listener untuk item modul di sidebar
+        moduleItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentModule = index;
+                updateModuleContent();
+            });
+        });
+
+        // Event listener untuk tombol navigasi
+        prevBtn.addEventListener('click', () => {
+            if (currentModule > 0) {
+                currentModule--;
+                updateModuleContent();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentModule < modules.length - 1) {
+                currentModule++;
+                updateModuleContent();
+            }
+        });
+
+        // Inisialisasi
+        updateModuleContent();
+    </script>
+</body>
+</html>
