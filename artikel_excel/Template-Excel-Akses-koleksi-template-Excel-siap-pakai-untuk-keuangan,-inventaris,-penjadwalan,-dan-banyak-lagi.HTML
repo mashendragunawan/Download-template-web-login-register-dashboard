@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Excel - Koleksi Template Siap Pakai | ExcelTemplates.com</title>
+    <meta name="description" content="Akses koleksi template Excel siap pakai untuk keuangan, inventaris, penjadwalan, dan banyak lagi. Download gratis template profesional untuk berbagai kebutuhan.">
+    <meta name="keywords" content="template excel, download template excel, template keuangan, template inventaris, template penjadwalan, excel gratis">
+    <meta name="author" content="ExcelTemplates.com">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #217346 0%, #2e8b57 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Template Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            height: 120px;
+            background: #217346;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+        }
+        
+        .category-content {
+            padding: 20px;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 10px;
+            color: #217346;
+        }
+        
+        .category-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .template-count {
+            display: inline-block;
+            background: #f0f7f4;
+            color: #217346;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Featured Templates */
+        .section-title {
+            font-size: 24px;
+            color: #217346;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f7f4;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .template-preview {
+            height: 180px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .template-preview .preview-placeholder {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .template-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .template-badge.free {
+            background: #4caf50;
+        }
+        
+        .template-badge.pro {
+            background: #f44336;
+        }
+        
+        .template-info {
+            padding: 15px;
+        }
+        
+        .template-info h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .template-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .template-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background: #217346;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1a5c38;
+        }
+        
+        .btn-secondary {
+            background: #f0f7f4;
+            color: #217346;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0efe7;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .benefit-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #217346;
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .benefit-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            margin: 40px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #217346;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #217346;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-templates li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-templates li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .how-it-works {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltemplates.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>ExcelTemplates.com</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kategori</a></li>
+                        <li><a href="#">Gratis</a></li>
+                        <li><a href="#">Premium</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Koleksi Template Excel Siap Pakai</h1>
+            <p>Download template Excel profesional untuk keuangan, inventaris, penjadwalan, dan banyak lagi. Hemat waktu dengan template yang sudah terstruktur dan mudah digunakan.</p>
+            <div class="search-box">
+                <input type="text" placeholder="Cari template... (contoh: budget, inventory, invoice)">
+                <button>Cari</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Categories Section -->
+                <h2 class="section-title">Kategori Template</h2>
+                <div class="categories">
+                    <div class="category-card">
+                        <div class="category-icon">💰</div>
+                        <div class="category-content">
+                            <h3>Keuangan & Akuntansi</h3>
+                            <p>Template untuk pengelolaan keuangan pribadi dan bisnis</p>
+                            <span class="template-count">48 Template</span>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📦</div>
+                        <div class="category-content">
+                            <h3>Inventaris & Stok</h3>
+                            <p>Kelola persediaan barang dan stok dengan mudah</p>
+                            <span class="template-count">32 Template</span>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📅</div>
+                        <div class="category-content">
+                            <h3>Penjadwalan & Kalender</h3>
+                            <p>Atur jadwal aktivitas dan rencana kerja</p>
+                            <span class="template-count">27 Template</span>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📊</div>
+                        <div class="category-content">
+                            <h3>Laporan & Dashboard</h3>
+                            <p>Template dashboard dan laporan performa</p>
+                            <span class="template-count">35 Template</span>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">👥</div>
+                        <div class="category-content">
+                            <h3>HR & Personalia</h3>
+                            <p>Kelola data karyawan dan penggajian</p>
+                            <span class="template-count">23 Template</span>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📈</div>
+                        <div class="category-content">
+                            <h3>Bisnis & Pemasaran</h3>
+                            <p>Template untuk analisis bisnis dan pemasaran</p>
+                            <span class="template-count">41 Template</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Templates -->
+                <h2 class="section-title">Template Unggulan</h2>
+                <div class="templates-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div class="preview-placeholder">Preview Budget Planner</div>
+                            <div class="template-badge free">GRATIS</div>
+                        </div>
+                        <div class="template-info">
+                            <h3>Budget Planner Pribadi</h3>
+                            <p>Kelola keuangan pribadi dengan template budget bulanan yang mudah digunakan.</p>
+                            <div class="template-meta">
+                                <span>⭐ 4.8 (124 review)</span>
+                                <span>📥 2.5K downloads</span>
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn btn-primary">Download</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div class="preview-placeholder">Preview Inventory Manager</div>
+                            <div class="template-badge pro">PRO</div>
+                        </div>
+                        <div class="template-info">
+                            <h3>Manajemen Inventaris</h3>
+                            <p>Lacak stok barang, pemasukan dan pengeluaran dengan sistem otomatis.</p>
+                            <div class="template-meta">
+                                <span>⭐ 4.9 (89 review)</span>
+                                <span>📥 1.8K downloads</span>
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn btn-primary">Beli ($9.99)</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div class="preview-placeholder">Preview Project Timeline</div>
+                            <div class="template-badge free">GRATIS</div>
+                        </div>
+                        <div class="template-info">
+                            <h3>Timeline Proyek</h3>
+                            <p>Jadwalkan dan lacak progress proyek dengan Gantt chart yang interaktif.</p>
+                            <div class="template-meta">
+                                <span>⭐ 4.7 (156 review)</span>
+                                <span>📥 3.2K downloads</span>
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn btn-primary">Download</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <div class="preview-placeholder">Preview Sales Dashboard</div>
+                            <div class="template-badge pro">PRO</div>
+                        </div>
+                        <div class="template-info">
+                            <h3>Dashboard Penjualan</h3>
+                            <p>Monitor performa penjualan dengan visualisasi data yang menarik.</p>
+                            <div class="template-meta">
+                                <span>⭐ 4.9 (67 review)</span>
+                                <span>📥 1.2K downloads</span>
+                            </div>
+                            <div class="template-actions">
+                                <button class="btn btn-primary">Beli ($12.99)</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits Section -->
+                <h2 class="section-title">Menggunakan Template Excel</h2>
+                <div class="benefits">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⏱️</div>
+                        <h3>Hemat Waktu</h3>
+                        <p>Template siap pakai menghemat waktu pembuatan spreadsheet dari nol</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💡</div>
+                        <h3>Profesional</h3>
+                        <p>Desain yang sudah terstruktur dan formula yang sudah terintegrasi</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <h3>Mudah Disesuaikan</h3>
+                        <p>Template dapat disesuaikan dengan kebutuhan spesifik Anda</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📚</div>
+                        <h3>Belajar Excel</h3>
+                        <p>Pelajari teknik Excel lanjutan dengan mempelajari template yang ada</p>
+                    </div>
+                </div>
+
+                <!-- How It Works -->
+                <h2 class="section-title">Cara Menggunakan</h2>
+                <div class="how-it-works">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">🔍</div>
+                        <h3>Temukan Template</h3>
+                        <p>Cari template yang sesuai dengan kebutuhan Anda</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">📥</div>
+                        <h3>Download</h3>
+                        <p>Download template gratis atau beli template premium</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">✏️</div>
+                        <h3>Sesuaikan</h3>
+                        <p>Edit dan sesuaikan template dengan data Anda</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">✅</div>
+                        <h3>Gunakan</h3>
+                        <p>Gunakan template untuk menyelesaikan pekerjaan Anda</p>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <h2 class="section-title">Apa Kata Pengguna</h2>
+                <div class="testimonials">
+                    <div class="testimonial-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                "Template budget planner sangat membantu saya mengatur keuangan bulanan. Sekarang saya bisa melihat dengan jelas kemana uang saya pergi."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">DS</div>
+                                <div class="author-info">
+                                    <h4>Diana Sari</h4>
+                                    <p>Freelancer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                "Template inventaris untuk toko saya sangat menghemat waktu. Sistem otomatisnya membantu mengurangi kesalahan pencatatan manual."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">RP</div>
+                                <div class="author-info">
+                                    <h4>Rizki Pratama</h4>
+                                    <p>Pemilik Bisnis</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                "Sebagai project manager, template timeline sangat membantu dalam mengelola multiple projects. Visual Gantt chart memudahkan komunikasi dengan tim."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AF</div>
+                                <div class="author-info">
+                                    <h4>Ahmad Fauzi</h4>
+                                    <p>Project Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Template Populer</h3>
+                    <ul class="popular-templates">
+                        <li><a href="#"><span>1</span> Budget Planner Pribadi</a></li>
+                        <li><a href="#"><span>2</span> Manajemen Inventaris</a></li>
+                        <li><a href="#"><span>3</span> Timeline Proyek</a></li>
+                        <li><a href="#"><span>4</span> Invoice & Faktur</a></li>
+                        <li><a href="#"><span>5</span> Laporan Keuangan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Template</h3>
+                    <ul>
+                        <li><a href="#">Keuangan & Akuntansi</a></li>
+                        <li><a href="#">Inventaris & Stok</a></li>
+                        <li><a href="#">Penjadwalan & Kalender</a></li>
+                        <li><a href="#">Laporan & Dashboard</a></li>
+                        <li><a href="#">HR & Personalia</a></li>
+                        <li><a href="#">Bisnis & Pemasaran</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Budget</a>
+                        <a href="#">Invoice</a>
+                        <a href="#">Inventory</a>
+                        <a href="#">Schedule</a>
+                        <a href="#">Dashboard</a>
+                        <a href="#">Financial</a>
+                        <a href="#">Gratis</a>
+                        <a href="#">Premium</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Newsletter</h3>
+                    <p>Dapatkan update template Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Berlangganan</button>
+                </div>
+                
+                <div class="widget">
+                    <h3>Template Gratis</h3>
+                    <p>Download koleksi template Excel gratis untuk berbagai kebutuhan.</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">Lihat Template Gratis</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ExcelTemplates.com</h3>
+                    <p>Pusat template Excel terlengkap dengan koleksi template siap pakai untuk berbagai kebutuhan bisnis dan pribadi.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kategori Template</h3>
+                    <ul>
+                        <li><a href="#">Keuangan & Akuntansi</a></li>
+                        <li><a href="#">Inventaris & Stok</a></li>
+                        <li><a href="#">Penjadwalan & Kalender</a></li>
+                        <li><a href="#">Laporan & Dashboard</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Template Populer</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Premium Templates</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltemplates.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ExcelTemplates.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

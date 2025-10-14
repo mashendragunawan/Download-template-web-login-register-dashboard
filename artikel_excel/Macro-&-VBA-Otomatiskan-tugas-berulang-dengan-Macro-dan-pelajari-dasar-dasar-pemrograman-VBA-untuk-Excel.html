@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro & VBA Excel - Panduan Otomatisasi dan Pemrograman | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara mengotomatiskan tugas berulang dengan Macro dan dasar-dasar pemrograman VBA untuk Excel. Tutorial lengkap untuk pemula hingga mahir.">
+    <meta name="keywords" content="macro excel, vba excel, pemrograman excel, otomatisasi excel, tutorial vba, excel programming">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* VBA Code Styles */
+        .vba-environment {
+            background: #2d2d2d;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+        
+        .vba-toolbar {
+            background: #3c3c3c;
+            padding: 10px 15px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #555;
+        }
+        
+        .toolbar-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .toolbar-red { background: #ff5f57; }
+        .toolbar-yellow { background: #ffbd2e; }
+        .toolbar-green { background: #28ca42; }
+        
+        .vba-editor {
+            padding: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #f8f8f2;
+            line-height: 1.5;
+        }
+        
+        .vba-keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        
+        .vba-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        
+        .vba-string {
+            color: #ce9178;
+        }
+        
+        .vba-function {
+            color: #dcdcaa;
+        }
+        
+        .automation-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .macro-workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .workflow-step {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #217346;
+        }
+        
+        .workflow-number {
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .vba-objects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .object-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #217346;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .security-info {
+            background: #ffebee;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .security-info h4 {
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .automation-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .macro-workflow {
+                grid-template-columns: 1fr;
+            }
+            
+            .vba-objects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Macro & VBA Excel: Panduan Lengkap Otomatisasi dan Pemrograman</h1>
+                        <div class="article-meta">
+                            <span>📅 15 April 2023</span>
+                            <span>👁️ 8.2K Dilihat</span>
+                            <span>⏱️ 25 menit membaca</span>
+                            <span>🏷️ Macro Excel, VBA, Pemrograman, Otomatisasi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Macro dan VBA (Visual Basic for Applications) adalah fitur powerful di Excel yang memungkinkan Anda mengotomatiskan tugas berulang dan membuat aplikasi custom. Dengan menguasai VBA, Anda dapat meningkatkan produktivitas hingga 90% dan membuat Excel bekerja sesuai kebutuhan spesifik Anda.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> VBA dapat mengurangi waktu kerja untuk tugas berulang dari jam menjadi detik, dan dari hari menjadi menit.
+                        </div>
+                        
+                        <h2>1. Apa itu Macro dan VBA?</h2>
+                        
+                        <div class="automation-benefits">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚡</div>
+                                <h4>Macro</h4>
+                                <p>Rekaman serangkaian perintah Excel yang dapat dijalankan ulang</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💻</div>
+                                <h4>VBA</h4>
+                                <p>Bahasa pemrograman untuk mengembangkan macro dan aplikasi custom</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🔄</div>
+                                <h4>Automation</h4>
+                                <p>Otomatisasi tugas berulang dengan satu klik</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Cara Kerja Macro & VBA</h2>
+                        
+                        <div class="macro-workflow">
+                            <div class="workflow-step">
+                                <div class="workflow-number">1</div>
+                                <h4>Record</h4>
+                                <p>Rekam tindakan pengguna</p>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="workflow-number">2</div>
+                                <h4>Generate</h4>
+                                <p>Excel buat kode VBA</p>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="workflow-number">3</div>
+                                <h4>Edit</h4>
+                                <p>Modifikasi kode jika perlu</p>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="workflow-number">4</div>
+                                <h4>Run</h4>
+                                <p>Jalankan macro</p>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Mengaktifkan Developer Tab</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>File → Options</h4>
+                                <p>Buka Excel Options</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Customize Ribbon</h4>
+                                <p>Pilih Customize the Ribbon</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Check Developer</h4>
+                                <p>Centang Developer tab</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>OK</h4>
+                                <p>Developer tab akan muncul</p>
+                            </div>
+                        </div>
+                        
+                        <h2>4. Membuat Macro Pertama Anda</h2>
+                        
+                        <div class="example-box">
+                            <h4>Contoh: Macro untuk Format Laporan</h4>
+                            <ol>
+                                <li>Developer Tab → Record Macro</li>
+                                <li>Berikan nama "FormatLaporan"</li>
+                                <li>Lakukan tindakan:
+                                    <ul>
+                                        <li>Format header dengan bold dan background</li>
+                                        <li>Set border untuk tabel</li>
+                                        <li>Format angka sebagai currency</li>
+                                        <li>Auto-fit columns</li>
+                                    </ul>
+                                </li>
+                                <li>Stop Recording</li>
+                            </ol>
+                            
+                            <div class="vba-environment">
+                                <div class="vba-toolbar">
+                                    <div class="toolbar-button toolbar-red"></div>
+                                    <div class="toolbar-button toolbar-yellow"></div>
+                                    <div class="toolbar-button toolbar-green"></div>
+                                </div>
+                                <div class="vba-editor">
+                                    <span class="vba-keyword">Sub</span> FormatLaporan()<br>
+                                    <span class="vba-comment">' Macro untuk format laporan otomatis</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">With</span> Selection<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Font.Bold = <span class="vba-keyword">True</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Interior.Color = RGB(217, 225, 242)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Borders.LineStyle = xlContinuous<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">End With</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Selection.NumberFormat = <span class="vba-string">"#,##0"</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Cells.EntireColumn.AutoFit<br>
+                                    <span class="vba-keyword">End Sub</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>5. Dasar-Dasar Pemrograman VBA</h2>
+                        
+                        <div class="vba-objects">
+                            <div class="object-card">
+                                <h4>Variables</h4>
+                                <p>Penyimpanan data sementara</p>
+                                <div class="code-block" style="font-size: 12px; margin: 10px 0 0 0;">
+                                    Dim nama As String<br>
+                                    Dim umur As Integer
+                                </div>
+                            </div>
+                            <div class="object-card">
+                                <h4>Loops</h4>
+                                <p>Pengulangan tugas</p>
+                                <div class="code-block" style="font-size: 12px; margin: 10px 0 0 0;">
+                                    For i = 1 To 10<br>
+                                    &nbsp;&nbsp;' kode<br>
+                                    Next i
+                                </div>
+                            </div>
+                            <div class="object-card">
+                                <h4>Conditions</h4>
+                                <p>Percabangan logika</p>
+                                <div class="code-block" style="font-size: 12px; margin: 10px 0 0 0;">
+                                    If nilai > 75 Then<br>
+                                    &nbsp;&nbsp;' kode<br>
+                                    End If
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>6. Object Model Excel VBA</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Object</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Application</strong></td>
+                                    <td>Excel application itu sendiri</td>
+                                    <td>Application.Version</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Workbook</strong></td>
+                                    <td>File Excel</td>
+                                    <td>Workbooks("Data.xlsx")</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Worksheet</strong></td>
+                                    <td>Sheet dalam workbook</td>
+                                    <td>Worksheets("Sheet1")</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Range</strong></td>
+                                    <td>Sel atau range sel</td>
+                                    <td>Range("A1:B10")</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cells</strong></td>
+                                    <td>Sel tertentu</td>
+                                    <td>Cells(1, 1) 'A1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>7. Contoh Kode VBA yang Berguna</h2>
+                        
+                        <div class="example-box">
+                            <h4>1. Import Multiple Files</h4>
+                            <div class="vba-environment">
+                                <div class="vba-toolbar">
+                                    <div class="toolbar-button toolbar-red"></div>
+                                    <div class="toolbar-button toolbar-yellow"></div>
+                                    <div class="toolbar-button toolbar-green"></div>
+                                </div>
+                                <div class="vba-editor">
+                                    <span class="vba-keyword">Sub</span> ImportMultipleFiles()<br>
+                                    <span class="vba-comment">' Import semua file CSV dari folder</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Dim</span> filePath <span class="vba-keyword">As String</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;filePath = "C:\Data\"<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;fileName = Dir(filePath & "*.csv")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Do While</span> fileName <> ""<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workbooks.Open filePath & fileName<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-comment">' Proses file</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileName = Dir()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Loop</span><br>
+                                    <span class="vba-keyword">End Sub</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>2. Auto Filter dan Copy Data</h4>
+                            <div class="vba-environment">
+                                <div class="vba-toolbar">
+                                    <div class="toolbar-button toolbar-red"></div>
+                                    <div class="toolbar-button toolbar-yellow"></div>
+                                    <div class="toolbar-button toolbar-green"></div>
+                                </div>
+                                <div class="vba-editor">
+                                    <span class="vba-keyword">Sub</span> FilterAndCopy()<br>
+                                    <span class="vba-comment">' Filter data dan copy ke sheet baru</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Dim</span> ws <span class="vba-keyword">As Worksheet</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Set</span> ws = Worksheets("Data")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ws.Range("A1:D100").AutoFilter Field:=3, Criteria1:=">1000"<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ws.AutoFilter.Range.Copy<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Dim</span> newWs <span class="vba-keyword">As Worksheet</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">Set</span> newWs = Worksheets.Add<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;newWs.Range("A1").PasteSpecial xlPasteValues<br>
+                                    <span class="vba-keyword">End Sub</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>8. Keamanan Macro</h2>
+                        
+                        <div class="security-info">
+                            <h4>⚠️ Penting: Keamanan Macro</h4>
+                            <p>Macro dapat mengandung kode berbahaya. Selalu:</p>
+                            <ul>
+                                <li>Aktifkan macro hanya dari sumber terpercaya</li>
+                                <li>Periksa kode sebelum menjalankan</li>
+                                <li>Gunakan digital signature</li>
+                                <li>Backup data sebelum menjalankan macro baru</li>
+                            </ul>
+                            
+                            <div class="tip">
+                                <strong>Setting Keamanan:</strong> File → Options → Trust Center → Trust Center Settings → Macro Settings
+                            </div>
+                        </div>
+                        
+                        <h2>9. Debugging dan Error Handling</h2>
+                        
+                        <div class="example-box">
+                            <h4>Teknik Debugging:</h4>
+                            <ul>
+                                <li><strong>F8:</strong> Step through code</li>
+                                <li><strong>F9:</strong> Set breakpoint</li>
+                                <li><strong>Immediate Window:</strong> Test kode cepat</li>
+                                <li><strong>Watch Window:</strong> Monitor variables</li>
+                            </ul>
+                            
+                            <h4>Error Handling:</h4>
+                            <div class="vba-environment">
+                                <div class="vba-toolbar">
+                                    <div class="toolbar-button toolbar-red"></div>
+                                    <div class="toolbar-button toolbar-yellow"></div>
+                                    <div class="toolbar-button toolbar-green"></div>
+                                </div>
+                                <div class="vba-editor">
+                                    <span class="vba-keyword">Sub</span> SafeMacro()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-keyword">On Error GoTo</span> ErrorHandler<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="vba-comment">' Kode utama di sini</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Exit <span class="vba-keyword">Sub</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                    ErrorHandler:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;MsgBox "Error: " & Err.Description<br>
+                                    <span class="vba-keyword">End Sub</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>10. Studi Kasus: Sistem Laporan Otomatis</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat sistem laporan bulanan otomatis dengan:</p>
+                            <ul>
+                                <li>Import data dari multiple CSV files</li>
+                                <li>Clean dan format data</li>
+                                <li>Generate summary report</li>
+                                <li>Create charts otomatis</li>
+                                <li>Export ke PDF</li>
+                                <li>Send email notification</li>
+                            </ul>
+                            
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Rekam macro untuk setiap langkah</li>
+                                <li>Edit kode VBA untuk membuatnya dinamis</li>
+                                <li>Tambah error handling</li>
+                                <li>Buat user form untuk input parameter</li>
+                                <li>Assign macro ke button</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Pro Tip:</strong> Gunakan Recorder Macro untuk belajar syntax VBA, lalu modifikasi kode sesuai kebutuhan.
+                        </div>
+                        
+                        <h2>11. Best Practices VBA</h2>
+                        
+                        <div class="design-tips">
+                            <div class="design-tip">
+                                <h5>📝 Comment Kode</h5>
+                                <p>Beri penjelasan untuk setiap section</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>🏷️ Naming Convention</h5>
+                                <p>Gunakan nama yang deskriptif</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>🎯 Error Handling</h5>
+                                <p>Selalu handle potential errors</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>⚡ Optimasi</h5>
+                                <p>Non-aktifkan screen updating</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk aplikasi yang lebih kompleks, pertimbangkan untuk belajar Visual Studio dan Excel Add-ins.
+                        </div>
+                        
+                        <p>Dengan menguasai Macro dan VBA, Anda dapat mentransformasi Excel dari sekadar spreadsheet menjadi platform aplikasi yang powerful. Start small, practice regularly, dan soon you'll be automating everything!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Pivot Table Excel</a></h3>
+                                <p>Pelajari cara meringkas dan menganalisis data dengan Pivot Table.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chart Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Chart & Grafik Excel</a></h3>
+                                <p>Buat visualisasi data yang menarik dengan berbagai jenis chart.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard interaktif yang profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (22)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Rizki Pratama</span>
+                                <span class="comment-date">16 April 2023</span>
+                            </div>
+                            <p>Tutorial yang sangat detail! Saya berhasil membuat macro untuk otomatisasi laporan harian. Waktu kerja berkurang dari 2 jam menjadi 5 menit!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">16 April 2023</span>
+                            </div>
+                            <p>Luar biasa Rizki! Itulah kekuatan VBA - menghemat waktu untuk fokus pada analisis daripada tugas administratif.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Diana Sari</span>
+                                <span class="comment-date">17 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara membuat user form untuk input data? Apakah ada tutorial khusus untuk user form VBA?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Macro & VBA Excel</a></li>
+                        <li><a href="#"><span>2</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>3</span> Chart & Grafik Excel</a></li>
+                        <li><a href="#"><span>4</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Macro & VBA</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Macro Excel</a>
+                        <a href="#">VBA</a>
+                        <a href="#">Pemrograman Excel</a>
+                        <a href="#">Otomatisasi</a>
+                        <a href="#">Excel Lanjutan</a>
+                        <a href="#">Visual Basic</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Coding</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Macro & VBA</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

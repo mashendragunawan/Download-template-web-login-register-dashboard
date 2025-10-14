@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Master - Panduan Lengkap Microsoft Excel | Tutorial, Rumus, Template</title>
+    <meta name="description" content="Pelajari Microsoft Excel dengan mudah. Tutorial lengkap Excel untuk pemula hingga ahli, rumus, fungsi, template gratis, dan tips produktivitas.">
+    <meta name="keywords" content="excel, microsoft excel, tutorial excel, rumus excel, fungsi excel, pivot table, vlookup, macro excel, dashboard excel, template excel">
+    <meta name="author" content="Excel Master">
+    <style>
+        /* Reset dan gaya dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header dan Navigasi */
+        header {
+            background-color: #217346; /* Hijau Excel */
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: #c9e2d6;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #217346 0%, #1a5c38 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b00;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e55c00;
+            transform: translateY(-2px);
+        }
+        
+        /* Cards Section */
+        .cards-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #217346;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #217346;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f7f4;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-header {
+            background-color: #217346;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 0.5rem;
+            color: #217346;
+        }
+        
+        .card-body p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .level {
+            font-size: 0.85rem;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .level.pemula {
+            background-color: #e1f5fe;
+            color: #0277bd;
+        }
+        
+        .level.menengah {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .level.lanjutan {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .card-btn {
+            background-color: #217346;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .card-btn:hover {
+            background-color: #1a5c38;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 10px;
+        }
+        
+        .pagination button {
+            background-color: #217346;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background-color: #1a5c38;
+        }
+        
+        .pagination button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .page-numbers {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .page-numbers button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: #217346;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-numbers button.active {
+            background-color: #217346;
+            color: white;
+            border-color: #217346;
+        }
+        
+        .page-numbers button:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+        
+        .page-info {
+            margin-left: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ddd;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsif */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+            
+            .page-numbers {
+                order: -1;
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Master</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Kuasaikan Microsoft Excel dengan Mudah</h2>
+            <p>Pelajari tips, trik, dan fungsi Excel terbaru untuk meningkatkan produktivitas Anda. Dari pemula hingga ahli, semua tersedia di sini.</p>
+            <a href="#" class="btn">Mulai Belajar Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <h2 class="section-title">Panduan Excel Lengkap</h2>
+            <div class="cards-grid" id="cardsContainer">
+                <!-- Cards akan diisi oleh JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prevBtn" disabled>Sebelumnya</button>
+                <div class="page-numbers" id="pageNumbers">
+                    <!-- Nomor halaman akan diisi oleh JavaScript -->
+                </div>
+                <button id="nextBtn">Selanjutnya</button>
+                <div class="page-info" id="pageInfo">Halaman 1 dari 5</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Master</h3>
+                    <p>Platform pembelajaran Excel terbaik untuk semua level, dari pemula hingga profesional.</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Lanjutan</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi</a></li>
+                        <li><a href="#">Otomasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Sumber Daya</h3>
+                    <ul>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Cheat Sheet</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><a href="#">Email: info@excelmaster.com</a></li>
+                        <li><a href="#">Telepon: (021) 1234-5678</a></li>
+                        <li><a href="#">Alamat: Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Master. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data untuk 50 card Excel
+        const excelCards = [
+            { id: 1, title: "Fungsi Dasar Excel", level: "pemula", image: "https://images.unsplash.com/photo-1618044619884-2c8c7b1f5b1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pelajari fungsi-fungsi dasar Excel seperti SUM, AVERAGE, COUNT, dan lainnya yang penting untuk pemula." },
+            { id: 2, title: "Rumus IF dan Logika", level: "menengah", image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Kuasaikan penggunaan rumus IF, AND, OR untuk membuat keputusan otomatis dalam spreadsheet Anda." },
+            { id: 3, title: "VLOOKUP & HLOOKUP", level: "menengah", image: "https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Temukan cara menggunakan VLOOKUP dan HLOOKUP untuk mencari data dalam tabel dengan cepat dan akurat." },
+            { id: 4, title: "Pivot Table", level: "menengah", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pelajari cara membuat dan menggunakan Pivot Table untuk meringkas dan menganalisis data dengan mudah." },
+            { id: 5, title: "Chart & Grafik", level: "pemula", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Buat visualisasi data yang menarik dengan berbagai jenis chart dan grafik yang tersedia di Excel." },
+            { id: 6, title: "Macro & VBA", level: "lanjutan", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Otomatiskan tugas berulang dengan Macro dan pelajari dasar-dasar pemrograman VBA untuk Excel." },
+            { id: 7, title: "Power Query", level: "lanjutan", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Transformasi dan persiapan data dengan mudah menggunakan Power Query untuk analisis yang lebih baik." },
+            { id: 8, title: "Dashboard Excel", level: "lanjutan", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Buat dashboard interaktif untuk memantau KPI dan metrik bisnis dengan tampilan yang profesional." },
+            { id: 9, title: "Analisis Data", level: "menengah", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pelajari teknik analisis data dengan Excel termasuk forecasting, analisis regresi, dan lainnya." },
+            { id: 10, title: "Template Excel", level: "pemula", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Akses koleksi template Excel siap pakai untuk keuangan, inventaris, penjadwalan, dan banyak lagi." },
+            // Data tambahan untuk mencapai 50 card
+            { id: 11, title: "Rumus Matematika Excel", level: "pemula", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pelajari rumus matematika dasar dan lanjutan untuk perhitungan dalam Excel." },
+            { id: 12, title: "Fungsi Teks Excel", level: "pemula", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Manipulasi dan pengolahan teks dengan fungsi-fungsi teks Excel seperti LEFT, RIGHT, MID, CONCATENATE." },
+            { id: 13, title: "Fungsi Tanggal & Waktu", level: "pemula", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Kelola data tanggal dan waktu dengan fungsi DATE, TIME, NOW, TODAY, dan lainnya." },
+            { id: 14, title: "Conditional Formatting", level: "menengah", image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Terapkan format bersyarat untuk menyoroti data penting secara visual." },
+            { id: 15, title: "Data Validation", level: "menengah", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Kontrol input data dengan validasi data untuk menghindari kesalahan." },
+            { id: 16, title: "INDEX & MATCH", level: "menengah", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Kombinasi INDEX dan MATCH untuk pencarian data yang lebih fleksibel daripada VLOOKUP." },
+            { id: 17, title: "SUMIF, COUNTIF, AVERAGEIF", level: "menengah", image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Fungsi agregat bersyarat untuk perhitungan berdasarkan kriteria tertentu." },
+            { id: 18, title: "Power Pivot", level: "lanjutan", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis data dalam skala besar dengan model data dan DAX di Power Pivot." },
+            { id: 19, title: "Power BI Integration", level: "lanjutan", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Integrasikan Excel dengan Power BI untuk visualisasi dan analisis data yang lebih powerful." },
+            { id: 20, title: "Excel untuk Keuangan", level: "menengah", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Aplikasi Excel dalam analisis keuangan, perhitungan investasi, dan pemodelan bisnis." },
+            { id: 21, title: "Excel untuk HR", level: "menengah", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Penggunaan Excel dalam manajemen sumber daya manusia dan penggajian." },
+            { id: 22, title: "Excel untuk Marketing", level: "menengah", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis data pemasaran, metrik kampanye, dan pelaporan performa dengan Excel." },
+            { id: 23, title: "Excel untuk Inventory", level: "menengah", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Manajemen inventaris dan stok dengan sistem Excel yang efektif." },
+            { id: 24, title: "Excel untuk Project Management", level: "menengah", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Perencanaan dan pelacakan proyek dengan Gantt chart dan tools manajemen proyek di Excel." },
+            { id: 25, title: "Excel untuk Sales", level: "menengah", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis penjualan, pipeline, dan performa tim sales dengan Excel." },
+            { id: 26, title: "Excel untuk Pendidikan", level: "pemula", image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pemanfaatan Excel dalam dunia pendidikan untuk administrasi dan analisis data siswa." },
+            { id: 27, title: "Excel untuk Kesehatan", level: "menengah", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Aplikasi Excel dalam manajemen data pasien, jadwal, dan analisis kesehatan." },
+            { id: 28, title: "Excel untuk UMKM", level: "pemula", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Solusi Excel untuk usaha kecil dan menengah dalam pengelolaan keuangan dan operasional." },
+            { id: 29, title: "Excel untuk Logistik", level: "menengah", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Optimasi rantai pasok dan manajemen logistik dengan tools Excel." },
+            { id: 30, title: "Excel untuk Real Estate", level: "menengah", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis properti, perhitungan investasi, dan manajemen portofolio real estate dengan Excel." },
+            { id: 31, title: "Excel untuk Manufacturing", level: "menengah", image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Penggunaan Excel dalam pengelolaan produksi, kualitas, dan efisiensi manufaktur." },
+            { id: 32, title: "Excel untuk Retail", level: "menengah", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis penjualan ritel, manajemen toko, dan optimasi inventaris dengan Excel." },
+            { id: 33, title: "Excel untuk E-commerce", level: "menengah", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis data e-commerce, performa produk, dan metrik bisnis online dengan Excel." },
+            { id: 34, title: "Excel untuk Startup", level: "pemula", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Tools Excel yang berguna untuk startup dalam pengelolaan operasional dan analisis bisnis." },
+            { id: 35, title: "Excel untuk NGO", level: "pemula", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pemanfaatan Excel dalam organisasi nirlaba untuk pelaporan dan manajemen program." },
+            { id: 36, title: "Excel untuk Event Management", level: "menengah", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Perencanaan dan manajemen event dengan tools Excel untuk anggaran, jadwal, dan peserta." },
+            { id: 37, title: "Excel untuk Research", level: "lanjutan", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis data penelitian, statistik, dan visualisasi hasil penelitian dengan Excel." },
+            { id: 38, title: "Excel untuk Consulting", level: "lanjutan", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Tools Excel untuk konsultan dalam analisis bisnis, financial modeling, dan presentasi." },
+            { id: 39, title: "Excel untuk Government", level: "menengah", image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Aplikasi Excel dalam sektor pemerintahan untuk administrasi dan analisis kebijakan." },
+            { id: 40, title: "Excel untuk Legal", level: "menengah", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Penggunaan Excel dalam praktik hukum untuk manajemen kasus, billing, dan dokumen." },
+            { id: 41, title: "Excel untuk Insurance", level: "menengah", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis data asuransi, klaim, dan portofolio dengan tools Excel." },
+            { id: 42, title: "Excel untuk Banking", level: "lanjutan", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Aplikasi Excel dalam perbankan untuk analisis kredit, risiko, dan laporan keuangan." },
+            { id: 43, title: "Excel untuk Investment", level: "lanjutan", image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis investasi, portofolio, dan pemodelan keuangan dengan Excel." },
+            { id: 44, title: "Excel untuk Cryptocurrency", level: "lanjutan", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Pelacakan dan analisis investasi cryptocurrency dengan tools Excel." },
+            { id: 45, title: "Excel untuk Forex Trading", level: "lanjutan", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis trading forex, backtesting strategi, dan manajemen risiko dengan Excel." },
+            { id: 46, title: "Excel untuk Stock Market", level: "lanjutan", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Analisis pasar saham, portofolio, dan screening saham dengan Excel." },
+            { id: 47, title: "Excel untuk Personal Finance", level: "pemula", image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Kelola keuangan pribadi, anggaran, dan investasi dengan template Excel." },
+            { id: 48, title: "Excel untuk Tax Planning", level: "menengah", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Perencanaan pajak dan perhitungan kewajiban pajak dengan tools Excel." },
+            { id: 49, title: "Excel untuk Budgeting", level: "pemula", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Buat anggaran pribadi, keluarga, atau bisnis dengan template Excel yang efektif." },
+            { id: 50, title: "Excel untuk Forecasting", level: "lanjutan", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Teknik forecasting dan prediksi bisnis dengan berbagai metode statistik di Excel." }
+        ];
+
+        // Variabel pagination
+        const cardsPerPage = 10;
+        let currentPage = 1;
+        const totalPages = Math.ceil(excelCards.length / cardsPerPage);
+
+        // Elemen DOM
+        const cardsContainer = document.getElementById('cardsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageNumbers = document.getElementById('pageNumbers');
+        const pageInfo = document.getElementById('pageInfo');
+
+        // Fungsi untuk menampilkan cards berdasarkan halaman
+        function displayCards(page) {
+            cardsContainer.innerHTML = '';
+            const startIndex = (page - 1) * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+            const cardsToShow = excelCards.slice(startIndex, endIndex);
+
+            cardsToShow.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <div class="card-image">
+                        <img src="${card.image}" alt="${card.title}">
+                    </div>
+                    <div class="card-header">
+                        <h3>${card.title}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>${card.desc}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="level ${card.level}">${getLevelText(card.level)}</span>
+                        <button class="card-btn">Pelajari</button>
+                    </div>
+                `;
+                cardsContainer.appendChild(cardElement);
+            });
+
+            updatePagination();
+        }
+
+        // Fungsi untuk mendapatkan teks level
+        function getLevelText(level) {
+            switch(level) {
+                case 'pemula': return 'Pemula';
+                case 'menengah': return 'Menengah';
+                case 'lanjutan': return 'Lanjutan';
+                default: return 'Semua Level';
+            }
+        }
+
+        // Fungsi untuk memperbarui tampilan pagination
+        function updatePagination() {
+            // Update tombol previous/next
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+
+            // Update nomor halaman
+            pageNumbers.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    displayCards(currentPage);
+                });
+                pageNumbers.appendChild(pageBtn);
+            }
+
+            // Update info halaman
+            pageInfo.textContent = `Halaman ${currentPage} dari ${totalPages}`;
+        }
+
+        // Event listener untuk tombol previous/next
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayCards(currentPage);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayCards(currentPage);
+            }
+        });
+
+        // Inisialisasi tampilan
+        displayCards(currentPage);
+    </script>
+</body>
+</html>

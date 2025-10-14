@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLOOKUP & HLOOKUP Excel - Panduan Lengkap Pencarian Data | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan VLOOKUP dan HLOOKUP di Excel untuk mencari data dalam tabel dengan cepat dan akurat. Tutorial lengkap dengan contoh praktis.">
+    <meta name="keywords" content="vlookup excel, hlookup excel, fungsi lookup, pencarian data excel, tutorial vlookup, excel lookup functions">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+        }
+        
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .lookup-visual {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .lookup-visual h4 {
+            color: #217346;
+            margin-bottom: 20px;
+        }
+        
+        .visual-table {
+            display: inline-block;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px;
+        }
+        
+        .table-row {
+            display: flex;
+        }
+        
+        .table-cell {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            min-width: 80px;
+            text-align: center;
+            background: white;
+        }
+        
+        .table-header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .lookup-direction {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .direction-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .direction-arrow {
+            font-size: 24px;
+            color: #217346;
+            margin: 10px 0;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .example-table th, .example-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .example-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .example-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .highlight {
+            background: #fff3cd !important;
+            font-weight: bold;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .parameter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .parameter-table th {
+            background: #217346;
+            color: white;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        
+        .parameter-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .lookup-direction {
+                flex-direction: column;
+            }
+            
+            .table-cell {
+                padding: 5px 8px;
+                min-width: 60px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="https://mashendragunawan.com/excelmaster.html">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>VLOOKUP & HLOOKUP Excel: Panduan Lengkap Pencarian Data dalam Tabel</h1>
+                        <div class="article-meta">
+                            <span>📅 30 Maret 2023</span>
+                            <span>👁️ 5.3K Dilihat</span>
+                            <span>⏱️ 15 menit membaca</span>
+                            <span>🏷️ Fungsi Lookup, VLOOKUP, HLOOKUP, Pencarian Data</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Fungsi VLOOKUP dan HLOOKUP adalah dua fungsi paling powerful di Excel untuk melakukan pencarian data dalam tabel. Dengan menguasai kedua fungsi ini, Anda dapat mengotomatiskan proses pencarian dan referensi data dengan cepat dan akurat.</p>
+                        
+                        <div class="note">
+                            <strong>Konsep Dasar:</strong> VLOOKUP mencari data secara vertikal (kolom), sedangkan HLOOKUP mencari data secara horizontal (baris).
+                        </div>
+                        
+                        <h2>1. Fungsi VLOOKUP (Vertical Lookup)</h2>
+                        <p>VLOOKUP mencari nilai tertentu dalam kolom pertama tabel dan mengembalikan nilai dari kolom lain dalam baris yang sama.</p>
+                        
+                        <h3>Sintaks VLOOKUP:</h3>
+                        <div class="code-block">
+                            =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+                        </div>
+                        
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>lookup_value</strong></td>
+                                    <td>Nilai yang ingin dicari</td>
+                                    <td>"PRD001" atau A2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>table_array</strong></td>
+                                    <td>Rentang tabel pencarian</td>
+                                    <td>A2:D10</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>col_index_num</strong></td>
+                                    <td>Nomor kolom nilai yang akan dikembalikan</td>
+                                    <td>2 (kolom kedua)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>range_lookup</strong></td>
+                                    <td>TRUE = approximate match, FALSE = exact match</td>
+                                    <td>FALSE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="lookup-visual">
+                            <h4>Visualisasi Cara Kerja VLOOKUP</h4>
+                            <div class="visual-table">
+                                <div class="table-row">
+                                    <div class="table-cell table-header">Kode</div>
+                                    <div class="table-cell table-header">Nama</div>
+                                    <div class="table-cell table-header">Harga</div>
+                                    <div class="table-cell table-header">Stok</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell highlight">PRD001</div>
+                                    <div class="table-cell">Laptop</div>
+                                    <div class="table-cell">8,500,000</div>
+                                    <div class="table-cell">15</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">PRD002</div>
+                                    <div class="table-cell">Mouse</div>
+                                    <div class="table-cell">250,000</div>
+                                    <div class="table-cell">50</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">PRD003</div>
+                                    <div class="table-cell">Keyboard</div>
+                                    <div class="table-cell">450,000</div>
+                                    <div class="table-cell">30</div>
+                                </div>
+                            </div>
+                            <div class="lookup-direction">
+                                <div class="direction-item">
+                                    <div>VLOOKUP mencari di kolom pertama</div>
+                                    <div class="direction-arrow">↓</div>
+                                    <div>Kolom 1: Kode</div>
+                                </div>
+                                <div class="direction-item">
+                                    <div>Mengembalikan nilai dari kolom yang ditentukan</div>
+                                    <div class="direction-arrow">→</div>
+                                    <div>Kolom 3: Harga</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Praktis VLOOKUP:</h4>
+                            <p>Mencari harga produk berdasarkan kode produk:</p>
+                            <div class="code-block">
+                                =VLOOKUP("PRD003", A2:D10, 3, FALSE)
+                            </div>
+                            <p><strong>Hasil:</strong> 450,000 (harga keyboard)</p>
+                            
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Produk</th>
+                                        <th>Rumus VLOOKUP</th>
+                                        <th>Hasil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>PRD001</td>
+                                        <td>=VLOOKUP("PRD001", A2:D10, 3, FALSE)</td>
+                                        <td>8,500,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRD002</td>
+                                        <td>=VLOOKUP("PRD002", A2:D10, 3, FALSE)</td>
+                                        <td>250,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRD003</td>
+                                        <td>=VLOOKUP("PRD003", A2:D10, 3, FALSE)</td>
+                                        <td>450,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h2>2. Fungsi HLOOKUP (Horizontal Lookup)</h2>
+                        <p>HLOOKUP mencari nilai tertentu dalam baris pertama tabel dan mengembalikan nilai dari baris lain dalam kolom yang sama.</p>
+                        
+                        <h3>Sintaks HLOOKUP:</h3>
+                        <div class="code-block">
+                            =HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])
+                        </div>
+                        
+                        <div class="lookup-visual">
+                            <h4>Visualisasi Cara Kerja HLOOKUP</h4>
+                            <div class="visual-table">
+                                <div class="table-row">
+                                    <div class="table-cell table-header">Quarter</div>
+                                    <div class="table-cell highlight">Q1</div>
+                                    <div class="table-cell">Q2</div>
+                                    <div class="table-cell">Q3</div>
+                                    <div class="table-cell">Q4</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell table-header">Sales</div>
+                                    <div class="table-cell">150,000</div>
+                                    <div class="table-cell">180,000</div>
+                                    <div class="table-cell">165,000</div>
+                                    <div class="table-cell">200,000</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell table-header">Expenses</div>
+                                    <div class="table-cell">80,000</div>
+                                    <div class="table-cell">85,000</div>
+                                    <div class="table-cell">78,000</div>
+                                    <div class="table-cell">90,000</div>
+                                </div>
+                            </div>
+                            <div class="lookup-direction">
+                                <div class="direction-item">
+                                    <div>HLOOKUP mencari di baris pertama</div>
+                                    <div class="direction-arrow">→</div>
+                                    <div>Baris 1: Quarter</div>
+                                </div>
+                                <div class="direction-item">
+                                    <div>Mengembalikan nilai dari baris yang ditentukan</div>
+                                    <div class="direction-arrow">↓</div>
+                                    <div>Baris 2: Sales</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Praktis HLOOKUP:</h4>
+                            <p>Mencari penjualan untuk kuartal tertentu:</p>
+                            <div class="code-block">
+                                =HLOOKUP("Q1", A1:D3, 2, FALSE)
+                            </div>
+                            <p><strong>Hasil:</strong> 150,000 (penjualan Q1)</p>
+                        </div>
+                        
+                        <h2>3. Perbandingan VLOOKUP vs HLOOKUP</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>VLOOKUP</th>
+                                    <th>HLOOKUP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pencarian</strong></td>
+                                    <td>Vertikal (kolom)</td>
+                                    <td>Horizontal (baris)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lookup Value</strong></td>
+                                    <td>Kolom pertama</td>
+                                    <td>Baris pertama</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Arah Pencarian</strong></td>
+                                    <td>Kiri ke Kanan</td>
+                                    <td>Atas ke Bawah</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Return Value</strong></td>
+                                    <td>Kolom kanan</td>
+                                    <td>Baris bawah</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kegunaan Umum</strong></td>
+                                    <td>Tabel database, list produk</td>
+                                    <td>Tabel timeline, data periode</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>4. Exact Match vs Approximate Match</h2>
+                        
+                        <div class="example-box">
+                            <h4>Exact Match (FALSE):</h4>
+                            <div class="code-block">
+                                =VLOOKUP("PRD003", A2:D10, 3, FALSE)
+                            </div>
+                            <p>Mencari nilai yang sama persis dengan "PRD003"</p>
+                            
+                            <h4>Approximate Match (TRUE):</h4>
+                            <div class="code-block">
+                                =VLOOKUP(85, A2:B10, 2, TRUE)
+                            </div>
+                            <p>Mencari nilai terdekat dengan 85 (data harus diurutkan)</p>
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan Penting:</strong> Selalu gunakan FALSE untuk exact match kecuali Anda benar-benar membutuhkan approximate match. Data untuk approximate match HARUS diurutkan secara ascending.
+                        </div>
+                        
+                        <h2>5. Mengatasi Error Umum</h2>
+                        
+                        <div class="example-box">
+                            <h4>#N/A Error (Nilai tidak ditemukan):</h4>
+                            <div class="code-block">
+                                =IFERROR(VLOOKUP(A2, B2:D10, 3, FALSE), "Tidak Ditemukan")
+                            </div>
+                            
+                            <h4>#REF! Error (Kolom tidak ada):</h4>
+                            <div class="code-block">
+                                // Pastikan col_index_num tidak lebih besar dari jumlah kolom table_array
+                            </div>
+                            
+                            <h4>#VALUE! Error (Format tidak sesuai):</h4>
+                            <div class="code-block">
+                                // Pastikan lookup_value dan data di tabel memiliki format yang sama
+                            </div>
+                        </div>
+                        
+                        <h2>6. Tips dan Best Practices</h2>
+                        
+                        <div class="tip">
+                            <strong>Tip 1:</strong> Gunakan referensi absolut ($A$2:$D$10) untuk table_array agar tidak berubah saat disalin.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 2:</strong> Untuk pencarian dari kanan ke kiri, gunakan kombinasi INDEX-MATCH.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 3:</strong> Gunakan named range untuk mempermudah pembacaan rumus.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 4:</strong> Selalu gunakan FALSE untuk exact match kecuali untuk data yang diurutkan.
+                        </div>
+                        
+                        <h2>7. Studi Kasus: Sistem Pencarian Produk</h2>
+                        
+                        <div class="example-box">
+                            <h4>Database Produk:</h4>
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kategori</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>EL001</td>
+                                        <td>Laptop ASUS</td>
+                                        <td>Elektronik</td>
+                                        <td>8,500,000</td>
+                                        <td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OF002</td>
+                                        <td>Printer Canon</td>
+                                        <td>Kantor</td>
+                                        <td>1,200,000</td>
+                                        <td>8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EL003</td>
+                                        <td>Mouse Wireless</td>
+                                        <td>Elektronik</td>
+                                        <td>250,000</td>
+                                        <td>25</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Form Pencarian:</h4>
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Input Kode</th>
+                                        <th>Nama Produk</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>EL003</td>
+                                        <td>=VLOOKUP(A15, A2:E10, 2, FALSE)</td>
+                                        <td>=VLOOKUP(A15, A2:E10, 4, FALSE)</td>
+                                        <td>=VLOOKUP(A15, A2:E10, 5, FALSE)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat sistem pencarian data karyawan dengan VLOOKUP</p>
+                            <p><strong>Data Karyawan:</strong></p>
+                            <ul>
+                                <li>Kolom A: NIK</li>
+                                <li>Kolom B: Nama</li>
+                                <li>Kolom C: Departemen</li>
+                                <li>Kolom D: Gaji</li>
+                            </ul>
+                            <p><strong>Tugas:</strong> Buat form pencarian yang dapat menampilkan nama, departemen, dan gaji berdasarkan NIK yang diinput.</p>
+                            <div class="code-block">
+                                // Rumus untuk nama:
+                                =VLOOKUP(NIK_input, A2:D20, 2, FALSE)
+                                
+                                // Rumus untuk departemen:
+                                =VLOOKUP(NIK_input, A2:D20, 3, FALSE)
+                                
+                                // Rumus untuk gaji:
+                                =VLOOKUP(NIK_input, A2:D20, 4, FALSE)
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Catatan Penting:</strong> Meskipun VLOOKUP dan HLOOKUP sangat powerful, di Excel versi terbaru disarankan menggunakan XLOOKUP yang lebih fleksibel dan powerful.
+                        </div>
+                        
+                        <p>Dengan menguasai VLOOKUP dan HLOOKUP, Anda dapat membuat spreadsheet yang lebih dinamis dan otomatis. Praktikkan dengan berbagai skenario untuk semakin mahir!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rumus IF Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Rumus IF dan Logika Excel</a></h3>
+                                <p>Pelajari penggunaan rumus IF, AND, OR untuk membuat keputusan otomatis dalam spreadsheet.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1618044619884-2c8c7b1f5b1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fungsi Dasar Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Fungsi Dasar Excel</a></h3>
+                                <p>Kuasaikan fungsi-fungsi dasar Excel seperti SUM, AVERAGE, COUNT untuk analisis data.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="INDEX MATCH Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">INDEX-MATCH vs VLOOKUP</a></h3>
+                                <p>Pelajari kombinasi INDEX-MATCH yang lebih fleksibel daripada VLOOKUP.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (12)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Ahmad Wijaya</span>
+                                <span class="comment-date">31 Maret 2023</span>
+                            </div>
+                            <p>Terima kasih tutorialnya! Sangat membantu. Visualisasi cara kerja VLOOKUP dan HLOOKUP membuat konsepnya lebih mudah dipahami.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">31 Maret 2023</span>
+                            </div>
+                            <p>Senang bisa membantu Ahmad! Visualisasi memang membantu memahami perbedaan antara VLOOKUP dan HLOOKUP dengan lebih jelas.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Sari Dewi</span>
+                                <span class="comment-date">1 April 2023</span>
+                            </div>
+                            <p>Bagus sekali tutorialnya! Saya sudah coba studi kasus sistem pencarian produk dan berhasil. Kapan ada tutorial untuk XLOOKUP?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>2</span> Rumus IF dan Logika</a></li>
+                        <li><a href="#"><span>3</span> Fungsi Dasar Excel</a></li>
+                        <li><a href="#"><span>4</span> Pivot Table Pemula</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Logika</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">VLOOKUP</a>
+                        <a href="#">HLOOKUP</a>
+                        <a href="#">Fungsi Lookup</a>
+                        <a href="#">Pencarian Data</a>
+                        <a href="#">Excel Menengah</a>
+                        <a href="#">Rumus Excel</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Database</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

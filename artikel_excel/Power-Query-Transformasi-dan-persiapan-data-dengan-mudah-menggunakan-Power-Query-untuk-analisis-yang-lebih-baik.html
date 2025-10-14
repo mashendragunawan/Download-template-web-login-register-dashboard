@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Query Excel - Panduan Transformasi Data | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara transformasi dan persiapan data dengan mudah menggunakan Power Query untuk analisis yang lebih baik. Tutorial lengkap ETL di Excel.">
+    <meta name="keywords" content="power query excel, transformasi data, etl excel, data preparation, data cleaning, tutorial power query">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Power Query Visual Styles */
+        .etl-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .etl-step {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .etl-step:not(:last-child):after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #217346;
+            font-weight: bold;
+        }
+        
+        .etl-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #217346;
+        }
+        
+        .transformation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .transformation-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .transform-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .data-preview {
+            background: #2d2d2d;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+        
+        .preview-header {
+            background: #3c3c3c;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .preview-tabs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .preview-tab {
+            padding: 5px 10px;
+            background: #555;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .preview-tab.active {
+            background: #217346;
+        }
+        
+        .preview-content {
+            padding: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #f8f8f2;
+            overflow-x: auto;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            background: #444;
+            color: white;
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #555;
+        }
+        
+        .data-table td {
+            padding: 6px 10px;
+            border: 1px solid #555;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #363636;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .m-code {
+            color: #569cd6;
+        }
+        
+        .m-function {
+            color: #dcdcaa;
+        }
+        
+        .m-string {
+            color: #ce9178;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .benefit-item {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #217346;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .data-source-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .source-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .source-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #217346;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .etl-process {
+                grid-template-columns: 1fr;
+            }
+            
+            .etl-step:not(:last-child):after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -25px;
+                transform: translateX(50%);
+            }
+            
+            .transformation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .data-source-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Power Query Excel: Panduan Lengkap Transformasi Data untuk Analisis</h1>
+                        <div class="article-meta">
+                            <span>📅 20 April 2023</span>
+                            <span>👁️ 9.1K Dilihat</span>
+                            <span>⏱️ 22 menit membaca</span>
+                            <span>🏷️ Power Query, ETL, Data Transformation, Data Cleaning</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Power Query adalah tool revolusioner di Excel yang memungkinkan Anda melakukan Extract, Transform, Load (ETL) data dengan mudah dan efisien. Dengan Power Query, Anda dapat membersihkan, mentransformasi, dan mempersiapkan data dari berbagai sumber untuk analisis yang lebih baik.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> Power Query dapat mengurangi waktu persiapan data hingga 80% dibandingkan metode manual, dan prosesnya dapat diulang dengan satu klik.
+                        </div>
+                        
+                        <h2>1. Apa itu Power Query?</h2>
+                        
+                        <div class="etl-process">
+                            <div class="etl-step">
+                                <div class="etl-icon">📥</div>
+                                <h4>EXTRACT</h4>
+                                <p>Ambil data dari berbagai sumber</p>
+                            </div>
+                            <div class="etl-step">
+                                <div class="etl-icon">🔄</div>
+                                <h4>TRANSFORM</h4>
+                                <p>Bersihkan dan transformasi data</p>
+                            </div>
+                            <div class="etl-step">
+                                <div class="etl-icon">📤</div>
+                                <h4>LOAD</h4>
+                                <p>Load data ke Excel/Power Pivot</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Mengapa Menggunakan Power Query?</h2>
+                        
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <h5>⏱️ Menghemat Waktu</h5>
+                                <p>Proses otomatis dan dapat diulang</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>🔧 Mudah Digunakan</h5>
+                                <p>Interface visual tanpa coding</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>📊 Multiple Sources</h5>
+                                <p>Support banyak sumber data</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>🔄 Refresh Otomatis</h5>
+                                <p>Update data dengan satu klik</p>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Sumber Data yang Didukung</h2>
+                        
+                        <div class="data-source-cards">
+                            <div class="source-card">
+                                <div class="source-icon">📄</div>
+                                <h5>Excel</h5>
+                                <p>Workbook & Worksheet</p>
+                            </div>
+                            <div class="source-card">
+                                <div class="source-icon">🗃️</div>
+                                <h5>CSV/Text</h5>
+                                <p>File teks & delimited</p>
+                            </div>
+                            <div class="source-card">
+                                <div class="source-icon">🌐</div>
+                                <h5>Web</h5>
+                                <p>Data dari website</p>
+                            </div>
+                            <div class="source-card">
+                                <div class="source-icon">🗄️</div>
+                                <h5>Database</h5>
+                                <p>SQL, Oracle, dll</p>
+                            </div>
+                            <div class="source-card">
+                                <div class="source-icon">☁️</div>
+                                <h5>Cloud</h5>
+                                <p>Azure, Salesforce</p>
+                            </div>
+                            <div class="source-card">
+                                <div class="source-icon">📊</div>
+                                <h5>JSON/XML</h5>
+                                <p>Structured data</p>
+                            </div>
+                        </div>
+                        
+                        <h2>4. Membuat Query Pertama</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>Data Tab → Get Data</h4>
+                                <p>Pilih sumber data yang diinginkan</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Power Query Editor</h4>
+                                <p>Data akan terbuka di editor</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Apply Transformations</h4>
+                                <p>Gunakan tools untuk transformasi data</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Close & Load</h4>
+                                <p>Simpan query dan load ke Excel</p>
+                            </div>
+                        </div>
+                        
+                        <h2>5. Transformasi Data Umum</h2>
+                        
+                        <div class="transformation-grid">
+                            <div class="transformation-card">
+                                <div class="transform-icon">🧹</div>
+                                <h4>Remove Columns</h4>
+                                <p>Hapus kolom yang tidak diperlukan</p>
+                            </div>
+                            <div class="transformation-card">
+                                <div class="transform-icon">📝</div>
+                                <h4>Rename Columns</h4>
+                                <p>Ubah nama kolom menjadi meaningful</p>
+                            </div>
+                            <div class="transformation-card">
+                                <div class="transform-icon">🔢</div>
+                                <h4>Change Data Type</h4>
+                                <p>Set tipe data yang tepat</p>
+                            </div>
+                            <div class="transformation-card">
+                                <div class="transform-icon">❌</div>
+                                <h4>Remove Errors</h4>
+                                <p>Bersihkan error values</p>
+                            </div>
+                            <div class="transformation-card">
+                                <div class="transform-icon">📊</div>
+                                <h4>Group Data</h4>
+                                <p>Agregasi dan grouping</p>
+                            </div>
+                            <div class="transformation-card">
+                                <div class="transform-icon">🔀</div>
+                                <h4>Merge Queries</h4>
+                                <p>Gabungkan multiple tables</p>
+                            </div>
+                        </div>
+                        
+                        <h2>6. Contoh: Cleaning Data Sales</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Sebelum Transformasi</h4>
+                            <div class="data-preview">
+                                <div class="preview-header">
+                                    <span>Raw Data</span>
+                                    <div class="preview-tabs">
+                                        <div class="preview-tab active">Before</div>
+                                        <div class="preview-tab">After</div>
+                                    </div>
+                                </div>
+                                <div class="preview-content">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>OrderDate</th>
+                                                <th>Region</th>
+                                                <th>Product</th>
+                                                <th>Sales_Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2023-01-15</td>
+                                                <td>East</td>
+                                                <td>Product A</td>
+                                                <td>1500.5</td>
+                                                <td>Completed</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-01-16</td>
+                                                <td>West</td>
+                                                <td>Product B</td>
+                                                <td>#ERROR!</td>
+                                                <td>Pending</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-01-17</td>
+                                                <td>North</td>
+                                                <td>Product C</td>
+                                                <td>890.75</td>
+                                                <td>Completed</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <h4>Langkah Transformasi:</h4>
+                            <ol>
+                                <li>Remove rows dengan errors di Sales_Amount</li>
+                                <li>Change data type Sales_Amount ke Currency</li>
+                                <li>Filter Status hanya "Completed"</li>
+                                <li>Add column "Month" dari OrderDate</li>
+                                <li>Group by Region dan Month</li>
+                            </ol>
+                            
+                            <div class="data-preview">
+                                <div class="preview-header">
+                                    <span>Transformed Data</span>
+                                    <div class="preview-tabs">
+                                        <div class="preview-tab">Before</div>
+                                        <div class="preview-tab active">After</div>
+                                    </div>
+                                </div>
+                                <div class="preview-content">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Region</th>
+                                                <th>Month</th>
+                                                <th>Total Sales</th>
+                                                <th>Transaction Count</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>East</td>
+                                                <td>January</td>
+                                                <td>45,250.50</td>
+                                                <td>28</td>
+                                            </tr>
+                                            <tr>
+                                                <td>West</td>
+                                                <td>January</td>
+                                                <td>38,750.25</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <td>North</td>
+                                                <td>January</td>
+                                                <td>52,100.75</td>
+                                                <td>31</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>7. M Formula Language</h2>
+                        
+                        <div class="example-box">
+                            <h4>Contoh M Code untuk Transformasi</h4>
+                            <div class="code-block">
+                                <span class="m-code">let</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Source = <span class="m-function">Excel.Workbook</span>(File.Contents(<span class="m-string">"C:\Data\Sales.xlsx"</span>), null, true),<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Sales_Sheet = Source{[Item=<span class="m-string">"Sales"</span>]}[Data],<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;PromotedHeaders = <span class="m-function">Table.PromoteHeaders</span>(Sales_Sheet, [PromoteAllScalars=true]),<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;ChangedType = <span class="m-function">Table.TransformColumnTypes</span>(PromotedHeaders,{{<span class="m-string">"Sales_Amount"</span>, type number}}),<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;FilteredRows = <span class="m-function">Table.SelectRows</span>(ChangedType, each [Status] = <span class="m-string">"Completed"</span>),<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;AddedMonth = <span class="m-function">Table.AddColumn</span>(FilteredRows, <span class="m-string">"Month"</span>, each <span class="m-function">Date.Month</span>([OrderDate]))<br>
+                                <span class="m-code">in</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;AddedMonth
+                            </div>
+                        </div>
+                        
+                        <h2>8. Merge dan Append Queries</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Deskripsi</th>
+                                    <th>Penggunaan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Merge Queries</strong></td>
+                                    <td>Gabungkan data secara horizontal (JOIN)</td>
+                                    <td>Gabungkan sales data dengan product info</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Append Queries</strong></td>
+                                    <td>Gabungkan data secara vertical (UNION)</td>
+                                    <td>Gabungkan data bulan Januari dan Februari</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Join Types</strong></td>
+                                    <td>Inner, Left Outer, Right Outer, Full Outer</td>
+                                    <td>Sesuaikan dengan kebutuhan data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>9. Parameter dan Fungsi Lanjutan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Membuat Parameter untuk Dynamic Query</h4>
+                            <ol>
+                                <li>Buat parameter (contoh: Tahun)</li>
+                                <li>Gunakan parameter dalam filter</li>
+                                <li>Query akan otomatis update ketika parameter berubah</li>
+                            </ol>
+                            
+                            <div class="tip">
+                                <strong>Pro Tip:</strong> Gunakan parameter untuk membuat template query yang dapat digunakan berulang dengan input berbeda.
+                            </div>
+                        </div>
+                        
+                        <h2>10. Best Practices Power Query</h2>
+                        
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <h5>🏷️ Naming Convention</h5>
+                                <p>Gunakan nama query yang meaningful</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>📁 Query Folding</h5>
+                                <p>Optimasi performa dengan query folding</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>🔧 Error Handling</h5>
+                                <p>Handle potential errors dengan baik</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h5>📝 Documentation</h5>
+                                <p>Beri deskripsi untuk setiap query</p>
+                            </div>
+                        </div>
+                        
+                        <h2>11. Studi Kasus: ETL Process untuk Laporan Bulanan</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat proses ETL untuk laporan penjualan bulanan:</p>
+                            <ul>
+                                <li>Import data dari multiple CSV files</li>
+                                <li>Clean data: remove duplicates, handle missing values</li>
+                                <li>Transform: add calculated columns, change data types</li>
+                                <li>Merge dengan product master data</li>
+                                <li>Group data untuk summary report</li>
+                                <li>Load ke Pivot Table untuk analisis</li>
+                            </ul>
+                            
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Create new query dari folder (semua CSV files)</li>
+                                <li>Combine dan transform data</li>
+                                <li>Merge dengan product lookup table</li>
+                                <li>Add calculated columns (profit, margin)</li>
+                                <li>Group by product category dan month</li>
+                                <li>Load to data model dan buat Pivot Table</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="warning">
+                            <h4>⚠️ Common Mistakes</h4>
+                            <ul>
+                                <li><strong>Data Type Errors:</strong> Pastikan tipe data sesuai</li>
+                                <li><strong>Performance Issues:</strong> Hindari transformasi yang berat di awal</li>
+                                <li><strong>Refresh Problems:</strong> Pastikan sumber data accessible</li>
+                                <li><strong>Memory Limits:</strong> Monitor ukuran data yang diproses</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk data yang sangat besar, pertimbangkan menggunakan Power Query dalam Power BI yang memiliki kapasitas dan performa lebih baik.
+                        </div>
+                        
+                        <p>Dengan menguasai Power Query, Anda dapat mentransformasi proses persiapan data dari tugas yang memakan waktu menjadi proses otomatis yang efisien. Data yang bersih dan terstruktur adalah fondasi untuk analisis yang akurat!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Pivot Table Excel</a></h3>
+                                <p>Pelajari cara meringkas dan menganalisis data dengan Pivot Table.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Power Pivot Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Power Pivot Excel</a></h3>
+                                <p>Analisis data dalam skala besar dengan data model relationships.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard interaktif yang profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (25)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Ahmad Wijaya</span>
+                                <span class="comment-date">21 April 2023</span>
+                            </div>
+                            <p>Tutorial yang sangat membantu! Saya berhasil mengotomatiskan proses cleaning data harian yang sebelumnya memakan waktu 2 jam, sekarang hanya 5 menit!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">21 April 2023</span>
+                            </div>
+                            <p>Luar biasa Ahmad! Itulah kekuatan Power Query - mengubah tugas manual yang repetitif menjadi proses otomatis yang efisien.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Sari Dewi</span>
+                                <span class="comment-date">22 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara handle data yang berasal dari multiple files dengan struktur yang sedikit berbeda?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Power Query Excel</a></li>
+                        <li><a href="#"><span>2</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>3</span> Macro & VBA Excel</a></li>
+                        <li><a href="#"><span>4</span> Power Pivot Excel</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Power Query & ETL</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Macro & VBA</a></li>
+                        <li><a href="#">Power Pivot & DAX</a></li>
+                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Power Query</a>
+                        <a href="#">ETL</a>
+                        <a href="#">Data Transformation</a>
+                        <a href="#">Data Cleaning</a>
+                        <a href="#">Excel Lanjutan</a>
+                        <a href="#">Data Preparation</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">M Language</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Power Query & ETL</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Macro & VBA</a></li>
+                        <li><a href="#">Power Pivot & DAX</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

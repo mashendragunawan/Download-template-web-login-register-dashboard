@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Word - Website Tema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2B579A;
+            --secondary-color: #1E4E8C;
+            --accent-color: #00A4EF;
+            --light-color: #F3F2F1;
+            --dark-color: #323130;
+            --text-color: #323130;
+            --text-light: #FFFFFF;
+            --beginner-color: #4CAF50;
+            --intermediate-color: #FF9800;
+            --advanced-color: #F44336;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 5px;
+            width: 200px;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-bar button {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0086D1;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 40px 0 20px;
+            background-color: white;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--primary-color);
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background-color: rgba(43, 87, 154, 0.1);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .filter-btn.beginner.active {
+            background-color: var(--beginner-color);
+            border-color: var(--beginner-color);
+        }
+
+        .filter-btn.intermediate.active {
+            background-color: var(--intermediate-color);
+            border-color: var(--intermediate-color);
+        }
+
+        .filter-btn.advanced.active {
+            background-color: var(--advanced-color);
+            border-color: var(--advanced-color);
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 40px 0 80px;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--dark-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 180px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-level {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .level-beginner {
+            background-color: var(--beginner-color);
+        }
+
+        .level-intermediate {
+            background-color: var(--intermediate-color);
+        }
+
+        .level-advanced {
+            background-color: var(--advanced-color);
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .card-content p {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #CCCCCC;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #CCCCCC;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Navigasi -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-file-word"></i>
+                <h1>Microsoft Word</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#"><i class="fas fa-feather"></i> Fitur</a></li>
+                    <li><a href="#"><i class="fas fa-download"></i> Unduh</a></li>
+                    <li><a href="#"><i class="fas fa-dollar-sign"></i> Harga</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Bantuan</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Cari di Word...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Microsoft Word - Alat Pemroses Kata Terdepan</h2>
+            <p>Buat, edit, dan bagikan dokumen dengan alat kolaborasi yang canggih. Word membantu Anda mengubah tulisan menjadi karya profesional.</p>
+            <a href="#" class="btn">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn beginner" data-filter="beginner">Pemula</button>
+                <button class="filter-btn intermediate" data-filter="intermediate">Menengah</button>
+                <button class="filter-btn advanced" data-filter="advanced">Mahir</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Unggulan Microsoft Word</h2>
+                <p>Temukan berbagai fitur canggih yang membuat Word menjadi aplikasi pengolah kata terbaik di dunia</p>
+            </div>
+            <div class="cards-container">
+                <!-- Card 1 - Pemula -->
+                <div class="card" data-level="beginner">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Editor Cerdas">
+                        <div class="card-level level-beginner">Pemula</div>
+                        <div class="card-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Editor yang Cerdas</h3>
+                        <p>Dapatkan saran tata bahasa, ejaan, dan gaya penulisan yang cerdas untuk meningkatkan kualitas dokumen Anda.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Menengah -->
+                <div class="card" data-level="intermediate">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kolaborasi Real-time">
+                        <div class="card-level level-intermediate">Menengah</div>
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Kolaborasi Real-time</h3>
+                        <p>Bekerja sama dengan tim secara real-time, lihat perubahan yang dilakukan orang lain secara langsung.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Pemula -->
+                <div class="card" data-level="beginner">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Penyimpanan Cloud">
+                        <div class="card-level level-beginner">Pemula</div>
+                        <div class="card-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Penyimpanan Cloud</h3>
+                        <p>Akses dokumen Anda dari mana saja dengan penyimpanan cloud OneDrive yang terintegrasi.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Pemula -->
+                <div class="card" data-level="beginner">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Template Profesional">
+                        <div class="card-level level-beginner">Pemula</div>
+                        <div class="card-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Template Profesional</h3>
+                        <p>Pilih dari ratusan template yang dirancang profesional untuk resume, laporan, surat, dan banyak lagi.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5 - Menengah -->
+                <div class="card" data-level="intermediate">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Aplikasi Mobile">
+                        <div class="card-level level-intermediate">Menengah</div>
+                        <div class="card-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Aplikasi Mobile</h3>
+                        <p>Buat dan edit dokumen di perangkat seluler Anda dengan aplikasi Word yang lengkap untuk iOS dan Android.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 6 - Mahir -->
+                <div class="card" data-level="advanced">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Alat Data & Grafik">
+                        <div class="card-level level-advanced">Mahir</div>
+                        <div class="card-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Alat Data & Grafik</h3>
+                        <p>Sisipkan dan visualisasikan data dengan grafik, tabel, dan diagram yang mudah dibuat dan disesuaikan.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 7 - Menengah -->
+                <div class="card" data-level="intermediate">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Desain Menarik">
+                        <div class="card-level level-intermediate">Menengah</div>
+                        <div class="card-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Desain yang Menarik</h3>
+                        <p>Terapkan gaya, font, dan tata letak yang menarik dengan alat desain yang mudah digunakan.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 8 - Mahir -->
+                <div class="card" data-level="advanced">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Keamanan Dokumen">
+                        <div class="card-level level-advanced">Mahir</div>
+                        <div class="card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Keamanan Dokumen</h3>
+                        <p>Lindungi dokumen sensitif dengan kata sandi, enkripsi, dan kontrol akses yang canggih.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 9 - Menengah -->
+                <div class="card" data-level="intermediate">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1529338296731-c4280a44fc48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dukungan Multibahasa">
+                        <div class="card-level level-intermediate">Menengah</div>
+                        <div class="card-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Dukungan Multibahasa</h3>
+                        <p>Word mendukung lebih dari 100 bahasa dengan pemeriksa tata bahasa dan ejaan yang akurat.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 10 - Mahir -->
+                <div class="card" data-level="advanced">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Integrasi Office 365">
+                        <div class="card-level level-advanced">Mahir</div>
+                        <div class="card-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Integrasi Office 365</h3>
+                        <p>Nikmati integrasi sempurna dengan aplikasi Office lainnya seperti Excel, PowerPoint, dan Outlook.</p>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Produk</h3>
+                    <ul>
+                        <li><a href="#">Microsoft Word</a></li>
+                        <li><a href="#">Microsoft 365</a></li>
+                        <li><a href="#">Word untuk Web</a></li>
+                        <li><a href="#">Word Mobile</a></li>
+                        <li><a href="#">Word untuk Windows</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Sumber Daya</h3>
+                    <ul>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Dukungan</a></li>
+                        <li><a href="#">Komunitas</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Perusahaan</h3>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Berita Perusahaan</a></li>
+                        <li><a href="#">Privasi</a></li>
+                        <li><a href="#">Investor</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ikuti Kami</h3>
+                    <p>Terhubung dengan kami di media sosial untuk mendapatkan update terbaru.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Microsoft Corporation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide cards based on filter
+                    cards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            if (card.getAttribute('data-level') === filterValue) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

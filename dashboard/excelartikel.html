@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Tutorial - Panduan Lengkap Belajar Microsoft Excel</title>
+    <meta name="description" content="Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir. Belajar rumus, fungsi, pivot table, VLOOKUP dan lebih banyak lagi.">
+    <meta name="keywords" content="tutorial excel, belajar excel, rumus excel, fungsi excel, microsoft excel, pivot table, vlookup, dashboard excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+      
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+               
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Cara Menggunakan Fungsi VLOOKUP di Excel: Panduan Lengkap untuk Pemula</h1>
+                        <div class="article-meta">
+                            <span>👁️ 2.5K Dilihat</span>
+                            <span>⏱️ 8 menit membaca</span>
+                            <span>🏷️ Fungsi Excel, Rumus</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Fungsi VLOOKUP adalah salah satu fungsi paling powerful dan sering digunakan di Microsoft Excel. Fungsi ini memungkinkan Anda untuk mencari nilai tertentu dalam tabel data dan mengembalikan nilai yang sesuai dari kolom lain. Dalam tutorial ini, kita akan mempelajari cara menggunakan VLOOKUP dengan contoh praktis.</p>
+                        
+                        <h2>Apa Itu Fungsi VLOOKUP?</h2>
+                        <p>VLOOKUP adalah singkatan dari <strong>Vertical Lookup</strong>. Fungsi ini mencari nilai secara vertikal di kolom pertama sebuah tabel dan mengembalikan nilai dari kolom lain dalam baris yang sama.</p>
+                        
+                        <div class="note">
+                            <strong>Catatan:</strong> VLOOKUP hanya dapat mencari nilai dari kiri ke kanan. Jika Anda perlu mencari dari kanan ke kiri, pertimbangkan untuk menggunakan fungsi INDEX dan MATCH.
+                        </div>
+                        
+                        <h2>Sintaks Fungsi VLOOKUP</h2>
+                        <p>Berikut adalah sintaks dasar fungsi VLOOKUP:</p>
+                        
+                        <div class="code-block">
+                            =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+                        </div>
+                        
+                        <p>Penjelasan parameter:</p>
+                        <ul>
+                            <li><strong>lookup_value</strong>: Nilai yang ingin dicari</li>
+                            <li><strong>table_array</strong>: Rentang tabel tempat pencarian dilakukan</li>
+                            <li><strong>col_index_num</strong>: Nomor kolom dalam tabel yang berisi nilai yang ingin dikembalikan</li>
+                            <li><strong>range_lookup</strong> (opsional): TRUE untuk perkiraan match, FALSE untuk exact match</li>
+                        </ul>
+                        
+                        <h2>Contoh Praktis VLOOKUP</h2>
+                        <p>Mari kita lihat contoh penggunaan VLOOKUP dalam situasi nyata. Misalkan kita memiliki tabel data produk seperti berikut:</p>
+                        
+                        <div class="code-block">
+                            A         B           C
+                            1  Kode    Nama       Harga
+                            2  PRD001  Laptop     8500000
+                            3  PRD002  Mouse      250000
+                            4  PRD003  Keyboard   450000
+                            5  PRD004  Monitor    1200000
+                        </div>
+                        
+                        <p>Kita ingin mencari harga produk berdasarkan kode produk. Berikut rumus VLOOKUP yang dapat digunakan:</p>
+                        
+                        <div class="code-block">
+                            =VLOOKUP("PRD003", A2:C5, 3, FALSE)
+                        </div>
+                        
+                        <p>Rumus ini akan mencari "PRD003" di kolom A (A2:A5) dan mengembalikan nilai dari kolom ke-3 (Harga), yang hasilnya adalah 450000.</p>
+                        
+                        <h2>Kapan Menggunakan Exact Match vs Approximate Match</h2>
+                        <p>Parameter keempat dalam VLOOKUP menentukan jenis pencarian:</p>
+                        
+                        <h3>Exact Match (FALSE)</h3>
+                        <p>Gunakan FALSE ketika Anda perlu menemukan nilai yang sama persis:</p>
+                        <div class="code-block">
+                            =VLOOKUP(lookup_value, table_array, col_index_num, FALSE)
+                        </div>
+                        
+                        <h3>Approximate Match (TRUE)</h3>
+                        <p>Gunakan TRUE ketika bekerja dengan data yang diurutkan dan Anda ingin menemukan nilai terdekat:</p>
+                        <div class="code-block">
+                            =VLOOKUP(lookup_value, table_array, col_index_num, TRUE)
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Jika Anda lupa menentukan parameter keempat, Excel akan menggunakan TRUE (approximate match) secara default, yang dapat menyebabkan hasil yang tidak diharapkan.
+                        </div>
+                        
+                        <h2>Kesalahan Umum VLOOKUP dan Solusinya</h2>
+                        <p>Berikut adalah beberapa kesalahan umum saat menggunakan VLOOKUP:</p>
+                        
+                        <h3>#N/A Error</h3>
+                        <p>Kesalahan ini terjadi ketika VLOOKUP tidak dapat menemukan nilai yang dicari. Pastikan:</p>
+                        <ul>
+                            <li>Nilai yang dicari ada dalam tabel</li>
+                            <li>Tidak ada perbedaan format (teks vs angka)</li>
+                            <li>Tidak ada spasi tambahan</li>
+                        </ul>
+                        
+                        <h3>#REF! Error</h3>
+                        <p>Kesalahan ini terjadi ketika col_index_num lebih besar dari jumlah kolom dalam table_array.</p>
+                        
+                        <h2>Tips dan Trik VLOOKUP</h2>
+                        <ol>
+                            <li>Selalu gunakan FALSE untuk exact match kecuali Anda benar-benar membutuhkan approximate match</li>
+                            <li>Gunakan referensi absolut ($A$1:$C$10) untuk table_array jika Anda akan menyalin rumus</li>
+                            <li>Pertimbangkan menggunakan fungsi IFERROR untuk menangani kesalahan dengan elegan</li>
+                            <li>Untuk pencarian yang lebih fleksibel, pelajari juga fungsi HLOOKUP, INDEX, dan MATCH</li>
+                        </ol>
+                        
+                        <p>Dengan menguasai fungsi VLOOKUP, Anda akan dapat menghemat banyak waktu dalam mengelola dan menganalisis data di Excel. Praktikkan dengan contoh-contoh yang berbeda untuk semakin memahami cara kerjanya.</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fungsi IF Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Cara Menggunakan Fungsi IF di Excel</a></h3>
+                                <p>Pelajari cara membuat keputusan logis dalam spreadsheet dengan fungsi IF.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Laporan dengan Pivot Table</a></h3>
+                                <p>Panduan lengkap membuat laporan interaktif dengan Pivot Table Excel.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rumus Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">15 Rumus Excel yang Wajib Dikuasai</a></h3>
+                                <p>Kumpulan rumus Excel paling penting untuk meningkatkan produktivitas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (3)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Ahmad Santoso</span>
+                                <span class="comment-date">16 Maret 2023</span>
+                            </div>
+                            <p>Terima kasih atas tutorialnya! Sangat membantu untuk pemula seperti saya. Apakah ada cara untuk menggunakan VLOOKUP dengan beberapa kriteria?</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">16 Maret 2023</span>
+                            </div>
+                            <p>Hai Ahmad, untuk beberapa kriteria Anda bisa menggunakan INDEX-MATCH atau VLOOKUP dengan kolom helper. Akan kami buatkan tutorial khusus untuk topik tersebut.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Sari Dewi</span>
+                                <span class="comment-date">17 Maret 2023</span>
+                            </div>
+                            <p>Penjelasannya sangat jelas dan contohnya mudah dipahami. Saya sudah berhasil menerapkan di pekerjaan. Terima kasih!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Fungsi VLOOKUP Excel</a></li>
+                        <li><a href="#"><span>2</span> Cara Membuat Pivot Table</a></li>
+                        <li><a href="#"><span>3</span> Rumus IF Bertingkat</a></li>
+                        <li><a href="#"><span>4</span> Dashboard Excel Sederhana</a></li>
+                        <li><a href="#"><span>5</span> Fungsi TEXT dan Format Tanggal</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar Excel</a></li>
+                        <li><a href="#">Rumus Lanjutan</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi Data</a></li>
+                        <li><a href="#">Macro & VBA</a></li>
+                        <li><a href="#">Tips & Trik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">VLOOKUP</a>
+                        <a href="#">Pivot Table</a>
+                        <a href="#">IF Function</a>
+                        <a href="#">SUMIF</a>
+                        <a href="#">Chart</a>
+                        <a href="#">Dashboard</a>
+                        <a href="#">Data Analysis</a>
+                        <a href="#">Excel Formula</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Lanjutan</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

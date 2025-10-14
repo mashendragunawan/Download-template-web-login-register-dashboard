@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Dasar Excel - Panduan Lengkap SUM, AVERAGE, COUNT | Excel Tutorial</title>
+    <meta name="description" content="Pelajari fungsi-fungsi dasar Excel seperti SUM, AVERAGE, COUNT, MAX, MIN dan lainnya. Tutorial lengkap untuk pemula dengan contoh praktis.">
+    <meta name="keywords" content="fungsi dasar excel, sum excel, average excel, count excel, tutorial excel pemula, rumus excel dasar">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+      
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .function-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .function-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .function-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .function-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .function-table tr:hover {
+            background: #f0f7f4;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+              
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Fungsi Dasar Excel: Panduan Lengkap SUM, AVERAGE, COUNT untuk Pemula</h1>
+                        <div class="article-meta">
+                            <span>📅 20 Maret 2023</span>
+                            <span>👁️ 3.2K Dilihat</span>
+                            <span>⏱️ 10 menit membaca</span>
+                            <span>🏷️ Fungsi Dasar, Excel Pemula</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Microsoft Excel memiliki ratusan fungsi yang dapat membantu Anda dalam mengolah data, namun ada beberapa fungsi dasar yang menjadi pondasi untuk mempelajari Excel lebih lanjut. Dalam tutorial ini, kita akan mempelajari fungsi-fungsi dasar Excel yang paling sering digunakan seperti SUM, AVERAGE, COUNT, MAX, dan MIN.</p>
+                        
+                        <div class="note">
+                            <strong>Tips Pemula:</strong> Fungsi di Excel selalu dimulai dengan tanda sama dengan (=) diikuti nama fungsi dan argumen dalam kurung.
+                        </div>
+                        
+                        <h2>1. Fungsi SUM - Penjumlahan</h2>
+                        <p>Fungsi SUM digunakan untuk menjumlahkan sekumpulan angka. Ini adalah fungsi paling dasar dan paling sering digunakan di Excel.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =SUM(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Penggunaan:</h4>
+                            <p>Misalkan Anda memiliki data penjualan dari sel A1 sampai A5:</p>
+                            <div class="code-block">
+                                A1: 100
+                                A2: 200
+                                A3: 150
+                                A4: 300
+                                A5: 250
+                                
+                                Rumus: =SUM(A1:A5)
+                                Hasil: 1000
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip Cepat:</strong> Gunakan tombol <strong>AutoSum (Σ)</strong> di ribbon Home untuk membuat rumus SUM secara otomatis.
+                        </div>
+                        
+                        <h2>2. Fungsi AVERAGE - Rata-rata</h2>
+                        <p>Fungsi AVERAGE menghitung nilai rata-rata dari sekumpulan angka.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =AVERAGE(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Penggunaan:</h4>
+                            <div class="code-block">
+                                =AVERAGE(B2:B10)  // Menghitung rata-rata nilai dari sel B2 sampai B10
+                                =AVERAGE(85, 90, 78, 92)  // Hasil: 86.25
+                            </div>
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Perhatian:</strong> Fungsi AVERAGE akan mengabaikan sel kosong dan sel yang berisi teks.
+                        </div>
+                        
+                        <h2>3. Fungsi COUNT - Menghitung Data Numerik</h2>
+                        <p>Fungsi COUNT menghitung jumlah sel yang berisi angka dalam suatu range.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =COUNT(nilai1, [nilai2], ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Penggunaan:</h4>
+                            <p>Misalkan range C1:C6 berisi data:</p>
+                            <div class="code-block">
+                                C1: 100
+                                C2: (kosong)
+                                C3: 150
+                                C4: "Teks"  // diabaikan
+                                C5: 200
+                                C6: 175
+                                
+                                Rumus: =COUNT(C1:C6)
+                                Hasil: 4  // hanya menghitung sel yang berisi angka
+                            </div>
+                        </div>
+                        
+                        <h2>4. Fungsi MAX dan MIN - Nilai Tertinggi dan Terendah</h2>
+                        <p>Fungsi MAX mengembalikan nilai terbesar, sedangkan MIN mengembalikan nilai terkecil dalam suatu range.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =MAX(angka1, [angka2], ...)
+                            =MIN(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Penggunaan:</h4>
+                            <div class="code-block">
+                                Data: 45, 78, 23, 89, 56, 34
+                                
+                                =MAX(45, 78, 23, 89, 56, 34)  // Hasil: 89
+                                =MIN(45, 78, 23, 89, 56, 34)  // Hasil: 23
+                            </div>
+                        </div>
+                        
+                        <h2>Tabel Ringkasan Fungsi Dasar Excel</h2>
+                        <table class="function-table">
+                            <thead>
+                                <tr>
+                                    <th>Fungsi</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh</th>
+                                    <th>Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>SUM</strong></td>
+                                    <td>Menjumlahkan angka</td>
+                                    <td>=SUM(10,20,30)</td>
+                                    <td>60</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AVERAGE</strong></td>
+                                    <td>Menghitung rata-rata</td>
+                                    <td>=AVERAGE(10,20,30)</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>COUNT</strong></td>
+                                    <td>Menghitung sel numerik</td>
+                                    <td>=COUNT(A1:A5)</td>
+                                    <td>5 (jika semua berisi angka)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MAX</strong></td>
+                                    <td>Nilai terbesar</td>
+                                    <td>=MAX(15,25,10)</td>
+                                    <td>25</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MIN</strong></td>
+                                    <td>Nilai terkecil</td>
+                                    <td>=MIN(15,25,10)</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>COUNTA</strong></td>
+                                    <td>Menghitung sel tidak kosong</td>
+                                    <td>=COUNTA(B1:B10)</td>
+                                    <td>Jumlah sel berisi data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>Kesalahan Umum dan Solusi</h2>
+                        
+                        <h3>#VALUE! Error</h3>
+                        <p>Terjadi ketika ada sel yang berisi teks dalam range perhitungan numerik.</p>
+                        <div class="code-block">
+                            Solusi: Pastikan semua sel dalam range berisi angka atau gunakan fungsi seperti SUMIF
+                        </div>
+                        
+                        <h3>#DIV/0! Error</h3>
+                        <p>Terjadi ketika membagi dengan nol, sering terjadi dalam fungsi AVERAGE jika tidak ada data.</p>
+                        <div class="code-block">
+                            Solusi: Gunakan =IF(COUNT(range)>0, AVERAGE(range), 0)
+                        </div>
+                        
+                        <h2>Praktik Langsung</h2>
+                        <p>Coba buat tabel sederhana dengan data berikut dan praktikkan semua fungsi yang telah dipelajari:</p>
+                        
+                        <div class="example-box">
+                            <h4>Data Contoh:</h4>
+                            <div class="code-block">
+                                A1: Nama
+                                A2: Andi
+                                A3: Budi
+                                A4: Citra
+                                A5: Dina
+                                
+                                B1: Nilai
+                                B2: 85
+                                B3: 92
+                                B4: 78
+                                B5: 88
+                            </div>
+                            
+                            <p><strong>Latihan:</strong> Buat rumus untuk menghitung:</p>
+                            <ul>
+                                <li>Total nilai: =SUM(B2:B5)</li>
+                                <li>Rata-rata: =AVERAGE(B2:B5)</li>
+                                <li>Nilai tertinggi: =MAX(B2:B5)</li>
+                                <li>Nilai terendah: =MIN(B2:B5)</li>
+                                <li>Jumlah siswa: =COUNT(B2:B5)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tips Lanjutan:</strong> Setelah menguasai fungsi dasar, pelajari juga fungsi SUMIF, AVERAGEIF, dan COUNTIF untuk perhitungan bersyarat.
+                        </div>
+                        
+                        <p>Dengan menguasai fungsi-fungsi dasar ini, Anda sudah memiliki pondasi yang kuat untuk mempelajari Excel lebih lanjut. Praktikkan secara rutin untuk semakin mahir!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fungsi IF Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Menguasai Fungsi IF di Excel</a></h3>
+                                <p>Pelajari cara membuat logika percabangan dengan fungsi IF untuk analisis data yang lebih cerdas.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="VLOOKUP Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Panduan Lengkap VLOOKUP</a></h3>
+                                <p>Tutorial detail tentang fungsi VLOOKUP untuk pencarian data dalam tabel.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Laporan dengan Pivot Table</a></h3>
+                                <p>Belajar membuat laporan dinamis dan interaktif dengan Pivot Table Excel.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (5)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Rina Wijaya</span>
+                                <span class="comment-date">21 Maret 2023</span>
+                            </div>
+                            <p>Terima kasih tutorialnya! Sangat membantu untuk pemula seperti saya. Penjelasannya jelas dan contohnya mudah dipahami.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">21 Maret 2023</span>
+                            </div>
+                            <p>Senang bisa membantu Rina! Jika ada pertanyaan lebih lanjut tentang fungsi Excel, jangan ragu untuk bertanya.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Budi Santoso</span>
+                                <span class="comment-date">22 Maret 2023</span>
+                            </div>
+                            <p>Bagus sekali tutorialnya. Saya sudah praktik dan berhasil. Kapan ada tutorial untuk fungsi IF dan VLOOKUP?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Fungsi Dasar Excel</a></li>
+                        <li><a href="#"><span>2</span> Cara Menggunakan VLOOKUP</a></li>
+                        <li><a href="#"><span>3</span> Rumus IF Bertingkat</a></li>
+                        <li><a href="#"><span>4</span> Pivot Table untuk Pemula</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel Sederhana</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar Excel</a></li>
+                        <li><a href="#">Rumus Lanjutan</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi Data</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">SUM</a>
+                        <a href="#">AVERAGE</a>
+                        <a href="#">COUNT</a>
+                        <a href="#">Fungsi Dasar</a>
+                        <a href="#">Excel Pemula</a>
+                        <a href="#">Rumus Excel</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Microsoft Excel</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Lanjutan</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

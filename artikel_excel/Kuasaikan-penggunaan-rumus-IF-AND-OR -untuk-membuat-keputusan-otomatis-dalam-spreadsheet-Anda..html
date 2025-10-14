@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumus IF dan Logika Excel - Panduan AND, OR untuk Keputusan Otomatis | Excel Tutorial</title>
+    <meta name="description" content="Pelajari penggunaan rumus IF, AND, OR di Excel untuk membuat keputusan otomatis. Tutorial lengkap dengan contoh praktis untuk analisis data yang lebih cerdas.">
+    <meta name="keywords" content="rumus IF excel, fungsi AND OR excel, logika excel, if bersarang, excel decision making, tutorial excel menengah">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .function-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .function-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .function-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .function-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .function-table tr:hover {
+            background: #f0f7f4;
+        }
+        
+        .logic-diagram {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .logic-diagram h4 {
+            color: #217346;
+            margin-bottom: 15px;
+        }
+        
+        .logic-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .logic-box {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-weight: 500;
+            min-width: 120px;
+        }
+        
+        .logic-arrow {
+            font-size: 20px;
+            color: #217346;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .example-table th, .example-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .example-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .example-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .logic-flow {
+                flex-direction: column;
+            }
+            
+            .logic-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Rumus IF dan Logika Excel: Panduan Lengkap AND, OR untuk Keputusan Otomatis</h1>
+                        <div class="article-meta">
+                            <span>📅 25 Maret 2023</span>
+                            <span>👁️ 4.1K Dilihat</span>
+                            <span>⏱️ 12 menit membaca</span>
+                            <span>🏷️ Rumus Logika, IF Excel, Fungsi Lanjutan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Rumus IF adalah salah satu fungsi paling powerful di Excel yang memungkinkan Anda membuat keputusan logis dalam spreadsheet. Dengan mengombinasikan IF dengan fungsi AND dan OR, Anda dapat membuat kondisi yang kompleks untuk analisis data yang lebih cerdas dan otomatis.</p>
+                        
+                        <div class="note">
+                            <strong>Konsep Dasar:</strong> Fungsi IF bekerja dengan prinsip "JIKA kondisi terpenuhi, MAKA lakukan ini, SELAIN ITU lakukan itu".
+                        </div>
+                        
+                        <h2>1. Fungsi IF Dasar</h2>
+                        <p>Fungsi IF mengevaluasi suatu kondisi dan mengembalikan satu nilai jika kondisi TRUE, dan nilai lain jika FALSE.</p>
+                        
+                        <h3>Sintaks Dasar:</h3>
+                        <div class="code-block">
+                            =IF(logical_test, value_if_true, value_if_false)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Sederhana:</h4>
+                            <p>Misalkan kita ingin mengecek apakah nilai ujian lulus (>=75) atau tidak:</p>
+                            <div class="code-block">
+                                =IF(B2>=75, "Lulus", "Tidak Lulus")
+                            </div>
+                            <p>Jika nilai di sel B2 adalah 80, hasilnya: <strong>"Lulus"</strong></p>
+                            <p>Jika nilai di sel B2 adalah 70, hasilnya: <strong>"Tidak Lulus"</strong></p>
+                        </div>
+                        
+                        <h2>2. Fungsi AND - Multiple Conditions</h2>
+                        <p>Fungsi AND mengembalikan TRUE hanya jika SEMUA kondisi terpenuhi.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =AND(condition1, condition2, ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh dengan AND:</h4>
+                            <p>Mengecek apakah seorang siswa lulus ujian DAN memiliki kehadiran minimal 80%:</p>
+                            <div class="code-block">
+                                =IF(AND(B2>=75, C2>=0.8), "Lulus", "Tidak Memenuhi Syarat")
+                            </div>
+                        </div>
+                        
+                        <div class="logic-diagram">
+                            <h4>Diagram Logika AND</h4>
+                            <div class="logic-flow">
+                                <div class="logic-box">Kondisi 1</div>
+                                <div class="logic-arrow">AND</div>
+                                <div class="logic-box">Kondisi 2</div>
+                                <div class="logic-arrow">→</div>
+                                <div class="logic-box" style="background: #e8f5e9;">TRUE</div>
+                            </div>
+                            <p style="margin-top: 10px; font-size: 14px;">Hanya menghasilkan TRUE jika semua kondisi terpenuhi</p>
+                        </div>
+                        
+                        <h2>3. Fungsi OR - Alternative Conditions</h2>
+                        <p>Fungsi OR mengembalikan TRUE jika SALAH SATU kondisi terpenuhi.</p>
+                        
+                        <h3>Sintaks:</h3>
+                        <div class="code-block">
+                            =OR(condition1, condition2, ...)
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4>Contoh dengan OR:</h4>
+                            <p>Memberikan diskon jika pelanggan adalah member ATAU total belanja > 1 juta:</p>
+                            <div class="code-block">
+                                =IF(OR(D2="Member", E2>1000000), "Dapat Diskon 10%", "Tidak Dapat Diskon")
+                            </div>
+                        </div>
+                        
+                        <div class="logic-diagram">
+                            <h4>Diagram Logika OR</h4>
+                            <div class="logic-flow">
+                                <div class="logic-box">Kondisi 1</div>
+                                <div class="logic-arrow">OR</div>
+                                <div class="logic-box">Kondisi 2</div>
+                                <div class="logic-arrow">→</div>
+                                <div class="logic-box" style="background: #e8f5e9;">TRUE</div>
+                            </div>
+                            <p style="margin-top: 10px; font-size: 14px;">Menghasilkan TRUE jika salah satu kondisi terpenuhi</p>
+                        </div>
+                        
+                        <h2>4. IF Bersarang (Nested IF)</h2>
+                        <p>Anda dapat menyusun beberapa fungsi IF bersama untuk kondisi yang lebih kompleks.</p>
+                        
+                        <div class="example-box">
+                            <h4>Contoh IF Bersarang untuk Kategori Nilai:</h4>
+                            <div class="code-block">
+                                =IF(B2>=90, "A", 
+                                    IF(B2>=80, "B",
+                                        IF(B2>=70, "C",
+                                            IF(B2>=60, "D", "E"))))
+                            </div>
+                            
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nilai</th>
+                                        <th>Rumus</th>
+                                        <th>Hasil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>95</td>
+                                        <td>=IF(B2>=90, "A", ...)</td>
+                                        <td>A</td>
+                                    </tr>
+                                    <tr>
+                                        <td>85</td>
+                                        <td>=IF(B2>=90, "A", IF(B2>=80, "B", ...))</td>
+                                        <td>B</td>
+                                    </tr>
+                                    <tr>
+                                        <td>65</td>
+                                        <td>=IF(B2>=90, "A", IF(B2>=80, "B", IF(B2>=70, "C", IF(B2>=60, "D", "E"))))</td>
+                                        <td>D</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Terlalu banyak IF bersarang dapat membuat rumus sulit dibaca dan dipelihara. Pertimbangkan menggunakan fungsi IFS (Excel 2019+) atau VLOOKUP untuk kategori.
+                        </div>
+                        
+                        <h2>5. Kombinasi AND dan OR dalam IF</h2>
+                        <p>Anda dapat mengombinasikan AND dan OR untuk membuat kondisi yang lebih kompleks.</p>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Kasus Kompleks:</h4>
+                            <p>Menentukan kelayakan kredit berdasarkan gaji DAN status pekerjaan ATAU memiliki jaminan:</p>
+                            <div class="code-block">
+                                =IF(OR(AND(B2>=5000000, C2="Tetap"), D2="Ya"), "Layak", "Tidak Layak")
+                            </div>
+                            <p><strong>Penjelasan:</strong> Kredit layak jika (gaji >= 5jt DAN status tetap) ATAU memiliki jaminan</p>
+                        </div>
+                        
+                        <h2>Tabel Referensi Cepat Fungsi Logika</h2>
+                        <table class="function-table">
+                            <thead>
+                                <tr>
+                                    <th>Fungsi</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh</th>
+                                    <th>Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>IF</strong></td>
+                                    <td>Percabangan kondisi</td>
+                                    <td>=IF(A1>10, "Yes", "No")</td>
+                                    <td>"Yes" jika A1>10</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AND</strong></td>
+                                    <td>Semua kondisi harus TRUE</td>
+                                    <td>=AND(A1>10, B1<5)</td>
+                                    <td>TRUE jika A1>10 DAN B1<5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>OR</strong></td>
+                                    <td>Salah satu kondisi TRUE</td>
+                                    <td>=OR(A1>10, B1<5)</td>
+                                    <td>TRUE jika A1>10 ATAU B1<5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NOT</strong></td>
+                                    <td>Membalikkan logika</td>
+                                    <td>=NOT(A1>10)</td>
+                                    <td>TRUE jika A1 TIDAK >10</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IFS</strong></td>
+                                    <td>Multiple conditions (Excel 2019+)</td>
+                                    <td>=IFS(A1>90,"A",A1>80,"B",TRUE,"C")</td>
+                                    <td>Nilai berdasarkan kondisi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>Studi Kasus: Sistem Penilaian Siswa</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Siswa:</h4>
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Nilai</th>
+                                        <th>Kehadiran</th>
+                                        <th>Tugas</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Andi</td>
+                                        <td>85</td>
+                                        <td>90%</td>
+                                        <td>Lengkap</td>
+                                        <td>=IF(AND(B2>=75, C2>=0.8, D2="Lengkap"), "Lulus", "Perbaikan")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Budi</td>
+                                        <td>70</td>
+                                        <td>95%</td>
+                                        <td>Lengkap</td>
+                                        <td>Perbaikan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Citra</td>
+                                        <td>90</td>
+                                        <td>75%</td>
+                                        <td>Lengkap</td>
+                                        <td>Perbaikan</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat sistem penilaian karyawan dengan ketentuan:</p>
+                            <ul>
+                                <li>Performance >= 80 DAN Attendance >= 90% → "Promosi"</li>
+                                <li>Performance >= 70 ATAU Attendance >= 85% → "Pertahankan"</li>
+                                <li>Selain itu → "Evaluasi"</li>
+                            </ul>
+                            <p><strong>Rumus yang harus dibuat:</strong></p>
+                            <div class="code-block">
+                                =IF(AND(performance>=80, attendance>=0.9), "Promosi",
+                                    IF(OR(performance>=70, attendance>=0.85), "Pertahankan", "Evaluasi"))
+                            </div>
+                        </div>
+                        
+                        <h2>Tips dan Best Practices</h2>
+                        
+                        <div class="tip">
+                            <strong>Tip 1:</strong> Gunakan referensi sel daripada nilai langsung untuk memudahkan maintenance.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 2:</strong> Untuk IF bersarang yang kompleks, pertimbangkan menggunakan helper columns.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 3:</strong> Gunakan fungsi IFERROR untuk menangani error dengan elegan.
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Pastikan urutan kondisi dalam IF bersarang sudah benar (dari kondisi paling ketat ke paling longgar).
+                        </div>
+                        
+                        <p>Dengan menguasai rumus IF, AND, dan OR, Anda dapat membuat spreadsheet yang lebih cerdas dan otomatis. Praktikkan dengan berbagai skenario untuk semakin mahir!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1618044619884-2c8c7b1f5b1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fungsi Dasar Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Fungsi Dasar Excel: SUM, AVERAGE, COUNT</a></h3>
+                                <p>Pelajari fungsi-fungsi dasar Excel yang menjadi pondasi untuk analisis data lebih lanjut.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="VLOOKUP Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Menguasai VLOOKUP dan HLOOKUP</a></h3>
+                                <p>Tutorial lengkap tentang fungsi lookup untuk pencarian data dalam tabel Excel.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table">
+                            <div class="related-item-content">
+                                <h3><a href="#">Analisis Data dengan Pivot Table</a></h3>
+                                <p>Belajar membuat laporan dinamis dan dashboard interaktif dengan Pivot Table.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (8)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Diana Putri</span>
+                                <span class="comment-date">26 Maret 2023</span>
+                            </div>
+                            <p>Terima kasih tutorialnya! Sangat detail dan mudah dipahami. Diagram logikanya sangat membantu visualisasi.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">26 Maret 2023</span>
+                            </div>
+                            <p>Senang bisa membantu Diana! Diagram memang membantu memahami alur logika dengan lebih baik.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Rizki Pratama</span>
+                                <span class="comment-date">27 Maret 2023</span>
+                            </div>
+                            <p>Bagus sekali! Saya sudah coba latihan praktiknya dan berhasil. Kapan ada tutorial untuk fungsi IFS?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Rumus IF dan Logika</a></li>
+                        <li><a href="#"><span>2</span> Fungsi VLOOKUP Excel</a></li>
+                        <li><a href="#"><span>3</span> Fungsi Dasar Excel</a></li>
+                        <li><a href="#"><span>4</span> Pivot Table Pemula</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar Excel</a></li>
+                        <li><a href="#">Rumus Logika</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi Data</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">IF Function</a>
+                        <a href="#">AND OR Excel</a>
+                        <a href="#">Logika Excel</a>
+                        <a href="#">Nested IF</a>
+                        <a href="#">Rumus Excel</a>
+                        <a href="#">Decision Making</a>
+                        <a href="#">Excel Menengah</a>
+                        <a href="#">Tutorial</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Logika</a></li>
+                        <li><a href="#">Analisis Data</a></li>
+                        <li><a href="#">Visualisasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

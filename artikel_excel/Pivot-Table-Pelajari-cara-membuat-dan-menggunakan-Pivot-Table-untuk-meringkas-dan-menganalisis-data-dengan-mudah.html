@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pivot Table Excel - Panduan Lengkap Analisis Data | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara membuat dan menggunakan Pivot Table di Excel untuk meringkas dan menganalisis data dengan mudah. Tutorial lengkap untuk pemula hingga mahir.">
+    <meta name="keywords" content="pivot table excel, analisis data excel, tutorial pivot table, laporan excel, dashboard excel, data summarization">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .pivot-structure {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .pivot-structure h4 {
+            color: #217346;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .pivot-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .pivot-areas {
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .pivot-area {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .pivot-area h5 {
+            color: #217346;
+            margin-bottom: 8px;
+        }
+        
+        .pivot-preview {
+            background: white;
+            border: 2px dashed #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .pivot-table-visual {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .pivot-table-visual th {
+            background: #217346;
+            color: white;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .pivot-table-visual td {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .pivot-table-visual tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .highlight {
+            background: #fff3cd !important;
+            font-weight: bold;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .pivot-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Pivot Table Excel: Panduan Lengkap Analisis dan Summarisasi Data</h1>
+                        <div class="article-meta">
+                            <span>📅 5 April 2023</span>
+                            <span>👁️ 6.8K Dilihat</span>
+                            <span>⏱️ 18 menit membaca</span>
+                            <span>🏷️ Pivot Table, Analisis Data, Laporan Excel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Pivot Table adalah salah satu fitur paling powerful di Excel yang memungkinkan Anda meringkas, menganalisis, mengeksplorasi, dan menyajikan data dalam bentuk yang mudah dipahami. Dengan Pivot Table, Anda dapat mengubah data mentah menjadi laporan yang informatif dalam hitungan menit.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> Pivot Table dapat memproses ribuan baris data dan membuat ringkasan dalam hitungan detik tanpa menggunakan rumus kompleks.
+                        </div>
+                        
+                        <h2>1. Apa itu Pivot Table dan Mengapa Penting?</h2>
+                        <p>Pivot Table adalah tool interaktif yang dapat:</p>
+                        <ul>
+                            <li>Meringkas data besar menjadi tabel ringkasan</li>
+                            <li>Menganalisis pola dan tren data</li>
+                            <li>Membuat laporan dinamis dengan drag-and-drop</li>
+                            <li>Melakukan perhitungan kompleks tanpa rumus</li>
+                            <li>Membuat visualisasi data yang powerful</li>
+                        </ul>
+                        
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚡</div>
+                                <h4>Cepat dan Efisien</h4>
+                                <p>Analisis data dalam hitungan detik</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🔄</div>
+                                <h4>Dinamis</h4>
+                                <p>Update otomatis ketika data berubah</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📊</div>
+                                <h4>Visual</h4>
+                                <p>Mudah dibuat menjadi chart dan grafik</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🔍</div>
+                                <h4>Eksploratif</h4>
+                                <p>Temukan insight tersembunyi dalam data</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Struktur Dasar Pivot Table</h2>
+                        
+                        <div class="pivot-structure">
+                            <h4>Area Pivot Table dan Fungsinya</h4>
+                            <div class="pivot-layout">
+                                <div class="pivot-areas">
+                                    <div class="pivot-area">
+                                        <h5>FILTERS</h5>
+                                        <p>Menyaring data keseluruhan</p>
+                                    </div>
+                                    <div class="pivot-area">
+                                        <h5>COLUMNS</h5>
+                                        <p>Header kolom laporan</p>
+                                    </div>
+                                    <div class="pivot-area">
+                                        <h5>ROWS</h5>
+                                        <p>Header baris laporan</p>
+                                    </div>
+                                    <div class="pivot-area">
+                                        <h5>VALUES</h5>
+                                        <p>Data yang dihitung</p>
+                                    </div>
+                                </div>
+                                <div class="pivot-preview">
+                                    <h4>Contoh Pivot Table</h4>
+                                    <table class="pivot-table-visual">
+                                        <thead>
+                                            <tr>
+                                                <th>Region</th>
+                                                <th>Q1 Sales</th>
+                                                <th>Q2 Sales</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>East</td>
+                                                <td>150,000</td>
+                                                <td>180,000</td>
+                                                <td>330,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>West</td>
+                                                <td>120,000</td>
+                                                <td>160,000</td>
+                                                <td>280,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td>270,000</td>
+                                                <td>340,000</td>
+                                                <td>610,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Langkah-langkah Membuat Pivot Table</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>Siapkan Data yang Benar</h4>
+                                <p>Pastikan data Anda memiliki:</p>
+                                <ul>
+                                    <li>Header di baris pertama</li>
+                                    <li>Tidak ada baris atau kolom kosong</li>
+                                    <li>Format data yang konsisten</li>
+                                    <li>Tidak ada subtotal dalam data</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Pilih Data dan Insert Pivot Table</h4>
+                                <p>Pilih range data → Insert tab → Pivot Table</p>
+                                <div class="code-block">
+                                    Shortcut: Alt + N + V
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Atur Layout Pivot Table</h4>
+                                <p>Drag field ke area yang sesuai:</p>
+                                <ul>
+                                    <li>Rows: Kategori untuk baris</li>
+                                    <li>Columns: Kategori untuk kolom</li>
+                                    <li>Values: Data numerik untuk dihitung</li>
+                                    <li>Filters: Filter global</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Customize dan Format</h4>
+                                <p>Atur format number, subtotal, dan layout sesuai kebutuhan</p>
+                            </div>
+                        </div>
+                        
+                        <h2>4. Contoh Praktis: Analisis Penjualan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Penjualan Mentah</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Region</th>
+                                        <th>Produk</th>
+                                        <th>Salesperson</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2023-01-05</td>
+                                        <td>East</td>
+                                        <td>Laptop</td>
+                                        <td>Andi</td>
+                                        <td>8,500,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-01-08</td>
+                                        <td>West</td>
+                                        <td>Printer</td>
+                                        <td>Budi</td>
+                                        <td>1,200,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-01-12</td>
+                                        <td>East</td>
+                                        <td>Mouse</td>
+                                        <td>Citra</td>
+                                        <td>250,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-01-15</td>
+                                        <td>West</td>
+                                        <td>Keyboard</td>
+                                        <td>Diana</td>
+                                        <td>450,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Pivot Table Hasil</h4>
+                            <table class="pivot-table-visual">
+                                <thead>
+                                    <tr>
+                                        <th>Region</th>
+                                        <th>Produk</th>
+                                        <th>Total Penjualan</th>
+                                        <th>Jumlah Transaksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2">East</td>
+                                        <td>Laptop</td>
+                                        <td>8,500,000</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mouse</td>
+                                        <td>250,000</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">West</td>
+                                        <td>Printer</td>
+                                        <td>1,200,000</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Keyboard</td>
+                                        <td>450,000</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><strong>Grand Total</strong></td>
+                                        <td><strong>10,400,000</strong></td>
+                                        <td><strong>4</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h2>5. Fungsi Perhitungan di VALUES</h2>
+                        
+                        <div class="example-box">
+                            <h4>Jenis Perhitungan yang Tersedia:</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fungsi</th>
+                                        <th>Deskripsi</th>
+                                        <th>Contoh Penggunaan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Sum</strong></td>
+                                        <td>Menjumlahkan nilai</td>
+                                        <td>Total penjualan</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Count</strong></td>
+                                        <td>Menghitung jumlah data</td>
+                                        <td>Jumlah transaksi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Average</strong></td>
+                                        <td>Rata-rata nilai</td>
+                                        <td>Rata-rata penjualan per transaksi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Max</strong></td>
+                                        <td>Nilai tertinggi</td>
+                                        <td>Penjualan tertinggi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Min</strong></td>
+                                        <td>Nilai terendah</td>
+                                        <td>Penjualan terendah</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h2>6. Filter dan Slicer</h2>
+                        
+                        <div class="example-box">
+                            <h4>Jenis Filter dalam Pivot Table:</h4>
+                            <ul>
+                                <li><strong>Report Filter:</strong> Filter seluruh laporan</li>
+                                <li><strong>Label Filter:</strong> Filter berdasarkan teks label</li>
+                                <li><strong>Value Filter:</strong> Filter berdasarkan nilai</li>
+                                <li><strong>Date Filter:</strong> Filter khusus untuk tanggal</li>
+                                <li><strong>Slicer:</strong> Filter visual yang interaktif</li>
+                            </ul>
+                            
+                            <div class="tip">
+                                <strong>Tip:</strong> Gunakan Slicer untuk membuat dashboard yang user-friendly dan mudah dioperasikan.
+                            </div>
+                        </div>
+                        
+                        <h2>7. Pivot Chart - Visualisasi Data</h2>
+                        
+                        <div class="example-box">
+                            <h4>Langkah Membuat Pivot Chart:</h4>
+                            <ol>
+                                <li>Klik pada Pivot Table yang sudah dibuat</li>
+                                <li>Pilih Analyze tab → PivotChart</li>
+                                <li>Pilih jenis chart yang diinginkan</li>
+                                <li>Customize chart sesuai kebutuhan</li>
+                            </ol>
+                            
+                            <div class="note">
+                                <strong>Keuntungan Pivot Chart:</strong> Terhubung langsung dengan Pivot Table, update otomatis ketika data berubah.
+                            </div>
+                        </div>
+                        
+                        <h2>8. Tips dan Best Practices</h2>
+                        
+                        <div class="tip">
+                            <strong>Tip 1:</strong> Gunakan Excel Table sebagai sumber data untuk update otomatis.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 2:</strong> Refresh Pivot Table setelah mengubah data sumber.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 3:</strong> Group date fields untuk analisis periode (bulanan, kuartalan, tahunan).
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 4:</strong> Gunakan Calculated Field untuk perhitungan kustom.
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Pastikan tidak ada blank rows atau columns dalam data sumber untuk menghindari error.
+                        </div>
+                        
+                        <h2>9. Studi Kasus: Laporan Kinerja Sales</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat laporan kinerja sales team dengan ketentuan:</p>
+                            <ul>
+                                <li>Tampilkan total penjualan per salesperson</li>
+                                <li>Kelompokkan berdasarkan region</li>
+                                <li>Hitung rata-rata penjualan per transaksi</li>
+                                <li>Filter untuk bulan tertentu</li>
+                                <li>Buat Pivot Chart untuk visualisasi</li>
+                            </ul>
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Siapkan data sales dengan kolom: Date, Salesperson, Region, Amount</li>
+                                <li>Insert Pivot Table</li>
+                                <li>Drag Salesperson ke ROWS, Region ke COLUMNS, Amount ke VALUES</li>
+                                <li>Ubah perhitungan Amount menjadi Average</li>
+                                <li>Tambahkan Date Filter</li>
+                                <li>Buat Pivot Chart dari hasil tersebut</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk data yang sangat besar, pertimbangkan menggunakan Power Pivot yang dapat menangani jutaan baris data dengan lebih efisien.
+                        </div>
+                        
+                        <p>Dengan menguasai Pivot Table, Anda dapat mengubah data mentah menjadi insight yang berharga dalam hitungan menit. Practice makes perfect - cobalah dengan data Anda sendiri!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="VLOOKUP Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">VLOOKUP & HLOOKUP Excel</a></h3>
+                                <p>Pelajari fungsi lookup untuk pencarian data dalam tabel dengan cepat dan akurat.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rumus IF Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Rumus IF dan Logika Excel</a></h3>
+                                <p>Kuasaikan penggunaan rumus IF, AND, OR untuk membuat keputusan otomatis.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard interaktif dengan Pivot Table dan Chart.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (15)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Rizki Pratama</span>
+                                <span class="comment-date">6 April 2023</span>
+                            </div>
+                            <p>Tutorial yang sangat komprehensif! Saya sudah mencoba studi kasus sales dan berhasil membuat laporan yang powerful. Terima kasih!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">6 April 2023</span>
+                            </div>
+                            <p>Senang mendengarnya Rizki! Pivot Table memang game-changer untuk analisis data.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Diana Sari</span>
+                                <span class="comment-date">7 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara menggunakan Grouping untuk data tanggal? Saya ingin menganalisis data per kuartal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>2</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>3</span> Rumus IF dan Logika</a></li>
+                        <li><a href="#"><span>4</span> Fungsi Dasar Excel</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Logika</a></li>
+                        <li><a href="#">Data Visualization</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Pivot Table</a>
+                        <a href="#">Analisis Data</a>
+                        <a href="#">Data Summarization</a>
+                        <a href="#">Laporan Excel</a>
+                        <a href="#">Dashboard</a>
+                        <a href="#">Excel Lanjutan</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Data Analysis</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Data Visualization</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

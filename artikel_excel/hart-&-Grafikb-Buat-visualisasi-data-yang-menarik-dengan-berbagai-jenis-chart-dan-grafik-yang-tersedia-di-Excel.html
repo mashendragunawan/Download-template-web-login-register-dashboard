@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart & Grafik Excel - Panduan Visualisasi Data Menarik | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara membuat visualisasi data yang menarik dengan berbagai jenis chart dan grafik di Excel. Tutorial lengkap untuk pemula hingga mahir.">
+    <meta name="keywords" content="chart excel, grafik excel, visualisasi data, tutorial excel chart, diagram excel, dashboard excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Chart Preview Styles */
+        .chart-previews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .chart-preview {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .chart-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chart-demo {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            margin: 15px 0;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .bar {
+            width: 30px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .bar-1 { height: 60%; }
+        .bar-2 { height: 85%; }
+        .bar-3 { height: 45%; }
+        .bar-4 { height: 75%; }
+        .bar-5 { height: 55%; }
+        
+        .pie-demo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4CAF50 0% 25%,
+                #2196F3 25% 50%,
+                #FFC107 50% 75%,
+                #FF5722 75% 100%
+            );
+            margin: 0 auto;
+        }
+        
+        .line-demo {
+            height: 150px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .line-path {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            stroke: #217346;
+            stroke-width: 3;
+            fill: none;
+        }
+        
+        .chart-preview h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .chart-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .chart-type-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .chart-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .design-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .design-tip {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #217346;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .chart-previews {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-type-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Chart & Grafik Excel: Panduan Lengkap Visualisasi Data Menarik</h1>
+                        <div class="article-meta">
+                            <span>📅 10 April 2023</span>
+                            <span>👁️ 7.5K Dilihat</span>
+                            <span>⏱️ 20 menit membaca</span>
+                            <span>🏷️ Chart Excel, Grafik, Visualisasi Data, Dashboard</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Chart dan grafik di Excel adalah alat powerful untuk mentransformasi data numerik yang membosankan menjadi visualisasi yang menarik dan mudah dipahami. Dengan menguasai berbagai jenis chart, Anda dapat menyampaikan insight data dengan lebih efektif dan profesional.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> Visualisasi data yang baik dapat meningkatkan pemahaman hingga 400% dibandingkan hanya menampilkan angka mentah.
+                        </div>
+                        
+                        <h2>1. Jenis-Jenis Chart di Excel dan Penggunaannya</h2>
+                        
+                        <div class="chart-previews">
+                            <div class="chart-preview">
+                                <h4>📊 Column Chart</h4>
+                                <div class="chart-demo">
+                                    <div class="bar bar-1"></div>
+                                    <div class="bar bar-2"></div>
+                                    <div class="bar bar-3"></div>
+                                    <div class="bar bar-4"></div>
+                                    <div class="bar bar-5"></div>
+                                </div>
+                                <p><strong>Untuk:</strong> Perbandingan data antar kategori</p>
+                            </div>
+                            
+                            <div class="chart-preview">
+                                <h4>🥧 Pie Chart</h4>
+                                <div class="pie-demo"></div>
+                                <p><strong>Untuk:</strong> Menunjukkan proporsi atau persentase</p>
+                            </div>
+                            
+                            <div class="chart-preview">
+                                <h4>📈 Line Chart</h4>
+                                <div class="line-demo">
+                                    <svg class="line-path" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <path d="M0,80 L20,50 L40,70 L60,30 L80,40 L100,20" />
+                                    </svg>
+                                </div>
+                                <p><strong>Untuk:</strong> Tren data dalam periode waktu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-type-grid">
+                            <div class="chart-type-card">
+                                <div class="chart-icon">📊</div>
+                                <h4>Bar/Column Chart</h4>
+                                <p>Perbandingan nilai antar kategori</p>
+                            </div>
+                            <div class="chart-type-card">
+                                <div class="chart-icon">📈</div>
+                                <h4>Line Chart</h4>
+                                <p>Tren data berkelanjutan</p>
+                            </div>
+                            <div class="chart-type-card">
+                                <div class="chart-icon">🥧</div>
+                                <h4>Pie/Doughnut</h4>
+                                <p>Proporsi bagian dari keseluruhan</p>
+                            </div>
+                            <div class="chart-type-card">
+                                <div class="chart-icon">🔺</div>
+                                <h4>Area Chart</h4>
+                                <p>Volume data dalam periode</p>
+                            </div>
+                            <div class="chart-type-card">
+                                <div class="chart-icon">• •</div>
+                                <h4>Scatter Plot</h4>
+                                <p>Korelasi antara dua variabel</p>
+                            </div>
+                            <div class="chart-type-card">
+                                <div class="chart-icon">📉</div>
+                                <h4>Combo Chart</h4>
+                                <p>Kombinasi dua jenis chart</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Langkah-Langkah Membuat Chart di Excel</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>Siapkan Data dengan Struktur yang Benar</h4>
+                                <p>Pastikan data memiliki header dan format yang konsisten</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Pilih Range Data</h4>
+                                <p>Blok data yang ingin divisualisasikan</p>
+                                <div class="code-block">
+                                    Tips: Include headers dalam seleksi
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Insert Chart</h4>
+                                <p>Insert tab → Pilih jenis chart yang diinginkan</p>
+                                <div class="code-block">
+                                    Shortcut: Alt + F1 (Chart default)
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Customize Chart</h4>
+                                <p>Atur title, axis, legend, dan format sesuai kebutuhan</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Format dan Style</h4>
+                                <p>Terapkan color scheme dan layout yang menarik</p>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Contoh Praktis: Data Penjualan Tahunan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Penjualan 2023</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bulan</th>
+                                        <th>Produk A</th>
+                                        <th>Produk B</th>
+                                        <th>Produk C</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Januari</td>
+                                        <td>150</td>
+                                        <td>200</td>
+                                        <td>120</td>
+                                        <td>470</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Februari</td>
+                                        <td>180</td>
+                                        <td>190</td>
+                                        <td>140</td>
+                                        <td>510</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maret</td>
+                                        <td>220</td>
+                                        <td>210</td>
+                                        <td>160</td>
+                                        <td>590</td>
+                                    </tr>
+                                    <tr>
+                                        <td>April</td>
+                                        <td>250</td>
+                                        <td>230</td>
+                                        <td>180</td>
+                                        <td>660</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Jenis Chart yang Cocok:</h4>
+                            <ul>
+                                <li><strong>Line Chart:</strong> Untuk melihat tren penjualan bulanan</li>
+                                <li><strong>Column Chart:</strong> Untuk perbandingan antar produk</li>
+                                <li><strong>Stacked Column:</strong> Untuk melihat kontribusi masing-masing produk</li>
+                                <li><strong>Pie Chart:</strong> Untuk proporsi total penjualan per produk</li>
+                            </ul>
+                        </div>
+                        
+                        <h2>4. Panduan Memilih Jenis Chart yang Tepat</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Tujuan Visualisasi</th>
+                                    <th>Jenis Chart yang Direkomendasikan</th>
+                                    <th>Contoh Penggunaan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Perbandingan</strong></td>
+                                    <td>Column Chart, Bar Chart</td>
+                                    <td>Perbandingan penjualan antar region</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tren Waktu</strong></td>
+                                    <td>Line Chart, Area Chart</td>
+                                    <td>Perkembangan penjualan bulanan</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Proporsi</strong></td>
+                                    <td>Pie Chart, Doughnut Chart</td>
+                                    <td>Market share produk</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Distribusi</strong></td>
+                                    <td>Histogram, Box Plot</td>
+                                    <td>Distribusi usia customer</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Korelasi</strong></td>
+                                    <td>Scatter Plot, Bubble Chart</td>
+                                    <td>Hubungan budget marketing vs penjualan</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Komposisi</strong></td>
+                                    <td>Stacked Column, Waterfall</td>
+                                    <td>Breakdown pendapatan</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>5. Tips Desain Chart yang Profesional</h2>
+                        
+                        <div class="design-tips">
+                            <div class="design-tip">
+                                <h5>🎨 Color Scheme</h5>
+                                <p>Gunakan maksimal 5-7 warna yang harmonis</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>📝 Label Jelas</h5>
+                                <p>Pastikan title dan axis label mudah dibaca</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>⚖️ Skala Proporsional</h5>
+                                <p>Jangan manipulasi skala axis</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>🧹 Minimalis</h5>
+                                <p>Hilangkan element yang tidak perlu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Best Practice:</strong> Gunakan template chart yang konsisten untuk menjaga branding perusahaan.
+                        </div>
+                        
+                        <h2>6. Chart Kombinasi (Combo Chart)</h2>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Combo Chart: Penjualan vs Target</h4>
+                            <p>Gunakan Column Chart untuk actual sales dan Line Chart untuk target:</p>
+                            <ol>
+                                <li>Buat Column Chart dari data penjualan</li>
+                                <li>Klik kanan pada data series target → Change Series Chart Type</li>
+                                <li>Pilih Line Chart dengan secondary axis</li>
+                                <li>Format line menjadi dashed untuk membedakan</li>
+                            </ol>
+                            
+                            <div class="note">
+                                <strong>Manfaat:</strong> Combo chart memungkinkan perbandingan dua metrik dengan skala berbeda dalam satu visualisasi.
+                            </div>
+                        </div>
+                        
+                        <h2>7. Dynamic Chart dengan Pivot Table</h2>
+                        
+                        <div class="example-box">
+                            <h4>Langkah Membuat Pivot Chart:</h4>
+                            <ol>
+                                <li>Buat Pivot Table dari data sumber</li>
+                                <li>Klik pada Pivot Table → Analyze → PivotChart</li>
+                                <li>Pilih jenis chart yang diinginkan</li>
+                                <li>Chart akan terupdate otomatis ketika data berubah</li>
+                            </ol>
+                            
+                            <div class="tip">
+                                <strong>Pro Tip:</strong> Tambahkan Slicer untuk membuat dashboard interaktif.
+                            </div>
+                        </div>
+                        
+                        <h2>8. Common Mistakes dan Solusinya</h2>
+                        
+                        <div class="warning">
+                            <h4>❌ Kesalahan Umum:</h4>
+                            <ul>
+                                <li><strong>3D Chart:</strong> Sulit dibaca, gunakan 2D</li>
+                                <li><strong>Terlalu Banyak Series:</strong> Maksimal 5-7 series</li>
+                                <li><strong>Warna Kontras Rendah:</strong> Gunakan warna dengan kontras tinggi</li>
+                                <li><strong>Axis Manipulation:</strong> Jangan putuskan axis</li>
+                                <li><strong>Label Berantakan:</strong> Rotate label atau gunakan diagonal</li>
+                            </ul>
+                        </div>
+                        
+                        <h2>9. Studi Kasus: Dashboard Penjualan</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat dashboard penjualan dengan komponen:</p>
+                            <ul>
+                                <li>Line Chart: Tren penjualan bulanan</li>
+                                <li>Pie Chart: Proporsi penjualan per produk</li>
+                                <li>Column Chart: Perbandingan performance sales</li>
+                                <li>KPI Cards: Total penjualan, growth, target achievement</li>
+                            </ul>
+                            
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Siapkan data penjualan lengkap</li>
+                                <li>Buat Pivot Table untuk aggregasi data</li>
+                                <li>Insert masing-masing chart berdasarkan Pivot Table</li>
+                                <li>Arrange chart dalam satu worksheet</li>
+                                <li>Tambahkan Slicer untuk filtering</li>
+                                <li>Format dengan color scheme yang konsisten</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk dashboard yang lebih interaktif, pelajari Excel Power BI yang menawarkan visualisasi yang lebih advanced.
+                        </div>
+                        
+                        <h2>10. Shortcut dan Tips Cepat</h2>
+                        
+                        <div class="design-tips">
+                            <div class="design-tip">
+                                <h5>⚡ Alt + F1</h5>
+                                <p>Buat chart default dari data terpilih</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>⚡ F11</h5>
+                                <p>Buat chart di worksheet baru</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>⚡ Ctrl + 1</h5>
+                                <p>Format chart element yang dipilih</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>⚡ Design Tab</h5>
+                                <p>Quick layout dan style templates</p>
+                            </div>
+                        </div>
+                        
+                        <p>Dengan menguasai chart dan grafik di Excel, Anda dapat mentransformasi data menjadi cerita yang compelling dan mudah dipahami. Practice dengan data nyata untuk semakin mahir!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Pivot Table Excel</a></h3>
+                                <p>Pelajari cara meringkas dan menganalisis data dengan Pivot Table.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="VLOOKUP Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">VLOOKUP & HLOOKUP</a></h3>
+                                <p>Kuasaikan fungsi lookup untuk pencarian data dalam tabel.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard interaktif yang profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (18)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Budi Santoso</span>
+                                <span class="comment-date">11 April 2023</span>
+                            </div>
+                            <p>Tutorial yang sangat lengkap! Saya khususnya suka bagian panduan memilih jenis chart yang tepat. Sangat membantu untuk presentasi.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">11 April 2023</span>
+                            </div>
+                            <p>Terima kasih Budi! Memilih chart yang tepat memang kunci untuk visualisasi yang efektif.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Maya Sari</span>
+                                <span class="comment-date">12 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara membuat chart yang otomatis update ketika ada penambahan data baru?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Chart & Grafik Excel</a></li>
+                        <li><a href="#"><span>2</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>3</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>4</span> Rumus IF dan Logika</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Data Visualization</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Chart Excel</a>
+                        <a href="#">Grafik</a>
+                        <a href="#">Visualisasi Data</a>
+                        <a href="#">Diagram</a>
+                        <a href="#">Dashboard</a>
+                        <a href="#">Excel Lanjutan</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Data Analysis</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Fungsi Lookup</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
