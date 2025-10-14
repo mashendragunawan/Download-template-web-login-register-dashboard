@@ -3,7 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microsoft Word - Website Tema</title>
+    <title>Microsoft Word - Pengolah Kata Profesional | Fitur & Tutorial</title>
+    <meta name="description" content="Pelajari Microsoft Word secara lengkap. Tutorial dari pemula hingga mahir, fitur kolaborasi, template profesional, dan tips produktivitas untuk pengolah kata terbaik.">
+    <meta name="keywords" content="microsoft word, tutorial word, pengolah kata, office 365, template dokumen, kolaborasi dokumen, tips word, pemula word, mahir word">
+    <meta name="author" content="Microsoft Corporation">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Microsoft Word - Pengolah Kata Profesional">
+    <meta property="og:description" content="Pelajari Microsoft Word secara lengkap dari pemula hingga mahir. Template profesional, kolaborasi real-time, dan fitur canggih lainnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.microsoft.com/word">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1586075010923-2dd4570fb338">
+    <meta property="og:site_name" content="Microsoft Word">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Microsoft Word - Pengolah Kata Profesional">
+    <meta name="twitter:description" content="Pelajari Microsoft Word secara lengkap dari pemula hingga mahir dengan fitur kolaborasi dan template profesional.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1586075010923-2dd4570fb338">
+    <meta name="twitter:site" content="@Microsoft">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#2B579A">
+    <meta name="msapplication-TileColor" content="#2B579A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.microsoft.com/word">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/732/732220.png">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/732/732220.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Microsoft Word",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Windows, macOS, iOS, Android, Web",
+        "description": "Microsoft Word adalah aplikasi pengolah kata terdepan dengan fitur kolaborasi real-time, template profesional, dan alat editing canggih.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Microsoft Corporation"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "12500"
+        }
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -30,6 +89,23 @@
             background-color: var(--light-color);
             color: var(--text-color);
             line-height: 1.6;
+        }
+
+        /* Skip to main content for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         /* Header Styles */
@@ -90,8 +166,11 @@
             gap: 5px;
         }
 
-        nav ul li a:hover {
+        nav ul li a:hover,
+        nav ul li a:focus {
             color: var(--accent-color);
+            outline: 2px solid var(--accent-color);
+            border-radius: 4px;
         }
 
         .search-bar {
@@ -114,11 +193,22 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        .search-bar input:focus {
+            outline: 2px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
         .search-bar button {
             background: transparent;
             border: none;
             color: var(--text-light);
             cursor: pointer;
+            padding: 5px;
+        }
+
+        .search-bar button:focus {
+            outline: 2px solid var(--accent-color);
+            border-radius: 4px;
         }
 
         /* Hero Section */
@@ -151,8 +241,10 @@
             transition: background-color 0.3s;
         }
 
-        .btn:hover {
+        .btn:hover,
+        .btn:focus {
             background-color: #0086D1;
+            outline: 2px solid white;
         }
 
         /* Filter Section */
@@ -181,6 +273,10 @@
 
         .filter-btn:hover {
             background-color: rgba(43, 87, 154, 0.1);
+        }
+
+        .filter-btn:focus {
+            outline: 2px solid var(--accent-color);
         }
 
         .filter-btn.active {
@@ -328,6 +424,11 @@
             gap: 5px;
         }
 
+        .card-link:focus {
+            outline: 2px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
         /* Footer */
         footer {
             background-color: var(--dark-color);
@@ -362,8 +463,10 @@
             transition: color 0.3s;
         }
 
-        .footer-column ul li a:hover {
+        .footer-column ul li a:hover,
+        .footer-column ul li a:focus {
             color: var(--accent-color);
+            outline: none;
         }
 
         .social-links {
@@ -382,10 +485,13 @@
             border-radius: 50%;
             color: white;
             transition: background-color 0.3s;
+            text-decoration: none;
         }
 
-        .social-links a:hover {
+        .social-links a:hover,
+        .social-links a:focus {
             background-color: var(--accent-color);
+            outline: 2px solid white;
         }
 
         .footer-bottom {
@@ -429,34 +535,66 @@
                 font-size: 16px;
             }
         }
+
+        /* High contrast support for accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #000080;
+                --secondary-color: #000060;
+                --accent-color: #008000;
+                --light-color: #FFFFFF;
+                --dark-color: #000000;
+                --text-color: #000000;
+            }
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .card:hover {
+                transform: none;
+            }
+            
+            .card:hover .card-image img {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Skip to main content for keyboard users -->
+    <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+
     <!-- Header dengan Navigasi -->
-    <header>
+    <header role="banner">
         <div class="container nav-container">
             <div class="logo">
-                <i class="fas fa-file-word"></i>
+                <i class="fas fa-file-word" aria-hidden="true"></i>
                 <h1>Microsoft Word</h1>
             </div>
-            <nav>
+            <nav role="navigation" aria-label="Navigasi utama">
                 <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                    <li><a href="#"><i class="fas fa-feather"></i> Fitur</a></li>
-                    <li><a href="#"><i class="fas fa-download"></i> Unduh</a></li>
-                    <li><a href="#"><i class="fas fa-dollar-sign"></i> Harga</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> Bantuan</a></li>
+                    <li><a href="#"><i class="fas fa-home" aria-hidden="true"></i> <span>Beranda</span></a></li>
+                    <li><a href="#"><i class="fas fa-feather" aria-hidden="true"></i> <span>Fitur</span></a></li>
+                    <li><a href="#"><i class="fas fa-download" aria-hidden="true"></i> <span>Unduh</span></a></li>
+                    <li><a href="#"><i class="fas fa-dollar-sign" aria-hidden="true"></i> <span>Harga</span></a></li>
+                    <li><a href="#"><i class="fas fa-question-circle" aria-hidden="true"></i> <span>Bantuan</span></a></li>
                 </ul>
             </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Cari di Word...">
-                <button><i class="fas fa-search"></i></button>
+            <div class="search-bar" role="search">
+                <input type="text" placeholder="Cari di Word..." aria-label="Cari konten di Microsoft Word">
+                <button aria-label="Tombol pencarian"><i class="fas fa-search" aria-hidden="true"></i></button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" role="banner">
         <div class="container">
             <h2>Microsoft Word - Alat Pemroses Kata Terdepan</h2>
             <p>Buat, edit, dan bagikan dokumen dengan alat kolaborasi yang canggih. Word membantu Anda mengubah tulisan menjadi karya profesional.</p>
@@ -465,182 +603,182 @@
     </section>
 
     <!-- Filter Section -->
-    <section class="filter-section">
+    <section class="filter-section" id="main-content">
         <div class="container">
             <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn beginner" data-filter="beginner">Pemula</button>
-                <button class="filter-btn intermediate" data-filter="intermediate">Menengah</button>
-                <button class="filter-btn advanced" data-filter="advanced">Mahir</button>
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">Semua</button>
+                <button class="filter-btn beginner" data-filter="beginner" aria-pressed="false">Pemula</button>
+                <button class="filter-btn intermediate" data-filter="intermediate" aria-pressed="false">Menengah</button>
+                <button class="filter-btn advanced" data-filter="advanced" aria-pressed="false">Mahir</button>
             </div>
         </div>
     </section>
 
     <!-- Cards Section -->
-    <section class="cards-section">
+    <section class="cards-section" aria-labelledby="fitur-unggulan">
         <div class="container">
             <div class="section-title">
-                <h2>Fitur Unggulan Microsoft Word</h2>
+                <h2 id="fitur-unggulan">Fitur Unggulan Microsoft Word</h2>
                 <p>Temukan berbagai fitur canggih yang membuat Word menjadi aplikasi pengolah kata terbaik di dunia</p>
             </div>
             <div class="cards-container">
                 <!-- Card 1 - Pemula -->
                 <div class="card" data-level="beginner">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Editor Cerdas">
+                        <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Editor Cerdas Microsoft Word">
                         <div class="card-level level-beginner">Pemula</div>
                         <div class="card-icon">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-edit" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Editor yang Cerdas</h3>
                         <p>Dapatkan saran tata bahasa, ejaan, dan gaya penulisan yang cerdas untuk meningkatkan kualitas dokumen Anda.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 2 - Menengah -->
                 <div class="card" data-level="intermediate">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kolaborasi Real-time">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kolaborasi Real-time di Microsoft Word">
                         <div class="card-level level-intermediate">Menengah</div>
                         <div class="card-icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Kolaborasi Real-time</h3>
                         <p>Bekerja sama dengan tim secara real-time, lihat perubahan yang dilakukan orang lain secara langsung.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 3 - Pemula -->
                 <div class="card" data-level="beginner">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Penyimpanan Cloud">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Penyimpanan Cloud Microsoft Word">
                         <div class="card-level level-beginner">Pemula</div>
                         <div class="card-icon">
-                            <i class="fas fa-cloud"></i>
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Penyimpanan Cloud</h3>
                         <p>Akses dokumen Anda dari mana saja dengan penyimpanan cloud OneDrive yang terintegrasi.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 4 - Pemula -->
                 <div class="card" data-level="beginner">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Template Profesional">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Template Profesional Microsoft Word">
                         <div class="card-level level-beginner">Pemula</div>
                         <div class="card-icon">
-                            <i class="fas fa-magic"></i>
+                            <i class="fas fa-magic" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Template Profesional</h3>
                         <p>Pilih dari ratusan template yang dirancang profesional untuk resume, laporan, surat, dan banyak lagi.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 5 - Menengah -->
                 <div class="card" data-level="intermediate">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Aplikasi Mobile">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Aplikasi Mobile Microsoft Word">
                         <div class="card-level level-intermediate">Menengah</div>
                         <div class="card-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Aplikasi Mobile</h3>
                         <p>Buat dan edit dokumen di perangkat seluler Anda dengan aplikasi Word yang lengkap untuk iOS dan Android.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 6 - Mahir -->
                 <div class="card" data-level="advanced">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Alat Data & Grafik">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Alat Data & Grafik Microsoft Word">
                         <div class="card-level level-advanced">Mahir</div>
                         <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Alat Data & Grafik</h3>
                         <p>Sisipkan dan visualisasikan data dengan grafik, tabel, dan diagram yang mudah dibuat dan disesuaikan.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 7 - Menengah -->
                 <div class="card" data-level="intermediate">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Desain Menarik">
+                        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Desain Menarik Microsoft Word">
                         <div class="card-level level-intermediate">Menengah</div>
                         <div class="card-icon">
-                            <i class="fas fa-paint-brush"></i>
+                            <i class="fas fa-paint-brush" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Desain yang Menarik</h3>
                         <p>Terapkan gaya, font, dan tata letak yang menarik dengan alat desain yang mudah digunakan.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 8 - Mahir -->
                 <div class="card" data-level="advanced">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Keamanan Dokumen">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Keamanan Dokumen Microsoft Word">
                         <div class="card-level level-advanced">Mahir</div>
                         <div class="card-icon">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-lock" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Keamanan Dokumen</h3>
                         <p>Lindungi dokumen sensitif dengan kata sandi, enkripsi, dan kontrol akses yang canggih.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 9 - Menengah -->
                 <div class="card" data-level="intermediate">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1529338296731-c4280a44fc48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dukungan Multibahasa">
+                        <img src="https://images.unsplash.com/photo-1529338296731-c4280a44fc48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dukungan Multibahasa Microsoft Word">
                         <div class="card-level level-intermediate">Menengah</div>
                         <div class="card-icon">
-                            <i class="fas fa-language"></i>
+                            <i class="fas fa-language" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Dukungan Multibahasa</h3>
                         <p>Word mendukung lebih dari 100 bahasa dengan pemeriksa tata bahasa dan ejaan yang akurat.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <!-- Card 10 - Mahir -->
                 <div class="card" data-level="advanced">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Integrasi Office 365">
+                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Integrasi Office 365 Microsoft Word">
                         <div class="card-level level-advanced">Mahir</div>
                         <div class="card-icon">
-                            <i class="fas fa-rocket"></i>
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="card-content">
                         <h3>Integrasi Office 365</h3>
                         <p>Nikmati integrasi sempurna dengan aplikasi Office lainnya seperti Excel, PowerPoint, dan Outlook.</p>
-                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="card-link">Pelajari lebih lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -648,7 +786,7 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -685,11 +823,11 @@
                     <h3>Ikuti Kami</h3>
                     <p>Terhubung dengan kami di media sosial untuk mendapatkan update terbaru.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -708,10 +846,14 @@
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
                     
                     // Add active class to clicked button
                     this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
                     
                     const filterValue = this.getAttribute('data-filter');
                     
