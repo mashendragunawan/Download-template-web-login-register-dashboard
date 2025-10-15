@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Berbagai Tipe Data di Excel dan Cara Mengaturnya | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap memahami tipe data Excel: teks, angka, tanggal, boolean, dan lainnya. Pelajari cara mengatur format data dengan benar untuk analisis optimal.">
+    <meta name="keywords" content="tipe data excel, format data, angka excel, tanggal excel, teks excel, tutorial excel, data validation">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.text { border-color: #27ae60; }
+        .feature-card.number { border-color: #2980b9; }
+        .feature-card.date { border-color: #e74c3c; }
+        .feature-card.boolean { border-color: #f39c12; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Demo Sections */
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .worksheet-demo {
+            background: #2d2d2d;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1px;
+            background: #444;
+            margin-top: 15px;
+        }
+        
+        .grid-cell {
+            background: #222;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #ccc;
+            position: relative;
+            padding: 0 5px;
+        }
+        
+        .grid-cell.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.text-data {
+            background: #27ae60;
+            color: white;
+            font-style: italic;
+        }
+        
+        .grid-cell.number-data {
+            background: #2980b9;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.date-data {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .grid-cell.boolean-data {
+            background: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.error-data {
+            background: #c0392b;
+            color: white;
+            position: relative;
+        }
+        
+        .grid-cell.error-data::after {
+            content: '⚠️';
+            position: absolute;
+            right: 5px;
+            font-size: 10px;
+        }
+        
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 200px;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .preview-table th {
+            background: #217346;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .preview-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        
+        .preview-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .data-type-demo {
+            background: #e8f4fc;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .data-type-demo::after {
+            content: '🔍';
+            position: absolute;
+            right: 10px;
+            font-size: 12px;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .step-visual {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Use Cases */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .use-case {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .use-case:hover {
+            border-color: #217346;
+            transform: translateY(-2px);
+        }
+        
+        .use-case h4 {
+            color: #217346;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Data Type Visual */
+        .data-type-visual {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .data-type-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .data-type-item.text { border-top: 4px solid #27ae60; }
+        .data-type-item.number { border-top: 4px solid #2980b9; }
+        .data-type-item.date { border-top: 4px solid #e74c3c; }
+        .data-type-item.boolean { border-top: 4px solid #f39c12; }
+        .data-type-item.error { border-top: 4px solid #c0392b; }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .use-cases {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+                font-size: 10px;
+            }
+            
+            .data-type-visual {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Formatting</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Memahami Berbagai Tipe Data di Excel dan Cara Mengaturnya</h1>
+                        <div class="article-meta">
+                            <span>📅 25 Juni 2023</span>
+                            <span>👁️ 15.7K Dilihat</span>
+                            <span>⏱️ 20 menit membaca</span>
+                            <span>🏷️ Tipe Data Excel, Format Data, Angka Excel, Tanggal Excel, Teks Excel, Data Validation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Tipe data Excel</strong> adalah fondasi penting dalam pengelolaan dan analisis data. Memahami berbagai jenis data dan cara mengaturnya dengan benar akan menghindarkan Anda dari kesalahan analisis dan memastikan perhitungan yang akurat. Pengaturan tipe data yang tepat adalah kunci keberhasilan dalam bekerja dengan Excel.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian">Apa itu Tipe Data dan Mengapa Penting?</a></li>
+                                <li><a href="#tipe-teks">Tipe Data Teks (String)</a></li>
+                                <li><a href="#tipe-angka">Tipe Data Angka (Number)</a></li>
+                                <li><a href="#tipe-tanggal">Tipe Data Tanggal dan Waktu</a></li>
+                                <li><a href="#tipe-boolean">Tipe Data Boolean (TRUE/FALSE)</a></li>
+                                <li><a href="#tipe-lainnya">Tipe Data Lainnya dan Khusus</a></li>
+                                <li><a href="#format-data">Cara Mengatur Format Data dengan Benar</a></li>
+                                <li><a href="#troubleshooting">Troubleshooting Masalah Umum</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian">1. Apa itu Tipe Data dan Mengapa Penting?</h2>
+                        
+                        <p><strong>Tipe data</strong> dalam Excel menentukan bagaimana data disimpan, ditampilkan, dan digunakan dalam perhitungan. Setiap tipe data memiliki karakteristik dan perilaku yang berbeda dalam operasi matematika, sorting, dan filtering.</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card text">
+                                <div class="feature-icon">📝</div>
+                                <h3>Data Teks</h3>
+                                <p>Untuk informasi deskriptif dan kategorikal</p>
+                                <p><strong>Contoh:</strong> Nama, alamat, kode produk</p>
+                            </div>
+                            
+                            <div class="feature-card number">
+                                <div class="feature-icon">🔢</div>
+                                <h3>Data Angka</h3>
+                                <p>Untuk perhitungan matematika dan statistik</p>
+                                <p><strong>Contoh:</strong> Harga, jumlah, persentase</p>
+                            </div>
+                            
+                            <div class="feature-card date">
+                                <div class="feature-icon">📅</div>
+                                <h3>Data Tanggal</h3>
+                                <p>Untuk perhitungan waktu dan penjadwalan</p>
+                                <p><strong>Contoh:</strong> Tanggal transaksi, deadline</p>
+                            </div>
+                            
+                            <div class="feature-card boolean">
+                                <div class="feature-icon">✅</div>
+                                <h3>Data Boolean</h3>
+                                <p>Untuk logika dan kondisi TRUE/FALSE</p>
+                                <p><strong>Contoh:</strong> Status aktif, checklist</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>📋 Contoh Berbagai Tipe Data dalam Worksheet</h4>
+                            <div class="worksheet-preview">
+                                <p>Berbagai tipe data dan formatnya dalam Excel:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell header">D</div>
+                                    <div class="grid-cell header">E</div>
+                                    <div class="grid-cell header">F</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell text-data">Nama Produk</div>
+                                    <div class="grid-cell number-data">Harga</div>
+                                    <div class="grid-cell number-data">Stok</div>
+                                    <div class="grid-cell date-data">Tanggal Masuk</div>
+                                    <div class="grid-cell boolean-data">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell text-data">Laptop ASUS</div>
+                                    <div class="grid-cell number-data">Rp 8.500.000</div>
+                                    <div class="grid-cell number-data">15</div>
+                                    <div class="grid-cell date-data">15/06/2023</div>
+                                    <div class="grid-cell boolean-data">TRUE</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell text-data">Mouse Wireless</div>
+                                    <div class="grid-cell number-data">Rp 250.000</div>
+                                    <div class="grid-cell number-data">0</div>
+                                    <div class="grid-cell date-data">20/06/2023</div>
+                                    <div class="grid-cell boolean-data">FALSE</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell text-data">Keyboard Mechanical</div>
+                                    <div class="grid-cell number-data">Rp 1.200.000</div>
+                                    <div class="grid-cell number-data">8</div>
+                                    <div class="grid-cell date-data">18/06/2023</div>
+                                    <div class="grid-cell boolean-data">TRUE</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Mengapa Tipe Data Penting:</strong>
+                            <ul>
+                                <li><strong>Akurasi perhitungan</strong> - data angka vs teks berperilaku berbeda</li>
+                                <li><strong>Konsistensi analisis</strong> - memastikan data sejenis diperlakukan sama</li>
+                                <li><strong>Efisiensi sorting/filtering</strong> - tanggal diurutkan secara kronologis</li>
+                                <li><strong>Pencegahan error</strong> - menghindari #VALUE! dan error lainnya</li>
+                                <li><strong>Optimasi storage</strong> - tipe data yang tepat menghemat memori</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="tipe-teks">2. Tipe Data Teks (String)</h2>
+                        
+                        <p><strong>Data teks</strong> digunakan untuk informasi deskriptif yang tidak dimaksudkan untuk perhitungan matematika. Excel memperlakukan data teks secara berbeda dari data numerik.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Karakteristik Data Teks</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Format Default</h4>
+                                <p>Data teks rata kiri secara default di sel</p>
+                                <p><strong>Contoh:</strong> "Nama Produk", "Kode Item"</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Tidak Bisa Dihitung</h4>
+                                <p>Data teks tidak dapat digunakan dalam operasi matematika</p>
+                                <p><strong>Contoh:</strong> SUM("100") akan error</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Sorting Berdasarkan Abjad</h4>
+                                <p>Data teks diurutkan berdasarkan urutan abjad</p>
+                                <p><strong>Contoh:</strong> A-Z atau Z-A</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Max Length</h4>
+                                <p>Maksimal 32,767 karakter per sel</p>
+                                <p>Untuk teks panjang, gunakan Text Box</p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🎮 Demo Data Teks</h4>
+                            <div class="demo-preview">
+                                <table class="preview-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipe Data</th>
+                                            <th>Contoh</th>
+                                            <th>Karakteristik</th>
+                                            <th>Penggunaan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="data-type-demo">Teks Biasa</td>
+                                            <td>"Nama Karyawan"</td>
+                                            <td>Rata kiri, tidak bisa dihitung</td>
+                                            <td>Label, deskripsi, kategori</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teks Angka</td>
+                                            <td>"00125"</td>
+                                            <td>Mempertahankan leading zero</td>
+                                            <td>Kode produk, nomor ID</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teks Panjang</td>
+                                            <td>"Deskripsi produk..."</td>
+                                            <td>Wrap text untuk readability</td>
+                                            <td>Keterangan, catatan</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                <p><strong>Tips:</strong> Klik pada sel dengan ikon kaca pembesar (🔍) untuk melihat detail tipe data!</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tipe-angka">3. Tipe Data Angka (Number)</h2>
+                        
+                        <p><strong>Data angka</strong> adalah tipe data untuk perhitungan matematika. Excel memiliki berbagai format angka untuk keperluan berbeda.</p>
+                        
+                        <div class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Format Angka</th>
+                                    <th>Contoh Tampilan</th>
+                                    <th>Penggunaan</th>
+                                    <th>Custom Format</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>General</strong></td>
+                                    <td>1500.75</td>
+                                    <td>Format default, tanpa pemformatan khusus</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Number</strong></td>
+                                    <td>1,500.75</td>
+                                    <td>Angka dengan pemisah ribuan dan desimal</td>
+                                    <td>#,##0.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Currency</strong></td>
+                                    <td>Rp 1,500.75</td>
+                                    <td>Nilai mata uang dengan simbol</td>
+                                    <td>Rp #,##0.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Accounting</strong></td>
+                                    <td>Rp  1,500.75</td>
+                                    <td>Mata uang dengan alignment konsisten</td>
+                                    <td>_Rp * #,##0.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Percentage</strong></td>
+                                    <td>15.50%</td>
+                                    <td>Nilai persentase (nilai × 100)</td>
+                                    <td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fraction</strong></td>
+                                    <td>1 1/2</td>
+                                    <td>Menampilkan angka sebagai pecahan</td>
+                                    <td># ?/?</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Scientific</strong></td>
+                                    <td>1.50E+03</td>
+                                    <td>Notasi ilmiah untuk angka sangat besar/kecil</td>
+                                    <td>0.00E+00</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Cara Mengatur Format Angka</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Sel/Range</h4>
+                                <p>Pilih sel atau range yang ingin diformat</p>
+                                <p><strong>Shortcut:</strong> Ctrl+1 untuk membuka Format Cells</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Format Cells</h4>
+                                <p>Home > Number > Dialog Box Launcher</p>
+                                <p>Atau right-click > Format Cells</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Kategori</h4>
+                                <p>Pilih kategori format yang diinginkan</p>
+                                <p><strong>Contoh:</strong> Currency, Percentage, Date</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Konfigurasi Detail</h4>
+                                <p>Atur decimal places, symbol currency, dll.</p>
+                                <p><strong>Tips:</strong> Gunakan Custom untuk format khusus</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tipe-tanggal">4. Tipe Data Tanggal dan Waktu</h2>
+                        
+                        <p><strong>Data tanggal dan waktu</strong> di Excel disimpan sebagai angka serial, dimana 1 = 1 Januari 1900. Ini memungkinkan perhitungan tanggal dan waktu.</p>
+                        
+                        <div class="demo-section">
+                            <h3>📅 Format Tanggal dan Waktu di Excel</h3>
+                            <div class="worksheet-demo">
+                                <p>Berbagai format tanggal dan waktu yang tersedia:</p>
+                                <div class="grid-container" style="grid-template-columns: repeat(4, 1fr);">
+                                    <div class="grid-cell header">Format</div>
+                                    <div class="grid-cell header">Contoh Tampilan</div>
+                                    <div class="grid-cell header">Nilai Dasar</div>
+                                    <div class="grid-cell header">Keterangan</div>
+                                    <div class="grid-cell">Short Date</div>
+                                    <div class="grid-cell date-data">15/06/2023</div>
+                                    <div class="grid-cell number-data">45105</div>
+                                    <div class="grid-cell text-data">Format regional</div>
+                                    <div class="grid-cell">Long Date</div>
+                                    <div class="grid-cell date-data">15 Juni 2023</div>
+                                    <div class="grid-cell number-data">45105</div>
+                                    <div class="grid-cell text-data">Nama bulan/hari</div>
+                                    <div class="grid-cell">Time</div>
+                                    <div class="grid-cell date-data">14:30:00</div>
+                                    <div class="grid-cell number-data">0.60417</div>
+                                    <div class="grid-cell text-data">24-hour format</div>
+                                    <div class="grid-cell">Date & Time</div>
+                                    <div class="grid-cell date-data">15/06/2023 14:30</div>
+                                    <div class="grid-cell number-data">45105.60417</div>
+                                    <div class="grid-cell text-data">Kombinasi</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-type-visual">
+                            <div class="data-type-item date">
+                                <h4>Tanggal Pendek</h4>
+                                <p>15/06/2023</p>
+                                <small>dd/mm/yyyy</small>
+                            </div>
+                            <div class="data-type-item date">
+                                <h4>Tanggal Panjang</h4>
+                                <p>15 Juni 2023</p>
+                                <small>d mmmm yyyy</small>
+                            </div>
+                            <div class="data-type-item date">
+                                <h4>Waktu</h4>
+                                <p>14:30:00</p>
+                                <small>hh:mm:ss</small>
+                            </div>
+                            <div class="data-type-item date">
+                                <h4>Tanggal & Waktu</h4>
+                                <p>15/06/2023 14:30</p>
+                                <small>dd/mm/yyyy hh:mm</small>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Tanggal Excel:</strong>
+                            <ul>
+                                <li>Gunakan <strong>DATE(year,month,day)</strong> untuk membuat tanggal dari komponen</li>
+                                <li><strong>Ctrl+;</strong> untuk tanggal sekarang, <strong>Ctrl+Shift+;</strong> untuk waktu sekarang</li>
+                                <li>Tanggal sebelum 1/1/1900 tidak bisa dihitung dengan benar</li>
+                                <li>Gunakan <strong>DATEDIF</strong> untuk menghitung selisih antara dua tanggal</li>
+                                <li>Format custom: <strong>dd-mmm-yy</strong> untuk "15-Jun-23"</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="tipe-boolean">5. Tipe Data Boolean (TRUE/FALSE)</h2>
+                        
+                        <p><strong>Data Boolean</strong> hanya memiliki dua nilai: TRUE (benar) atau FALSE (salah). Tipe data ini sangat berguna untuk logika dan kondisi.</p>
+                        
+                        <div class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Nilai Boolean</th>
+                                    <th>Nilai Numerik</th>
+                                    <th>Penggunaan</th>
+                                    <th>Contoh Formula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TRUE</strong></td>
+                                    <td>1</td>
+                                    <td>Kondisi benar/terpenuhi</td>
+                                    <td>=A1>100</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FALSE</strong></td>
+                                    <td>0</td>
+                                    <td>Kondisi salah/tidak terpenuhi</td>
+                                    <td>=B1="Selesai"</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Yes/No</strong></td>
+                                    <td>-</td>
+                                    <td>Alternatif TRUE/FALSE</td>
+                                    <td>Format custom</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1/0</strong></td>
+                                    <td>1/0</td>
+                                    <td>Representasi biner</td>
+                                    <td>Dalam perhitungan</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>📊 Conditional Formatting</h4>
+                                <p><strong>Scenario:</strong> Menyorot sel yang memenuhi kondisi</p>
+                                <p><strong>Solusi:</strong> =A1>100 → TRUE/FALSE → Format diterapkan jika TRUE</p>
+                                <p><strong>Hasil:</strong> Visualisasi data berdasarkan kondisi</p>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h4>📈 Data Validation</h4>
+                                <p><strong>Scenario:</strong> Membatasi input data</p>
+                                <p><strong>Solusi:</strong> Data Validation → Custom → =LEN(A1)<=10</p>
+                                <p><strong>Hasil:</strong> Input hanya diterima jika kondisi TRUE</p>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h4>📋 Logical Tests</h4>
+                                <p><strong>Scenario:</strong> Pengambilan keputusan dalam formula</p>
+                                <p><strong>Solusi:</strong> =IF(A1>100,"Tinggi","Rendah")</p>
+                                <p><strong>Hasil:</strong> Output berbeda berdasarkan kondisi</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tipe-lainnya">6. Tipe Data Lainnya dan Khusus</h2>
+                        
+                        <p>Selain tipe data dasar, Excel memiliki beberapa tipe data khusus untuk keperluan tertentu.</p>
+                        
+                        <div class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipe Data</th>
+                                    <th>Deskripsi</th>
+                                    <th>Penggunaan</th>
+                                    <th>Contoh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Error Values</strong></td>
+                                    <td>Nilai error dari formula</td>
+                                    <td>Indikator kesalahan perhitungan</td>
+                                    <td>#N/A, #VALUE!, #REF!</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blank/Empty</strong></td>
+                                    <td>Sel kosong</td>
+                                    <td>Data belum tersedia atau tidak berlaku</td>
+                                    <td>(sel kosong)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Logical</strong></td>
+                                    <td>TRUE/FALSE dan hasil comparison</td>
+                                    <td>Kondisi dan logika Boolean</td>
+                                    <td>=A1>B1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Array</strong></td>
+                                    <td>Kumpulan nilai dalam formula array</td>
+                                    <td>Perhitungan multiple values sekaligus</td>
+                                    <td>{1,2,3,4,5}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rich Text</strong></td>
+                                    <td>Teks dengan formatting internal</td>
+                                    <td>Teks dengan bold, italic dalam satu sel</td>
+                                    <td>Hello <b>World</b></td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Nilai Error yang Umum:</h4>
+                            <ul>
+                                <li><strong>#N/A</strong> - Value not available (data tidak tersedia)</li>
+                                <li><strong>#VALUE!</strong> - Wrong type of argument (tipe data salah)</li>
+                                <li><strong>#REF!</strong> - Invalid cell reference (referensi sel tidak valid)</li>
+                                <li><strong>#DIV/0!</strong> - Division by zero (pembagian dengan nol)</li>
+                                <li><strong>#NAME?</strong> - Unrecognized text in formula (nama tidak dikenali)</li>
+                                <li><strong>#NUM!</strong> - Problem with a number (masalah dengan angka)</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="format-data">7. Cara Mengatur Format Data dengan Benar</h2>
+                        
+                        <p>Mengatur format data dengan benar sangat penting untuk memastikan akurasi analisis dan perhitungan.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Setting Format Data</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Identifikasi Tipe Data</h4>
+                                <p>Analisis data yang akan dimasukkan</p>
+                                <p><strong>Pertanyaan:</strong> Apakah data untuk dihitung? Ditampilkan? Disorting?</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Pilih Format yang Tepat</h4>
+                                <p>Pilih format sesuai kebutuhan</p>
+                                <p><strong>Contoh:</strong> Currency untuk harga, Date untuk tanggal</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Terapkan Data Validation</h4>
+                                <p>Batasi input untuk konsistensi data</p>
+                                <p><strong>Tools:</strong> Data > Data Validation</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Test dan Verifikasi</h4>
+                                <p>Pastikan format bekerja seperti yang diharapkan</p>
+                                <p><strong>Check:</strong> Perhitungan, sorting, filtering</p>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-section">
+                            <h3>🔧 Data Validation untuk Konsistensi</h3>
+                            <div class="worksheet-demo">
+                                <p>Contoh aturan data validation untuk berbagai tipe data:</p>
+                                <div class="grid-container" style="grid-template-columns: repeat(3, 1fr);">
+                                    <div class="grid-cell header">Tipe Data</div>
+                                    <div class="grid-cell header">Validation Rule</div>
+                                    <div class="grid-cell header">Input Message</div>
+                                    <div class="grid-cell">Angka (Harga)</div>
+                                    <div class="grid-cell number-data">Decimal between 0 and 10000000</div>
+                                    <div class="grid-cell text-data">Masukkan harga antara 0-10 juta</div>
+                                    <div class="grid-cell">Teks (Kode)</div>
+                                    <div class="grid-cell text-data">Text length = 5</div>
+                                    <div class="grid-cell text-data">Kode harus 5 karakter</div>
+                                    <div class="grid-cell">Tanggal</div>
+                                    <div class="grid-cell date-data">Date >= TODAY()</div>
+                                    <div class="grid-cell text-data">Tanggal tidak boleh masa lalu</div>
+                                    <div class="grid-cell">List (Kategori)</div>
+                                    <div class="grid-cell text-data">List: Elektronik, Pakaian, Makanan</div>
+                                    <div class="grid-cell text-data">Pilih dari dropdown</div>
+                                    <div class="grid-cell">Boolean (Status)</div>
+                                    <div class="grid-cell boolean-data">List: Aktif, Non-Aktif</div>
+                                    <div class="grid-cell text-data">Pilih status</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="troubleshooting">8. Troubleshooting Masalah Umum</h2>
+                        
+                        <p>Berikut solusi untuk masalah umum yang terkait dengan tipe data di Excel.</p>
+                        
+                        <div class="demo-section">
+                            <h3>🔧 Masalah dan Solusi Tipe Data</h3>
+                            <div class="worksheet-demo">
+                                <p>Common issues dan cara memperbaikinya:</p>
+                                <div class="grid-container" style="grid-template-columns: repeat(3, 1fr);">
+                                    <div class="grid-cell header">Masalah</div>
+                                    <div class="grid-cell header">Penyebab</div>
+                                    <div class="grid-cell header">Solusi</div>
+                                    <div class="grid-cell">Angka jadi teks</div>
+                                    <div class="grid-cell error-data">Format Text atau apostrophe</div>
+                                    <div class="grid-cell text-data">Convert to Number, Clear Formatting</div>
+                                    <div class="grid-cell">Tanggal tidak dikenali</div>
+                                    <div class="grid-cell error-data">Format regional mismatch</div>
+                                    <div class="grid-cell text-data">DATEVALUE, Text to Columns</div>
+                                    <div class="grid-cell">#VALUE! error</div>
+                                    <div class="grid-cell error-data">Tipe data tidak kompatibel</div>
+                                    <div class="grid-cell text-data">Periksa tipe data argumen</div>
+                                    <div class="grid-cell">Sorting tidak benar</div>
+                                    <div class="grid-cell error-data">Data mixed types</div>
+                                    <div class="grid-cell text-data">Pastikan konsistensi tipe data</div>
+                                    <div class="grid-cell">Leading zero hilang</div>
+                                    <div class="grid-cell error-data">Format Number menghilangkan zero</div>
+                                    <div class="grid-cell text-data">Format as Text atau Custom "00000"</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>🚀 Best Practices Tipe Data:</strong>
+                            <ul>
+                                <li><strong>Konsistensi</strong> - satu kolom, satu tipe data</li>
+                                <li><strong>Data Validation</strong> - batasi input untuk mencegah error</li>
+                                <li><strong>Format yang Tepat</strong> - sesuai dengan nature data</li>
+                                <li><strong>Documentation</strong> - beri keterangan format yang digunakan</li>
+                                <li><strong>Regular Audit</strong> - periksa konsistensi data berkala</li>
+                            </ul>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p><strong>Memahami tipe data Excel</strong> adalah keterampilan fundamental yang akan meningkatkan akurasi dan efisiensi kerja Anda. Dengan pengaturan yang tepat, Anda bisa:</p>
+                        
+                        <ul>
+                            <li><strong>Menghindari kesalahan analisis</strong> dan perhitungan</li>
+                            <li><strong>Meningkatkan konsistensi</strong> data dalam workbook</li>
+                            <li><strong>Mengoptimalkan proses</strong> sorting dan filtering</li>
+                            <li><strong>Membuat dashboard dan laporan</strong> yang lebih akurat</li>
+                            <li><strong>Menghemat waktu troubleshooting</strong> masalah data</li>
+                        </ul>
+                        
+                        <p><strong>Mulailah dengan identifikasi tipe data</strong> yang tepat untuk setiap kolom data Anda, terapkan format yang sesuai, dan gunakan data validation untuk menjaga konsistensi. Ingatlah bahwa data yang terformat dengan benar adalah fondasi untuk analisis yang akurat dan pengambilan keputusan yang tepat.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan periksa tipe data dalam workbook Anda. Pastikan setiap kolom memiliki tipe data yang konsisten dan format yang tepat. Punya pertanyaan atau tips tambahan? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Data Management</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Tipe Data Excel</a></li>
+                        <li><a href="#"><span>2</span> Data Validation</a></li>
+                        <li><a href="#"><span>3</span> Text to Columns</a></li>
+                        <li><a href="#"><span>4</span> Remove Duplicates</a></li>
+                        <li><a href="#"><span>5</span> Find and Replace</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Data Management</a></li>
+                        <li><a href="#">Tipe Data</a></li>
+                        <li><a href="#">Formatting</a></li>
+                        <li><a href="#">Tips Cepat</a></li>
+                        <li><a href="#">Untuk Pemula</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Tipe Data Excel</a>
+                        <a href="#">Format Data</a>
+                        <a href="#">Angka Excel</a>
+                        <a href="#">Tanggal Excel</a>
+                        <a href="#">Teks Excel</a>
+                        <a href="#">Data Validation</a>
+                        <a href="#">Format Cells</a>
+                        <a href="#">Excel Basics</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Quick Reference</h3>
+                    <p>Shortcut format data:</p>
+                    <ul>
+                        <li><strong>Ctrl+1</strong> - Format Cells</li>
+                        <li><strong>Ctrl+Shift+1</strong> - Number Format</li>
+                        <li><strong>Ctrl+Shift+2</strong> - Time Format</li>
+                        <li><strong>Ctrl+Shift+3</strong> - Date Format</li>
+                        <li><strong>Ctrl+Shift+4</strong> - Currency Format</li>
+                        <li><strong>Ctrl+Shift+5</strong> - Percentage Format</li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Data Management</a></li>
+                        <li><a href="#">Formulas</a></li>
+                        <li><a href="#">Formatting</a></li>
+                        <li><a href="#">Charts</a></li>
+                        <li><a href="#">Tips & Trik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Data Type Demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data type interaction for worksheet demo
+            const dataTypeCells = document.querySelectorAll('.data-type-demo');
+            
+            dataTypeCells.forEach(cell => {
+                cell.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Show data type explanation
+                    const currentBg = this.style.background;
+                    if (!currentBg || currentBg.includes('#e8f4fc')) {
+                        this.style.background = '#217346';
+                        this.style.color = 'white';
+                        this.style.fontWeight = 'bold';
+                        
+                        // Show tooltip with data type info
+                        const tooltip = document.createElement('div');
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.background = '#333';
+                        tooltip.style.color = 'white';
+                        tooltip.style.padding = '10px';
+                        tooltip.style.borderRadius = '5px';
+                        tooltip.style.zIndex = '1000';
+                        tooltip.style.maxWidth = '200px';
+                        tooltip.innerHTML = '<strong>' + this.textContent + '</strong><br>Klik lagi untuk menutup';
+                        
+                        this.appendChild(tooltip);
+                        
+                        // Remove tooltip on second click
+                        this.addEventListener('click', function removeTooltip() {
+                            tooltip.remove();
+                            this.style.background = '#e8f4fc';
+                            this.style.color = 'black';
+                            this.style.fontWeight = 'normal';
+                            this.removeEventListener('click', removeTooltip);
+                        }, { once: true });
+                    }
+                });
+            });
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Data type visual animation
+            const dataTypeItems = document.querySelectorAll('.data-type-item');
+            dataTypeItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
