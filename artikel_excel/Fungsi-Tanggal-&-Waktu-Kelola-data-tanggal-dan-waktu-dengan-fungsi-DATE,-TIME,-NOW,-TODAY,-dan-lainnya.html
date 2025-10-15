@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fungsi Teks Excel - Panduan Manipulasi Teks Lengkap | Excel Master</title>
-    <meta name="description" content="Pelajari manipulasi dan pengolahan teks dengan fungsi-fungsi teks Excel seperti LEFT, RIGHT, MID, CONCATENATE. Tutorial lengkap untuk pemula hingga mahir.">
-    <meta name="keywords" content="fungsi teks excel, left right mid, concatenate excel, text manipulation, tutorial excel, rumus teks">
+    <title>Fungsi Tanggal & Waktu Excel - Panduan Lengkap | Excel Master</title>
+    <meta name="description" content="Pelajari cara mengelola data tanggal dan waktu dengan fungsi DATE, TIME, NOW, TODAY, dan lainnya. Tutorial lengkap untuk pemula hingga mahir.">
+    <meta name="keywords" content="fungsi tanggal excel, fungsi waktu excel, date time excel, now today, datedif, tutorial excel">
     <meta name="author" content="Excel Master">
     <style>
         /* Reset dan Base Styles */
@@ -272,8 +272,8 @@
             border-left: 3px solid #217346;
         }
         
-        /* Text Manipulation Demo */
-        .text-demo {
+        /* Date Demo */
+        .date-demo {
             background: #f8f9fa;
             border-radius: 8px;
             padding: 20px;
@@ -294,6 +294,47 @@
             padding: 15px;
             border-radius: 5px;
             border-left: 4px solid #4caf50;
+        }
+        
+        /* Calendar Visualization */
+        .calendar-demo {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #217346;
+            font-weight: bold;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            padding: 10px;
+            text-align: center;
+            border-radius: 3px;
+            background: #f8f9fa;
+        }
+        
+        .calendar-day.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .calendar-day.today {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            font-weight: bold;
         }
         
         /* Practice Section */
@@ -700,6 +741,11 @@
             .formula-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -746,27 +792,27 @@
             <div class="content">
                 <article>
                     <div class="article-header">
-                        <h1>Fungsi Teks Excel: Panduan Lengkap Manipulasi Teks</h1>
+                        <h1>Fungsi Tanggal & Waktu Excel: Panduan Lengkap</h1>
                         <div class="article-meta">
-                            <span>20 Juni 2023</span>
-                            <span>12.8K Dilihat</span>
-                            <span>25 menit membaca</span>
-                            <span>Excel, Fungsi Teks, LEFT RIGHT MID, CONCATENATE</span>
+                            <span>25 Juni 2023</span>
+                            <span>18.5K Dilihat</span>
+                            <span>28 menit membaca</span>
+                            <span>Excel, Tanggal, Waktu, DATE, NOW, TODAY</span>
                         </div>
                     </div>
                     
                     <div class="article-body">
-                        <p>Fungsi teks di Excel adalah alat yang sangat powerful untuk memanipulasi, mengolah, dan mengubah format teks. Dengan menguasai fungsi-fungsi ini, Anda dapat membersihkan data, menggabungkan informasi, dan mengekstrak bagian tertentu dari teks dengan mudah.</p>
+                        <p>Fungsi tanggal dan waktu di Excel adalah alat essential untuk mengelola data temporal, menghitung durasi, membuat jadwal, dan melakukan analisis berbasis waktu. Dengan menguasai fungsi-fungsi ini, Anda dapat mengotomatisasi banyak tugas yang berkaitan dengan waktu.</p>
                         
                         <div class="note">
-                            <strong>Fakta Menarik:</strong> 68% pekerja kantoran menghabiskan waktu untuk memanipulasi data teks secara manual yang sebenarnya bisa diotomatisasi dengan fungsi teks Excel.
+                            <strong>Fakta Penting:</strong> Excel menyimpan tanggal sebagai angka serial, dimana 1 = 1 Januari 1900. Ini memungkinkan perhitungan matematika pada tanggal.
                         </div>
                         
-                        <h2>1. Fungsi Ekstraksi Teks Dasar</h2>
+                        <h2>1. Fungsi Tanggal & Waktu Dasar</h2>
                         
                         <div class="formula-section">
                             <div class="formula-header">
-                                <h3>LEFT, RIGHT, MID - Mengambil Bagian Teks</h3>
+                                <h3>Fungsi Pembuat Tanggal dan Waktu</h3>
                             </div>
                             
                             <table class="formula-table">
@@ -780,68 +826,98 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><code>LEFT</code></td>
-                                        <td>Mengambil karakter dari kiri</td>
-                                        <td><code>=LEFT(teks, jumlah_karakter)</code></td>
-                                        <td><code>=LEFT("Excel", 2)</code> → "Ex"</td>
+                                        <td><code>DATE</code></td>
+                                        <td>Membuat tanggal dari tahun, bulan, hari</td>
+                                        <td><code>=DATE(tahun, bulan, hari)</code></td>
+                                        <td><code>=DATE(2023, 6, 25)</code> → 25/06/2023</td>
                                     </tr>
                                     <tr>
-                                        <td><code>RIGHT</code></td>
-                                        <td>Mengambil karakter dari kanan</td>
-                                        <td><code>=RIGHT(teks, jumlah_karakter)</code></td>
-                                        <td><code>=RIGHT("Excel", 3)</code> → "cel"</td>
+                                        <td><code>TIME</code></td>
+                                        <td>Membuat waktu dari jam, menit, detik</td>
+                                        <td><code>=TIME(jam, menit, detik)</code></td>
+                                        <td><code>=TIME(14, 30, 0)</code> → 14:30</td>
                                     </tr>
                                     <tr>
-                                        <td><code>MID</code></td>
-                                        <td>Mengambil karakter dari tengah</td>
-                                        <td><code>=MID(teks, start_num, jumlah_karakter)</code></td>
-                                        <td><code>=MID("Excel", 2, 3)</code> → "xce"</td>
+                                        <td><code>NOW</code></td>
+                                        <td>Tanggal dan waktu saat ini</td>
+                                        <td><code>=NOW()</code></td>
+                                        <td><code>=NOW()</code> → 25/06/2023 14:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>TODAY</code></td>
+                                        <td>Tanggal hari ini</td>
+                                        <td><code>=TODAY()</code></td>
+                                        <td><code>=TODAY()</code> → 25/06/2023</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <div class="text-demo">
-                            <h4>Demo: Ekstraksi Nama dari Email</h4>
-                            <div class="demo-input">
-                                <strong>Input:</strong> "john.doe@company.com"
-                            </div>
-                            <div class="formula-example">
-                                =LEFT(A1, FIND("@", A1)-1)  // Hasil: "john.doe"<br>
-                                =SUBSTITUTE(LEFT(A1, FIND("@", A1)-1), ".", " ")  // Hasil: "john doe"
+                        <div class="calendar-demo">
+                            <div class="calendar-header">Kalender Bulan Ini</div>
+                            <div class="calendar-grid">
+                                <div class="calendar-day header">Min</div>
+                                <div class="calendar-day header">Sen</div>
+                                <div class="calendar-day header">Sel</div>
+                                <div class="calendar-day header">Rab</div>
+                                <div class="calendar-day header">Kam</div>
+                                <div class="calendar-day header">Jum</div>
+                                <div class="calendar-day header">Sab</div>
+                                <div class="calendar-day">25</div>
+                                <div class="calendar-day">26</div>
+                                <div class="calendar-day">27</div>
+                                <div class="calendar-day">28</div>
+                                <div class="calendar-day">29</div>
+                                <div class="calendar-day">30</div>
+                                <div class="calendar-day today">1</div>
+                                <div class="calendar-day">2</div>
+                                <div class="calendar-day">3</div>
+                                <div class="calendar-day">4</div>
+                                <div class="calendar-day">5</div>
+                                <div class="calendar-day">6</div>
+                                <div class="calendar-day">7</div>
+                                <div class="calendar-day">8</div>
                             </div>
                         </div>
                         
-                        <h2>2. Fungsi Penggabungan dan Pemotongan Teks</h2>
+                        <h2>2. Fungsi Ekstraksi Komponen Tanggal & Waktu</h2>
                         
                         <div class="formula-grid">
                             <div class="formula-card">
-                                <h3>CONCATENATE <span class="difficulty beginner">Pemula</span></h3>
-                                <p>Menggabungkan beberapa teks menjadi satu.</p>
-                                <div class="formula-syntax">=CONCATENATE(teks1, teks2, ...)</div>
-                                <p><strong>Contoh:</strong> <code>=CONCATENATE("Nama: ", A1)</code> menggabungkan "Nama: " dengan isi sel A1.</p>
+                                <h3>YEAR, MONTH, DAY <span class="difficulty beginner">Pemula</span></h3>
+                                <p>Mengambil tahun, bulan, atau hari dari tanggal.</p>
+                                <div class="formula-syntax">
+                                    =YEAR(tanggal)<br>
+                                    =MONTH(tanggal)<br>
+                                    =DAY(tanggal)
+                                </div>
+                                <p><strong>Contoh:</strong> <code>=YEAR("25/06/2023")</code> → 2023</p>
                             </div>
                             
                             <div class="formula-card">
-                                <h3>CONCAT <span class="difficulty beginner">Pemula</span></h3>
-                                <p>Versi modern dari CONCATENATE (Excel 2016+).</p>
-                                <div class="formula-syntax">=CONCAT(teks1, teks2, ...)</div>
-                                <p><strong>Contoh:</strong> <code>=CONCAT(A1, " ", B1)</code> menggabungkan A1, spasi, dan B1.</p>
+                                <h3>HOUR, MINUTE, SECOND <span class="difficulty beginner">Pemula</span></h3>
+                                <p>Mengambil jam, menit, atau detik dari waktu.</p>
+                                <div class="formula-syntax">
+                                    =HOUR(waktu)<br>
+                                    =MINUTE(waktu)<br>
+                                    =SECOND(waktu)
+                                </div>
+                                <p><strong>Contoh:</strong> <code>=HOUR("14:30:25")</code> → 14</p>
                             </div>
                             
                             <div class="formula-card">
-                                <h3>TEXTJOIN <span class="difficulty intermediate">Menengah</span></h3>
-                                <p>Menggabungkan teks dengan pemisah yang bisa ditentukan.</p>
-                                <div class="formula-syntax">=TEXTJOIN(pemisah, ignore_empty, teks1, teks2, ...)</div>
-                                <p><strong>Contoh:</strong> <code>=TEXTJOIN(", ", TRUE, A1:A10)</code> menggabungkan range dengan koma.</p>
+                                <h3>WEEKDAY <span class="difficulty intermediate">Menengah</span></h3>
+                                <p>Menentukan hari dalam seminggu (1=Minggu, 7=Sabtu).</p>
+                                <div class="formula-syntax">=WEEKDAY(tanggal, [type])</div>
+                                <p><strong>Contoh:</strong> <code>=WEEKDAY("25/06/2023", 2)</code> → 1 (Senin)</p>
                             </div>
                         </div>
                         
-                        <h2>3. Fungsi Pencarian dan Penggantian</h2>
+                        <h2>3. Fungsi Perhitungan Tanggal</h2>
                         
                         <div class="formula-section">
                             <div class="formula-header">
-                                <h3>FIND, SEARCH, SUBSTITUTE, REPLACE</h3>
+                                <h3>Fungsi untuk Kalkulasi Tanggal</h3>
                             </div>
                             
                             <table class="formula-table">
@@ -849,128 +925,140 @@
                                     <tr>
                                         <th>Fungsi</th>
                                         <th>Deskripsi</th>
-                                        <th>Perbedaan</th>
+                                        <th>Syntax</th>
                                         <th>Contoh</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><code>FIND</code></td>
-                                        <td>Mencari posisi teks (case-sensitive)</td>
-                                        <td>Membedakan huruf besar/kecil</td>
-                                        <td><code>=FIND("E", "Excel")</code> → 1</td>
+                                        <td><code>DATEDIF</code></td>
+                                        <td>Menghitung selisih antara dua tanggal</td>
+                                        <td><code>=DATEDIF(start_date, end_date, unit)</code></td>
+                                        <td><code>=DATEDIF(A1,B1,"D")</code> → selisih hari</td>
                                     </tr>
                                     <tr>
-                                        <td><code>SEARCH</code></td>
-                                        <td>Mencari posisi teks (non case-sensitive)</td>
-                                        <td>Tidak bedakan huruf besar/kecil</td>
-                                        <td><code>=SEARCH("e", "Excel")</code> → 4</td>
+                                        <td><code>EDATE</code></td>
+                                        <td>Tanggal setelah sejumlah bulan</td>
+                                        <td><code>=EDATE(start_date, months)</code></td>
+                                        <td><code>=EDATE("25/06/2023", 3)</code> → 25/09/2023</td>
                                     </tr>
                                     <tr>
-                                        <td><code>SUBSTITUTE</code></td>
-                                        <td>Mengganti teks tertentu</td>
-                                        <td>Berdasarkan konten teks</td>
-                                        <td><code>=SUBSTITUTE("Hello", "l", "x")</code> → "Hexxo"</td>
+                                        <td><code>EOMONTH</code></td>
+                                        <td>Tanggal terakhir bulan setelah sejumlah bulan</td>
+                                        <td><code>=EOMONTH(start_date, months)</code></td>
+                                        <td><code>=EOMONTH("25/06/2023", 0)</code> → 30/06/2023</td>
                                     </tr>
                                     <tr>
-                                        <td><code>REPLACE</code></td>
-                                        <td>Mengganti teks berdasarkan posisi</td>
-                                        <td>Berdasarkan posisi karakter</td>
-                                        <td><code>=REPLACE("Excel", 1, 1, "M")</code> → "Mxcel"</td>
+                                        <td><code>WORKDAY</code></td>
+                                        <td>Tanggal kerja setelah sejumlah hari</td>
+                                        <td><code>=WORKDAY(start_date, days, [holidays])</code></td>
+                                        <td><code>=WORKDAY("25/06/2023", 5)</code> → 02/07/2023</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <h2>4. Fungsi Format dan Cleaning Teks</h2>
-                        
-                        <div class="formula-grid">
-                            <div class="formula-card">
-                                <h3>TRIM <span class="difficulty beginner">Pemula</span></h3>
-                                <p>Menghapus spasi berlebih dari teks.</p>
-                                <div class="formula-syntax">=TRIM(teks)</div>
-                                <p><strong>Contoh:</strong> <code>=TRIM("  Excel  ")</code> → "Excel"</p>
-                            </div>
-                            
-                            <div class="formula-card">
-                                <h3>UPPER, LOWER, PROPER <span class="difficulty beginner">Pemula</span></h3>
-                                <p>Mengubah kapitalisasi teks.</p>
-                                <div class="formula-syntax">
-                                    =UPPER(teks)  // Huruf besar semua<br>
-                                    =LOWER(teks)  // Huruf kecil semua<br>
-                                    =PROPER(teks) // Huruf besar setiap kata
-                                </div>
-                                <p><strong>Contoh:</strong> <code>=PROPER("john doe")</code> → "John Doe"</p>
-                            </div>
-                            
-                            <div class="formula-card">
-                                <h3>LEN <span class="difficulty beginner">Pemula</span></h3>
-                                <p>Menghitung jumlah karakter dalam teks.</p>
-                                <div class="formula-syntax">=LEN(teks)</div>
-                                <p><strong>Contoh:</strong> <code>=LEN("Excel")</code> → 5</p>
-                            </div>
-                        </div>
-                        
-                        <h2>5. Contoh Praktis Manipulasi Data</h2>
+                        <h2>4. Contoh Praktis Penggunaan</h2>
                         
                         <div class="practice-section">
-                            <h3>Contoh 1: Memisahkan Nama Depan dan Belakang</h3>
+                            <h3>Contoh 1: Menghitung Usia</h3>
                             <div class="exercise">
-                                <p><strong>Data:</strong> "John Doe" di sel A1</p>
+                                <p><strong>Data:</strong> Tanggal lahir "15/03/1990" di sel A1</p>
                                 <div class="formula-example">
-                                    // Nama Depan<br>
-                                    =LEFT(A1, FIND(" ", A1)-1)  // "John"<br><br>
-                                    // Nama Belakang<br>
-                                    =RIGHT(A1, LEN(A1)-FIND(" ", A1))  // "Doe"
+                                    =DATEDIF(A1, TODAY(), "Y") & " tahun, " &<br>
+                                    DATEDIF(A1, TODAY(), "YM") & " bulan, " &<br>
+                                    DATEDIF(A1, TODAY(), "MD") & " hari"
+                                </div>
+                                <div class="demo-result">
+                                    <strong>Hasil:</strong> "33 tahun, 3 bulan, 10 hari"
                                 </div>
                             </div>
                             
-                            <h3>Contoh 2: Format Nomor Telepon</h3>
+                            <h3>Contoh 2: Menghitung Jatuh Tempo</h3>
                             <div class="exercise">
-                                <p><strong>Data:</strong> "08123456789" di sel A1</p>
+                                <p><strong>Data:</strong> Tanggal invoice "20/06/2023" di sel A1, Term 30 hari</p>
                                 <div class="formula-example">
-                                    =CONCATENATE("(", LEFT(A1,3), ") ", MID(A1,4,3), "-", MID(A1,7,4))<br>
-                                    // Hasil: "(081) 234-56789"
+                                    =WORKDAY(A1, 30)  // Jatuh tempo 30 hari kerja<br>
+                                    =A1 + 30         // Jatuh tempo 30 hari kalender
                                 </div>
                             </div>
                             
-                            <h3>Contoh 3: Cleaning Data Alamat</h3>
+                            <h3>Contoh 3: Analisis Data Penjualan Bulanan</h3>
                             <div class="exercise">
-                                <p><strong>Data:</strong> "  jl. merdeka no. 123  "</p>
+                                <p><strong>Data:</strong> Tanggal transaksi di kolom A, Jumlah di kolom B</p>
                                 <div class="formula-example">
-                                    =PROPER(TRIM(A1))  // "Jl. Merdeka No. 123"
+                                    // Total penjualan bulan ini<br>
+                                    =SUMIFS(B:B, A:A, ">="&EOMONTH(TODAY(),-1)+1, A:A, "<="&EOMONTH(TODAY(),0))<br><br>
+                                    // Rata-rata harian bulan ini<br>
+                                    =AVERAGEIFS(B:B, A:A, ">="&EOMONTH(TODAY(),-1)+1, A:A, "<="&EOMONTH(TODAY(),0))
                                 </div>
                             </div>
                         </div>
                         
                         <div class="tip">
-                            <strong>Pro Tip:</strong> Gunakan kombinasi fungsi teks untuk menyelesaikan masalah kompleks. Contoh: gabungkan FIND dengan LEFT untuk mengekstrak teks dinamis.
+                            <strong>Pro Tip:</strong> Gunakan EOMONTH untuk dengan mudah mendapatkan tanggal pertama atau terakhir bulan. EOMONTH(TODAY(),-1)+1 = tanggal pertama bulan ini.
                         </div>
                         
-                        <h2>6. Kombinasi Fungsi Teks yang Powerful</h2>
+                        <h2>5. Format Tanggal dan Waktu</h2>
+                        
+                        <div class="formula-grid">
+                            <div class="formula-card">
+                                <h3>TEXT Function</h3>
+                                <p>Mengubah tanggal menjadi teks dengan format tertentu.</p>
+                                <div class="formula-syntax">=TEXT(tanggal, "format")</div>
+                                <p><strong>Contoh:</strong> <code>=TEXT(TODAY(), "DDDD, D MMMM YYYY")</code> → "Minggu, 25 Juni 2023"</p>
+                            </div>
+                            
+                            <div class="formula-card">
+                                <h3>Format Cells</h3>
+                                <p>Format built-in Excel untuk tampilan tanggal.</p>
+                                <div class="formula-syntax">
+                                    dd/mm/yyyy → 25/06/2023<br>
+                                    dddd → Sunday<br>
+                                    mmmm yyyy → June 2023
+                                </div>
+                            </div>
+                            
+                            <div class="formula-card">
+                                <h3>DATEVALUE & TIMEVALUE</h3>
+                                <p>Mengubah teks menjadi nilai tanggal/waktu.</p>
+                                <div class="formula-syntax">
+                                    =DATEVALUE("25/06/2023")<br>
+                                    =TIMEVALUE("14:30:00")
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>6. Kombinasi Fungsi Tanggal yang Powerful</h2>
                         
                         <div class="formula-section">
                             <div class="formula-header">
-                                <h3>Formula Kombinasi untuk Kasus Nyata</h3>
+                                <h3>Formula Kombinasi untuk Kasus Kompleks</h3>
                             </div>
                             
-                            <div class="text-demo">
-                                <h4>Ekstrak Domain dari Email</h4>
+                            <div class="date-demo">
+                                <h4>Menghitung Umur Project</h4>
                                 <div class="demo-input">
-                                    <strong>Input:</strong> "user@company.co.id"
+                                    <strong>Data:</strong> Start Date: "01/01/2023", End Date: "31/12/2023"
                                 </div>
                                 <div class="formula-example">
-                                    =RIGHT(A1, LEN(A1)-FIND("@", A1))  // "company.co.id"
+                                    // Total hari project<br>
+                                    =DATEDIF(A1, A2, "D")  // 364 hari<br><br>
+                                    // Hari kerja project<br>
+                                    =NETWORKDAYS(A1, A2)  // 260 hari (approx)
                                 </div>
                             </div>
                             
-                            <div class="text-demo">
-                                <h4>Format Tanggal dari String</h4>
+                            <div class="date-demo">
+                                <h4>Membuat Timeline Otomatis</h4>
                                 <div class="demo-input">
-                                    <strong>Input:</strong> "20230620" (YYYYMMDD)
+                                    <strong>Data:</strong> Start Date: "01/07/2023", Duration: 90 hari
                                 </div>
                                 <div class="formula-example">
-                                    =DATE(LEFT(A1,4), MID(A1,5,2), RIGHT(A1,2))  // 20/06/2023
+                                    =A1  // Start: 01/07/2023<br>
+                                    =WORKDAY(A1, 30)  // Milestone 1: 11/08/2023<br>
+                                    =WORKDAY(A1, 60)  // Milestone 2: 22/09/2023<br>
+                                    =WORKDAY(A1, 90)  // Deadline: 03/11/2023
                                 </div>
                             </div>
                         </div>
@@ -978,12 +1066,13 @@
                         <h2>7. Common Mistakes dan Solusi</h2>
                         
                         <div class="warning">
-                            <h4>Kesalahan Umum dalam Fungsi Teks:</h4>
+                            <h4>Kesalahan Umum dalam Fungsi Tanggal & Waktu:</h4>
                             <ul>
-                                <li><strong>Lupa TRIM:</strong> Data memiliki spasi tak terlihat yang mengacaukan hasil</li>
-                                <li><strong>Case sensitivity:</strong> Menggunakan FIND padahal butuh SEARCH</li>
-                                <li><strong>Error #VALUE!:</strong> FIND/SEARCH tidak menemukan teks yang dicari</li>
-                                <li><strong>Number as text:</strong> Angka diperlakukan sebagai teks sehingga tidak bisa dihitung</li>
+                                <li><strong>Format regional:</strong> DD/MM/YYYY vs MM/DD/YYYY</li>
+                                <li><strong>DATEDIF hidden:</strong> Fungsi bekerja tapi tidak muncul di autocomplete</li>
+                                <li><strong>NOW() volatile:</strong> Nilai berubah setiap kalkulasi ulang</li>
+                                <li><strong>Date as text:</strong> Tanggal disimpan sebagai teks bukan nilai tanggal</li>
+                                <li><strong>Leap year:</strong> Perhitungan melompati tahun kabisat</li>
                             </ul>
                         </div>
                         
@@ -991,22 +1080,22 @@
                         
                         <div class="formula-grid">
                             <div class="formula-card">
-                                <h3>Validasi Data Input</h3>
-                                <p>Selalu gunakan TRIM dan proper case untuk konsistensi data.</p>
+                                <h3>Validasi Tanggal</h3>
+                                <p>Gunakan Data Validation untuk memastikan input tanggal valid.</p>
                             </div>
                             
                             <div class="formula-card">
-                                <h3>Error Handling</h3>
-                                <p>Gunakan IFERROR dengan fungsi teks untuk menghindari error.</p>
+                                <h3>Static Timestamps</h3>
+                                <p>Gunakan Ctrl+; untuk timestamp statis, NOW() untuk dinamis.</p>
                             </div>
                             
                             <div class="formula-card">
-                                <h3>Documentation</h3>
-                                <p>Buat kolom helper untuk setiap step manipulasi teks yang kompleks.</p>
+                                <h3>Holiday Calendar</h3>
+                                <p>Buat daftar hari libur untuk perhitungan WORKDAY yang akurat.</p>
                             </div>
                         </div>
                         
-                        <p>Dengan menguasai fungsi teks Excel, Anda dapat mengotomatisasi banyak tugas manipulasi data yang sebelumnya memakan waktu. Mulailah dengan fungsi dasar dan secara bertahap eksplorasi kombinasi yang lebih kompleks untuk menyelesaikan masalah data yang spesifik.</p>
+                        <p>Dengan menguasai fungsi tanggal dan waktu Excel, Anda dapat membuat sistem yang responsive terhadap waktu, mengotomatisasi laporan periodik, dan melakukan analisis tren temporal dengan presisi. Practice dengan data nyata untuk semakin mahir!</p>
                     </div>
                 </article>
                 
@@ -1022,10 +1111,10 @@
                             </div>
                         </div>
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rumus Matematika Excel">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fungsi Teks Excel">
                             <div class="related-item-content">
-                                <h3><a href="#">Rumus Matematika Excel</a></h3>
-                                <p>Kuasaikan rumus matematika dasar dan lanjutan untuk perhitungan dalam Excel.</p>
+                                <h3><a href="#">Fungsi Teks Excel</a></h3>
+                                <p>Manipulasi dan pengolahan teks dengan fungsi-fungsi teks Excel.</p>
                             </div>
                         </div>
                         <div class="related-item">
@@ -1040,7 +1129,7 @@
                 
                 <!-- Comments Section -->
                 <div class="comments-section">
-                    <h2>Komentar (24)</h2>
+                    <h2>Komentar (32)</h2>
                     
                     <div class="comment-form">
                         <h3>Tinggalkan Komentar</h3>
@@ -1064,26 +1153,26 @@
                     <div class="comment-list">
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Rina Wijaya</span>
-                                <span class="comment-date">21 Juni 2023</span>
+                                <span class="comment-author">Dewi Sartika</span>
+                                <span class="comment-date">26 Juni 2023</span>
                             </div>
-                            <p>Tutorial yang sangat praktis! Saya baru saja menggunakan kombinasi LEFT dan FIND untuk memisahkan kode produk dari deskripsi panjang. Sangat menghemat waktu!</p>
+                            <p>Sangat membantu! Saya baru saja menggunakan WORKDAY dan NETWORKDAYS untuk menghitung timeline project. Menghemat waktu perhitungan manual yang sebelumnya memakan waktu berjam-jam.</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
                                 <span class="comment-author">Admin</span>
-                                <span class="comment-date">21 Juni 2023</span>
+                                <span class="comment-date">26 Juni 2023</span>
                             </div>
-                            <p>Senang mendengarnya Rina! Kombinasi LEFT-FIND memang sangat powerful untuk ekstraksi teks. Apa ada tantangan khusus yang Anda hadapi?</p>
+                            <p>Senang mendengarnya Dewi! WORKDAY dan NETWORKDAYS memang sangat powerful untuk manajemen project. Apa ada tantangan khusus yang Anda hadapi?</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Ahmad Fauzi</span>
-                                <span class="comment-date">22 Juni 2023</span>
+                                <span class="comment-author">Rizki Pratama</span>
+                                <span class="comment-date">27 Juni 2023</span>
                             </div>
-                            <p>Bagaimana cara menangani data yang memiliki format tidak konsisten? Misalnya ada yang pakai titik, ada yang pakai strip sebagai pemisah?</p>
+                            <p>Bagaimana cara menangani perbedaan format tanggal antara Indonesia (DD/MM/YYYY) dan sistem yang menggunakan MM/DD/YYYY? Sering terjadi error dalam import data.</p>
                         </div>
                     </div>
                 </div>
@@ -1094,22 +1183,22 @@
                 <div class="widget">
                     <h3>Tutorial Populer</h3>
                     <ul class="popular-tutorials">
-                        <li><a href="#"><span>1</span> Fungsi Teks Excel</a></li>
+                        <li><a href="#"><span>1</span> Fungsi Tanggal & Waktu</a></li>
                         <li><a href="#"><span>2</span> Fungsi Logika Excel</a></li>
-                        <li><a href="#"><span>3</span> Rumus Matematika Excel</a></li>
-                        <li><a href="#"><span>4</span> Pivot Table Master</a></li>
-                        <li><a href="#"><span>5</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>3</span> Fungsi Teks Excel</a></li>
+                        <li><a href="#"><span>4</span> Rumus Matematika Excel</a></li>
+                        <li><a href="#"><span>5</span> Pivot Table Master</a></li>
                     </ul>
                 </div>
                 
                 <div class="widget">
-                    <h3>Kategori Fungsi Teks</h3>
+                    <h3>Kategori Fungsi Tanggal</h3>
                     <ul>
-                        <li><a href="#">Ekstraksi Teks (LEFT, RIGHT, MID)</a></li>
-                        <li><a href="#">Penggabungan Teks (CONCATENATE)</a></li>
-                        <li><a href="#">Pencarian Teks (FIND, SEARCH)</a></li>
-                        <li><a href="#">Pembersihan Teks (TRIM, CLEAN)</a></li>
-                        <li><a href="#">Format Teks (UPPER, LOWER, PROPER)</a></li>
+                        <li><a href="#">Fungsi Dasar (DATE, TIME, NOW)</a></li>
+                        <li><a href="#">Ekstraksi (YEAR, MONTH, DAY)</a></li>
+                        <li><a href="#">Perhitungan (DATEDIF, EDATE)</a></li>
+                        <li><a href="#">Hari Kerja (WORKDAY, NETWORKDAYS)</a></li>
+                        <li><a href="#">Format Tanggal (TEXT)</a></li>
                         <li><a href="#">Kombinasi Fungsi</a></li>
                     </ul>
                 </div>
@@ -1117,20 +1206,20 @@
                 <div class="widget tags-widget">
                     <h3>Tags Populer</h3>
                     <div class="tags">
-                        <a href="#">Fungsi Teks</a>
-                        <a href="#">LEFT RIGHT MID</a>
-                        <a href="#">CONCATENATE</a>
-                        <a href="#">Manipulasi Teks</a>
+                        <a href="#">Fungsi Tanggal</a>
+                        <a href="#">DATE TIME</a>
+                        <a href="#">NOW TODAY</a>
+                        <a href="#">DATEDIF</a>
                         <a href="#">Excel</a>
                         <a href="#">Tutorial</a>
-                        <a href="#">Data Cleaning</a>
-                        <a href="#">Text Functions</a>
+                        <a href="#">Workday</a>
+                        <a href="#">Networkdays</a>
                     </div>
                 </div>
                 
                 <div class="widget">
-                    <h3>Cheat Sheet Fungsi Teks</h3>
-                    <p>Download panduan lengkap fungsi teks Excel dalam format PDF.</p>
+                    <h3>Cheat Sheet Tanggal & Waktu</h3>
+                    <p>Download panduan lengkap fungsi tanggal Excel dalam format PDF.</p>
                     <button class="submit-btn" style="width: 100%; margin-top: 10px;">Download Gratis</button>
                 </div>
                 

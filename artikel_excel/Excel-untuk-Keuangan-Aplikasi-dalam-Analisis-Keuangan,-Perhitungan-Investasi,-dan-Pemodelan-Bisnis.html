@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel untuk Keuangan - Analisis Keuangan & Pemodelan Bisnis | Excel Tutorial</title>
+    <meta name="description" content="Pelajari aplikasi Excel dalam analisis keuangan, perhitungan investasi, dan pemodelan bisnis. Tutorial lengkap untuk profesional keuangan dan bisnis.">
+    <meta name="keywords" content="excel keuangan, analisis keuangan, financial modeling, investasi excel, npv irr, laporan keuangan">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Financial Styles */
+        .finance-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .finance-workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .workflow-step {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #217346;
+        }
+        
+        .workflow-number {
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .finance-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .finance-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #217346;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Financial Table Styles */
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .financial-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .financial-table td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-align: right;
+        }
+        
+        .financial-table .text-left {
+            text-align: left;
+        }
+        
+        .financial-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Formula Styles */
+        .formula-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .formula-keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        
+        .formula-argument {
+            color: #9cdcfe;
+        }
+        
+        .formula-text {
+            color: #ce9178;
+        }
+        
+        .formula-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        
+        .formula-number {
+            color: #b5cea8;
+        }
+        
+        /* Financial Model Preview */
+        .model-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .model-section {
+            margin-bottom: 25px;
+        }
+        
+        .model-header {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #217346;
+            border-left: 4px solid #217346;
+        }
+        
+        /* Cash Flow Visualization */
+        .cashflow-chart {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .chart-bar {
+            background: #217346;
+            height: 30px;
+            margin: 10px 0;
+            border-radius: 3px;
+            color: white;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        /* Financial Ratios */
+        .ratios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .ratio-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        /* Investment Analysis */
+        .investment-calc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .calc-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .finance-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .finance-workflow {
+                grid-template-columns: 1fr;
+            }
+            
+            .finance-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .ratios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .investment-calc {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Excel untuk Keuangan: Aplikasi dalam Analisis Keuangan, Perhitungan Investasi, dan Pemodelan Bisnis</h1>
+                        <div class="article-meta">
+                            <span>📅 20 Mei 2023</span>
+                            <span>👁️ 15.8K Dilihat</span>
+                            <span>⏱️ 25 menit membaca</span>
+                            <span>🏷️ Excel Keuangan, Analisis Finansial, Financial Modeling, Investasi, Laporan Keuangan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Excel adalah alat yang indispensable dalam dunia keuangan dan bisnis. Dengan penguasaan teknik Excel yang tepat, Anda dapat melakukan analisis keuangan yang mendalam, evaluasi investasi yang akurat, dan membangun model bisnis yang sophisticated untuk pengambilan keputusan yang lebih baik.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> 87% perusahaan Fortune 500 menggunakan Excel untuk analisis keuangan dan pemodelan bisnis, dengan average financial analyst menghabiskan 4-6 jam per hari bekerja dengan Excel.
+                        </div>
+                        
+                        <h2>1. Mengapa Excel untuk Keuangan?</h2>
+                        
+                        <div class="finance-benefits">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💰</div>
+                                <h4>Analisis Mendalam</h4>
+                                <p>Kemampuan melakukan analisis finansial yang kompleks</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📈</div>
+                                <h4>Pemodelan Bisnis</h4>
+                                <p>Membangun financial model untuk forecasting dan planning</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🎯</div>
+                                <h4>Pengambilan Keputusan</h4>
+                                <p>Data-driven decision making untuk strategi bisnis</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚡</div>
+                                <h4>Efisiensi Operasional</h4>
+                                <p>Otomatisasi proses keuangan dan reporting</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Fungsi Excel Penting untuk Keuangan</h2>
+                        
+                        <div class="finance-types">
+                            <div class="finance-card">
+                                <h4>Time Value of Money</h4>
+                                <p>Fungsi untuk perhitungan nilai waktu uang</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=NPV</span>(rate, value1, [value2], ...)<br>
+                                    <span class="formula-keyword">=IRR</span>(values, [guess])<br>
+                                    <span class="formula-keyword">=PMT</span>(rate, nper, pv, [fv], [type])<br>
+                                    <span class="formula-keyword">=FV</span>(rate, nper, pmt, [pv], [type])
+                                </div>
+                            </div>
+                            
+                            <div class="finance-card">
+                                <h4>Statistical Analysis</h4>
+                                <p>Fungsi untuk analisis statistik keuangan</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=AVERAGE</span>(number1, [number2], ...)<br>
+                                    <span class="formula-keyword">=STDEV.P</span>(number1, [number2], ...)<br>
+                                    <span class="formula-keyword">=CORREL</span>(array1, array2)<br>
+                                    <span class="formula-keyword">=FORECAST</span>(x, known_y's, known_x's)
+                                </div>
+                            </div>
+                            
+                            <div class="finance-card">
+                                <h4>Lookup & Reference</h4>
+                                <p>Fungsi untuk data retrieval dan analysis</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=VLOOKUP</span>(lookup_value, table_array, col_index_num, [range_lookup])<br>
+                                    <span class="formula-keyword">=INDEX</span>(array, row_num, [column_num])<br>
+                                    <span class="formula-keyword">=MATCH</span>(lookup_value, lookup_array, [match_type])<br>
+                                    <span class="formula-keyword">=OFFSET</span>(reference, rows, cols, [height], [width])
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Analisis Laporan Keuangan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Contoh: Income Statement Analysis</h4>
+                            
+                            <table class="financial-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>2022</th>
+                                        <th>2023</th>
+                                        <th>Growth</th>
+                                        <th>% of Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">Revenue</td>
+                                        <td>12,500,000</td>
+                                        <td>15,800,000</td>
+                                        <td>3,300,000</td>
+                                        <td>100.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">COGS</td>
+                                        <td>7,500,000</td>
+                                        <td>9,200,000</td>
+                                        <td>1,700,000</td>
+                                        <td>58.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Gross Profit</td>
+                                        <td>5,000,000</td>
+                                        <td>6,600,000</td>
+                                        <td>1,600,000</td>
+                                        <td>41.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Operating Expenses</td>
+                                        <td>3,200,000</td>
+                                        <td>3,800,000</td>
+                                        <td>600,000</td>
+                                        <td>24.1%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Operating Income</td>
+                                        <td>1,800,000</td>
+                                        <td>2,800,000</td>
+                                        <td>1,000,000</td>
+                                        <td>17.7%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Net Income</td>
+                                        <td>1,350,000</td>
+                                        <td>2,100,000</td>
+                                        <td>750,000</td>
+                                        <td>13.3%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="formula-box">
+                                <span class="formula-comment">// Formulas untuk analisis:</span><br>
+                                Growth: =C3-B3<br>
+                                % of Revenue: =C3/$C$3<br>
+                                Gross Margin: =1-(C4/C3)<br>
+                                Net Margin: =C7/C3
+                            </div>
+                        </div>
+                        
+                        <h2>4. Financial Ratios Analysis</h2>
+                        
+                        <div class="ratios-grid">
+                            <div class="ratio-card">
+                                <h4>Profitability Ratios</h4>
+                                <ul>
+                                    <li><strong>Gross Margin:</strong> =Gross Profit/Revenue</li>
+                                    <li><strong>Net Margin:</strong> =Net Income/Revenue</li>
+                                    <li><strong>ROA:</strong> =Net Income/Total Assets</li>
+                                    <li><strong>ROE:</strong> =Net Income/Shareholders' Equity</li>
+                                </ul>
+                                <div class="tip">
+                                    <strong>Interpretasi:</strong> Mengukur kemampuan perusahaan menghasilkan profit
+                                </div>
+                            </div>
+                            
+                            <div class="ratio-card">
+                                <h4>Liquidity Ratios</h4>
+                                <ul>
+                                    <li><strong>Current Ratio:</strong> =Current Assets/Current Liabilities</li>
+                                    <li><strong>Quick Ratio:</strong> =(Current Assets-Inventory)/Current Liabilities</li>
+                                    <li><strong>Cash Ratio:</strong> =Cash/Current Liabilities</li>
+                                </ul>
+                                <div class="tip">
+                                    <strong>Interpretasi:</strong> Mengukur kemampuan memenuhi kewajiban jangka pendek
+                                </div>
+                            </div>
+                            
+                            <div class="ratio-card">
+                                <h4>Leverage Ratios</h4>
+                                <ul>
+                                    <li><strong>Debt to Equity:</strong> =Total Debt/Total Equity</li>
+                                    <li><strong>Debt to Assets:</strong> =Total Debt/Total Assets</li>
+                                    <li><strong>Interest Coverage:</strong> =EBIT/Interest Expense</li>
+                                </ul>
+                                <div class="tip">
+                                    <strong>Interpretasi:</strong> Mengukur tingkat utang dan kemampuan bayar bunga
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>5. Analisis Investasi dengan NPV dan IRR</h2>
+                        
+                        <div class="example-box">
+                            <h4>Evaluasi Proyek Investasi</h4>
+                            
+                            <table class="financial-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tahun</th>
+                                        <th>Cash Flow</th>
+                                        <th>Discounted CF (10%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>(5,000,000)</td>
+                                        <td>(5,000,000)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1,500,000</td>
+                                        <td>1,363,636</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>1,800,000</td>
+                                        <td>1,487,603</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2,200,000</td>
+                                        <td>1,652,892</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>2,500,000</td>
+                                        <td>1,707,535</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>3,000,000</td>
+                                        <td>1,862,727</td>
+                                    </tr>
+                                    <tr style="font-weight: bold; background: #e8f5e9;">
+                                        <td>Total</td>
+                                        <td>6,000,000</td>
+                                        <td>3,074,393</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="investment-calc">
+                                <div class="calc-card">
+                                    <h4>NPV</h4>
+                                    <div class="formula-box" style="margin: 10px 0;">
+                                        =NPV(10%, B2:B6)+B1
+                                    </div>
+                                    <strong>Result: 3,074,393</strong>
+                                    <p style="margin-top: 10px; color: #4caf50;">✓ Project Accepted (NPV > 0)</p>
+                                </div>
+                                
+                                <div class="calc-card">
+                                    <h4>IRR</h4>
+                                    <div class="formula-box" style="margin: 10px 0;">
+                                        =IRR(B1:B6)
+                                    </div>
+                                    <strong>Result: 28.7%</strong>
+                                    <p style="margin-top: 10px; color: #4caf50;">✓ Project Accepted (IRR > 10%)</p>
+                                </div>
+                                
+                                <div class="calc-card">
+                                    <h4>Payback Period</h4>
+                                    <div class="formula-box" style="margin: 10px 0;">
+                                        =PERCENTRANK(E2:E6,0,6)*5
+                                    </div>
+                                    <strong>Result: 2.8 Years</strong>
+                                    <p style="margin-top: 10px; color: #4caf50;">✓ Acceptable Payback</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>6. Financial Modeling - 3 Statement Model</h2>
+                        
+                        <div class="model-preview">
+                            <div class="model-section">
+                                <div class="model-header">Income Statement Projection</div>
+                                <table class="financial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>2023</th>
+                                            <th>2024</th>
+                                            <th>2025</th>
+                                            <th>Assumption</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left">Revenue</td>
+                                            <td>15,800</td>
+                                            <td>18,960</td>
+                                            <td>22,752</td>
+                                            <td>Growth 20%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">COGS</td>
+                                            <td>9,200</td>
+                                            <td>11,040</td>
+                                            <td>13,248</td>
+                                            <td>58.2% of Revenue</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Gross Profit</td>
+                                            <td>6,600</td>
+                                            <td>7,920</td>
+                                            <td>9,504</td>
+                                            <td>41.8% Margin</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Operating Expenses</td>
+                                            <td>3,800</td>
+                                            <td>4,180</td>
+                                            <td>4,598</td>
+                                            <td>10% Growth</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">EBIT</td>
+                                            <td>2,800</td>
+                                            <td>3,740</td>
+                                            <td>4,906</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="model-section">
+                                <div class="model-header">Balance Sheet Projection</div>
+                                <table class="financial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>2023</th>
+                                            <th>2024</th>
+                                            <th>2025</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left">Cash</td>
+                                            <td>2,500</td>
+                                            <td>3,200</td>
+                                            <td>4,100</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Accounts Receivable</td>
+                                            <td>3,200</td>
+                                            <td>3,840</td>
+                                            <td>4,608</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Total Assets</td>
+                                            <td>18,000</td>
+                                            <td>21,600</td>
+                                            <td>25,920</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Total Liabilities</td>
+                                            <td>8,000</td>
+                                            <td>9,200</td>
+                                            <td>10,580</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">Equity</td>
+                                            <td>10,000</td>
+                                            <td>12,400</td>
+                                            <td>15,340</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <h2>7. Budgeting dan Forecasting</h2>
+                        
+                        <div class="cashflow-chart">
+                            <h4>Cash Flow Forecast</h4>
+                            
+                            <div class="chart-bar" style="width: 90%">
+                                <span>Operating Activities</span>
+                                <span>+2,800,000</span>
+                            </div>
+                            
+                            <div class="chart-bar" style="width: 60%">
+                                <span>Investing Activities</span>
+                                <span>-1,500,000</span>
+                            </div>
+                            
+                            <div class="chart-bar" style="width: 40%">
+                                <span>Financing Activities</span>
+                                <span>-800,000</span>
+                            </div>
+                            
+                            <div class="chart-bar" style="width: 70%; background: #4caf50;">
+                                <span>Net Cash Flow</span>
+                                <span>+500,000</span>
+                            </div>
+                            
+                            <div class="formula-box" style="margin-top: 15px;">
+                                <span class="formula-comment">// Cash Flow Formula:</span><br>
+                                Net Cash Flow = Operating + Investing + Financing<br>
+                                Ending Cash = Beginning Cash + Net Cash Flow
+                            </div>
+                        </div>
+                        
+                        <h2>8. Sensitivity Analysis dan Scenario Planning</h2>
+                        
+                        <div class="example-box">
+                            <h4>What-If Analysis dengan Data Tables</h4>
+                            
+                            <table class="financial-table">
+                                <thead>
+                                    <tr>
+                                        <th>Growth Rate</th>
+                                        <th>8% WACC</th>
+                                        <th>10% WACC</th>
+                                        <th>12% WACC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15%</td>
+                                        <td>2,150,000</td>
+                                        <td>1,850,000</td>
+                                        <td>1,600,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20%</td>
+                                        <td>3,074,393</td>
+                                        <td>2,650,000</td>
+                                        <td>2,300,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25%</td>
+                                        <td>4,200,000</td>
+                                        <td>3,600,000</td>
+                                        <td>3,100,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30%</td>
+                                        <td>5,500,000</td>
+                                        <td>4,700,000</td>
+                                        <td>4,000,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="step-by-step">
+                                <div class="step">
+                                    <h4>Data Table Setup</h4>
+                                    <p>Buat tabel dengan variabel input di row dan column</p>
+                                </div>
+                                
+                                <div class="step">
+                                    <h4>Select Data Table Range</h4>
+                                    <p>Pilih seluruh range tabel termasuk formula reference</p>
+                                </div>
+                                
+                                <div class="step">
+                                    <h4>Data → What-If Analysis → Data Table</h4>
+                                    <p>Isi row input cell dan column input cell</p>
+                                </div>
+                                
+                                <div class="step">
+                                    <h4>Analyze Results</h4>
+                                    <p>Interpretasi hasil sensitivity analysis</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>9. Best Practices Financial Modeling</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Best Practice</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh Implementasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Consistent Structure</strong></td>
+                                    <td>Gunakan layout yang konsisten di seluruh model</td>
+                                    <td>Inputs → Calculations → Outputs</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Clear Documentation</strong></td>
+                                    <td>Dokumentasikan assumptions dan formulas</td>
+                                    <td>Comments, documentation sheet</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Error Checking</strong></td>
+                                    <td>Implementasi error checks dan validation</td>
+                                    <td>Balance sheet checks, cash flow checks</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Flexible Scenarios</strong></td>
+                                    <td>Bangun model yang mudah di-adjust</td>
+                                    <td>Data validation, scenario manager</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sensitivity Analysis</strong></td>
+                                    <td>Sertakan what-if analysis</td>
+                                    <td>Data tables, goal seek</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>10. Studi Kasus: Business Valuation Model</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Bangun business valuation model untuk perusahaan manufacturing:</p>
+                            <ul>
+                                <li>Revenue projection 5 tahun dengan berbagai growth scenarios</li>
+                                <li>Discounted Cash Flow (DCF) valuation</li>
+                                <li>Comparable company analysis (comps)</li>
+                                <li>Precedent transactions analysis</li>
+                                <li>Sensitivity analysis untuk WACC dan terminal value</li>
+                                <li>Football field chart untuk summary valuation</li>
+                            </ul>
+                            
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Kumpulkan historical financial statements</li>
+                                <li>Bangun financial projections (income statement, balance sheet, cash flow)</li>
+                                <li>Hitung free cash flow to firm (FCFF)</li>
+                                <li>Tentukan WACC dan terminal growth rate</li>
+                                <li>Hitung DCF valuation</li>
+                                <li>Lakukan comparable analysis</li>
+                                <li>Buat sensitivity analysis dan summary</li>
+                            </ol>
+                        </div>
+                        
+                        <h2>11. Advanced Excel Techniques untuk Keuangan</h2>
+                        
+                        <div class="tip">
+                            <h4>💡 Advanced Financial Modeling Techniques</h4>
+                            <ul>
+                                <li><strong>Circular References:</strong> Handle iterative calculations untuk interest</li>
+                                <li><strong>Macros untuk Automation:</strong> Otomatisasi reporting rutin</li>
+                                <li><strong>Power Pivot untuk Large Data:</strong> Analisis dataset besar</li>
+                                <li><strong>Dynamic Ranges:</strong> Gunakan OFFSET dan INDEX untuk flexible models</li>
+                                <li><strong>Data Validation:</strong> Control input values dengan dropdowns</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning">
+                            <h4>⚠️ Common Financial Modeling Mistakes</h4>
+                            <ul>
+                                <li>Hard-coded numbers dalam formulas</li>
+                                <li>Tidak ada error checking</li>
+                                <li>Struktur model yang tidak konsisten</li>
+                                <li>Documentation yang tidak memadai</li>
+                                <li>Tidak melakukan sensitivity analysis</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Pro Tip:</strong> Selalu gunakan Excel's "Trace Precedents" dan "Trace Dependents" untuk audit financial models dan memastikan integrity calculations.
+                        </div>
+                        
+                        <p>Dengan penguasaan Excel untuk keuangan yang komprehensif, Anda dapat membangun financial models yang sophisticated, melakukan analisis investasi yang akurat, dan memberikan insights berharga untuk pengambilan keputusan bisnis yang strategic. Practice makes perfect - mulai dengan model sederhana dan secara bertahap bangun kompleksitas!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Financial Modeling">
+                            <div class="related-item-content">
+                                <h3><a href="#">Financial Modeling Excel</a></h3>
+                                <p>Teknik lanjutan membangun financial model yang robust dan accurate.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Business Intelligence">
+                            <div class="related-item-content">
+                                <h3><a href="#">Excel untuk Business Intelligence</a></h3>
+                                <p>Transformasi data menjadi insights bisnis yang actionable.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Keuangan">
+                            <div class="related-item-content">
+                                <h3><a href="#">Financial Dashboard Excel</a></h3>
+                                <p>Membuat dashboard keuangan interaktif untuk monitoring performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (34)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Ari Gunawan, CFA</span>
+                                <span class="comment-date">21 Mei 2023</span>
+                            </div>
+                            <p>Sebagai financial analyst di investment bank, saya menggunakan teknik-teknik ini setiap hari. Tutorial yang sangat komprehensif dan praktis! Penjelasan NPV dan IRR sangat membantu untuk investment appraisal.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">21 Mei 2023</span>
+                            </div>
+                            <p>Terima kasih Ari! Senang tutorial ini bermanfaat untuk profesional seperti Anda. Apa teknik Excel favorit Anda dalam analisis keuangan sehari-hari?</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Diana Sari</span>
+                                <span class="comment-date">22 Mei 2023</span>
+                            </div>
+                            <p>Bagaimana cara terbaik menangani circular references dalam financial modeling? Saya sering mengalami masalah ini saat modeling working capital.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Excel untuk Keuangan</a></li>
+                        <li><a href="#"><span>2</span> Financial Modeling</a></li>
+                        <li><a href="#"><span>3</span> Power Pivot & DAX</a></li>
+                        <li><a href="#"><span>4</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>5</span> Pivot Table Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Excel Keuangan</a></li>
+                        <li><a href="#">Financial Modeling</a></li>
+                        <li><a href="#">Business Intelligence</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Investment Analysis</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Excel Keuangan</a>
+                        <a href="#">Financial Analysis</a>
+                        <a href="#">NPV IRR</a>
+                        <a href="#">Financial Modeling</a>
+                        <a href="#">Investasi</a>
+                        <a href="#">Laporan Keuangan</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Tips Excel</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Excel Keuangan</a></li>
+                        <li><a href="#">Financial Modeling</a></li>
+                        <li><a href="#">Business Intelligence</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

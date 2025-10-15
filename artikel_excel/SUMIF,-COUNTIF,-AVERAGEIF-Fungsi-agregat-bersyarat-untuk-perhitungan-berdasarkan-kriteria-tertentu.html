@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUMIF COUNTIF AVERAGEIF Excel - Fungsi Agregat Bersyarat | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan SUMIF, COUNTIF, dan AVERAGEIF di Excel untuk perhitungan agregat berdasarkan kriteria tertentu. Tutorial lengkap untuk pemula hingga mahir.">
+    <meta name="keywords" content="sumif excel, countif excel, averageif excel, fungsi agregat bersyarat, excel conditional aggregate, tutorial excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Function Styles */
+        .function-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .function-workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .workflow-step {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #217346;
+        }
+        
+        .workflow-number {
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .function-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .function-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #217346;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Excel Table Styles */
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .excel-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .excel-table td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .excel-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Formula Styles */
+        .formula-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .formula-keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        
+        .formula-argument {
+            color: #9cdcfe;
+        }
+        
+        .formula-text {
+            color: #ce9178;
+        }
+        
+        .formula-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        
+        .formula-number {
+            color: #b5cea8;
+        }
+        
+        /* Highlighted cells for examples */
+        .criteria-cell {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            font-weight: bold;
+        }
+        
+        .result-cell {
+            background-color: #d1ecf1;
+            border: 2px solid #0c5460;
+            font-weight: bold;
+        }
+        
+        .sum-range {
+            background-color: #d4edda;
+            border: 2px solid #155724;
+        }
+        
+        .count-range {
+            background-color: #e2e3e5;
+            border: 2px solid #383d41;
+        }
+        
+        .average-range {
+            background-color: #cce7ff;
+            border: 2px solid #0066cc;
+        }
+        
+        /* Function Visualization */
+        .function-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .function-part {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #217346;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .function-operator {
+            font-size: 24px;
+            font-weight: bold;
+            color: #217346;
+        }
+        
+        /* Criteria Examples */
+        .criteria-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .criteria-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .function-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .function-workflow {
+                grid-template-columns: 1fr;
+            }
+            
+            .function-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .function-visual {
+                flex-direction: column;
+            }
+            
+            .criteria-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>SUMIF, COUNTIF, AVERAGEIF Excel: Fungsi Agregat Bersyarat</h1>
+                        <div class="article-meta">
+                            <span>📅 5 Mei 2023</span>
+                            <span>👁️ 14.7K Dilihat</span>
+                            <span>⏱️ 18 menit membaca</span>
+                            <span>🏷️ SUMIF, COUNTIF, AVERAGEIF, Fungsi Agregat, Excel Conditional</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>SUMIF, COUNTIF, dan AVERAGEIF adalah fungsi agregat bersyarat di Excel yang memungkinkan Anda melakukan perhitungan berdasarkan kriteria tertentu. Fungsi-fungsi ini sangat powerful untuk analisis data yang membutuhkan filtering berdasarkan kondisi spesifik.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> Penggunaan fungsi agregat bersyarat dapat mengurangi kebutuhan untuk filter manual hingga 70% dan membuat analisis data lebih otomatis.
+                        </div>
+                        
+                        <h2>1. Mengapa Menggunakan Fungsi Agregat Bersyarat?</h2>
+                        
+                        <div class="function-benefits">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🎯</div>
+                                <h4>Analisis Target</h4>
+                                <p>Fokus pada data yang memenuhi kriteria tertentu</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚡</div>
+                                <h4>Otomatisasi</h4>
+                                <p>Hindari filter manual yang memakan waktu</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📊</div>
+                                <h4>Dashboard Dinamis</h4>
+                                <p>Buat laporan yang update otomatis</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Memahami Fungsi Dasar</h2>
+                        
+                        <div class="function-types">
+                            <div class="function-card">
+                                <h4>Fungsi SUMIF</h4>
+                                <p>Menjumlahkan nilai yang memenuhi kriteria tertentu</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=SUMIF</span>(<span class="formula-argument">range, criteria, [sum_range]</span>)
+                                </div>
+                                <ul>
+                                    <li><strong>range:</strong> Range untuk evaluasi kriteria</li>
+                                    <li><strong>criteria:</strong> Kondisi yang harus dipenuhi</li>
+                                    <li><strong>sum_range:</strong> Range yang akan dijumlahkan (opsional)</li>
+                                </ul>
+                            </div>
+                            <div class="function-card">
+                                <h4>Fungsi COUNTIF</h4>
+                                <p>Menghitung jumlah sel yang memenuhi kriteria</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=COUNTIF</span>(<span class="formula-argument">range, criteria</span>)
+                                </div>
+                                <ul>
+                                    <li><strong>range:</strong> Range untuk evaluasi kriteria</li>
+                                    <li><strong>criteria:</strong> Kondisi yang harus dipenuhi</li>
+                                </ul>
+                            </div>
+                            <div class="function-card">
+                                <h4>Fungsi AVERAGEIF</h4>
+                                <p>Menghitung rata-rata nilai yang memenuhi kriteria</p>
+                                <div class="formula-box">
+                                    <span class="formula-keyword">=AVERAGEIF</span>(<span class="formula-argument">range, criteria, [average_range]</span>)
+                                </div>
+                                <ul>
+                                    <li><strong>range:</strong> Range untuk evaluasi kriteria</li>
+                                    <li><strong>criteria:</strong> Kondisi yang harus dipenuhi</li>
+                                    <li><strong>average_range:</strong> Range untuk rata-rata (opsional)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Contoh 1: SUMIF - Penjualan per Kategori</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Penjualan Produk</h4>
+                            <p>Hitung total penjualan untuk setiap kategori:</p>
+                            
+                            <table class="excel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Produk</th>
+                                        <th>Kategori</th>
+                                        <th>Penjualan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Laptop ASUS</td>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="sum-range">12,500,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mouse Wireless</td>
+                                        <td>Aksesoris</td>
+                                        <td>350,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monitor 24"</td>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="sum-range">2,800,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Keyboard Mechanical</td>
+                                        <td>Aksesoris</td>
+                                        <td>850,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smartphone</td>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="sum-range">8,200,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="formula-box">
+                                <span class="formula-comment">// Total penjualan kategori Elektronik</span><br>
+                                =<span class="formula-keyword">SUMIF</span>(B2:B6, <span class="formula-text">"Elektronik"</span>, C2:C6)
+                            </div>
+                            
+                            <div class="result-cell" style="padding: 10px; margin: 10px 0; text-align: center;">
+                                <strong>Hasil: 23,500,000</strong>
+                            </div>
+                            
+                            <div class="step-by-step">
+                                <div class="step">
+                                    <h4>Evaluasi Kriteria</h4>
+                                    <p>Periksa setiap sel di B2:B6 apakah sama dengan "Elektronik"</p>
+                                </div>
+                                
+                                <div class="step">
+                                    <h4>Jumlahkan Nilai yang Sesuai</h4>
+                                    <p>Jumlahkan nilai di C2:C6 untuk baris yang memenuhi kriteria</p>
+                                </div>
+                                
+                                <div class="step">
+                                    <h4>Hasil</h4>
+                                    <p>12,500,000 + 2,800,000 + 8,200,000 = 23,500,000</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>4. Contoh 2: COUNTIF - Hitung Produk per Kategori</h2>
+                        
+                        <div class="example-box">
+                            <h4>Hitung Jumlah Produk per Kategori</h4>
+                            <p>Gunakan COUNTIF untuk menghitung frekuensi kategori:</p>
+                            
+                            <table class="excel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th>Jumlah Produk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="result-cell">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aksesoris</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="formula-box">
+                                <span class="formula-comment">// Hitung produk kategori Elektronik</span><br>
+                                =<span class="formula-keyword">COUNTIF</span>(B2:B6, <span class="formula-text">"Elektronik"</span>)
+                            </div>
+                        </div>
+                        
+                        <h2>5. Contoh 3: AVERAGEIF - Rata-rata Penjualan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Rata-rata Penjualan per Kategori</h4>
+                            <p>Hitung rata-rata penjualan untuk kategori tertentu:</p>
+                            
+                            <table class="excel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th>Rata-rata Penjualan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="result-cell">7,833,333</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aksesoris</td>
+                                        <td>600,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="formula-box">
+                                <span class="formula-comment">// Rata-rata penjualan kategori Elektronik</span><br>
+                                =<span class="formula-keyword">AVERAGEIF</span>(B2:B6, <span class="formula-text">"Elektronik"</span>, C2:C6)
+                            </div>
+                        </div>
+                        
+                        <h2>6. Jenis-jenis Kriteria yang Dapat Digunakan</h2>
+                        
+                        <div class="criteria-examples">
+                            <div class="criteria-card">
+                                <h4>Kriteria Teks</h4>
+                                <div class="formula-box">
+                                    =<span class="formula-keyword">SUMIF</span>(A:A, <span class="formula-text">"Jakarta"</span>, B:B)<br>
+                                    =<span class="formula-keyword">COUNTIF</span>(A:A, <span class="formula-text">"*Timur"</span>)<br>
+                                    =<span class="formula-keyword">AVERAGEIF</span>(A:A, <span class="formula-text">"<>Completed"</span>, B:B)
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <h4>Kriteria Angka</h4>
+                                <div class="formula-box">
+                                    =<span class="formula-keyword">SUMIF</span>(B:B, <span class="formula-number">">1000"</span>)<br>
+                                    =<span class="formula-keyword">COUNTIF</span>(B:B, <span class="formula-number">50</span>)<br>
+                                    =<span class="formula-keyword">AVERAGEIF</span>(B:B, <span class="formula-number">"<=500"</span>)
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <h4>Kriteria Tanggal</h4>
+                                <div class="formula-box">
+                                    =<span class="formula-keyword">SUMIF</span>(A:A, <span class="formula-text">">="&DATE(2023,1,1)</span>, B:B)<br>
+                                    =<span class="formula-keyword">COUNTIF</span>(A:A, <span class="formula-text">"<"&TODAY()</span>)<br>
+                                    =<span class="formula-keyword">AVERAGEIF</span>(A:A, <span class="formula-text">"Q1"</span>, B:B)
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <h4>Kriteria Sel Reference</h4>
+                                <div class="formula-box">
+                                    =<span class="formula-keyword">SUMIF</span>(A:A, D2, B:B)<br>
+                                    =<span class="formula-keyword">COUNTIF</span>(A:A, <span class="formula-text">">"&E2</span>)<br>
+                                    =<span class="formula-keyword">AVERAGEIF</span>(A:A, <span class="formula-text">"*"&F2&"*"</span>, B:B)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>7. Wildcards dalam Kriteria</h2>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Wildcard</th>
+                                    <th>Deskripsi</th>
+                                    <th>Contoh</th>
+                                    <th>Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>*</strong></td>
+                                    <td>Karakter apa saja (nol atau lebih)</td>
+                                    <td>"*Timur"</td>
+                                    <td>Jakarta Timur, Surabaya Timur</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>?</strong></td>
+                                    <td>Satu karakter apa saja</td>
+                                    <td>"Kota ?"</td>
+                                    <td>Kota A, Kota B</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>~</strong></td>
+                                    <td>Escape character</td>
+                                    <td>"~*"</td>
+                                    <td>Tanda * literal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>8. SUMIFS, COUNTIFS, AVERAGEIFS (Multiple Criteria)</h2>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Multiple Criteria dengan SUMIFS</h4>
+                            <p>Hitung total penjualan untuk kategori Elektronik di bulan Januari:</p>
+                            
+                            <table class="excel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Kategori</th>
+                                        <th>Penjualan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15-Jan-2023</td>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td class="sum-range">12,500,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20-Feb-2023</td>
+                                        <td class="criteria-cell">Elektronik</td>
+                                        <td>8,200,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10-Jan-2023</td>
+                                        <td>Aksesoris</td>
+                                        <td>350,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="formula-box">
+                                =<span class="formula-keyword">SUMIFS</span>(C2:C4, B2:B4, <span class="formula-text">"Elektronik"</span>, A2:A4, <span class="formula-text">">=1/1/2023"</span>, A2:A4, <span class="formula-text">"<=1/31/2023"</span>)
+                            </div>
+                            
+                            <div class="result-cell" style="padding: 10px; margin: 10px 0; text-align: center;">
+                                <strong>Hasil: 12,500,000</strong>
+                            </div>
+                        </div>
+                        
+                        <h2>9. Tips dan Best Practices</h2>
+                        
+                        <div class="tip">
+                            <h4>💡 Tip 1: Gunakan Absolute References</h4>
+                            <p>Selalu gunakan reference absolut untuk range agar tidak berubah saat di-copy:</p>
+                            <div class="formula-box">
+                                =<span class="formula-keyword">SUMIF</span>($B$2:$B$100, D2, $C$2:$C$100)
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <h4>💡 Tip 2: Handle Errors dengan IFERROR</h4>
+                            <p>Gunakan IFERROR untuk menangani kasus tidak ada data yang memenuhi kriteria:</p>
+                            <div class="formula-box">
+                                =<span class="formula-keyword">IFERROR</span>(<span class="formula-keyword">AVERAGEIF</span>(B:B, D2, C:C), <span class="formula-text">"Tidak ada data"</span>)
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <h4>💡 Tip 3: Optimasi Performance</h4>
+                            <p>Gunakan range yang spesifik daripada seluruh kolom untuk performa yang lebih baik:</p>
+                            <div class="formula-box">
+                                <span class="formula-comment">// Lebih baik:</span><br>
+                                =<span class="formula-keyword">SUMIF</span>(B2:B1000, D2, C2:C1000)<br>
+                                <span class="formula-comment">// Kurang optimal:</span><br>
+                                =<span class="formula-keyword">SUMIF</span>(B:B, D2, C:C)
+                            </div>
+                        </div>
+                        
+                        <div class="warning">
+                            <h4>⚠️ Peringatan: Perhatikan Tipe Data</h4>
+                            <p>Pastikan tipe data di range kriteria sesuai dengan nilai yang dicari. Teks vs angka bisa memberikan hasil yang berbeda.</p>
+                        </div>
+                        
+                        <h2>10. Studi Kasus: Laporan Penjualan Bulanan</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Buat laporan penjualan bulanan dengan analisis menggunakan fungsi agregat bersyarat:</p>
+                            <ul>
+                                <li>Total penjualan per salesperson</li>
+                                <li>Jumlah transaksi per kategori produk</li>
+                                <li>Rata-rata nilai transaksi per region</li>
+                                <li>Penjualan di atas target</li>
+                                <li>Trend penjualan bulan berjalan vs bulan sebelumnya</li>
+                            </ul>
+                            
+                            <p><strong>Langkah-langkah:</strong></p>
+                            <ol>
+                                <li>Siapkan dataset penjualan dengan minimal 500 baris</li>
+                                <li>Buat summary report menggunakan SUMIF, COUNTIF, AVERAGEIF</li>
+                                <li>Implementasikan multiple criteria dengan SUMIFS, COUNTIFS</li>
+                                <li>Buat dashboard dengan dropdown untuk filter dinamis</li>
+                                <li>Tambahkan conditional formatting untuk highlight performa</li>
+                                <li>Test dengan berbagai skenario kriteria</li>
+                            </ol>
+                        </div>
+                        
+                        <h2>11. Troubleshooting Common Issues</h2>
+                        
+                        <div class="example-box">
+                            <h4>Masalah Umum dan Solusinya</h4>
+                            <ul>
+                                <li><strong>Hasil 0 padahal seharusnya ada data:</strong> Periksa tipe data dan format kriteria</li>
+                                <li><strong>#VALUE! Error:</strong> Kemungkinan ada teks dalam range angka</li>
+                                <li><strong>Hasil tidak akurat:</strong> Pastikan tidak ada trailing spaces di data</li>
+                                <li><strong>Performance lambat:</strong> Kurangi range atau gunakan Excel Tables</li>
+                                <li><strong>Kriteria tanggal tidak bekerja:</strong> Gunakan DATE function atau cell reference</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Pro Tip:</strong> Untuk analisis yang lebih kompleks, pertimbangkan untuk menggunakan Pivot Tables yang memberikan fleksibilitas lebih dalam agregasi data bersyarat.
+                        </div>
+                        
+                        <p>Dengan menguasai SUMIF, COUNTIF, dan AVERAGEIF, Anda dapat membuat analisis data yang powerful dan otomatis di Excel. Fungsi-fungsi ini adalah fondasi untuk dashboard reporting yang efektif dan efisien!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pivot Table Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Pivot Table Excel</a></h3>
+                                <p>Pelajari cara meringkas dan menganalisis data dengan Pivot Table.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="IF Function Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Fungsi IF Excel</a></h3>
+                                <p>Panduan lengkap menggunakan fungsi IF untuk logika bersyarat.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Excel Dashboard">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard interaktif yang profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (32)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Dewi Sartika</span>
+                                <span class="comment-date">6 Mei 2023</span>
+                            </div>
+                            <p>Terima kasih tutorialnya! SUMIF sangat membantu untuk laporan penjualan bulanan saya. Sekarang tidak perlu filter manual lagi!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">6 Mei 2023</span>
+                            </div>
+                            <p>Senang mendengarnya Dewi! Memang fungsi agregat bersyarat sangat menghemat waktu. Apa penggunaan favorit Anda?</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Rizaldi Pratama</span>
+                                <span class="comment-date">7 Mei 2023</span>
+                            </div>
+                            <p>Bagaimana cara menggunakan SUMIF dengan kriteria tanggal? Saya ingin menghitung penjualan untuk bulan tertentu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> SUMIF COUNTIF AVERAGEIF</a></li>
+                        <li><a href="#"><span>2</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>3</span> VLOOKUP & HLOOKUP</a></li>
+                        <li><a href="#"><span>4</span> Conditional Formatting</a></li>
+                        <li><a href="#"><span>5</span> INDEX & MATCH</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Agregat</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Lookup Functions</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Data Validation</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">SUMIF</a>
+                        <a href="#">COUNTIF</a>
+                        <a href="#">AVERAGEIF</a>
+                        <a href="#">Fungsi Agregat</a>
+                        <a href="#">Excel</a>
+                        <a href="#">Conditional Sum</a>
+                        <a href="#">Tutorial</a>
+                        <a href="#">Tips Excel</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Agregat</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Lookup Functions</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

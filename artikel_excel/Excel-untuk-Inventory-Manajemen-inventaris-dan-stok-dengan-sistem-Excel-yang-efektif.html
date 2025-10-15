@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel untuk Inventory - Manajemen Stok & Inventaris | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan Excel untuk manajemen inventaris dan stok yang efektif. Sistem tracking, reorder point, dan analisis stok.">
+    <meta name="keywords" content="excel inventory, manajemen stok excel, sistem inventaris, tracking stok, reorder point, laporan inventory">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        .inventory-structure {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .inventory-structure h4 {
+            color: #217346;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .inventory-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .inventory-areas {
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .inventory-area {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .inventory-area h5 {
+            color: #217346;
+            margin-bottom: 8px;
+        }
+        
+        .inventory-preview {
+            background: white;
+            border: 2px dashed #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .stock-low {
+            background: #ffeaa7 !important;
+            font-weight: bold;
+        }
+        
+        .stock-out {
+            background: #fab1a0 !important;
+            font-weight: bold;
+            color: #d63031;
+        }
+        
+        .stock-optimal {
+            background: #55efc4 !important;
+        }
+        
+        .highlight {
+            background: #fff3cd !important;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #217346;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .inventory-status {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .status-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .status-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+        
+        .status-optimal { background: #55efc4; }
+        .status-warning { background: #ffeaa7; }
+        .status-danger { background: #fab1a0; }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .inventory-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .inventory-status {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Excel untuk Inventory: Sistem Manajemen Stok dan Inventaris yang Efektif</h1>
+                        <div class="article-meta">
+                            <span>📅 25 April 2023</span>
+                            <span>👁️ 7.2K Dilihat</span>
+                            <span>⏱️ 18 menit membaca</span>
+                            <span>🏷️ Excel Inventory, Manajemen Stok, Sistem Inventaris, Tracking Stok</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Manajemen inventaris yang efektif adalah kunci sukses bisnis retail, manufaktur, dan distribusi. Excel menyediakan alat yang powerful untuk membuat sistem inventory yang terintegrasi, mulai dari tracking stok hingga analisis pergerakan barang. Artikel ini akan membangun sistem inventory komprehensif menggunakan Excel.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> Perusahaan dengan sistem inventory yang baik dapat mengurangi biaya penyimpanan hingga 30% dan meningkatkan turnover rate hingga 25%.
+                        </div>
+                        
+                        <h2>1. Mengapa Excel untuk Manajemen Inventory?</h2>
+                        <p>Excel menawarkan fleksibilitas dan kontrol penuh atas sistem inventory Anda. Berikut keunggulan menggunakan Excel:</p>
+                        <ul>
+                            <li>Customisasi sesuai kebutuhan bisnis yang spesifik</li>
+                            <li>Biaya lebih terjangkau dibandingkan software khusus</li>
+                            <li>Integrasi mudah dengan sistem akuntansi dan penjualan</li>
+                            <li>Analisis data yang mendalam dengan Pivot Table</li>
+                            <li>Automation dengan formula dan macro</li>
+                        </ul>
+                        
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📦</div>
+                                <h4>Real-time Stock Tracking</h4>
+                                <p>Monitor level stok secara real-time dengan update otomatis</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🚨</div>
+                                <h4>Auto Reorder Alert</h4>
+                                <p>Notifikasi otomatis ketika stok mencapai titik pemesanan ulang</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📊</div>
+                                <h4>Inventory Analysis</h4>
+                                <p>Analisis pergerakan stok dan identifikasi slow-moving items</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💰</div>
+                                <h4>Cost Control</h4>
+                                <p>Hitung nilai inventory dan optimasi biaya penyimpanan</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Struktur Database Inventory yang Efektif</h2>
+                        
+                        <div class="inventory-structure">
+                            <h4>Komponen Sistem Inventory Excel</h4>
+                            <div class="inventory-layout">
+                                <div class="inventory-areas">
+                                    <div class="inventory-area">
+                                        <h5>MASTER DATA</h5>
+                                        <p>Data produk, supplier, kategori</p>
+                                    </div>
+                                    <div class="inventory-area">
+                                        <h5>STOCK MOVEMENT</h5>
+                                        <p>Masuk, keluar, adjustment</p>
+                                    </div>
+                                    <div class="inventory-area">
+                                        <h5>STOCK LEVEL</h5>
+                                        <p>Stok current, minimum, maksimum</p>
+                                    </div>
+                                    <div class="inventory-area">
+                                        <h5>REPORTING</h5>
+                                        <p>Laporan stok, valuation, aging</p>
+                                    </div>
+                                </div>
+                                <div class="inventory-preview">
+                                    <h4>Contoh Dashboard Inventory</h4>
+                                    <div class="metric-grid">
+                                        <div class="metric-card">
+                                            <div class="metric-value">1,248</div>
+                                            <div class="metric-label">Total SKU</div>
+                                        </div>
+                                        <div class="metric-card">
+                                            <div class="metric-value">Rp 2.1B</div>
+                                            <div class="metric-label">Nilai Inventory</div>
+                                        </div>
+                                        <div class="metric-card">
+                                            <div class="metric-value">12</div>
+                                            <div class="metric-label">Stok Low</div>
+                                        </div>
+                                        <div class="metric-card">
+                                            <div class="metric-value">45</div>
+                                            <div class="metric-label">Stok Out</div>
+                                        </div>
+                                    </div>
+                                    <div class="inventory-status">
+                                        <div class="status-item">
+                                            <div class="status-indicator status-optimal"></div>
+                                            <div>Optimal</div>
+                                        </div>
+                                        <div class="status-item">
+                                            <div class="status-indicator status-warning"></div>
+                                            <div>Low Stock</div>
+                                        </div>
+                                        <div class="status-item">
+                                            <div class="status-indicator status-danger"></div>
+                                            <div>Out of Stock</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Membuat Sistem Inventory di Excel</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>Setup Master Data Produk</h4>
+                                <p>Buat tabel master produk dengan kolom:</p>
+                                <ul>
+                                    <li>Kode Produk, Nama Produk, Kategori</li>
+                                    <li>Supplier, Harga Beli, Harga Jual</li>
+                                    <li>Stok Minimum, Stok Maksimum</li>
+                                    <li>Lokasi Penyimpanan (Gudang/Rak)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Buat Sheet Transaksi</h4>
+                                <p>Setup sheet untuk mencatat semua pergerakan stok:</p>
+                                <ul>
+                                    <li><strong>Stock In:</strong> Pembelian, retur customer</li>
+                                    <li><strong>Stock Out:</strong> Penjualan, retur supplier</li>
+                                    <li><strong>Adjustment:</strong> Koreksi, stock opname</li>
+                                    <li><strong>Transfer:</strong> Antar gudang/lokasi</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Rumus Perhitungan Stok</h4>
+                                <p>Implementasikan rumus untuk tracking stok:</p>
+                                <ul>
+                                    <li>Stok Akhir = Stok Awal + Masuk - Keluar</li>
+                                    <li>Auto calculation dengan SUMIF/SUMIFS</li>
+                                    <li>Conditional formatting untuk alert</li>
+                                    <li>VLOOKUP untuk update otomatis</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Buat Dashboard & Reporting</h4>
+                                <p>Develop laporan dan monitoring tools:</p>
+                                <ul>
+                                    <li>Stock Level Report</li>
+                                    <li>Slow/Fast Moving Analysis</li>
+                                    <li>Inventory Valuation</li>
+                                    <li>Reorder Suggestions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h2>4. Rumus Penting Excel untuk Inventory</h2>
+                        
+                        <div class="example-box">
+                            <h4>Rumus Dasar Perhitungan Stok</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fungsi</th>
+                                        <th>Rumus Excel</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Stok Akhir</strong></td>
+                                        <td>=StokAwal + SUMIF(Masuk) - SUMIF(Keluar)</td>
+                                        <td>Menghitung stok current</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Reorder Alert</strong></td>
+                                        <td>=IF(StokAkhir<=StokMin, "REORDER", "OK")</td>
+                                        <td>Notifikasi pesan ulang</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Stock Value</strong></td>
+                                        <td>=StokAkhir * HargaBeli</td>
+                                        <td>Nilai inventory</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Days Stock</strong></td>
+                                        <td>=StokAkhir / RataPenjualanHarian</td>
+                                        <td>Estimasi hari stok tersedia</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Rumus Lanjutan Inventory Management</h4>
+                            <div class="code-block">
+                                // Reorder Point Calculation
+                                = (LeadTime * AvgDailySales) + SafetyStock
+                                
+                                // Economic Order Quantity (EOQ)
+                                = SQRT((2 * AnnualDemand * OrderCost) / HoldingCost)
+                                
+                                // Stock Turnover Rate
+                                = CostOfGoodsSold / AverageInventory
+                                
+                                // ABC Analysis Classification
+                                = IF(PercentCumulative<=0.8, "A", 
+                                  IF(PercentCumulative<=0.95, "B", "C"))
+                            </div>
+                        </div>
+                        
+                        <h2>5. Contoh Sistem Tracking Stok</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Master Produk & Level Stok</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama Produk</th>
+                                        <th>Stok Min</th>
+                                        <th>Stok Max</th>
+                                        <th>Stok Aktual</th>
+                                        <th>Status</th>
+                                        <th>Nilai Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>PRD001</td>
+                                        <td>Laptop ASUS X515</td>
+                                        <td>5</td>
+                                        <td>50</td>
+                                        <td class="stock-optimal">42</td>
+                                        <td>OK</td>
+                                        <td>Rp 42,000,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRD002</td>
+                                        <td>Mouse Wireless</td>
+                                        <td>20</td>
+                                        <td>200</td>
+                                        <td class="stock-low">15</td>
+                                        <td>LOW</td>
+                                        <td>Rp 750,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRD003</td>
+                                        <td>Keyboard Mechanical</td>
+                                        <td>10</td>
+                                        <td>100</td>
+                                        <td class="stock-out">0</td>
+                                        <td>OUT</td>
+                                        <td>Rp 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PRD004</td>
+                                        <td>Monitor 24"</td>
+                                        <td>8</td>
+                                        <td>80</td>
+                                        <td class="stock-optimal">25</td>
+                                        <td>OK</td>
+                                        <td>Rp 37,500,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="tip">
+                                <strong>Best Practice:</strong> Gunakan conditional formatting untuk visual status stok. Hijau untuk optimal, kuning untuk low stock, dan merah untuk out of stock.
+                            </div>
+                        </div>
+                        
+                        <h2>6. ABC Analysis untuk Inventory Control</h2>
+                        
+                        <div class="example-box">
+                            <h4>Klasifikasi ABC Berdasarkan Nilai Inventory</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <th>% Item</th>
+                                        <th>% Nilai</th>
+                                        <th>Strategy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>A Items</strong></td>
+                                        <td>20%</td>
+                                        <td>80%</td>
+                                        <td>Tight control, frequent review</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>B Items</strong></td>
+                                        <td>30%</td>
+                                        <td>15%</td>
+                                        <td>Moderate control, periodic review</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>C Items</strong></td>
+                                        <td>50%</td>
+                                        <td>5%</td>
+                                        <td>Simple control, occasional review</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Rumus ABC Classification</h4>
+                            <div class="code-block">
+                                // Hitung nilai total per item
+                                = Quantity * UnitCost
+                                
+                                // Urutkan descending berdasarkan nilai
+                                = SORT(Table, ValueColumn, FALSE)
+                                
+                                // Hitung persentase kumulatif
+                                = RUNNING_TOTAL / TOTAL_VALUE
+                                
+                                // Klasifikasi ABC
+                                = IF(CumulativePercent <= 0.8, "A",
+                                    IF(CumulativePercent <= 0.95, "B", "C"))
+                            </div>
+                        </div>
+                        
+                        <h2>7. Inventory Valuation Methods</h2>
+                        
+                        <div class="example-box">
+                            <h4>Metode Penilaian Inventory</h4>
+                            <ul>
+                                <li><strong>FIFO (First In First Out):</strong> Barang pertama masuk adalah pertama keluar</li>
+                                <li><strong>LIFO (Last In First Out):</strong> Barang terakhir masuk adalah pertama keluar</li>
+                                <li><strong>Weighted Average:</strong> Rata-rata tertimbang semua pembelian</li>
+                                <li><strong>Specific Identification:</strong> Tracking per unit secara spesifik</li>
+                            </ul>
+                            
+                            <h4>Contoh Perhitungan Weighted Average</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Qty Masuk</th>
+                                        <th>Harga Beli</th>
+                                        <th>Total Nilai</th>
+                                        <th>Qty Stok</th>
+                                        <th>Avg Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>01/04/2023</td>
+                                        <td>100</td>
+                                        <td>Rp 50,000</td>
+                                        <td>Rp 5,000,000</td>
+                                        <td>100</td>
+                                        <td>Rp 50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15/04/2023</td>
+                                        <td>200</td>
+                                        <td>Rp 55,000</td>
+                                        <td>Rp 11,000,000</td>
+                                        <td>300</td>
+                                        <td>Rp 53,333</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25/04/2023</td>
+                                        <td>150</td>
+                                        <td>Rp 52,000</td>
+                                        <td>Rp 7,800,000</td>
+                                        <td>450</td>
+                                        <td>Rp 52,889</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h2>8. Tips dan Best Practices Inventory Excel</h2>
+                        
+                        <div class="tip">
+                            <strong>Tip 1:</strong> Gunakan Data Validation untuk mencegah input error pada kode produk dan kategori.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 2:</strong> Implementasikan barcode scanning dengan integration ke Excel untuk input data yang lebih cepat dan akurat.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 3:</strong> Buat template stock opname dengan sistem cycle counting untuk akurasi yang berkelanjutan.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tip 4:</strong> Gunakan Power Query untuk mengotomatisasi import data dari sistem penjualan dan pembelian.
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Selalu backup data inventory secara berkala. Data inventory adalah aset critical bisnis.
+                        </div>
+                        
+                        <h2>9. Studi Kasus: Optimasi Inventory Retail</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Optimasi level stok untuk toko retail elektronik dengan data:</p>
+                            <ul>
+                                <li>Total 500 SKU dengan nilai inventory Rp 2.5M</li>
+                                <li>15% item mengalami stock out dalam 3 bulan terakhir</li>
+                                <li>25% item termasuk slow-moving (turnover < 2x/tahun)</li>
+                                <li>Lead time supplier rata-rata 7-14 hari</li>
+                            </ul>
+                            <p><strong>Langkah-langkah Optimasi:</strong></p>
+                            <ol>
+                                <li>Lakukan ABC analysis untuk prioritasi</li>
+                                <li>Hitung reorder point dan safety stock untuk A items</li>
+                                <li>Identifikasi slow-moving items untuk clearance</li>
+                                <li>Setup automatic reorder alert system</li>
+                                <li>Implementasikan cycle counting schedule</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk bisnis dengan volume tinggi, pertimbangkan menggunakan Excel dengan database external (Access/SQL) atau upgrade ke sistem inventory khusus untuk performance yang lebih baik.
+                        </div>
+                        
+                        <p>Dengan mengimplementasikan sistem inventory Excel yang komprehensif, Anda dapat mengurangi stock out, meminimalkan biaya penyimpanan, dan meningkatkan efisiensi operasional bisnis secara signifikan.</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1563013546-77f13c5e26ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Membuat Dashboard Inventory di Excel</a></h3>
+                                <p>Panduan lengkap membuat dashboard inventory yang interaktif dan real-time.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Stock Opname">
+                            <div class="related-item-content">
+                                <h3><a href="#">Sistem Stock Opname dengan Excel</a></h3>
+                                <p>Template dan metode untuk stock opname yang akurat dan efisien.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Purchase Order">
+                            <div class="related-item-content">
+                                <h3><a href="#">Management Purchase Order Excel</a></h3>
+                                <p>Sistem pembelian dan purchase order terintegrasi dengan inventory.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (22)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Inventory Manager</span>
+                                <span class="comment-date">26 April 2023</span>
+                            </div>
+                            <p>Sistem ABC analysis sangat membantu! Berhasil mengurangi nilai inventory 15% tanpa meningkatkan stock out rate. Terima kasih!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">26 April 2023</span>
+                            </div>
+                            <p>Luar biasa! ABC analysis memang efektif untuk optimasi inventory. Selamat atas improvementnya!</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Retail Owner</span>
+                                <span class="comment-date">27 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara menghitung safety stock yang optimal untuk produk dengan demand yang fluktuatif?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Excel untuk Inventory</a></li>
+                        <li><a href="#"><span>2</span> Pivot Table Excel</a></li>
+                        <li><a href="#"><span>3</span> Dashboard Inventory</a></li>
+                        <li><a href="#"><span>4</span> ABC Analysis</a></li>
+                        <li><a href="#"><span>5</span> Stock Opname System</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Excel untuk Inventory</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Dashboard & Visualisasi</a></li>
+                        <li><a href="#">Manajemen Bisnis</a></li>
+                        <li><a href="#">Template Excel</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Excel Inventory</a>
+                        <a href="#">Manajemen Stok</a>
+                        <a href="#">Sistem Inventaris</a>
+                        <a href="#">ABC Analysis</a>
+                        <a href="#">Reorder Point</a>
+                        <a href="#">Stock Valuation</a>
+                        <a href="#">Inventory Dashboard</a>
+                        <a href="#">Stock Opname</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Excel untuk Inventory</a></li>
+                        <li><a href="#">Pivot Table & Analisis</a></li>
+                        <li><a href="#">Dashboard & Visualisasi</a></li>
+                        <li><a href="#">Manajemen Bisnis</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
