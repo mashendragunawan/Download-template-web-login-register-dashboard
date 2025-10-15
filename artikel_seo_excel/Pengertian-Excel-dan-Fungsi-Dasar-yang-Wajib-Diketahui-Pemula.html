@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Fungsi Excel Dasar untuk Analisis Real Estate: Panduan Lengkap Pemula</title>
+    <meta name="description" content="Pelajari 5 fungsi Excel dasar untuk analisis properti, perhitungan ROI, dan manajemen portofolio real estate. Template dan formula lengkap untuk pemula.">
+    <meta name="keywords" content="excel real estate, fungsi excel dasar, analisis properti, investasi properti, kalkulasi ROI, portofolio real estate, template excel properti">
+    <meta name="author" content="Excel Real Estate">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Code and Examples */
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .example {
+            background: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* Real Estate Specific Styles */
+        .property-analysis {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .roi-calculator {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .formula-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@excelrealestate.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Studi Kasus</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>5 Fungsi Excel Dasar untuk Analisis Real Estate: Panduan Lengkap Pemula</h1>
+                        <div class="article-meta">
+                            <span>📅 15 April 2023</span>
+                            <span>👁️ 5.2K Dilihat</span>
+                            <span>⏱️ 15 menit membaca</span>
+                            <span>🏷️ Fungsi Excel Dasar, Analisis Real Estate, Investasi Properti, ROI</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Apakah Anda ingin mulai berinvestasi di properti tetapi bingung bagaimana menganalisis kelayakannya? Atau mungkin Anda sudah memiliki beberapa properti tetapi kesulitan mengelola data dan perhitungannya? Microsoft Excel bisa menjadi solusi tepat untuk membantu Anda menganalisis investasi real estate dengan lebih sistematis dan akurat.</p>
+                        
+                        <p>Artikel ini akan membahas <strong>5 fungsi Excel dasar</strong> yang paling penting untuk analisis real estate, dilengkapi dengan contoh praktis dan template yang bisa langsung Anda terapkan. Dengan menguasai fungsi-fungsi ini, Anda akan mampu membuat keputusan investasi yang lebih tepat dan mengelola portofolio properti dengan lebih efektif.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian-excel">Apa Itu Microsoft Excel? Pengertian dan Kegunaannya untuk Real Estate</a></li>
+                                <li><a href="#fungsi-dasar">5 Fungsi Dasar Excel untuk Analisis Real Estate</a>
+                                    <ol>
+                                        <li><a href="#fungsi-sum">Fungsi SUM: Untuk Penjumlahan Total Investasi</a></li>
+                                        <li><a href="#fungsi-average">Fungsi AVERAGE: Menghitung Rata-rata Harga Sewa</a></li>
+                                        <li><a href="#fungsi-count">Fungsi COUNT: Menghitung Jumlah Properti</a></li>
+                                        <li><a href="#fungsi-max-min">Fungsi MAX dan MIN: Analisis Harga Properti</a></li>
+                                        <li><a href="#fungsi-if">Fungsi IF: Analisis Kelayakan Investasi</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#kesimpulan">Kesimpulan dan Langkah Selanjutnya</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian-excel">1. Apa Itu Microsoft Excel? Pengertian dan Kegunaannya untuk Real Estate</h2>
+                        
+                        <p><strong>Microsoft Excel</strong> adalah program aplikasi spreadsheet yang dikembangkan oleh Microsoft. Dalam konteks real estate, Excel berfungsi sebagai <strong>"kertas digital" untuk menganalisis data properti</strong>, menghitung return on investment (ROI), dan mengelola portofolio properti.</p>
+                        
+                        <div class="property-analysis">
+                            <h3>Kegunaan Excel untuk Real Estate:</h3>
+                            <ul>
+                                <li><strong>Analisis Kelayakan Investasi:</strong> Menghitung ROI, cap rate, dan cash flow</li>
+                                <li><strong>Perbandingan Properti:</strong> Membandingkan beberapa properti berdasarkan parameter tertentu</li>
+                                <li><strong>Manajemen Portofolio:</strong> Melacak kinerja semua properti dalam satu dashboard</li>
+                                <li><strong>Proyeksi Keuangan:</strong> Membuat forecast pendapatan dan pengeluaran</li>
+                                <li><strong>Pelaporan:</strong> Menyajikan data dalam bentuk tabel dan grafik yang mudah dipahami</li>
+                            </ul>
+                        </div>
+                        
+                        <p>Dengan memahami <strong>pengertian Excel</strong> dan penerapannya di dunia real estate, Anda akan melihatnya sebagai alat bantu yang powerful, bukan sekadar program spreadsheet biasa.</p>
+                        
+                        <h2 id="fungsi-dasar">2. 5 Fungsi Dasar Excel untuk Analisis Real Estate</h2>
+                        
+                        <p>Fungsi adalah rumus bawaan Excel yang memudahkan perhitungan. Berikut adalah 5 <strong>fungsi dasar Excel</strong> yang paling berguna untuk analisis real estate.</p>
+                        
+                        <h3 id="fungsi-sum">2.1. Fungsi SUM: Untuk Penjumlahan Total Investasi</h3>
+                        
+                        <p>Fungsi <code>SUM</code> adalah yang paling dasar dan paling sering digunakan untuk <strong>menjumlahkan sekumpulan angka</strong>, seperti total biaya investasi properti.</p>
+                        
+                        <div class="code-block">
+                            =SUM(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Contoh Praktis Real Estate:</strong></p>
+                            <ul>
+                                <li>Anda memiliki biaya-biaya properti di sel A1 hingga A5: Harga beli, biaya notaris, biaya renovasi, dll.</li>
+                                <li>Ketik <code>=SUM(A1:A5)</code> di sel A6.</li>
+                                <li>Tekan Enter, dan Excel akan langsung menampilkan total investasi properti.</li>
+                            </ul>
+                            <p><strong>Kapan Digunakan?</strong> Untuk menghitung total investasi properti, total pendapatan sewa bulanan, atau total pengeluaran operasional.</p>
+                        </div>
+                        
+                        <h3 id="fungsi-average">2.2. Fungsi AVERAGE: Menghitung Rata-rata Harga Sewa</h3>
+                        
+                        <p>Ingin tahu harga sewa rata-rata di suatu area? Fungsi <code>AVERAGE</code> adalah jawabannya.</p>
+                        
+                        <div class="code-block">
+                            =AVERAGE(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Contoh Praktis Real Estate:</strong></p>
+                            <ul>
+                                <li>Anda memiliki data harga sewa unit sejenis di sel B1 hingga B10.</li>
+                                <li>Gunakan <code>=AVERAGE(B1:B10)</code> untuk mendapatkan harga sewa pasar yang realistis.</li>
+                            </ul>
+                            <p><strong>Kapan Digunakan?</strong> Sangat berguna untuk menganalisis harga sewa pasar, rata-rata biaya maintenance per properti, atau rata-rata appreciation tahunan.</p>
+                        </div>
+                        
+                        <h3 id="fungsi-count">2.3. Fungsi COUNT: Menghitung Jumlah Properti</h3>
+                        
+                        <p>Fungsi <code>COUNT</code> digunakan untuk <strong>menghitung jumlah sel yang berisi angka</strong> dalam portofolio properti Anda.</p>
+                        
+                        <div class="code-block">
+                            =COUNT(nilai1, [nilai2], ...)
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Contoh Praktis Real Estate:</strong></p>
+                            <ul>
+                                <li>Pada daftar portofolio properti, sel C1 hingga C20 berisi harga beli properti.</li>
+                                <li><code>=COUNT(C1:C20)</code> akan memberitahu Anda berapa banyak properti yang sudah Anda miliki.</li>
+                            </ul>
+                            <p><strong>Kapan Digunakan?</strong> Cocok untuk menghitung jumlah properti dalam portofolio, jumlah unit yang tersewa, atau jumlah transaksi dalam periode tertentu.</p>
+                        </div>
+                        
+                        <h3 id="fungsi-max-min">2.4. Fungsi MAX dan MIN: Analisis Harga Properti</h3>
+                        
+                        <p>Dua fungsi ini membantu Anda dengan cepat menemukan properti dengan harga tertinggi dan terendah dalam portofolio.</p>
+                        
+                        <div class="code-block">
+                            =MAX(angka1, [angka2], ...)<br>
+                            =MIN(angka1, [angka2], ...)
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Contoh Praktis Real Estate:</strong></p>
+                            <ul>
+                                <li>Dalam data harga properti (sel D1:D31), <code>=MAX(D1:D31)</code> akan menunjukkan properti dengan harga jual tertinggi, sementara <code>=MIN(D1:D31)</code> menunjukkan yang terendah.</li>
+                            </ul>
+                            <p><strong>Kapan Digunakan?</strong> Ideal untuk analisis cepat, seperti mencari properti dengan ROI tertinggi, harga sewa tertinggi, atau biaya maintenance terendah.</p>
+                        </div>
+                        
+                        <h3 id="fungsi-if">2.5. Fungsi IF: Analisis Kelayakan Investasi</h3>
+                        
+                        <p>Ini adalah gerbang Anda ke dunia logika di Excel. Fungsi <code>IF</code> memungkinkan Anda membuat analisis kelayakan investasi berdasarkan kriteria tertentu.</p>
+                        
+                        <div class="code-block">
+                            =IF(logical_test, [value_if_true], [value_if_false])
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Contoh Praktis Real Estate:</strong></p>
+                            <ul>
+                                <li>Anda ingin menilai "Layak" jika cap rate properti (di sel E1) >= 6%, dan "Tidak Layak" jika tidak.</li>
+                                <li>Rumusnya: <code>=IF(E1>=0.06, "Layak", "Tidak Layak")</code></li>
+                                <li>Excel akan secara otomatis mengecek nilai di E1 dan mengisi sel tersebut dengan "Layak" atau "Tidak Layak".</li>
+                            </ul>
+                            <p><strong>Kapan Digunakan?</strong> Untuk otomatisasi analisis kelayakan investasi, kategorisasi properti berdasarkan kriteria, dan banyak lagi. Ini adalah <strong>fungsi dasar Excel</strong> yang sangat penting untuk dikuasai.</p>
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah Membuat Analisis Properti Sederhana</h3>
+                            <div class="step">
+                                <h4>Siapkan Data Properti</h4>
+                                <p>Buat tabel dengan kolom: Nama Properti, Harga Beli, Biaya Tambahan, Harga Sewa/Bulan, dll.</p>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Hitung Total Investasi</h4>
+                                <p>Gunakan <code>SUM</code> untuk menjumlahkan harga beli dan biaya tambahan</p>
+                                <div class="formula-box">
+                                    =SUM(Harga_Beli, Biaya_Tambahan)
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Hitung Pendapatan Tahunan</h4>
+                                <p>Kalikan harga sewa bulanan dengan 12 (bulan)</p>
+                                <div class="formula-box">
+                                    =Harga_Sewa * 12
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Hitung Cap Rate</h4>
+                                <p>Bagi pendapatan tahunan dengan total investasi</p>
+                                <div class="formula-box">
+                                    =Pendapatan_Tahunan / Total_Investasi
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Analisis Kelayakan</h4>
+                                <p>Gunakan <code>IF</code> untuk menentukan properti layak atau tidak berdasarkan cap rate</p>
+                                <div class="formula-box">
+                                    =IF(Cap_Rate >= 0.06, "Layak", "Tidak Layak")
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>Contoh Analisis Properti Apartemen</h2>
+                        
+                        <div class="roi-calculator">
+                            <h4>Data Properti Apartemen di Jakarta Selatan</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Nilai</th>
+                                        <th>Rumus Excel</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Harga Beli</td>
+                                        <td>Rp 1.200.000.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Notaris + Renovasi</td>
+                                        <td>Rp 75.000.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Investasi</td>
+                                        <td>Rp 1.275.000.000</td>
+                                        <td>=SUM(B2:B3)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Harga Sewa/Bulan</td>
+                                        <td>Rp 12.000.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pendapatan Sewa Tahunan</td>
+                                        <td>Rp 144.000.000</td>
+                                        <td>=B5*12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Operasional/Bulan</td>
+                                        <td>Rp 2.500.000</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Operasional Tahunan</td>
+                                        <td>Rp 30.000.000</td>
+                                        <td>=B7*12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Operating Income (NOI)</td>
+                                        <td>Rp 114.000.000</td>
+                                        <td>=B6-B8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cap Rate</td>
+                                        <td>8.94%</td>
+                                        <td>=B9/B4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelayakan Investasi</td>
+                                        <td>Layak</td>
+                                        <td>=IF(B10>=0.06,"Layak","Tidak Layak")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Catatan Penting:</strong> Analisis ini disederhanakan untuk tujuan pembelajaran. Dalam praktiknya, pertimbangkan juga faktor seperti pajak, appreciation, vacancy rate, dan biaya tak terduga.
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Tips Praktis:</strong> Buat template analisis properti yang bisa digunakan berulang kali. Simpan sebagai Excel template (.xltx) untuk menghemat waktu.
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>Peringatan:</strong> Selalu lakukan due diligence lengkap sebelum berinvestasi di properti. Excel adalah alat bantu, bukan pengganti penelitian mendalam.
+                        </div>
+                        
+                        <h2 id="kesimpulan">3. Kesimpulan dan Langkah Selanjutnya</h2>
+                        
+                        <p>Memahami <strong>pengertian Excel</strong> dan menguasai <strong>fungsi dasar Excel</strong> adalah langkah pertama yang krusial untuk menjadi investor real estate yang cerdas. Kelima fungsi di atas—<strong>SUM, AVERAGE, COUNT, MAX/MIN, dan IF</strong>—adalah fondasi yang akan Anda gunakan terus-menerus dalam berbagai analisis properti.</p>
+                        
+                        <p>Dengan mempraktikkannya, Anda akan melihat bagaimana Excel bisa menghemat waktu, meningkatkan akurasi analisis, dan membantu Anda membuat keputusan investasi yang lebih tepat. Mulailah dengan properti sederhana, buat analisis menggunakan fungsi-fungsi dasar ini, dan kembangkan kemampuan Anda secara bertahap.</p>
+                        
+                        <p>Sekarang giliran Anda! <strong>Coba buka file Excel dan praktikkan langsung kelima fungsi tersebut dengan data properti nyata atau contoh di atas.</strong> Punya pertanyaan atau pengalaman saat mencobanya? <strong>Jangan ragu untuk berbagi di kolom komentar di bawah!</strong> Ingin belajar lebih dalam tentang analisis real estate yang lebih advanced? <strong>Subscribe newsletter kami</strong> untuk mendapatkan panduan Excel real estate lanjutan langsung ke inbox Anda.</p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Fungsi Excel untuk Real Estate</a></li>
+                        <li><a href="#"><span>2</span> Analisis ROI Properti</a></li>
+                        <li><a href="#"><span>3</span> Kalkulator KPR Excel</a></li>
+                        <li><a href="#"><span>4</span> Dashboard Portofolio Properti</a></li>
+                        <li><a href="#"><span>5</span> Rumus Keuangan Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Excel Dasar</a></li>
+                        <li><a href="#">Analisis Real Estate</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Fungsi Keuangan</a></li>
+                        <li><a href="#">Studi Kasus</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Fungsi Excel Dasar</a>
+                        <a href="#">Real Estate</a>
+                        <a href="#">Analisis Properti</a>
+                        <a href="#">Investasi</a>
+                        <a href="#">ROI</a>
+                        <a href="#">Cash Flow</a>
+                        <a href="#">Template</a>
+                        <a href="#">Panduan Pemula</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel real estate terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Real Estate</h3>
+                    <p>Website tutorial Microsoft Excel khusus untuk analisis real estate dan investasi properti. Panduan step by step dari pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Fungsi Dasar Excel</a></li>
+                        <li><a href="#">Analisis Real Estate</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Fungsi Keuangan</a></li>
+                        <li><a href="#">Dashboard & Reporting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@excelrealestate.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Real Estate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
