@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel untuk Sales - Analisis Penjualan & Pipeline Management | Excel Tutorial</title>
-    <meta name="description" content="Pelajari cara menggunakan Excel untuk analisis penjualan, pipeline management, tracking performa tim sales, dan forecasting revenue.">
-    <meta name="keywords" content="excel sales, analisis penjualan, pipeline management, tracking sales, dashboard sales, forecasting revenue">
+    <title>Excel untuk UMKM - Solusi Keuangan & Operasional | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan Excel untuk mengelola keuangan, inventory, penjualan, dan operasional usaha kecil menengah (UMKM) dengan mudah dan efektif.">
+    <meta name="keywords" content="excel umkm, usaha kecil menengah, keuangan usaha, inventory umkm, laporan penjualan, bisnis excel">
     <meta name="author" content="Excel Tutorial">
     <style>
         /* Reset dan Base Styles */
@@ -183,7 +183,7 @@
             margin-bottom: 8px;
         }
         
-        .sales-structure {
+        .umkm-structure {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 8px;
@@ -191,26 +191,26 @@
             margin: 25px 0;
         }
         
-        .sales-structure h4 {
+        .umkm-structure h4 {
             color: #217346;
             margin-bottom: 20px;
             text-align: center;
         }
         
-        .sales-layout {
+        .umkm-layout {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 20px;
             margin: 20px 0;
         }
         
-        .sales-areas {
+        .umkm-areas {
             display: grid;
             grid-template-rows: repeat(4, 1fr);
             gap: 15px;
         }
         
-        .sales-area {
+        .umkm-area {
             background: white;
             border: 2px solid #217346;
             border-radius: 5px;
@@ -218,12 +218,12 @@
             text-align: center;
         }
         
-        .sales-area h5 {
+        .umkm-area h5 {
             color: #217346;
             margin-bottom: 8px;
         }
         
-        .sales-preview {
+        .umkm-preview {
             background: white;
             border: 2px dashed #217346;
             border-radius: 5px;
@@ -235,7 +235,7 @@
             flex-direction: column;
         }
         
-        .pipeline-visual {
+        .cashflow-visual {
             width: 100%;
             background: white;
             border: 1px solid #ddd;
@@ -244,7 +244,7 @@
             margin: 20px 0;
         }
         
-        .pipeline-stage {
+        .cashflow-month {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
@@ -253,35 +253,49 @@
             background: #f8f9fa;
         }
         
-        .stage-name {
-            width: 120px;
+        .month-name {
+            width: 100px;
             font-weight: 500;
         }
         
-        .stage-bar {
+        .cashflow-bar {
             flex: 1;
             height: 20px;
             background: #e9ecef;
             border-radius: 10px;
             margin: 0 15px;
             overflow: hidden;
+            position: relative;
         }
         
-        .stage-fill {
+        .income-bar {
             height: 100%;
+            background: #4caf50;
             border-radius: 10px;
+            position: absolute;
+            left: 0;
         }
         
-        .stage-prospect { background: #ff6b6b; }
-        .stage-qualification { background: #ffa726; }
-        .stage-proposal { background: #29b6f6; }
-        .stage-negotiation { background: #66bb6a; }
-        .stage-closed { background: #217346; }
+        .expense-bar {
+            height: 100%;
+            background: #f44336;
+            border-radius: 10px;
+            position: absolute;
+            right: 0;
+        }
         
-        .stage-value {
-            width: 100px;
+        .cashflow-value {
+            width: 120px;
             text-align: right;
             font-weight: bold;
+        }
+        
+        .profit {
+            color: #4caf50;
+        }
+        
+        .loss {
+            color: #f44336;
         }
         
         .data-table {
@@ -306,27 +320,33 @@
             background: #f9f9f9;
         }
         
-        .performance-excellent {
+        .status-profitable {
             background: #e8f5e9 !important;
             color: #2e7d32;
             font-weight: bold;
         }
         
-        .performance-good {
-            background: #e3f2fd !important;
-            color: #1565c0;
-            font-weight: bold;
-        }
-        
-        .performance-average {
+        .status-breakeven {
             background: #fff3e0 !important;
             color: #ef6c00;
         }
         
-        .performance-poor {
+        .status-loss {
             background: #ffebee !important;
             color: #c62828;
             font-weight: bold;
+        }
+        
+        .category-high {
+            background: #ffebee !important;
+        }
+        
+        .category-medium {
+            background: #fff3e0 !important;
+        }
+        
+        .category-low {
+            background: #e8f5e9 !important;
         }
         
         .highlight {
@@ -482,14 +502,14 @@
             color: #666;
         }
         
-        .kpi-grid {
+        .analysis-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
             margin: 20px 0;
         }
         
-        .kpi-card {
+        .analysis-card {
             background: white;
             border: 1px solid #e9ecef;
             border-radius: 8px;
@@ -497,19 +517,19 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        .kpi-header {
+        .analysis-header {
             display: flex;
             justify-content: between;
             align-items: center;
             margin-bottom: 10px;
         }
         
-        .kpi-title {
+        .analysis-title {
             font-weight: 500;
             color: #333;
         }
         
-        .kpi-trend {
+        .analysis-trend {
             font-size: 12px;
             padding: 2px 8px;
             border-radius: 10px;
@@ -525,10 +545,40 @@
             color: #c62828;
         }
         
-        .kpi-value {
+        .analysis-value {
             font-size: 20px;
             font-weight: bold;
             color: #217346;
+        }
+        
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .priority-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .priority-high {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .priority-medium {
+            background: #fff3e0;
+            border-color: #ff9800;
+        }
+        
+        .priority-low {
+            background: #e8f5e9;
+            border-color: #4caf50;
         }
         
         /* Sidebar Widgets */
@@ -860,7 +910,7 @@
                 margin-bottom: 5px;
             }
             
-            .sales-layout {
+            .umkm-layout {
                 grid-template-columns: 1fr;
             }
             
@@ -872,26 +922,30 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .kpi-grid {
+            .analysis-grid {
                 grid-template-columns: 1fr;
             }
             
-            .pipeline-stage {
+            .priority-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cashflow-month {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .stage-name {
+            .month-name {
                 width: 100%;
                 margin-bottom: 5px;
             }
             
-            .stage-bar {
+            .cashflow-bar {
                 width: 100%;
                 margin: 5px 0;
             }
             
-            .stage-value {
+            .cashflow-value {
                 width: 100%;
                 text-align: left;
             }
@@ -899,6 +953,10 @@
         
         @media (max-width: 480px) {
             .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .priority-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -947,266 +1005,289 @@
             <div class="content">
                 <article>
                     <div class="article-header">
-                        <h1>Excel untuk Sales: Analisis Penjualan, Pipeline Management, dan Tracking Performa Tim</h1>
+                        <h1>Excel untuk UMKM: Solusi Lengkap Pengelolaan Keuangan dan Operasional Usaha</h1>
                         <div class="article-meta">
-                            <span>📅 9 Mei 2023</span>
-                            <span>👁️ 9.3K Dilihat</span>
-                            <span>⏱️ 20 menit membaca</span>
-                            <span>🏷️ Excel Sales, Analisis Penjualan, Pipeline Management, Sales Performance</span>
+                            <span>📅 30 Mei 2023</span>
+                            <span>👁️ 8.2K Dilihat</span>
+                            <span>⏱️ 18 menit membaca</span>
+                            <span>🏷️ Excel UMKM, Usaha Kecil, Keuangan Bisnis, Operasional Usaha</span>
                         </div>
                     </div>
                     
                     <div class="article-body">
-                        <p>Excel adalah alat yang sangat powerful untuk tim sales dalam menganalisis performa, mengelola pipeline, dan membuat forecasting yang akurat. Dengan Excel, sales manager dapat membuat dashboard yang komprehensif untuk memantau KPI tim dan mengidentifikasi peluang improvement.</p>
+                        <p>Microsoft Excel adalah solusi yang sempurna untuk Usaha Mikro, Kecil, dan Menengah (UMKM) dalam mengelola keuangan, inventory, penjualan, dan operasional bisnis. Dengan Excel, pelaku UMKM dapat memiliki kontrol penuh atas bisnis mereka tanpa perlu mengeluarkan biaya besar untuk software khusus.</p>
                         
                         <div class="note">
-                            <strong>Fakta Menarik:</strong> Sales team yang menggunakan data analytics memiliki conversion rate 28% lebih tinggi dibandingkan yang tidak menggunakan analisis data.
+                            <strong>Fakta Menarik:</strong> UMKM yang menggunakan sistem pencatatan keuangan yang baik memiliki peluang bertahan 67% lebih tinggi dibandingkan yang tidak memiliki pencatatan teratur.
                         </div>
                         
-                        <h2>1. Mengapa Excel Penting untuk Sales?</h2>
-                        <p>Excel memberikan kontrol penuh dan fleksibilitas dalam analisis data penjualan. Keunggulan utama menggunakan Excel:</p>
+                        <h2>1. Mengapa Excel Penting untuk UMKM?</h2>
+                        <p>Excel menawarkan solusi yang terjangkau dan mudah dipelajari untuk berbagai kebutuhan bisnis UMKM. Keunggulan utama menggunakan Excel:</p>
                         <ul>
-                            <li>Custom reporting sesuai kebutuhan bisnis</li>
-                            <li>Integrasi data dari berbagai sumber (CRM, website, marketing)</li>
-                            <li>Analisis mendalam dengan Pivot Table dan charts</li>
-                            <li>Forecasting dan predictive analysis</li>
-                            <li>Cost-effective dibandingkan software khusus</li>
+                            <li>Biaya efektif - tidak perlu investasi software mahal</li>
+                            <li>Mudah dipelajari bahkan untuk pemula</li>
+                            <li>Fleksibel dan customizable sesuai jenis usaha</li>
+                            <li>Dapat diakses kapan saja tanpa koneksi internet</li>
+                            <li>Integrasi data dari berbagai aspek bisnis</li>
                         </ul>
                         
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <div class="benefit-icon">📈</div>
-                                <h4>Sales Analytics</h4>
-                                <p>Analisis tren penjualan dan performa produk</p>
+                                <div class="benefit-icon">💰</div>
+                                <h4>Keuangan</h4>
+                                <p>Pencatatan pemasukan, pengeluaran, dan laba rugi</p>
                             </div>
                             <div class="benefit-card">
-                                <div class="benefit-icon">🔄</div>
-                                <h4>Pipeline Management</h4>
-                                <p>Tracking opportunity dari prospect sampai closing</p>
+                                <div class="benefit-icon">📦</div>
+                                <h4>Inventory</h4>
+                                <p>Manajemen stok dan persediaan barang</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📊</div>
+                                <h4>Penjualan</h4>
+                                <p>Tracking penjualan dan analisis produk</p>
                             </div>
                             <div class="benefit-card">
                                 <div class="benefit-icon">👥</div>
-                                <h4>Team Performance</h4>
-                                <p>Monitoring dan coaching berdasarkan data</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon">🎯</div>
-                                <h4>Forecasting</h4>
-                                <p>Prediksi revenue dan target achievement</p>
+                                <h4>Pelanggan</h4>
+                                <p>Database pelanggan dan riwayat transaksi</p>
                             </div>
                         </div>
                         
-                        <h2>2. Komponen Dashboard Sales Excel</h2>
+                        <h2>2. Sistem Manajemen UMKM di Excel</h2>
                         
-                        <div class="sales-structure">
-                            <h4>Struktur Dashboard Sales yang Efektif</h4>
-                            <div class="sales-layout">
-                                <div class="sales-areas">
-                                    <div class="sales-area">
-                                        <h5>KPI PERFORMANCE</h5>
-                                        <p>Revenue, target, growth rate</p>
+                        <div class="umkm-structure">
+                            <h4>Komponen Sistem UMKM Excel</h4>
+                            <div class="umkm-layout">
+                                <div class="umkm-areas">
+                                    <div class="umkm-area">
+                                        <h5>KAS & BANK</h5>
+                                        <p>Arus kas, rekening, transaksi</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>PIPELINE</h5>
-                                        <p>Sales funnel dan conversion rate</p>
+                                    <div class="umkm-area">
+                                        <h5>INVENTORY</h5>
+                                        <p>Stok barang, pembelian, penjualan</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>TEAM METRICS</h5>
-                                        <p>Performa individual dan tim</p>
+                                    <div class="umkm-area">
+                                        <h5>PENJUALAN</h5>
+                                        <p>Transaksi, invoice, piutang</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>FORECASTING</h5>
-                                        <p>Revenue prediction dan trends</p>
+                                    <div class="umkm-area">
+                                        <h5>LAPORAN</h5>
+                                        <p>Laba rugi, neraca, analisis</p>
                                     </div>
                                 </div>
-                                <div class="sales-preview">
-                                    <h4>Contoh Sales Dashboard</h4>
+                                <div class="umkm-preview">
+                                    <h4>Contoh Dashboard UMKM</h4>
                                     <div class="metric-grid">
                                         <div class="metric-card">
-                                            <div class="metric-value">Rp 2.5B</div>
-                                            <div class="metric-label">Monthly Revenue</div>
+                                            <div class="metric-value">Rp 25.8Jt</div>
+                                            <div class="metric-label">Pendapatan Bulan Ini</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">124%</div>
-                                            <div class="metric-label">Target Achievement</div>
+                                            <div class="metric-value">Rp 18.2Jt</div>
+                                            <div class="metric-label">Pengeluaran</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">28%</div>
-                                            <div class="metric-label">Conversion Rate</div>
+                                            <div class="metric-value">Rp 7.6Jt</div>
+                                            <div class="metric-label">Laba Bersih</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">Rp 185Jt</div>
-                                            <div class="metric-label">Avg Deal Size</div>
+                                            <div class="metric-value">42%</div>
+                                            <div class="metric-label">Profit Margin</div>
                                         </div>
                                     </div>
-                                    <div class="kpi-grid">
-                                        <div class="kpi-card">
-                                            <div class="kpi-header">
-                                                <div class="kpi-title">Sales Growth</div>
-                                                <div class="kpi-trend trend-up">+15%</div>
+                                    <div class="analysis-grid">
+                                        <div class="analysis-card">
+                                            <div class="analysis-header">
+                                                <div class="analysis-title">Produk Terlaris</div>
+                                                <div class="analysis-trend trend-up">+15%</div>
                                             </div>
-                                            <div class="kpi-value">24.8%</div>
+                                            <div class="analysis-value">Kue Brownies</div>
                                         </div>
-                                        <div class="kpi-card">
-                                            <div class="kpi-header">
-                                                <div class="kpi-title">Pipeline Value</div>
-                                                <div class="kpi-trend trend-up">+8%</div>
+                                        <div class="analysis-card">
+                                            <div class="analysis-header">
+                                                <div class="analysis-title">Piutang</div>
+                                                <div class="analysis-trend trend-down">-8%</div>
                                             </div>
-                                            <div class="kpi-value">Rp 4.2B</div>
+                                            <div class="analysis-value">Rp 3.2Jt</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <h2>3. Membuat Sales Pipeline di Excel</h2>
+                        <h2>3. Membuat Sistem Keuangan UMKM di Excel</h2>
                         
                         <div class="step-by-step">
                             <div class="step">
-                                <h4>Define Sales Stages</h4>
-                                <p>Tentukan tahapan pipeline yang sesuai bisnis:</p>
+                                <h4>Setup Buku Kas Harian</h4>
+                                <p>Buat template pencatatan transaksi harian:</p>
                                 <ul>
-                                    <li>Prospect → Qualification → Proposal</li>
-                                    <li>Negotiation → Closed Won/Closed Lost</li>
-                                    <li>Set probability % untuk setiap stage</li>
-                                    <li>Define average deal size per stage</li>
+                                    <li>Tanggal, Keterangan, Kategori</li>
+                                    <li>Pemasukan, Pengeluaran, Saldo</li>
+                                    <li>Metode Pembayaran (Tunai/Transfer)</li>
+                                    <li>Nomor Referensi/Invoice</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Setup Data Structure</h4>
-                                <p>Buat tabel dengan kolom-kolom berikut:</p>
+                                <h4>Klasifikasi Pengeluaran</h4>
+                                <p>Kategorikan pengeluaran untuk analisis:</p>
                                 <ul>
-                                    <li>Opportunity Name, Company, Value</li>
-                                    <li>Stage, Probability %, Expected Close Date</li>
-                                    <li>Sales Rep, Created Date, Last Update</li>
-                                    <li>Notes, Next Action, Competitors</li>
+                                    <li>Bahan Baku & Inventory</li>
+                                    <li>Operasional (listrik, air, internet)</li>
+                                    <li>Gaji & Upah</li>
+                                    <li>Pemasaran & Promosi</li>
+                                    <li>Lain-lain</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Implement Automated Calculations</h4>
+                                <h4>Implementasi Rumus Keuangan</h4>
                                 <p>Gunakan rumus untuk otomatisasi:</p>
                                 <ul>
-                                    <li>Weighted Value = Deal Value × Probability %</li>
-                                    <li>Days in Stage = Today - Stage Entry Date</li>
-                                    <li>Forecast Category berdasarkan close date</li>
-                                    <li>Conversion rate antara stages</li>
+                                    <li>Saldo = Saldo Sebelumnya + Pemasukan - Pengeluaran</li>
+                                    <li>Total per Kategori = SUMIF(Kategori, "Kategori")</li>
+                                    <li>Profit Margin = (Pendapatan - HPP) / Pendapatan</li>
+                                    <li>Break Even Point analysis</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Create Pipeline Visualization</h4>
-                                <p>Buat visual dashboard untuk monitoring:</p>
+                                <h4>Laporan Keuangan</h4>
+                                <p>Buat laporan periodik untuk evaluasi:</p>
                                 <ul>
-                                    <li>Pipeline value per stage</li>
-                                    <li>Conversion funnel analysis</li>
-                                    <li>Aging analysis per stage</li>
-                                    <li>Sales rep performance comparison</li>
+                                    <li>Laporan Laba Rugi</li>
+                                    <li>Laporan Arus Kas</li>
+                                    <li>Analisis Rasio Keuangan</li>
+                                    <li>Budget vs Actual</li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <h2>4. Contoh Sales Pipeline Visualization</h2>
+                        <h2>4. Contoh Analisis Arus Kas UMKM</h2>
                         
                         <div class="example-box">
-                            <h4>Visual Sales Pipeline</h4>
-                            <div class="pipeline-visual">
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Prospect</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-prospect" style="width: 90%"></div>
+                            <h4>Visual Arus Kas 6 Bulan Terakhir</h4>
+                            <div class="cashflow-visual">
+                                <div class="cashflow-month">
+                                    <div class="month-name">Januari</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 60%"></div>
+                                        <div class="expense-bar" style="width: 40%"></div>
                                     </div>
-                                    <div class="stage-value">Rp 900Jt (45 deals)</div>
+                                    <div class="cashflow-value profit">+Rp 4.2Jt</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Qualification</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-qualification" style="width: 70%"></div>
+                                <div class="cashflow-month">
+                                    <div class="month-name">Februari</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 55%"></div>
+                                        <div class="expense-bar" style="width: 45%"></div>
                                     </div>
-                                    <div class="stage-value">Rp 700Jt (28 deals)</div>
+                                    <div class="cashflow-value profit">+Rp 3.8Jt</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Proposal</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-proposal" style="width: 50%"></div>
+                                <div class="cashflow-month">
+                                    <div class="month-name">Maret</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 48%"></div>
+                                        <div class="expense-bar" style="width: 52%"></div>
                                     </div>
-                                    <div class="stage-value">Rp 500Jt (15 deals)</div>
+                                    <div class="cashflow-value loss">-Rp 1.2Jt</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Negotiation</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-negotiation" style="width: 30%"></div>
+                                <div class="cashflow-month">
+                                    <div class="month-name">April</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 65%"></div>
+                                        <div class="expense-bar" style="width: 35%"></div>
                                     </div>
-                                    <div class="stage-value">Rp 300Jt (8 deals)</div>
+                                    <div class="cashflow-value profit">+Rp 5.6Jt</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Closed Won</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-closed" style="width: 15%"></div>
+                                <div class="cashflow-month">
+                                    <div class="month-name">Mei</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 70%"></div>
+                                        <div class="expense-bar" style="width: 30%"></div>
                                     </div>
-                                    <div class="stage-value">Rp 150Jt (4 deals)</div>
+                                    <div class="cashflow-value profit">+Rp 6.8Jt</div>
+                                </div>
+                                <div class="cashflow-month">
+                                    <div class="month-name">Juni</div>
+                                    <div class="cashflow-bar">
+                                        <div class="income-bar" style="width: 62%"></div>
+                                        <div class="expense-bar" style="width: 38%"></div>
+                                    </div>
+                                    <div class="cashflow-value profit">+Rp 5.1Jt</div>
                                 </div>
                             </div>
                             
-                            <h4>Data Pipeline Detail</h4>
+                            <h4>Data Transaksi Keuangan</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Opportunity</th>
-                                        <th>Company</th>
-                                        <th>Value</th>
-                                        <th>Stage</th>
-                                        <th>Probability</th>
-                                        <th>Expected Close</th>
-                                        <th>Sales Rep</th>
+                                        <th>Tanggal</th>
+                                        <th>Keterangan</th>
+                                        <th>Kategori</th>
+                                        <th>Pemasukan</th>
+                                        <th>Pengeluaran</th>
+                                        <th>Saldo</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ERP Implementation</td>
-                                        <td>PT Maju Jaya</td>
-                                        <td>Rp 500,000,000</td>
-                                        <td>Proposal</td>
-                                        <td>50%</td>
-                                        <td>30 Juni 2023</td>
-                                        <td>Budi Santoso</td>
+                                        <td>01/06/2023</td>
+                                        <td>Penjualan Kue Brownies</td>
+                                        <td>Penjualan</td>
+                                        <td>Rp 850,000</td>
+                                        <td>-</td>
+                                        <td>Rp 12,450,000</td>
+                                        <td class="status-profitable">Profit</td>
                                     </tr>
                                     <tr>
-                                        <td>CRM License 100 users</td>
-                                        <td>PT Sukses Makmur</td>
-                                        <td>Rp 250,000,000</td>
-                                        <td>Negotiation</td>
-                                        <td>75%</td>
-                                        <td>15 Juni 2023</td>
-                                        <td>Sari Indah</td>
+                                        <td>01/06/2023</td>
+                                        <td>Beli Tepung dan Gula</td>
+                                        <td>Bahan Baku</td>
+                                        <td>-</td>
+                                        <td>Rp 350,000</td>
+                                        <td>Rp 12,100,000</td>
+                                        <td class="status-profitable">Operasional</td>
                                     </tr>
                                     <tr>
-                                        <td>Website Development</td>
-                                        <td>PT Inovasi Digital</td>
-                                        <td>Rp 150,000,000</td>
-                                        <td>Qualification</td>
-                                        <td>25%</td>
-                                        <td>31 Juli 2023</td>
-                                        <td>Rizki Pratama</td>
+                                        <td>02/06/2023</td>
+                                        <td>Bayar Listrik dan Internet</td>
+                                        <td>Operasional</td>
+                                        <td>-</td>
+                                        <td>Rp 450,000</td>
+                                        <td>Rp 11,650,000</td>
+                                        <td class="status-breakeven">Fixed Cost</td>
                                     </tr>
                                     <tr>
-                                        <td>Mobile App Development</td>
-                                        <td>PT Tech Solution</td>
-                                        <td>Rp 350,000,000</td>
-                                        <td>Prospect</td>
-                                        <td>10%</td>
-                                        <td>31 Agustus 2023</td>
-                                        <td>Diana Sari</td>
+                                        <td>02/06/2023</td>
+                                        <td>Penjualan Roti dan Kue</td>
+                                        <td>Penjualan</td>
+                                        <td>Rp 1,200,000</td>
+                                        <td>-</td>
+                                        <td>Rp 12,850,000</td>
+                                        <td class="status-profitable">Profit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>03/06/2023</td>
+                                        <td>Gaji Karyawan</td>
+                                        <td>Gaji</td>
+                                        <td>-</td>
+                                        <td>Rp 2,500,000</td>
+                                        <td>Rp 10,350,000</td>
+                                        <td class="status-breakeven">Fixed Cost</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <h2>5. Rumus Penting Sales Analysis Excel</h2>
+                        <h2>5. Rumus Penting Excel untuk UMKM</h2>
                         
                         <div class="example-box">
-                            <h4>Rumus Dasar Analisis Penjualan</h4>
+                            <h4>Rumus Dasar Manajemen UMKM</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
@@ -1217,193 +1298,252 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Target Achievement</strong></td>
-                                        <td>=ActualSales / SalesTarget</td>
-                                        <td>Persentase pencapaian target</td>
+                                        <td><strong>Laba Kotor</strong></td>
+                                        <td>=Pendapatan - HPP</td>
+                                        <td>Gross profit</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Weighted Pipeline</strong></td>
-                                        <td>=DealValue * Probability%</td>
-                                        <td>Nilai pipeline yang diharapkan</td>
+                                        <td><strong>Profit Margin</strong></td>
+                                        <td>=(Pendapatan - HPP)/Pendapatan</td>
+                                        <td>Persentase profit</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Conversion Rate</strong></td>
-                                        <td>=WonDeals / TotalLeads</td>
-                                        <td>Efisiensi conversion</td>
+                                        <td><strong>ROI</strong></td>
+                                        <td>=(Laba/Modal)*100%</td>
+                                        <td>Return on Investment</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Sales Growth</strong></td>
-                                        <td>=(CurrentMonth - PreviousMonth) / PreviousMonth</td>
-                                        <td>Pertumbuhan bulanan</td>
+                                        <td><strong>Inventory Turnover</strong></td>
+                                        <td>=HPP/RataInventory</td>
+                                        <td>Perputaran inventory</td>
                                     </tr>
                                 </tbody>
                             </table>
                             
-                            <h4>Rumus Lanjutan Sales Forecasting</h4>
+                            <h4>Rumus Lanjutan Analisis Bisnis</h4>
                             <div class="code-block">
-                                // Sales Velocity
-                                = (WonDeals * AvgDealSize) / SalesCycleDays
-                                
-                                // Lead Conversion Probability
-                                = COUNTIFS(LeadSourceColumn, LeadSource, StatusColumn, "Won") / 
-                                  COUNTIF(LeadSourceColumn, LeadSource)
-                                
-                                // Forecast Accuracy
-                                = 1 - (ABS(ForecastedSales - ActualSales) / ActualSales)
+                                // Break Even Point (BEP)
+                                BEP Unit = Total Fixed Cost / (Harga Jual - Variable Cost per Unit)
+                                BEP Rupiah = Total Fixed Cost / (1 - (Variable Cost/Pendapatan))
                                 
                                 // Customer Lifetime Value (CLV)
-                                = (AvgPurchaseValue * PurchaseFrequency * CustomerLifespan) - CAC
+                                = (Average Order Value × Purchase Frequency × Customer Lifespan)
                                 
-                                // Pipeline Coverage
-                                = TotalPipelineValue / SalesTarget
+                                // Cash Flow Projection
+                                = Saldo Awal + Projected Income - Projected Expenses
+                                
+                                // Inventory Reorder Point
+                                = (Lead Time × Average Daily Sales) + Safety Stock
+                                
+                                // Sales Growth Rate
+                                = (Current Month Sales - Previous Month Sales) / Previous Month Sales
                             </div>
                         </div>
                         
-                        <h2>6. Sales Team Performance Tracking</h2>
+                        <h2>6. Manajemen Inventory untuk UMKM</h2>
                         
                         <div class="example-box">
-                            <h4>Sales Team Performance Dashboard</h4>
+                            <h4>Data Inventory Toko Kue</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Sales Rep</th>
-                                        <th>Revenue</th>
-                                        <th>Target</th>
-                                        <th>Achievement</th>
-                                        <th># Deals</th>
-                                        <th>Avg Deal Size</th>
-                                        <th>Conversion Rate</th>
-                                        <th>Performance</th>
+                                        <th>Bahan Baku</th>
+                                        <th>Stok Awal</th>
+                                        <th>Pemakaian</th>
+                                        <th>Stok Akhir</th>
+                                        <th>Harga Beli</th>
+                                        <th>Nilai Inventory</th>
+                                        <th>Status</th>
+                                        <th>Prioritas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Budi Santoso</td>
-                                        <td>Rp 850,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>121%</td>
-                                        <td>12</td>
-                                        <td>Rp 70,833,333</td>
-                                        <td>35%</td>
-                                        <td class="performance-excellent">Excellent</td>
+                                        <td>Tepung Terigu</td>
+                                        <td>50 kg</td>
+                                        <td>35 kg</td>
+                                        <td>15 kg</td>
+                                        <td>Rp 12,000/kg</td>
+                                        <td>Rp 180,000</td>
+                                        <td class="status-loss">Perlu Restock</td>
+                                        <td class="category-high">High</td>
                                     </tr>
                                     <tr>
-                                        <td>Sari Indah</td>
-                                        <td>Rp 720,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>103%</td>
-                                        <td>15</td>
-                                        <td>Rp 48,000,000</td>
+                                        <td>Gula Pasir</td>
+                                        <td>30 kg</td>
+                                        <td>18 kg</td>
+                                        <td>12 kg</td>
+                                        <td>Rp 15,000/kg</td>
+                                        <td>Rp 180,000</td>
+                                        <td class="status-loss">Perlu Restock</td>
+                                        <td class="category-high">High</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telur</td>
+                                        <td>200 butir</td>
+                                        <td>150 butir</td>
+                                        <td>50 butir</td>
+                                        <td>Rp 2,500/butir</td>
+                                        <td>Rp 125,000</td>
+                                        <td class="status-breakeven">Aman</td>
+                                        <td class="category-medium">Medium</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mentega</td>
+                                        <td>15 kg</td>
+                                        <td>8 kg</td>
+                                        <td>7 kg</td>
+                                        <td>Rp 35,000/kg</td>
+                                        <td>Rp 245,000</td>
+                                        <td class="status-breakeven">Aman</td>
+                                        <td class="category-medium">Medium</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vanilla Essence</td>
+                                        <td>5 botol</td>
+                                        <td>2 botol</td>
+                                        <td>3 botol</td>
+                                        <td>Rp 25,000/botol</td>
+                                        <td>Rp 75,000</td>
+                                        <td class="status-profitable">Aman</td>
+                                        <td class="category-low">Low</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="priority-grid">
+                                <div class="priority-item priority-high">
+                                    <div>🚨 HIGH PRIORITY</div>
+                                    <div>Tepung, Gula</div>
+                                    <div>Restock Segera</div>
+                                </div>
+                                <div class="priority-item priority-medium">
+                                    <div>⚠️ MEDIUM PRIORITY</div>
+                                    <div>Telur, Mentega</div>
+                                    <div>Monitor Stok</div>
+                                </div>
+                                <div class="priority-item priority-low">
+                                    <div>✅ LOW PRIORITY</div>
+                                    <div>Vanilla, Baking Powder</div>
+                                    <div>Stok Aman</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>7. Analisis Produk dan Pelanggan</h2>
+                        
+                        <div class="example-box">
+                            <h4>Analisis Performa Produk</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Produk</th>
+                                        <th>Qty Terjual</th>
+                                        <th>Harga Jual</th>
+                                        <th>HPP</th>
+                                        <th>Pendapatan</th>
+                                        <th>Laba</th>
+                                        <th>Margin</th>
+                                        <th>Kategori</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Brownies Coklat</td>
+                                        <td>150</td>
+                                        <td>Rp 15,000</td>
+                                        <td>Rp 8,000</td>
+                                        <td>Rp 2,250,000</td>
+                                        <td>Rp 1,050,000</td>
+                                        <td>47%</td>
+                                        <td class="status-profitable">Star</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Roti Tawar</td>
+                                        <td>200</td>
+                                        <td>Rp 12,000</td>
+                                        <td>Rp 7,000</td>
+                                        <td>Rp 2,400,000</td>
+                                        <td>Rp 1,000,000</td>
+                                        <td>42%</td>
+                                        <td class="status-profitable">Star</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kue Lapis</td>
+                                        <td>80</td>
+                                        <td>Rp 25,000</td>
+                                        <td>Rp 18,000</td>
+                                        <td>Rp 2,000,000</td>
+                                        <td>Rp 560,000</td>
                                         <td>28%</td>
-                                        <td class="performance-good">Good</td>
+                                        <td class="status-breakeven">Question Mark</td>
                                     </tr>
                                     <tr>
-                                        <td>Rizki Pratama</td>
-                                        <td>Rp 550,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>79%</td>
-                                        <td>8</td>
-                                        <td>Rp 68,750,000</td>
-                                        <td>22%</td>
-                                        <td class="performance-average">Average</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diana Sari</td>
-                                        <td>Rp 380,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>54%</td>
-                                        <td>14</td>
-                                        <td>Rp 27,142,857</td>
-                                        <td>18%</td>
-                                        <td class="performance-poor">Needs Improvement</td>
+                                        <td>Donat</td>
+                                        <td>120</td>
+                                        <td>Rp 8,000</td>
+                                        <td>Rp 6,000</td>
+                                        <td>Rp 960,000</td>
+                                        <td>Rp 240,000</td>
+                                        <td>25%</td>
+                                        <td class="status-loss">Poor Performer</td>
                                     </tr>
                                 </tbody>
                             </table>
                             
                             <div class="tip">
-                                <strong>Coaching Insight:</strong> Diana memiliki volume deal tinggi tetapi average deal size rendah, menunjukkan potensi untuk coaching pada deal sizing dan negotiation skills.
+                                <strong>Strategi:</strong> Fokus pada produk "Star" dengan margin tinggi, evaluasi "Question Mark" untuk improvement, dan pertimbangkan phase out "Poor Performer".
                             </div>
                         </div>
                         
-                        <h2>7. Sales Forecasting Techniques</h2>
-                        
-                        <div class="example-box">
-                            <h4>Metode Sales Forecasting</h4>
-                            <ul>
-                                <li><strong>Historical Forecasting:</strong> Berdasarkan data historis + growth rate</li>
-                                <li><strong>Pipeline-Based Forecasting:</strong> Weighted pipeline value</li>
-                                <li><strong>Lead Conversion Forecasting:</strong> Leads × conversion rate × avg deal size</li>
-                                <li><strong>Multi-variable Forecasting:</strong> Kombinasi faktor seasonality, market trends, capacity</li>
-                            </ul>
-                            
-                            <h4>Contoh Pipeline-Based Forecast</h4>
-                            <div class="code-block">
-                                // Monthly Forecast Calculation
-                                Q2 Forecast = SUM(Weighted Pipeline where Close Date in Q2)
-                                
-                                // Confidence Levels
-                                Best Case = SUM(Deals with Probability >= 75%)
-                                Expected Case = SUM(Weighted Pipeline)
-                                Worst Case = SUM(Deals with Probability >= 25%)
-                                
-                                // Forecast by Sales Rep
-                                = SUMIFS(WeightedValue, SalesRepColumn, RepName, 
-                                        CloseDateColumn, ">="&StartDate, 
-                                        CloseDateColumn, "<="&EndDate)
-                                
-                                // Trend Analysis
-                                = FORECAST.LINEAR(NextMonth, HistoricalData, TimePeriods)
-                            </div>
-                        </div>
-                        
-                        <h2>8. Tips dan Best Practices Sales Excel</h2>
+                        <h2>8. Tips dan Best Practices Excel untuk UMKM</h2>
                         
                         <div class="tip">
-                            <strong>Tip 1:</strong> Gunakan CRM integration atau Power Query untuk mengotomatisasi data import dari sistem lain.
+                            <strong>Tip 1:</strong> Gunakan template yang konsisten dan simpan backup harian/mingguan untuk mencegah kehilangan data.
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 2:</strong> Implementasikan data validation untuk consistency pada stages, product categories, dan sales reps.
+                            <strong>Tip 2:</strong> Implementasikan data validation untuk menghindari kesalahan input data.
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 3:</strong> Buat automated alerts untuk deals yang stuck dalam stage terlalu lama atau approaching close date.
+                            <strong>Tip 3:</strong> Buat dashboard sederhana dengan chart untuk monitoring cepat performa bisnis.
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 4:</strong> Gunakan conditional formatting untuk visual quick assessment of performance and pipeline health.
+                            <strong>Tip 4:</strong> Gunakan conditional formatting untuk alert otomatis (stok rendah, piutang jatuh tempo, dll).
                         </div>
                         
                         <div class="warning">
-                            <strong>Peringatan:</strong> Jangan over-complicate dengan terlalu banyak metrics. Fokus pada KPI yang benar-benar drive business decisions.
+                            <strong>Peringatan:</strong> Jangan mencampur keuangan pribadi dan bisnis. Buat sistem terpisah untuk transaksi bisnis.
                         </div>
                         
-                        <h2>9. Studi Kasus: Optimasi Sales Performance</h2>
+                        <h2>9. Studi Kasus: Scaling Up Bisnis Kue</h2>
                         
                         <div class="exercise">
                             <h4>💪 Latihan Praktik</h4>
-                            <p><strong>Scenario:</strong> Tingkatkan performa sales team dengan data berikut:</p>
+                            <p><strong>Scenario:</strong> Tingkatkan skala bisnis kue rumahan dengan data berikut:</p>
                             <ul>
-                                <li>Current monthly revenue: Rp 2.5B (target: Rp 3B)</li>
-                                <li>Conversion rate: 15% (industry average: 25%)</li>
-                                <li>Average sales cycle: 45 days (ideal: 30 days)</li>
-                                <li>Pipeline coverage: 2.5x (recommended: 3x)</li>
+                                <li>Current monthly revenue: Rp 25 juta</li>
+                                <li>Profit margin: 35% (target: 45%)</li>
+                                <li>Customer repeat rate: 25% (target: 40%)</li>
+                                <li>Inventory turnover: 2x/bulan (target: 4x/bulan)</li>
                             </ul>
-                            <p><strong>Langkah-langkah Optimasi:</strong></p>
+                            <p><strong>Langkah-langkah Improvement:</strong></p>
                             <ol>
-                                <li>Analisis conversion rate per stage untuk identifikasi bottleneck</li>
-                                <li>Review sales cycle duration dan identifikasi penyebab delay</li>
-                                <li>Optimasi lead quality dan quantity untuk pipeline coverage</li>
-                                <li>Implementasikan sales coaching berdasarkan performance gap analysis</li>
-                                <li>Setup weekly performance review dengan data-driven insights</li>
+                                <li>Analisis produk dengan margin tertinggi dan fokus pengembangan</li>
+                                <li>Optimasi pricing strategy berdasarkan competitor analysis</li>
+                                <li>Implementasikan loyalty program untuk meningkatkan repeat customer</li>
+                                <li>Optimasi manajemen inventory untuk mengurangi waste</li>
+                                <li>Ekspansi channel penjualan (online, catering, retail)</li>
                             </ol>
                         </div>
                         
                         <div class="note">
-                            <strong>Advanced Tip:</strong> Untuk sales organization yang kompleks, pertimbangkan menggunakan Power BI di atas Excel untuk real-time dashboard dan advanced analytics capabilities.
+                            <strong>Advanced Tip:</strong> Ketika bisnis sudah berkembang, pertimbangkan untuk upgrade ke software akuntansi khusus UMKM yang terintegrasi dengan perpajakan.
                         </div>
                         
-                        <p>Dengan menguasai Excel untuk sales analysis, Anda dapat mengubah data mentah menjadi actionable insights yang mendrive revenue growth dan sales team performance improvement.</p>
+                        <p>Dengan menguasai Excel untuk manajemen UMKM, Anda dapat memiliki kontrol penuh atas bisnis, membuat keputusan yang lebih baik berdasarkan data, dan mengoptimalkan pertumbuhan usaha secara sustainable.</p>
                     </div>
                 </article>
                 
@@ -1412,24 +1552,24 @@
                     <h2>Artikel Terkait</h2>
                     <div class="related-grid">
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sales Dashboard">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Keuangan UMKM">
                             <div class="related-item-content">
-                                <h3><a href="#">Membuat Dashboard Sales di Excel</a></h3>
-                                <p>Panduan lengkap membuat dashboard sales yang interaktif dan informatif.</p>
+                                <h3><a href="#">Sistem Akuntansi UMKM dengan Excel</a></h3>
+                                <p>Panduan lengkap membuat sistem akuntansi sederhana untuk usaha kecil.</p>
                             </div>
                         </div>
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CRM Excel">
+                            <img src="https://images.unsplash.com/photo-1563013546-77f13c5e26ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Inventory UMKM">
                             <div class="related-item-content">
-                                <h3><a href="#">Sistem CRM Sederhana dengan Excel</a></h3>
-                                <p>Membangun sistem CRM basic untuk tracking customer dan sales activities.</p>
+                                <h3><a href="#">Manajemen Inventory untuk Retail</a></h3>
+                                <p>Sistem tracking stok dan persediaan untuk usaha retail.</p>
                             </div>
                         </div>
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sales Forecasting">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Analisis Bisnis">
                             <div class="related-item-content">
-                                <h3><a href="#">Sales Forecasting dengan Excel</a></h3>
-                                <p>Teknik membuat prediksi penjualan yang akurat menggunakan Excel.</p>
+                                <h3><a href="#">Analisis Bisnis dan Forecasting</a></h3>
+                                <p>Teknik menganalisis data bisnis dan membuat prediksi masa depan.</p>
                             </div>
                         </div>
                     </div>
@@ -1437,7 +1577,7 @@
                 
                 <!-- Comments Section -->
                 <div class="comments-section">
-                    <h2>Komentar (35)</h2>
+                    <h2>Komentar (42)</h2>
                     
                     <div class="comment-form">
                         <h3>Tinggalkan Komentar</h3>
@@ -1461,26 +1601,26 @@
                     <div class="comment-list">
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Sales Director</span>
-                                <span class="comment-date">10 Mei 2023</span>
+                                <span class="comment-author">Pemilik Toko Kue</span>
+                                <span class="comment-date">31 Mei 2023</span>
                             </div>
-                            <p>Pipeline coverage analysis sangat membantu! Berhasil mengidentifikasi need untuk meningkatkan lead generation 30% untuk memenuhi target Q3.</p>
+                            <p>Sistem analisis produk sangat membantu! Berhasil mengidentifikasi bahwa brownies memberikan margin 47% sehingga bisa fokus produksi dan promosi pada produk tersebut.</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
                                 <span class="comment-author">Admin</span>
-                                <span class="comment-date">10 Mei 2023</span>
+                                <span class="comment-date">31 Mei 2023</span>
                             </div>
-                            <p>Excellent! Data-driven decision making adalah kunci sales success di era modern.</p>
+                            <p>Excellent! Data-driven decision making adalah kunci success bisnis di era modern.</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Sales Manager</span>
-                                <span class="comment-date">11 Mei 2023</span>
+                                <span class="comment-author">Pelaku UMKM Fashion</span>
+                                <span class="comment-date">1 Juni 2023</span>
                             </div>
-                            <p>Bagaimana cara menghitung optimal pipeline coverage untuk business kami yang seasonal?</p>
+                            <p>Bagaimana cara menghitung safety stock yang optimal untuk bisnis fashion yang seasonal?</p>
                         </div>
                     </div>
                 </div>
@@ -1491,21 +1631,21 @@
                 <div class="widget">
                     <h3>Tutorial Populer</h3>
                     <ul class="popular-tutorials">
-                        <li><a href="#"><span>1</span> Excel untuk Sales</a></li>
-                        <li><a href="#"><span>2</span> Sales Dashboard Excel</a></li>
+                        <li><a href="#"><span>1</span> Excel untuk UMKM</a></li>
+                        <li><a href="#"><span>2</span> Akuntansi Excel</a></li>
                         <li><a href="#"><span>3</span> Pivot Table Excel</a></li>
-                        <li><a href="#"><span>4</span> Pipeline Management</a></li>
-                        <li><a href="#"><span>5</span> Sales Forecasting</a></li>
+                        <li><a href="#"><span>4</span> Inventory Management</a></li>
+                        <li><a href="#"><span>5</span> Dashboard Bisnis</a></li>
                     </ul>
                 </div>
                 
                 <div class="widget">
                     <h3>Kategori Tutorial</h3>
                     <ul>
-                        <li><a href="#">Excel untuk Sales</a></li>
+                        <li><a href="#">Excel untuk UMKM</a></li>
                         <li><a href="#">Pivot Table & Analisis</a></li>
                         <li><a href="#">Dashboard & Visualisasi</a></li>
-                        <li><a href="#">Manajemen Bisnis</a></li>
+                        <li><a href="#">Akuntansi & Keuangan</a></li>
                         <li><a href="#">Template Excel</a></li>
                         <li><a href="#">Tips & Trik Excel</a></li>
                     </ul>
@@ -1514,14 +1654,14 @@
                 <div class="widget tags-widget">
                     <h3>Tags</h3>
                     <div class="tags">
-                        <a href="#">Excel Sales</a>
-                        <a href="#">Analisis Penjualan</a>
-                        <a href="#">Pipeline Management</a>
-                        <a href="#">Sales Performance</a>
-                        <a href="#">Sales Dashboard</a>
-                        <a href="#">Forecasting</a>
-                        <a href="#">KPI Sales</a>
-                        <a href="#">CRM Excel</a>
+                        <a href="#">Excel UMKM</a>
+                        <a href="#">Usaha Kecil</a>
+                        <a href="#">Keuangan Bisnis</a>
+                        <a href="#">Manajemen Inventory</a>
+                        <a href="#">Laporan Keuangan</a>
+                        <a href="#">Bisnis Excel</a>
+                        <a href="#">Analisis Usaha</a>
+                        <a href="#">Operasional</a>
                     </div>
                 </div>
                 
@@ -1555,10 +1695,10 @@
                 <div class="footer-column">
                     <h3>Tutorial Excel</h3>
                     <ul>
-                        <li><a href="#">Excel untuk Sales</a></li>
+                        <li><a href="#">Excel untuk UMKM</a></li>
                         <li><a href="#">Pivot Table & Analisis</a></li>
                         <li><a href="#">Dashboard & Visualisasi</a></li>
-                        <li><a href="#">Manajemen Bisnis</a></li>
+                        <li><a href="#">Akuntansi & Keuangan</a></li>
                         <li><a href="#">Template Gratis</a></li>
                     </ul>
                 </div>

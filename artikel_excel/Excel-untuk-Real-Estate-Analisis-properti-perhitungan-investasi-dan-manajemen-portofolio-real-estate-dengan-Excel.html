@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel untuk Real Estate - Analisis Properti & Investasi | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan Excel untuk analisis properti, perhitungan investasi, dan manajemen portofolio real estate. Template dan formula lengkap.">
+    <meta name="keywords" content="excel real estate, analisis properti, investasi properti, kalkulasi ROI, portofolio real estate, template excel properti">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Chart Preview Styles */
+        .chart-previews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .chart-preview {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .chart-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chart-demo {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            margin: 15px 0;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .bar {
+            width: 30px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .bar-1 { height: 60%; }
+        .bar-2 { height: 85%; }
+        .bar-3 { height: 45%; }
+        .bar-4 { height: 75%; }
+        .bar-5 { height: 55%; }
+        
+        .pie-demo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4CAF50 0% 25%,
+                #2196F3 25% 50%,
+                #FFC107 50% 75%,
+                #FF5722 75% 100%
+            );
+            margin: 0 auto;
+        }
+        
+        .line-demo {
+            height: 150px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .line-path {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            stroke: #217346;
+            stroke-width: 3;
+            fill: none;
+        }
+        
+        .chart-preview h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .chart-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .chart-type-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .chart-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        .step-by-step {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: #217346;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .design-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .design-tip {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #217346;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .exercise h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 40px;
+        }
+        
+        .related-articles h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .related-item {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .related-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .related-item-content {
+            padding: 15px;
+        }
+        
+        .related-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .related-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comments-section h2 {
+            font-size: 22px;
+            color: #217346;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #217346;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #1a5c38;
+        }
+        
+        .comment-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            color: #217346;
+        }
+        
+        .comment-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Real Estate Specific Styles */
+        .property-analysis {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .roi-calculator {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .portfolio-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .portfolio-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .portfolio-card h4 {
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .formula-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .chart-previews {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-type-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                        <li><a href="#">Rumus</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Excel untuk Real Estate: Analisis Properti, Investasi, dan Manajemen Portofolio</h1>
+                        <div class="article-meta">
+                            <span>📅 15 April 2023</span>
+                            <span>👁️ 5.2K Dilihat</span>
+                            <span>⏱️ 25 menit membaca</span>
+                            <span>🏷️ Excel Real Estate, Analisis Properti, Investasi, ROI, Portofolio</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>Excel adalah alat yang sangat powerful untuk analisis properti, perhitungan investasi, dan manajemen portofolio real estate. Dengan menguasai teknik-teknik Excel khusus real estate, Anda dapat membuat keputusan investasi yang lebih tepat dan mengelola properti dengan lebih efisien.</p>
+                        
+                        <div class="note">
+                            <strong>Fakta Menarik:</strong> 78% investor real estate profesional menggunakan Excel sebagai alat analisis utama mereka.
+                        </div>
+                        
+                        <h2>1. Analisis Kelayakan Investasi Properti</h2>
+                        
+                        <div class="property-analysis">
+                            <h3>Komponen Analisis Properti</h3>
+                            <ul>
+                                <li><strong>Harga Beli:</strong> Biaya akuisisi properti</li>
+                                <li><strong>Biaya Renovasi:</strong> Perbaikan dan peningkatan</li>
+                                <li><strong>Pendapatan Sewa:</strong> Estimasi pendapatan bulanan/tahunan</li>
+                                <li><strong>Biaya Operasional:</strong> Pajak, maintenance, asuransi</li>
+                                <li><strong>Nilai Jual Kembali:</strong> Estimasi appreciation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="chart-previews">
+                            <div class="chart-preview">
+                                <h4>📈 ROI Calculator</h4>
+                                <div class="chart-demo">
+                                    <div class="bar bar-1"></div>
+                                    <div class="bar bar-2"></div>
+                                    <div class="bar bar-3"></div>
+                                    <div class="bar bar-4"></div>
+                                    <div class="bar bar-5"></div>
+                                </div>
+                                <p><strong>Untuk:</strong> Menghitung Return on Investment</p>
+                            </div>
+                            
+                            <div class="chart-preview">
+                                <h4>💰 Cash Flow Analysis</h4>
+                                <div class="pie-demo"></div>
+                                <p><strong>Untuk:</strong> Analisis arus kas bulanan</p>
+                            </div>
+                            
+                            <div class="chart-preview">
+                                <h4>📊 Portfolio Performance</h4>
+                                <div class="line-demo">
+                                    <svg class="line-path" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <path d="M0,80 L20,50 L40,70 L60,30 L80,40 L100,20" />
+                                    </svg>
+                                </div>
+                                <p><strong>Untuk:</strong> Tren kinerja portofolio</p>
+                            </div>
+                        </div>
+                        
+                        <h2>2. Template Analisis Properti di Excel</h2>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <h4>Siapkan Struktur Data Properti</h4>
+                                <p>Buat tabel dengan kolom: Alamat, Harga Beli, Biaya Renovasi, dll.</p>
+                                <div class="code-block">
+                                    Tips: Gunakan Table Format untuk data yang dinamis
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Hitung Biaya Akuisisi</h4>
+                                <p>Total biaya = Harga beli + Biaya notaris + Biaya renovasi</p>
+                                <div class="formula-box">
+                                    =Harga_Beli + Biaya_Notaris + Biaya_Renovasi
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Estimasi Pendapatan Sewa</h4>
+                                <p>Berdasarkan harga sewa pasar dan occupancy rate</p>
+                                <div class="formula-box">
+                                    =Harga_Sewa * 12 * Occupancy_Rate
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Hitung Biaya Operasional</h4>
+                                <p>Pajak, maintenance, asuransi, management fee</p>
+                                <div class="formula-box">
+                                    =SUM(Pajak, Maintenance, Asuransi, Management_Fee)
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <h4>Analisis ROI dan Cash Flow</h4>
+                                <p>Net Operating Income dan Capitalization Rate</p>
+                                <div class="formula-box">
+                                    Cap_Rate = NOI / Total_Investasi
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2>3. Contoh Analisis Properti Apartemen</h2>
+                        
+                        <div class="example-box">
+                            <h4>Data Properti Apartemen di Jakarta Selatan</h4>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Nilai</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Harga Beli</td>
+                                        <td>Rp 1.200.000.000</td>
+                                        <td>Harga unit 2BR</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Notaris</td>
+                                        <td>Rp 25.000.000</td>
+                                        <td>1% dari harga beli</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Renovasi</td>
+                                        <td>Rp 50.000.000</td>
+                                        <td>Furnishing dan perbaikan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Harga Sewa/Bulan</td>
+                                        <td>Rp 12.000.000</td>
+                                        <td>Berdasarkan pasar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Occupancy Rate</td>
+                                        <td>85%</td>
+                                        <td>Rata-rata tahunan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biaya Operasional/Bulan</td>
+                                        <td>Rp 2.500.000</td>
+                                        <td>Service charge, pajak, dll</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4>Perhitungan ROI:</h4>
+                            <ul>
+                                <li><strong>Total Investasi:</strong> Rp 1.275.000.000</li>
+                                <li><strong>Pendapatan Sewa Tahunan:</strong> Rp 122.400.000</li>
+                                <li><strong>Biaya Operasional Tahunan:</strong> Rp 30.000.000</li>
+                                <li><strong>Net Operating Income:</strong> Rp 92.400.000</li>
+                                <li><strong>Cap Rate:</strong> 7.25%</li>
+                                <li><strong>Cash on Cash Return:</strong> 8.9% (dengan financing)</li>
+                            </ul>
+                        </div>
+                        
+                        <h2>4. Manajemen Portofolio Real Estate</h2>
+                        
+                        <div class="portfolio-overview">
+                            <div class="portfolio-card">
+                                <h4>Total Nilai Portofolio</h4>
+                                <div class="value">Rp 8.5M</div>
+                                <p>5 properti</p>
+                            </div>
+                            <div class="portfolio-card">
+                                <h4>Rata-rata Cap Rate</h4>
+                                <div class="value">6.8%</div>
+                                <p>Portofolio keseluruhan</p>
+                            </div>
+                            <div class="portfolio-card">
+                                <h4>Occupancy Rate</h4>
+                                <div class="value">87%</div>
+                                <p>Rata-rata tahunan</p>
+                            </div>
+                            <div class="portfolio-card">
+                                <h4>Cash Flow/Bulan</h4>
+                                <div class="value">Rp 15.2Jt</div>
+                                <p>Setelah semua biaya</p>
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Metrik Kinerja</th>
+                                    <th>Rumus Excel</th>
+                                    <th>Kegunaan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Cap Rate</strong></td>
+                                    <td>=NOI/Total_Investasi</td>
+                                    <td>Mengukur profitabilitas properti</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cash on Cash Return</strong></td>
+                                    <td>=Cash_Flow_Tahunan/Modal_Keluar</td>
+                                    <td>Return berdasarkan modal sendiri</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gross Rent Multiplier</strong></td>
+                                    <td>=Harga_Beli/Pendapatan_Sewa_Kotor</td>
+                                    <td>Membandingkan harga properti</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Debt Service Coverage</strong></td>
+                                    <td>=NOI/Pembayaran_Pinjaman_Tahunan</td>
+                                    <td>Kemampuan bayar utang</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Internal Rate of Return</strong></td>
+                                    <td>=IRR(Aliran_Kas)</td>
+                                    <td>Return investasi komprehensif</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Net Present Value</strong></td>
+                                    <td>=NPV(Tingkat_Diskonto,Aliran_Kas)</td>
+                                    <td>Nilai sekarang investasi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2>5. Analisis Komparatif Properti</h2>
+                        
+                        <div class="design-tips">
+                            <div class="design-tip">
+                                <h5>📍 Location Analysis</h5>
+                                <p>Bandingkan properti berdasarkan lokasi dan fasilitas sekitar</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>💰 Price per SqM</h5>
+                                <p>Hitung harga per meter persegi untuk perbandingan</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>📈 Growth Potential</h5>
+                                <p>Analisis tren harga dan perkembangan area</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>🏗️ Development Pipeline</h5>
+                                <p>Proyek infrastruktur dan pengembangan baru</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>Best Practice:</strong> Buat dashboard properti dengan Pivot Table dan Slicer untuk analisis yang interaktif.
+                        </div>
+                        
+                        <h2>6. Analisis Financing dan Leverage</h2>
+                        
+                        <div class="example-box">
+                            <h4>Perhitungan KPR untuk Investasi Properti</h4>
+                            <p>Gunakan fungsi PMT, IPMT, dan PPMT untuk analisis pembiayaan:</p>
+                            <ol>
+                                <li>Hitung angsuran bulanan dengan fungsi PMT</li>
+                                <li>Breakdown pembayaran bunga dan pokok dengan IPMT dan PPMT</li>
+                                <li>Analisis dampak leverage terhadap ROI</li>
+                                <li>Hitung break-even point dengan berbagai skenario</li>
+                            </ol>
+                            
+                            <div class="formula-box">
+                                =PMT(Bunga/12, Tenor*12, -Pinjaman)
+                            </div>
+                            
+                            <div class="note">
+                                <strong>Manfaat Leverage:</strong> Dengan financing yang tepat, Anda dapat meningkatkan return on equity meskipun cap rate lebih rendah.
+                            </div>
+                        </div>
+                        
+                        <h2>7. Forecasting dan Proyeksi Harga</h2>
+                        
+                        <div class="example-box">
+                            <h4>Langkah Membuat Proyeksi Harga Properti:</h4>
+                            <ol>
+                                <li>Kumpulkan data historis harga properti</li>
+                                <li>Gunakan fungsi FORECAST atau TREND untuk proyeksi linear</li>
+                                <li>Analisis faktor makro yang mempengaruhi harga</li>
+                                <li>Buat skenario optimis, realistis, dan pesimis</li>
+                            </ol>
+                            
+                            <div class="formula-box">
+                                =FORECAST(X, Known_Y's, Known_X's)
+                            </div>
+                            
+                            <div class="tip">
+                                <strong>Pro Tip:</strong> Gunakan data BPS dan Bank Indonesia untuk inflasi dan pertumbuhan ekonomi dalam proyeksi.
+                            </div>
+                        </div>
+                        
+                        <h2>8. Common Mistakes dan Solusinya</h2>
+                        
+                        <div class="warning">
+                            <h4>❌ Kesalahan Umum Analisis Real Estate:</h4>
+                            <ul>
+                                <li><strong>Underestimate Biaya:</strong> Selalu tambahkan buffer 10-15% untuk biaya tak terduga</li>
+                                <li><strong>Overestimate Pendapatan Sewa:</strong> Gunakan data pasar yang realistis</li>
+                                <li><strong>Ignoring Vacancy Rate:</strong> Faktor 5-10% untuk periode kosong</li>
+                                <li><strong>Lupa Biaya Maintenance:</strong> Alokasikan 1-2% nilai properti per tahun</li>
+                                <li><strong>Tidak Mempertimbangkan Pajak:</strong> Hitung PPh final dan pajak tahunan</li>
+                            </ul>
+                        </div>
+                        
+                        <h2>9. Studi Kasus: Portofolio Apartemen Jakarta</h2>
+                        
+                        <div class="exercise">
+                            <h4>💪 Latihan Praktik</h4>
+                            <p><strong>Scenario:</strong> Anda memiliki 3 unit apartemen di lokasi berbeda dengan karakteristik:</p>
+                            <ul>
+                                <li>Unit A: Sudah disewa 3 tahun, cap rate 6.5%</li>
+                                <li>Unit B: Baru dibeli, sedang renovasi</li>
+                                <li>Unit C: Akan dijual, capital gain 35%</li>
+                            </ul>
+                            
+                            <p><strong>Tugas Analisis:</strong></p>
+                            <ol>
+                                <li>Hitung kinerja portofolio keseluruhan</li>
+                                <li>Analisis apakah harus menjual Unit C atau mempertahankan</li>
+                                <li>Hitung dampak reinvestasi hasil penjualan Unit C</li>
+                                <li>Buat proyeksi cash flow 5 tahun ke depan</li>
+                                <li>Analisis sensitivity terhadap perubahan suku bunga</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Advanced Tip:</strong> Untuk portofolio yang lebih kompleks, pelajari Excel Power Query untuk mengkonsolidasi data dari berbagai sumber.
+                        </div>
+                        
+                        <h2>10. Template dan Tools Gratis</h2>
+                        
+                        <div class="design-tips">
+                            <div class="design-tip">
+                                <h5>📋 Property Analysis Template</h5>
+                                <p>Template analisis properti single family home</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>🏢 Multi-Unit Calculator</h5>
+                                <p>Kalkulator untuk properti dengan banyak unit</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>📊 Portfolio Dashboard</h5>
+                                <p>Dashboard monitoring portofolio real estate</p>
+                            </div>
+                            <div class="design-tip">
+                                <h5>💰 Rental Cash Flow</h5>
+                                <p>Template analisis arus kas properti sewa</p>
+                            </div>
+                        </div>
+                        
+                        <p>Dengan menguasai Excel untuk analisis real estate, Anda dapat membuat keputusan investasi yang lebih terinformasi dan mengelola portofolio properti dengan lebih efektif. Practice dengan data properti nyata untuk semakin mahir!</p>
+                    </div>
+                </article>
+                
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h2>Artikel Terkait</h2>
+                    <div class="related-grid">
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Analisis Investasi Properti">
+                            <div class="related-item-content">
+                                <h3><a href="#">Analisis Investasi Properti</a></h3>
+                                <p>Teknik analisis mendalam untuk properti residensial dan komersial.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Kalkulator KPR Excel">
+                            <div class="related-item-content">
+                                <h3><a href="#">Kalkulator KPR Excel</a></h3>
+                                <p>Template lengkap untuk analisis pembiayaan properti.</p>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dashboard Real Estate">
+                            <div class="related-item-content">
+                                <h3><a href="#">Dashboard Real Estate</a></h3>
+                                <p>Membuat dashboard monitoring portofolio properti.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h2>Komentar (12)</h2>
+                    
+                    <div class="comment-form">
+                        <h3>Tinggalkan Komentar</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nama *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentar *</label>
+                                <textarea id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim Komentar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="comment-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Andi Wijaya</span>
+                                <span class="comment-date">16 April 2023</span>
+                            </div>
+                            <p>Artikel yang sangat bermanfaat! Saya sedang membangun portofolio apartemen dan template analisisnya sangat membantu.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-date">16 April 2023</span>
+                            </div>
+                            <p>Terima kasih Andi! Template analisis properti memang essential untuk investor real estate yang serius.</p>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">Sarah Tan</span>
+                                <span class="comment-date">17 April 2023</span>
+                            </div>
+                            <p>Bagaimana cara mendapatkan template gratis yang disebutkan di artikel?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Populer</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Excel untuk Real Estate</a></li>
+                        <li><a href="#"><span>2</span> Analisis Investasi Properti</a></li>
+                        <li><a href="#"><span>3</span> Kalkulator KPR Excel</a></li>
+                        <li><a href="#"><span>4</span> Dashboard Real Estate</a></li>
+                        <li><a href="#"><span>5</span> Rumus Keuangan Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Real Estate Excel</a></li>
+                        <li><a href="#">Analisis Investasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Fungsi Keuangan</a></li>
+                        <li><a href="#">Dashboard & Reporting</a></li>
+                        <li><a href="#">Tips & Trik Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags</h3>
+                    <div class="tags">
+                        <a href="#">Real Estate</a>
+                        <a href="#">Analisis Properti</a>
+                        <a href="#">Investasi</a>
+                        <a href="#">ROI</a>
+                        <a href="#">Cash Flow</a>
+                        <a href="#">Portofolio</a>
+                        <a href="#">KPR</a>
+                        <a href="#">Template</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan update tutorial Excel real estate terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda">
+                    </div>
+                    <button class="submit-btn" style="width: 100%;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Real Estate Excel</a></li>
+                        <li><a href="#">Analisis Investasi</a></li>
+                        <li><a href="#">Template Gratis</a></li>
+                        <li><a href="#">Fungsi Keuangan</a></li>
+                        <li><a href="#">Dashboard & Reporting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

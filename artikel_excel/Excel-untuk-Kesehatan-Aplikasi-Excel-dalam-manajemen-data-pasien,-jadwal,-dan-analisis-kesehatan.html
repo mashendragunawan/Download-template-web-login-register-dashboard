@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel untuk Sales - Analisis Penjualan & Pipeline Management | Excel Tutorial</title>
-    <meta name="description" content="Pelajari cara menggunakan Excel untuk analisis penjualan, pipeline management, tracking performa tim sales, dan forecasting revenue.">
-    <meta name="keywords" content="excel sales, analisis penjualan, pipeline management, tracking sales, dashboard sales, forecasting revenue">
+    <title>Excel untuk Kesehatan - Manajemen Data Pasien & Analisis Kesehatan | Excel Tutorial</title>
+    <meta name="description" content="Pelajari cara menggunakan Excel untuk manajemen data pasien, jadwal dokter, rekam medis, dan analisis data kesehatan di rumah sakit dan klinik.">
+    <meta name="keywords" content="excel kesehatan, manajemen pasien, rekam medis, jadwal dokter, analisis kesehatan, rumah sakit excel">
     <meta name="author" content="Excel Tutorial">
     <style>
         /* Reset dan Base Styles */
@@ -183,7 +183,7 @@
             margin-bottom: 8px;
         }
         
-        .sales-structure {
+        .health-structure {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 8px;
@@ -191,26 +191,26 @@
             margin: 25px 0;
         }
         
-        .sales-structure h4 {
+        .health-structure h4 {
             color: #217346;
             margin-bottom: 20px;
             text-align: center;
         }
         
-        .sales-layout {
+        .health-layout {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 20px;
             margin: 20px 0;
         }
         
-        .sales-areas {
+        .health-areas {
             display: grid;
             grid-template-rows: repeat(4, 1fr);
             gap: 15px;
         }
         
-        .sales-area {
+        .health-area {
             background: white;
             border: 2px solid #217346;
             border-radius: 5px;
@@ -218,12 +218,12 @@
             text-align: center;
         }
         
-        .sales-area h5 {
+        .health-area h5 {
             color: #217346;
             margin-bottom: 8px;
         }
         
-        .sales-preview {
+        .health-preview {
             background: white;
             border: 2px dashed #217346;
             border-radius: 5px;
@@ -235,7 +235,7 @@
             flex-direction: column;
         }
         
-        .pipeline-visual {
+        .patient-flow {
             width: 100%;
             background: white;
             border: 1px solid #ddd;
@@ -244,7 +244,7 @@
             margin: 20px 0;
         }
         
-        .pipeline-stage {
+        .flow-step {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
@@ -253,35 +253,28 @@
             background: #f8f9fa;
         }
         
-        .stage-name {
-            width: 120px;
-            font-weight: 500;
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #217346;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
         }
         
-        .stage-bar {
+        .step-description {
             flex: 1;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            margin: 0 15px;
-            overflow: hidden;
         }
         
-        .stage-fill {
-            height: 100%;
-            border-radius: 10px;
-        }
-        
-        .stage-prospect { background: #ff6b6b; }
-        .stage-qualification { background: #ffa726; }
-        .stage-proposal { background: #29b6f6; }
-        .stage-negotiation { background: #66bb6a; }
-        .stage-closed { background: #217346; }
-        
-        .stage-value {
-            width: 100px;
+        .step-duration {
+            width: 80px;
             text-align: right;
             font-weight: bold;
+            color: #217346;
         }
         
         .data-table {
@@ -306,27 +299,44 @@
             background: #f9f9f9;
         }
         
-        .performance-excellent {
-            background: #e8f5e9 !important;
-            color: #2e7d32;
-            font-weight: bold;
-        }
-        
-        .performance-good {
+        .status-scheduled {
             background: #e3f2fd !important;
             color: #1565c0;
             font-weight: bold;
         }
         
-        .performance-average {
+        .status-inprogress {
+            background: #fff3e0 !important;
+            color: #ef6c00;
+            font-weight: bold;
+        }
+        
+        .status-completed {
+            background: #e8f5e9 !important;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .status-cancelled {
+            background: #ffebee !important;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .priority-high {
+            background: #ffebee !important;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .priority-medium {
             background: #fff3e0 !important;
             color: #ef6c00;
         }
         
-        .performance-poor {
-            background: #ffebee !important;
-            color: #c62828;
-            font-weight: bold;
+        .priority-low {
+            background: #e8f5e9 !important;
+            color: #2e7d32;
         }
         
         .highlight {
@@ -482,14 +492,14 @@
             color: #666;
         }
         
-        .kpi-grid {
+        .analysis-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
             margin: 20px 0;
         }
         
-        .kpi-card {
+        .analysis-card {
             background: white;
             border: 1px solid #e9ecef;
             border-radius: 8px;
@@ -497,19 +507,19 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        .kpi-header {
+        .analysis-header {
             display: flex;
             justify-content: between;
             align-items: center;
             margin-bottom: 10px;
         }
         
-        .kpi-title {
+        .analysis-title {
             font-weight: 500;
             color: #333;
         }
         
-        .kpi-trend {
+        .analysis-trend {
             font-size: 12px;
             padding: 2px 8px;
             border-radius: 10px;
@@ -525,10 +535,40 @@
             color: #c62828;
         }
         
-        .kpi-value {
+        .analysis-value {
             font-size: 20px;
             font-weight: bold;
             color: #217346;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .schedule-slot {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .slot-available {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .slot-booked {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .slot-break {
+            background: #fff3e0;
+            border-color: #ff9800;
         }
         
         /* Sidebar Widgets */
@@ -860,7 +900,7 @@
                 margin-bottom: 5px;
             }
             
-            .sales-layout {
+            .health-layout {
                 grid-template-columns: 1fr;
             }
             
@@ -872,34 +912,37 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .kpi-grid {
+            .analysis-grid {
                 grid-template-columns: 1fr;
             }
             
-            .pipeline-stage {
+            .schedule-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .flow-step {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .stage-name {
-                width: 100%;
-                margin-bottom: 5px;
+            .step-number {
+                margin-bottom: 10px;
             }
             
-            .stage-bar {
-                width: 100%;
-                margin: 5px 0;
-            }
-            
-            .stage-value {
+            .step-duration {
                 width: 100%;
                 text-align: left;
+                margin-top: 5px;
             }
         }
         
         @media (max-width: 480px) {
             .metric-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -947,266 +990,261 @@
             <div class="content">
                 <article>
                     <div class="article-header">
-                        <h1>Excel untuk Sales: Analisis Penjualan, Pipeline Management, dan Tracking Performa Tim</h1>
+                        <h1>Excel untuk Kesehatan: Manajemen Data Pasien, Jadwal Dokter, dan Analisis Kesehatan</h1>
                         <div class="article-meta">
-                            <span>📅 9 Mei 2023</span>
-                            <span>👁️ 9.3K Dilihat</span>
+                            <span>📅 23 Mei 2023</span>
+                            <span>👁️ 7.5K Dilihat</span>
                             <span>⏱️ 20 menit membaca</span>
-                            <span>🏷️ Excel Sales, Analisis Penjualan, Pipeline Management, Sales Performance</span>
+                            <span>🏷️ Excel Kesehatan, Manajemen Pasien, Rekam Medis, Jadwal Dokter</span>
                         </div>
                     </div>
                     
                     <div class="article-body">
-                        <p>Excel adalah alat yang sangat powerful untuk tim sales dalam menganalisis performa, mengelola pipeline, dan membuat forecasting yang akurat. Dengan Excel, sales manager dapat membuat dashboard yang komprehensif untuk memantau KPI tim dan mengidentifikasi peluang improvement.</p>
+                        <p>Microsoft Excel adalah alat yang sangat efektif dalam bidang kesehatan untuk mengelola data pasien, menjadwalkan appointment, membuat rekam medis, dan menganalisis data kesehatan. Dengan Excel, rumah sakit, klinik, dan praktik dokter dapat meningkatkan efisiensi operasional dan kualitas pelayanan.</p>
                         
                         <div class="note">
-                            <strong>Fakta Menarik:</strong> Sales team yang menggunakan data analytics memiliki conversion rate 28% lebih tinggi dibandingkan yang tidak menggunakan analisis data.
+                            <strong>Fakta Menarik:</strong> Fasilitas kesehatan yang menggunakan sistem manajemen data yang baik dapat mengurangi waktu tunggu pasien hingga 35% dan meningkatkan kepuasan pasien sebesar 28%.
                         </div>
                         
-                        <h2>1. Mengapa Excel Penting untuk Sales?</h2>
-                        <p>Excel memberikan kontrol penuh dan fleksibilitas dalam analisis data penjualan. Keunggulan utama menggunakan Excel:</p>
+                        <h2>1. Mengapa Excel Penting di Bidang Kesehatan?</h2>
+                        <p>Excel menawarkan solusi yang terjangkau dan fleksibel untuk berbagai kebutuhan administrasi kesehatan. Keunggulan utama menggunakan Excel:</p>
                         <ul>
-                            <li>Custom reporting sesuai kebutuhan bisnis</li>
-                            <li>Integrasi data dari berbagai sumber (CRM, website, marketing)</li>
-                            <li>Analisis mendalam dengan Pivot Table dan charts</li>
-                            <li>Forecasting dan predictive analysis</li>
-                            <li>Cost-effective dibandingkan software khusus</li>
+                            <li>Mudah diakses dan dipelajari oleh tenaga kesehatan</li>
+                            <li>Customizable sesuai kebutuhan fasilitas kesehatan</li>
+                            <li>Integrasi data dari berbagai departemen</li>
+                            <li>Analisis data kesehatan yang mendalam dengan Pivot Table</li>
+                            <li>Pembuatan laporan medis yang akurat dan informatif</li>
                         </ul>
                         
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <div class="benefit-icon">📈</div>
-                                <h4>Sales Analytics</h4>
-                                <p>Analisis tren penjualan dan performa produk</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon">🔄</div>
-                                <h4>Pipeline Management</h4>
-                                <p>Tracking opportunity dari prospect sampai closing</p>
-                            </div>
-                            <div class="benefit-card">
                                 <div class="benefit-icon">👥</div>
-                                <h4>Team Performance</h4>
-                                <p>Monitoring dan coaching berdasarkan data</p>
+                                <h4>Manajemen Pasien</h4>
+                                <p>Database pasien, riwayat kunjungan, dan rekam medis</p>
                             </div>
                             <div class="benefit-card">
-                                <div class="benefit-icon">🎯</div>
-                                <h4>Forecasting</h4>
-                                <p>Prediksi revenue dan target achievement</p>
+                                <div class="benefit-icon">📅</div>
+                                <h4>Penjadwalan</h4>
+                                <p>Appointment dokter, jadwal operasi, dan ruang rawat</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💊</div>
+                                <h4>Farmasi</h4>
+                                <p>Stok obat, penggunaan, dan monitoring kadaluarsa</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📊</div>
+                                <h4>Analisis Kesehatan</h4>
+                                <p>Epidemiologi, outcome treatment, dan quality control</p>
                             </div>
                         </div>
                         
-                        <h2>2. Komponen Dashboard Sales Excel</h2>
+                        <h2>2. Sistem Manajemen Fasilitas Kesehatan di Excel</h2>
                         
-                        <div class="sales-structure">
-                            <h4>Struktur Dashboard Sales yang Efektif</h4>
-                            <div class="sales-layout">
-                                <div class="sales-areas">
-                                    <div class="sales-area">
-                                        <h5>KPI PERFORMANCE</h5>
-                                        <p>Revenue, target, growth rate</p>
+                        <div class="health-structure">
+                            <h4>Komponen Sistem Kesehatan Excel</h4>
+                            <div class="health-layout">
+                                <div class="health-areas">
+                                    <div class="health-area">
+                                        <h5>DATA PASIEN</h5>
+                                        <p>Profil, riwayat, demografi</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>PIPELINE</h5>
-                                        <p>Sales funnel dan conversion rate</p>
+                                    <div class="health-area">
+                                        <h5>REKAM MEDIS</h5>
+                                        <p>Diagnosa, treatment, progress</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>TEAM METRICS</h5>
-                                        <p>Performa individual dan tim</p>
+                                    <div class="health-area">
+                                        <h5>JADWAL</h5>
+                                        <p>Appointment, operasi, kunjungan</p>
                                     </div>
-                                    <div class="sales-area">
-                                        <h5>FORECASTING</h5>
-                                        <p>Revenue prediction dan trends</p>
+                                    <div class="health-area">
+                                        <h5>ANALISIS</h5>
+                                        <p>Statistik, outcome, quality</p>
                                     </div>
                                 </div>
-                                <div class="sales-preview">
-                                    <h4>Contoh Sales Dashboard</h4>
+                                <div class="health-preview">
+                                    <h4>Contoh Dashboard Kesehatan</h4>
                                     <div class="metric-grid">
                                         <div class="metric-card">
-                                            <div class="metric-value">Rp 2.5B</div>
-                                            <div class="metric-label">Monthly Revenue</div>
+                                            <div class="metric-value">156</div>
+                                            <div class="metric-label">Pasien Hari Ini</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">124%</div>
-                                            <div class="metric-label">Target Achievement</div>
+                                            <div class="metric-value">92%</div>
+                                            <div class="metric-label">Bed Occupancy</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">28%</div>
-                                            <div class="metric-label">Conversion Rate</div>
+                                            <div class="metric-value">18</div>
+                                            <div class="metric-label">Rujukan</div>
                                         </div>
                                         <div class="metric-card">
-                                            <div class="metric-value">Rp 185Jt</div>
-                                            <div class="metric-label">Avg Deal Size</div>
+                                            <div class="metric-value">4.7/5</div>
+                                            <div class="metric-label">Kepuasan Pasien</div>
                                         </div>
                                     </div>
-                                    <div class="kpi-grid">
-                                        <div class="kpi-card">
-                                            <div class="kpi-header">
-                                                <div class="kpi-title">Sales Growth</div>
-                                                <div class="kpi-trend trend-up">+15%</div>
+                                    <div class="analysis-grid">
+                                        <div class="analysis-card">
+                                            <div class="analysis-header">
+                                                <div class="analysis-title">Penyakit Terbanyak</div>
+                                                <div class="analysis-trend trend-up">+12%</div>
                                             </div>
-                                            <div class="kpi-value">24.8%</div>
+                                            <div class="analysis-value">ISPA</div>
                                         </div>
-                                        <div class="kpi-card">
-                                            <div class="kpi-header">
-                                                <div class="kpi-title">Pipeline Value</div>
-                                                <div class="kpi-trend trend-up">+8%</div>
+                                        <div class="analysis-card">
+                                            <div class="analysis-header">
+                                                <div class="analysis-title">Rata-rata Tunggu</div>
+                                                <div class="analysis-trend trend-down">-8%</div>
                                             </div>
-                                            <div class="kpi-value">Rp 4.2B</div>
+                                            <div class="analysis-value">22 menit</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <h2>3. Membuat Sales Pipeline di Excel</h2>
+                        <h2>3. Membuat Sistem Manajemen Pasien di Excel</h2>
                         
                         <div class="step-by-step">
                             <div class="step">
-                                <h4>Define Sales Stages</h4>
-                                <p>Tentukan tahapan pipeline yang sesuai bisnis:</p>
+                                <h4>Setup Database Pasien</h4>
+                                <p>Buat template data pasien dengan kolom-kolom berikut:</p>
                                 <ul>
-                                    <li>Prospect → Qualification → Proposal</li>
-                                    <li>Negotiation → Closed Won/Closed Lost</li>
-                                    <li>Set probability % untuk setiap stage</li>
-                                    <li>Define average deal size per stage</li>
+                                    <li>No. RM, Nama, Tanggal Lahir, Jenis Kelamin</li>
+                                    <li>Alamat, Kontak, Golongan Darah, Alergi</li>
+                                    <li>Asuransi, Nomor BPJS, Keluhan Utama</li>
+                                    <li>Dokter Penanggung Jawab, Status</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Setup Data Structure</h4>
-                                <p>Buat tabel dengan kolom-kolom berikut:</p>
+                                <h4>Rekam Medis Elektronik</h4>
+                                <p>Develop sistem rekam medis yang terintegrasi:</p>
                                 <ul>
-                                    <li>Opportunity Name, Company, Value</li>
-                                    <li>Stage, Probability %, Expected Close Date</li>
-                                    <li>Sales Rep, Created Date, Last Update</li>
-                                    <li>Notes, Next Action, Competitors</li>
+                                    <li>Anamnesis dan pemeriksaan fisik</li>
+                                    <li>Diagnosa utama dan sekunder</li>
+                                    <li>Treatment plan dan medication</li>
+                                    <li>Progress notes dan follow-up</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Implement Automated Calculations</h4>
-                                <p>Gunakan rumus untuk otomatisasi:</p>
+                                <h4>Sistem Appointment</h4>
+                                <p>Buat penjadwalan yang efisien:</p>
                                 <ul>
-                                    <li>Weighted Value = Deal Value × Probability %</li>
-                                    <li>Days in Stage = Today - Stage Entry Date</li>
-                                    <li>Forecast Category berdasarkan close date</li>
-                                    <li>Conversion rate antara stages</li>
+                                    <li>Jadwal praktek dokter</li>
+                                    <li>Booking appointment online/offline</li>
+                                    <li>Reminder kunjungan follow-up</li>
+                                    <li>Manajemen antrian real-time</li>
                                 </ul>
                             </div>
                             
                             <div class="step">
-                                <h4>Create Pipeline Visualization</h4>
-                                <p>Buat visual dashboard untuk monitoring:</p>
+                                <h4>Analisis dan Reporting</h4>
+                                <p>Implementasi analisis data kesehatan:</p>
                                 <ul>
-                                    <li>Pipeline value per stage</li>
-                                    <li>Conversion funnel analysis</li>
-                                    <li>Aging analysis per stage</li>
-                                    <li>Sales rep performance comparison</li>
+                                    <li>Statistik kunjungan dan penyakit</li>
+                                    <li>Outcome treatment analysis</li>
+                                    <li>Utilization review</li>
+                                    <li>Quality indicators monitoring</li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <h2>4. Contoh Sales Pipeline Visualization</h2>
+                        <h2>4. Contoh Alur Pelayanan Pasien</h2>
                         
                         <div class="example-box">
-                            <h4>Visual Sales Pipeline</h4>
-                            <div class="pipeline-visual">
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Prospect</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-prospect" style="width: 90%"></div>
-                                    </div>
-                                    <div class="stage-value">Rp 900Jt (45 deals)</div>
+                            <h4>Patient Journey Mapping</h4>
+                            <div class="patient-flow">
+                                <div class="flow-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-description">Registrasi dan Pendaftaran</div>
+                                    <div class="step-duration">5-10 menit</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Qualification</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-qualification" style="width: 70%"></div>
-                                    </div>
-                                    <div class="stage-value">Rp 700Jt (28 deals)</div>
+                                <div class="flow-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-description">Triase dan Pengukuran Vital Signs</div>
+                                    <div class="step-duration">8-12 menit</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Proposal</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-proposal" style="width: 50%"></div>
-                                    </div>
-                                    <div class="stage-value">Rp 500Jt (15 deals)</div>
+                                <div class="flow-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-description">Konsultasi dengan Dokter</div>
+                                    <div class="step-duration">15-25 menit</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Negotiation</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-negotiation" style="width: 30%"></div>
-                                    </div>
-                                    <div class="stage-value">Rp 300Jt (8 deals)</div>
+                                <div class="flow-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-description">Pemeriksaan Penunjang (jika diperlukan)</div>
+                                    <div class="step-duration">20-40 menit</div>
                                 </div>
-                                <div class="pipeline-stage">
-                                    <div class="stage-name">Closed Won</div>
-                                    <div class="stage-bar">
-                                        <div class="stage-fill stage-closed" style="width: 15%"></div>
-                                    </div>
-                                    <div class="stage-value">Rp 150Jt (4 deals)</div>
+                                <div class="flow-step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-description">Farmasi dan Pembayaran</div>
+                                    <div class="step-duration">10-15 menit</div>
                                 </div>
                             </div>
                             
-                            <h4>Data Pipeline Detail</h4>
+                            <h4>Data Kunjungan Pasien</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Opportunity</th>
-                                        <th>Company</th>
-                                        <th>Value</th>
-                                        <th>Stage</th>
-                                        <th>Probability</th>
-                                        <th>Expected Close</th>
-                                        <th>Sales Rep</th>
+                                        <th>No. RM</th>
+                                        <th>Nama Pasien</th>
+                                        <th>Dokter</th>
+                                        <th>Keluhan</th>
+                                        <th>Diagnosa</th>
+                                        <th>Tanggal</th>
+                                        <th>Status</th>
+                                        <th>Prioritas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ERP Implementation</td>
-                                        <td>PT Maju Jaya</td>
-                                        <td>Rp 500,000,000</td>
-                                        <td>Proposal</td>
-                                        <td>50%</td>
-                                        <td>30 Juni 2023</td>
+                                        <td>RM-2023-001</td>
+                                        <td>Ahmad Fauzi</td>
+                                        <td>dr. Sari Indah</td>
+                                        <td>Demam, batuk, pilek</td>
+                                        <td>ISPA</td>
+                                        <td>23 Mei 2023</td>
+                                        <td class="status-completed">Selesai</td>
+                                        <td class="priority-medium">Medium</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RM-2023-002</td>
                                         <td>Budi Santoso</td>
+                                        <td>dr. Rizki Pratama</td>
+                                        <td>Nyeri dada, sesak napas</td>
+                                        <td>Suspect Cardiac</td>
+                                        <td>23 Mei 2023</td>
+                                        <td class="status-inprogress">Dalam Proses</td>
+                                        <td class="priority-high">High</td>
                                     </tr>
                                     <tr>
-                                        <td>CRM License 100 users</td>
-                                        <td>PT Sukses Makmur</td>
-                                        <td>Rp 250,000,000</td>
-                                        <td>Negotiation</td>
-                                        <td>75%</td>
-                                        <td>15 Juni 2023</td>
-                                        <td>Sari Indah</td>
+                                        <td>RM-2023-003</td>
+                                        <td>Citra Dewi</td>
+                                        <td>dr. Diana Sari</td>
+                                        <td>Kontrol kehamilan</td>
+                                        <td>Antenatal Care</td>
+                                        <td>23 Mei 2023</td>
+                                        <td class="status-scheduled">Terjadwal</td>
+                                        <td class="priority-low">Low</td>
                                     </tr>
                                     <tr>
-                                        <td>Website Development</td>
-                                        <td>PT Inovasi Digital</td>
-                                        <td>Rp 150,000,000</td>
-                                        <td>Qualification</td>
-                                        <td>25%</td>
-                                        <td>31 Juli 2023</td>
-                                        <td>Rizki Pratama</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mobile App Development</td>
-                                        <td>PT Tech Solution</td>
-                                        <td>Rp 350,000,000</td>
-                                        <td>Prospect</td>
-                                        <td>10%</td>
-                                        <td>31 Agustus 2023</td>
-                                        <td>Diana Sari</td>
+                                        <td>RM-2023-004</td>
+                                        <td>Deni Wijaya</td>
+                                        <td>dr. Andi Pratama</td>
+                                        <td>Follow-up pasca operasi</td>
+                                        <td>Post-Op Evaluation</td>
+                                        <td>23 Mei 2023</td>
+                                        <td class="status-cancelled">Dibatalkan</td>
+                                        <td class="priority-medium">Medium</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <h2>5. Rumus Penting Sales Analysis Excel</h2>
+                        <h2>5. Rumus Penting Excel untuk Kesehatan</h2>
                         
                         <div class="example-box">
-                            <h4>Rumus Dasar Analisis Penjualan</h4>
+                            <h4>Rumus Dasar Manajemen Kesehatan</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
@@ -1217,193 +1255,226 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Target Achievement</strong></td>
-                                        <td>=ActualSales / SalesTarget</td>
-                                        <td>Persentase pencapaian target</td>
+                                        <td><strong>Usia Pasien</strong></td>
+                                        <td>=DATEDIF(TanggalLahir, TODAY(), "Y")</td>
+                                        <td>Menghitung usia dalam tahun</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Weighted Pipeline</strong></td>
-                                        <td>=DealValue * Probability%</td>
-                                        <td>Nilai pipeline yang diharapkan</td>
+                                        <td><strong>BMI Calculation</strong></td>
+                                        <td>=Berat/(Tinggi/100)^2</td>
+                                        <td>Body Mass Index</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Conversion Rate</strong></td>
-                                        <td>=WonDeals / TotalLeads</td>
-                                        <td>Efisiensi conversion</td>
+                                        <td><strong>Bed Occupancy Rate</strong></td>
+                                        <td>=TempatTerisi/TotalTempat</td>
+                                        <td>Persentase tempat tidur terisi</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Sales Growth</strong></td>
-                                        <td>=(CurrentMonth - PreviousMonth) / PreviousMonth</td>
-                                        <td>Pertumbuhan bulanan</td>
+                                        <td><strong>Average Length of Stay</strong></td>
+                                        <td>=SUM(LamaRawat)/COUNT(Pasien)</td>
+                                        <td>Rata-rata lama rawat</td>
                                     </tr>
                                 </tbody>
                             </table>
                             
-                            <h4>Rumus Lanjutan Sales Forecasting</h4>
+                            <h4>Rumus Lanjutan Analisis Kesehatan</h4>
                             <div class="code-block">
-                                // Sales Velocity
-                                = (WonDeals * AvgDealSize) / SalesCycleDays
+                                // Kategori BMI
+                                =IF(BMI<18.5, "Underweight",
+                                  IF(BMI<25, "Normal",
+                                  IF(BMI<30, "Overweight", "Obesity")))
                                 
-                                // Lead Conversion Probability
-                                = COUNTIFS(LeadSourceColumn, LeadSource, StatusColumn, "Won") / 
-                                  COUNTIF(LeadSourceColumn, LeadSource)
+                                // Risk Stratification
+                                =IF(AND(Age>65, Comorbidities>=2), "High Risk",
+                                  IF(OR(Age>65, Comorbidities>=1), "Medium Risk", "Low Risk"))
                                 
-                                // Forecast Accuracy
-                                = 1 - (ABS(ForecastedSales - ActualSales) / ActualSales)
+                                // Readmission Probability
+                                =1/(1+EXP(-(0.5*Age + 0.3*Comorbidities + 0.2*PreviousAdmissions)))
                                 
-                                // Customer Lifetime Value (CLV)
-                                = (AvgPurchaseValue * PurchaseFrequency * CustomerLifespan) - CAC
+                                // Epidemic Alert
+                                =IF(COUNTIFS(DiseaseRange, Disease, DateRange, ">="&TODAY()-7)>Threshold, "ALERT", "Normal")
                                 
-                                // Pipeline Coverage
-                                = TotalPipelineValue / SalesTarget
+                                // Drug Interaction Check
+                                =IF(COUNTIF(DrugList, InteractionDrug)>0, "Potential Interaction", "Safe")
                             </div>
                         </div>
                         
-                        <h2>6. Sales Team Performance Tracking</h2>
+                        <h2>6. Sistem Penjadwalan Dokter dan Staf</h2>
                         
                         <div class="example-box">
-                            <h4>Sales Team Performance Dashboard</h4>
+                            <h4>Jadwal Praktek Dokter - Senin, 23 Mei 2023</h4>
+                            <div class="schedule-grid">
+                                <div class="schedule-slot slot-available">
+                                    <div>08:00-09:00</div>
+                                    <div>Available</div>
+                                </div>
+                                <div class="schedule-slot slot-booked">
+                                    <div>09:00-10:00</div>
+                                    <div>RM-2023-001</div>
+                                </div>
+                                <div class="schedule-slot slot-booked">
+                                    <div>10:00-11:00</div>
+                                    <div>RM-2023-005</div>
+                                </div>
+                                <div class="schedule-slot slot-break">
+                                    <div>11:00-11:30</div>
+                                    <div>Break</div>
+                                </div>
+                                <div class="schedule-slot slot-available">
+                                    <div>11:30-12:30</div>
+                                    <div>Available</div>
+                                </div>
+                                <div class="schedule-slot slot-booked">
+                                    <div>13:30-14:30</div>
+                                    <div>RM-2023-008</div>
+                                </div>
+                                <div class="schedule-slot slot-available">
+                                    <div>14:30-15:30</div>
+                                    <div>Available</div>
+                                </div>
+                                <div class="schedule-slot slot-booked">
+                                    <div>15:30-16:30</div>
+                                    <div>RM-2023-012</div>
+                                </div>
+                            </div>
+                            
+                            <h4>Data Jadwal Dokter</h4>
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Sales Rep</th>
-                                        <th>Revenue</th>
-                                        <th>Target</th>
-                                        <th>Achievement</th>
-                                        <th># Deals</th>
-                                        <th>Avg Deal Size</th>
-                                        <th>Conversion Rate</th>
-                                        <th>Performance</th>
+                                        <th>Dokter</th>
+                                        <th>Spesialisasi</th>
+                                        <th>Senin</th>
+                                        <th>Selasa</th>
+                                        <th>Rabu</th>
+                                        <th>Kamis</th>
+                                        <th>Jumat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Budi Santoso</td>
-                                        <td>Rp 850,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>121%</td>
-                                        <td>12</td>
-                                        <td>Rp 70,833,333</td>
-                                        <td>35%</td>
-                                        <td class="performance-excellent">Excellent</td>
+                                        <td>dr. Sari Indah</td>
+                                        <td>Penyakit Dalam</td>
+                                        <td>08:00-16:00</td>
+                                        <td>08:00-16:00</td>
+                                        <td>08:00-12:00</td>
+                                        <td>08:00-16:00</td>
+                                        <td>08:00-16:00</td>
                                     </tr>
                                     <tr>
-                                        <td>Sari Indah</td>
-                                        <td>Rp 720,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>103%</td>
-                                        <td>15</td>
-                                        <td>Rp 48,000,000</td>
-                                        <td>28%</td>
-                                        <td class="performance-good">Good</td>
+                                        <td>dr. Rizki Pratama</td>
+                                        <td>Kardiologi</td>
+                                        <td>09:00-17:00</td>
+                                        <td>09:00-17:00</td>
+                                        <td>-</td>
+                                        <td>09:00-17:00</td>
+                                        <td>09:00-17:00</td>
                                     </tr>
                                     <tr>
-                                        <td>Rizki Pratama</td>
-                                        <td>Rp 550,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>79%</td>
-                                        <td>8</td>
-                                        <td>Rp 68,750,000</td>
-                                        <td>22%</td>
-                                        <td class="performance-average">Average</td>
+                                        <td>dr. Diana Sari</td>
+                                        <td>Obgyn</td>
+                                        <td>08:00-12:00</td>
+                                        <td>13:00-17:00</td>
+                                        <td>08:00-17:00</td>
+                                        <td>08:00-12:00</td>
+                                        <td>13:00-17:00</td>
                                     </tr>
                                     <tr>
-                                        <td>Diana Sari</td>
-                                        <td>Rp 380,000,000</td>
-                                        <td>Rp 700,000,000</td>
-                                        <td>54%</td>
-                                        <td>14</td>
-                                        <td>Rp 27,142,857</td>
-                                        <td>18%</td>
-                                        <td class="performance-poor">Needs Improvement</td>
+                                        <td>dr. Andi Pratama</td>
+                                        <td>Bedah</td>
+                                        <td>07:00-15:00</td>
+                                        <td>07:00-15:00</td>
+                                        <td>07:00-15:00</td>
+                                        <td>-</td>
+                                        <td>07:00-15:00</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            
-                            <div class="tip">
-                                <strong>Coaching Insight:</strong> Diana memiliki volume deal tinggi tetapi average deal size rendah, menunjukkan potensi untuk coaching pada deal sizing dan negotiation skills.
-                            </div>
                         </div>
                         
-                        <h2>7. Sales Forecasting Techniques</h2>
+                        <h2>7. Analisis Data Kesehatan dengan Pivot Table</h2>
                         
                         <div class="example-box">
-                            <h4>Metode Sales Forecasting</h4>
+                            <h4>Jenis Analisis Kesehatan yang Dapat Dilakukan</h4>
                             <ul>
-                                <li><strong>Historical Forecasting:</strong> Berdasarkan data historis + growth rate</li>
-                                <li><strong>Pipeline-Based Forecasting:</strong> Weighted pipeline value</li>
-                                <li><strong>Lead Conversion Forecasting:</strong> Leads × conversion rate × avg deal size</li>
-                                <li><strong>Multi-variable Forecasting:</strong> Kombinasi faktor seasonality, market trends, capacity</li>
+                                <li><strong>Epidemiologi:</strong> Pola penyakit berdasarkan waktu, tempat, orang</li>
+                                <li><strong>Utilization Review:</strong> Analisis penggunaan layanan kesehatan</li>
+                                <li><strong>Outcome Analysis:</strong> Hasil treatment dan kepuasan pasien</li>
+                                <li><strong>Resource Allocation:</strong> Optimasi penggunaan sumber daya</li>
+                                <li><strong>Quality Indicators:</strong> Monitoring indikator kualitas pelayanan</li>
                             </ul>
                             
-                            <h4>Contoh Pipeline-Based Forecast</h4>
+                            <h4>Contoh Laporan Epidemiologi</h4>
                             <div class="code-block">
-                                // Monthly Forecast Calculation
-                                Q2 Forecast = SUM(Weighted Pipeline where Close Date in Q2)
+                                // Struktur Data untuk Analisis:
+                                - No. RM, Usia, Jenis Kelamin, Alamat
+                                - Diagnosa, Tanggal Kunjungan, Dokter
+                                - Treatment, Outcome, Lama Rawat
                                 
-                                // Confidence Levels
-                                Best Case = SUM(Deals with Probability >= 75%)
-                                Expected Case = SUM(Weighted Pipeline)
-                                Worst Case = SUM(Deals with Probability >= 25%)
+                                // Metrik Epidemiologi:
+                                - Incidence Rate per penyakit
+                                - Prevalence rate per populasi
+                                - Distribution by age and gender
+                                - Seasonal trends analysis
+                                - Geographic distribution
                                 
-                                // Forecast by Sales Rep
-                                = SUMIFS(WeightedValue, SalesRepColumn, RepName, 
-                                        CloseDateColumn, ">="&StartDate, 
-                                        CloseDateColumn, "<="&EndDate)
-                                
-                                // Trend Analysis
-                                = FORECAST.LINEAR(NextMonth, HistoricalData, TimePeriods)
+                                // Quality Indicators:
+                                - Readmission rate within 30 days
+                                - Average length of stay
+                                - Patient satisfaction scores
+                                - Medication error rate
+                                - Infection rate
                             </div>
                         </div>
                         
-                        <h2>8. Tips dan Best Practices Sales Excel</h2>
+                        <h2>8. Tips dan Best Practices Excel untuk Kesehatan</h2>
                         
                         <div class="tip">
-                            <strong>Tip 1:</strong> Gunakan CRM integration atau Power Query untuk mengotomatisasi data import dari sistem lain.
+                            <strong>Tip 1:</strong> Gunakan Data Validation untuk memastikan konsistensi input data (misal: hanya pilihan diagnosa ICD-10 yang valid).
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 2:</strong> Implementasikan data validation untuk consistency pada stages, product categories, dan sales reps.
+                            <strong>Tip 2:</strong> Implementasikan audit trail untuk tracking perubahan data medis yang kritis.
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 3:</strong> Buat automated alerts untuk deals yang stuck dalam stage terlalu lama atau approaching close date.
+                            <strong>Tip 3:</strong> Buat template terstandarisasi untuk semua departemen agar data mudah dikonsolidasi.
                         </div>
                         
                         <div class="tip">
-                            <strong>Tip 4:</strong> Gunakan conditional formatting untuk visual quick assessment of performance and pipeline health.
+                            <strong>Tip 4:</strong> Gunakan conditional formatting untuk alert early warning (misal: pasien high risk, obat kadaluarsa).
                         </div>
                         
                         <div class="warning">
-                            <strong>Peringatan:</strong> Jangan over-complicate dengan terlalu banyak metrics. Fokus pada KPI yang benar-benar drive business decisions.
+                            <strong>Peringatan:</strong> Selalu maintain confidentiality data pasien sesuai regulasi HIPAA/Kebijakan Privasi. Gunakan password protection dan encryption untuk file yang berisi data sensitif.
                         </div>
                         
-                        <h2>9. Studi Kasus: Optimasi Sales Performance</h2>
+                        <h2>9. Studi Kasus: Optimasi Pelayanan IGD</h2>
                         
                         <div class="exercise">
                             <h4>💪 Latihan Praktik</h4>
-                            <p><strong>Scenario:</strong> Tingkatkan performa sales team dengan data berikut:</p>
+                            <p><strong>Scenario:</strong> Tingkatkan efisiensi IGD berdasarkan data berikut:</p>
                             <ul>
-                                <li>Current monthly revenue: Rp 2.5B (target: Rp 3B)</li>
-                                <li>Conversion rate: 15% (industry average: 25%)</li>
-                                <li>Average sales cycle: 45 days (ideal: 30 days)</li>
-                                <li>Pipeline coverage: 2.5x (recommended: 3x)</li>
+                                <li>Rata-rata waktu tunggu: 45 menit (target: <30 menit)</li>
+                                <li>Bed occupancy rate: 115% (over capacity)</li>
+                                <li>Patient satisfaction: 3.2/5 (target: >4.0)</li>
+                                <li>Left without being seen: 8% (target: <3%)</li>
                             </ul>
-                            <p><strong>Langkah-langkah Optimasi:</strong></p>
+                            <p><strong>Langkah-langkah Improvement:</strong></p>
                             <ol>
-                                <li>Analisis conversion rate per stage untuk identifikasi bottleneck</li>
-                                <li>Review sales cycle duration dan identifikasi penyebab delay</li>
-                                <li>Optimasi lead quality dan quantity untuk pipeline coverage</li>
-                                <li>Implementasikan sales coaching berdasarkan performance gap analysis</li>
-                                <li>Setup weekly performance review dengan data-driven insights</li>
+                                <li>Analisis peak hours dan pola kedatangan pasien</li>
+                                <li>Optimasi triage process dan resource allocation</li>
+                                <li>Implementasikan fast-track untuk kasus minor</li>
+                                <li>Monitoring real-time bed availability</li>
+                                <li>Staff training dan process improvement</li>
                             </ol>
                         </div>
                         
                         <div class="note">
-                            <strong>Advanced Tip:</strong> Untuk sales organization yang kompleks, pertimbangkan menggunakan Power BI di atas Excel untuk real-time dashboard dan advanced analytics capabilities.
+                            <strong>Advanced Tip:</strong> Untuk fasilitas kesehatan dengan volume tinggi, pertimbangkan menggunakan Excel dengan database external atau upgrade ke specialized healthcare information system untuk better scalability dan security.
                         </div>
                         
-                        <p>Dengan menguasai Excel untuk sales analysis, Anda dapat mengubah data mentah menjadi actionable insights yang mendrive revenue growth dan sales team performance improvement.</p>
+                        <p>Dengan menguasai Excel untuk manajemen kesehatan, fasilitas kesehatan dapat meningkatkan efisiensi operasional, kualitas pelayanan, dan membuat keputusan klinis yang lebih berbasis data.</p>
                     </div>
                 </article>
                 
@@ -1412,24 +1483,24 @@
                     <h2>Artikel Terkait</h2>
                     <div class="related-grid">
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sales Dashboard">
+                            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rekam Medis">
                             <div class="related-item-content">
-                                <h3><a href="#">Membuat Dashboard Sales di Excel</a></h3>
-                                <p>Panduan lengkap membuat dashboard sales yang interaktif dan informatif.</p>
+                                <h3><a href="#">Sistem Rekam Medis Elektronik dengan Excel</a></h3>
+                                <p>Panduan membuat rekam medis digital yang komprehensif.</p>
                             </div>
                         </div>
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CRM Excel">
+                            <img src="https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jadwal Dokter">
                             <div class="related-item-content">
-                                <h3><a href="#">Sistem CRM Sederhana dengan Excel</a></h3>
-                                <p>Membangun sistem CRM basic untuk tracking customer dan sales activities.</p>
+                                <h3><a href="#">Manajemen Jadwal Dokter dan Staf</a></h3>
+                                <p>Sistem penjadwalan yang efisien untuk fasilitas kesehatan.</p>
                             </div>
                         </div>
                         <div class="related-item">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sales Forecasting">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Analisis Kesehatan">
                             <div class="related-item-content">
-                                <h3><a href="#">Sales Forecasting dengan Excel</a></h3>
-                                <p>Teknik membuat prediksi penjualan yang akurat menggunakan Excel.</p>
+                                <h3><a href="#">Analisis Data Epidemiologi dengan Excel</a></h3>
+                                <p>Teknik analisis pola penyakit dan trend kesehatan.</p>
                             </div>
                         </div>
                     </div>
@@ -1437,7 +1508,7 @@
                 
                 <!-- Comments Section -->
                 <div class="comments-section">
-                    <h2>Komentar (35)</h2>
+                    <h2>Komentar (31)</h2>
                     
                     <div class="comment-form">
                         <h3>Tinggalkan Komentar</h3>
@@ -1461,26 +1532,26 @@
                     <div class="comment-list">
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Sales Director</span>
-                                <span class="comment-date">10 Mei 2023</span>
+                                <span class="comment-author">Manajer Rumah Sakit</span>
+                                <span class="comment-date">24 Mei 2023</span>
                             </div>
-                            <p>Pipeline coverage analysis sangat membantu! Berhasil mengidentifikasi need untuk meningkatkan lead generation 30% untuk memenuhi target Q3.</p>
+                            <p>Sistem analisis bed occupancy sangat membantu! Berhasil mengoptimalkan utilisasi tempat tidur dari 78% menjadi 92% tanpa mengurangi kualitas pelayanan.</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
                                 <span class="comment-author">Admin</span>
-                                <span class="comment-date">10 Mei 2023</span>
+                                <span class="comment-date">24 Mei 2023</span>
                             </div>
-                            <p>Excellent! Data-driven decision making adalah kunci sales success di era modern.</p>
+                            <p>Excellent! Data-driven healthcare management memang kunci efisiensi di era modern.</p>
                         </div>
                         
                         <div class="comment">
                             <div class="comment-header">
-                                <span class="comment-author">Sales Manager</span>
-                                <span class="comment-date">11 Mei 2023</span>
+                                <span class="comment-author">Kepala IGD</span>
+                                <span class="comment-date">25 Mei 2023</span>
                             </div>
-                            <p>Bagaimana cara menghitung optimal pipeline coverage untuk business kami yang seasonal?</p>
+                            <p>Bagaimana cara membuat early warning system untuk epidemic outbreak menggunakan Excel?</p>
                         </div>
                     </div>
                 </div>
@@ -1491,18 +1562,18 @@
                 <div class="widget">
                     <h3>Tutorial Populer</h3>
                     <ul class="popular-tutorials">
-                        <li><a href="#"><span>1</span> Excel untuk Sales</a></li>
-                        <li><a href="#"><span>2</span> Sales Dashboard Excel</a></li>
+                        <li><a href="#"><span>1</span> Excel untuk Kesehatan</a></li>
+                        <li><a href="#"><span>2</span> Rekam Medis Excel</a></li>
                         <li><a href="#"><span>3</span> Pivot Table Excel</a></li>
-                        <li><a href="#"><span>4</span> Pipeline Management</a></li>
-                        <li><a href="#"><span>5</span> Sales Forecasting</a></li>
+                        <li><a href="#"><span>4</span> Manajemen Pasien</a></li>
+                        <li><a href="#"><span>5</span> Jadwal Dokter</a></li>
                     </ul>
                 </div>
                 
                 <div class="widget">
                     <h3>Kategori Tutorial</h3>
                     <ul>
-                        <li><a href="#">Excel untuk Sales</a></li>
+                        <li><a href="#">Excel untuk Kesehatan</a></li>
                         <li><a href="#">Pivot Table & Analisis</a></li>
                         <li><a href="#">Dashboard & Visualisasi</a></li>
                         <li><a href="#">Manajemen Bisnis</a></li>
@@ -1514,14 +1585,14 @@
                 <div class="widget tags-widget">
                     <h3>Tags</h3>
                     <div class="tags">
-                        <a href="#">Excel Sales</a>
-                        <a href="#">Analisis Penjualan</a>
-                        <a href="#">Pipeline Management</a>
-                        <a href="#">Sales Performance</a>
-                        <a href="#">Sales Dashboard</a>
-                        <a href="#">Forecasting</a>
-                        <a href="#">KPI Sales</a>
-                        <a href="#">CRM Excel</a>
+                        <a href="#">Excel Kesehatan</a>
+                        <a href="#">Manajemen Pasien</a>
+                        <a href="#">Rekam Medis</a>
+                        <a href="#">Jadwal Dokter</a>
+                        <a href="#">Analisis Kesehatan</a>
+                        <a href="#">Rumah Sakit</a>
+                        <a href="#">Klinik</a>
+                        <a href="#">Epidemiologi</a>
                     </div>
                 </div>
                 
@@ -1555,7 +1626,7 @@
                 <div class="footer-column">
                     <h3>Tutorial Excel</h3>
                     <ul>
-                        <li><a href="#">Excel untuk Sales</a></li>
+                        <li><a href="#">Excel untuk Kesehatan</a></li>
                         <li><a href="#">Pivot Table & Analisis</a></li>
                         <li><a href="#">Dashboard & Visualisasi</a></li>
                         <li><a href="#">Manajemen Bisnis</a></li>
