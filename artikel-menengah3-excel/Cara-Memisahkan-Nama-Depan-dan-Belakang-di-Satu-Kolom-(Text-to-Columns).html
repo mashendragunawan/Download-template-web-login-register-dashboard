@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Memisahkan Nama Depan dan Belakang di Satu Kolom (Text to Columns) | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap cara menggunakan Text to Columns di Excel untuk memisahkan nama depan dan belakang. Pelajari teknik split data teks dengan delimiter dan fixed width.">
+    <meta name="keywords" content="text to columns excel, pisahkan nama, split text excel, pemisahan teks, tutorial excel, nama depan belakang">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.delimiter { border-color: #27ae60; }
+        .feature-card.fixed-width { border-color: #2980b9; }
+        .feature-card.formula { border-color: #e74c3c; }
+        .feature-card.flash-fill { border-color: #f39c12; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Demo Sections */
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .worksheet-demo {
+            background: #2d2d2d;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1px;
+            background: #444;
+            margin-top: 15px;
+        }
+        
+        .grid-cell {
+            background: #222;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #ccc;
+            position: relative;
+        }
+        
+        .grid-cell.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.original {
+            background: #1a5c38;
+        }
+        
+        .grid-cell.result {
+            background: #7d6608;
+        }
+        
+        .grid-cell.delimiter {
+            background: #a84300;
+            font-weight: bold;
+        }
+        
+        .split-arrow {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .preview-table th, .preview-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .preview-table th {
+            background: #f0f7f4;
+        }
+        
+        .preview-table .before {
+            background: #e8f5e9;
+        }
+        
+        .preview-table .after {
+            background: #fff3e0;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Shortcut Grid */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .shortcut-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .shortcut-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #217346;
+        }
+        
+        .shortcut-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .shortcut-keys {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .key {
+            background: #217346;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .key.plus {
+            background: transparent;
+            color: #333;
+            padding: 5px 2px;
+        }
+        
+        .shortcut-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .shortcut-tip {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Formula Examples */
+        .formula-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .formula-example {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        
+        .formula-code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .formula-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        /* Delimiter Examples */
+        .delimiter-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .delimiter-example {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .delimiter-symbol {
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: 10px;
+            }
+            
+            .formula-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .delimiter-examples {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Text to Columns</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Cara Memisahkan Nama Depan dan Belakang di Satu Kolom (Text to Columns)</h1>
+                        <div class="article-meta">
+                            <span>📅 30 Juni 2023</span>
+                            <span>👁️ 8.3K Dilihat</span>
+                            <span>⏱️ 12 menit membaca</span>
+                            <span>🏷️ Text to Columns Excel, Pisahkan Nama, Split Text, Pemisahan Teks, Tutorial Excel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Text to Columns</strong> adalah fitur Excel yang sangat powerful untuk memisahkan data teks dalam satu kolom menjadi beberapa kolom berdasarkan delimiter (pemisah) atau fixed width (lebar tetap). Fitur ini sangat berguna untuk memisahkan nama depan dan belakang, alamat, atau data gabungan lainnya.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian-ttc">Apa itu Text to Columns?</a></li>
+                                <li><a href="#delimiter">Pemisahan dengan Delimiter (Spasi)</a></li>
+                                <li><a href="#fixed-width">Pemisahan dengan Fixed Width</a></li>
+                                <li><a href="#formula-text">Menggunakan Formula Text</a></li>
+                                <li><a href="#flash-fill">Flash Fill (Otomatis)</a></li>
+                                <li><a href="#tips-ahli">Tips dan Trik Ahli</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian-ttc">1. Apa itu Text to Columns di Excel?</h2>
+                        
+                        <p><strong>Text to Columns</strong> adalah wizard (panduan) di Excel yang membantu Anda memisahkan data teks dalam satu kolom menjadi beberapa kolom. Ada dua metode utama: <strong>Delimited</strong> (berdasarkan pemisah) dan <strong>Fixed Width</strong> (berdasarkan lebar tetap).</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card delimiter">
+                                <div class="feature-icon">🔪</div>
+                                <h3>Delimited</h3>
+                                <p>Pisahkan berdasarkan karakter pemisah</p>
+                                <p><strong>Contoh:</strong> Spasi, koma, tab, titik koma</p>
+                            </div>
+                            
+                            <div class="feature-card fixed-width">
+                                <div class="feature-icon">📏</div>
+                                <h3>Fixed Width</h3>
+                                <p>Pisahkan berdasarkan posisi karakter</p>
+                                <p><strong>Contoh:</strong> Nama dengan panjang tetap</p>
+                            </div>
+                            
+                            <div class="feature-card formula">
+                                <div class="feature-icon">🧮</div>
+                                <h3>Formula Text</h3>
+                                <p>Pisahkan dengan fungsi teks Excel</p>
+                                <p><strong>Contoh:</strong> LEFT, RIGHT, MID, FIND</p>
+                            </div>
+                            
+                            <div class="feature-card flash-fill">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Flash Fill</h3>
+                                <p>Pemisahan otomatis cerdas</p>
+                                <p><strong>Contoh:</strong> Excel belajar pola pemisahan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>🎮 Demo Text to Columns</h4>
+                            <div class="worksheet-preview">
+                                <p>Contoh data sebelum dan setelah Text to Columns:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">Nama Lengkap</div>
+                                    <div class="grid-cell">Nama Depan</div>
+                                    <div class="grid-cell">Nama Belakang</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">Budi Santoso</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">Ani Wijaya</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">Cici Permata</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                                <div class="split-arrow">↓</div>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">Nama Lengkap</div>
+                                    <div class="grid-cell">Nama Depan</div>
+                                    <div class="grid-cell">Nama Belakang</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">Budi Santoso</div>
+                                    <div class="grid-cell result">Budi</div>
+                                    <div class="grid-cell result">Santoso</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">Ani Wijaya</div>
+                                    <div class="grid-cell result">Ani</div>
+                                    <div class="grid-cell result">Wijaya</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">Cici Permata</div>
+                                    <div class="grid-cell result">Cici</div>
+                                    <div class="grid-cell result">Permata</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>📌 Kapan Menggunakan Text to Columns:</strong>
+                            <ul>
+                                <li><strong>Memisahkan nama</strong> depan dan belakang</li>
+                                <li><strong>Memisahkan alamat</strong> jalan, kota, kode pos</li>
+                                <li><strong>Memisahkan tanggal</strong> dan waktu</li>
+                                <li><strong>Memisahkan kode produk</strong> dengan pola tertentu</li>
+                                <li><strong>Import data</strong> dari CSV atau sistem lain</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="delimiter">2. Pemisahan dengan Delimiter (Spasi)</h2>
+                        
+                        <p>Metode Delimited adalah yang paling umum digunakan, terutama untuk memisahkan nama depan dan belakang yang dipisahkan oleh spasi.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Text to Columns dengan Delimiter</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data</h4>
+                                <p>Pilih kolom yang berisi nama lengkap yang ingin dipisahkan</p>
+                                <p><strong>Tips:</strong> Pastikan ada kolom kosong di sebelah kanan untuk hasil</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Text to Columns</h4>
+                                <p>Pergi ke <strong>Data tab → Data Tools → Text to Columns</strong></p>
+                                <p>Atau gunakan shortcut <strong>Alt + A + E</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Delimited</h4>
+                                <p>Pilih <strong>Delimited</strong> dan klik <strong>Next</strong></p>
+                                <p>Pilih <strong>Space</strong> sebagai delimiter</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Selesaikan Proses</h4>
+                                <p>Preview hasil di bagian bawah, klik <strong>Next</strong></p>
+                                <p>Pilih format data dan klik <strong>Finish</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🎯 Coba Berbagai Jenis Delimiter</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-delimiter="space">
+                                    <h4>Spasi</h4>
+                                    <p>Budi Santoso → Budi, Santoso</p>
+                                </div>
+                                <div class="demo-option" data-delimiter="comma">
+                                    <h4>Koma</h4>
+                                    <p>Jakarta, Indonesia → Jakarta, Indonesia</p>
+                                </div>
+                                <div class="demo-option" data-delimiter="semicolon">
+                                    <h4>Titik Koma</h4>
+                                    <p>HR;Marketing;IT → HR, Marketing, IT</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="delimiterPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Data Asli</th>
+                                            <th>Hasil 1</th>
+                                            <th>Hasil 2</th>
+                                            <th>Hasil 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="before">Budi Santoso</td>
+                                            <td class="after">Budi</td>
+                                            <td class="after">Santoso</td>
+                                            <td class="after"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Ani Wijaya Kusuma</td>
+                                            <td class="after">Ani</td>
+                                            <td class="after">Wijaya</td>
+                                            <td class="after">Kusuma</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Cici Permata</td>
+                                            <td class="after">Cici</td>
+                                            <td class="after">Permata</td>
+                                            <td class="after"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                <p><strong>Tips:</strong> Coba klik berbagai opsi delimiter di atas untuk melihat hasil pemisahan yang berbeda!</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="fixed-width">3. Pemisahan dengan Fixed Width</h2>
+                        
+                        <p>Metode Fixed Width digunakan ketika data memiliki pola panjang yang konsisten, seperti kode produk atau data dengan format tetap.</p>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Fixed Width</h3>
+                            <div class="worksheet-demo">
+                                <p>Data dengan panjang tetap sebelum dan setelah Text to Columns:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">KodeProduk</div>
+                                    <div class="grid-cell">Kode</div>
+                                    <div class="grid-cell">Produk</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">PRD001Laptop</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">PRD002Mouse</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">PRD003Keyboard</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                                <div class="split-arrow">↓</div>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">KodeProduk</div>
+                                    <div class="grid-cell">Kode</div>
+                                    <div class="grid-cell">Produk</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">PRD001Laptop</div>
+                                    <div class="grid-cell result">PRD001</div>
+                                    <div class="grid-cell result">Laptop</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">PRD002Mouse</div>
+                                    <div class="grid-cell result">PRD002</div>
+                                    <div class="grid-cell result">Mouse</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">PRD003Keyboard</div>
+                                    <div class="grid-cell result">PRD003</div>
+                                    <div class="grid-cell result">Keyboard</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Text to Columns</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">E</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Buka Text to Columns wizard</p>
+                                <div class="shortcut-tip">💡 Works pada data yang dipilih</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Flash Fill</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">E</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Aktifkan Flash Fill otomatis</p>
+                                <div class="shortcut-tip">💡 Excel belajar pola dari contoh</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Convert Text</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">D</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">E</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Buka Convert Text to Columns</p>
+                                <div class="shortcut-tip">💡 Alternatif shortcut lama</div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="formula-text">4. Menggunakan Formula Text</h2>
+                        
+                        <p>Selain Text to Columns, Excel juga menyediakan fungsi teks yang powerful untuk memisahkan data. Metode ini lebih fleksibel dan dinamis.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Fungsi Teks untuk Memisahkan Nama</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>LEFT - Nama Depan</h4>
+                                <p><strong>=LEFT(A2, FIND(" ", A2)-1)</strong></p>
+                                <p>Mengambil karakter dari kiri sampai spasi pertama</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>RIGHT - Nama Belakang</h4>
+                                <p><strong>=RIGHT(A2, LEN(A2)-FIND(" ", A2))</strong></p>
+                                <p>Mengambil karakter dari spasi pertama sampai akhir</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>MID - Nama Tengah</h4>
+                                <p><strong>=MID(A2, FIND(" ", A2)+1, FIND(" ", A2, FIND(" ", A2)+1)-FIND(" ", A2)-1)</strong></p>
+                                <p>Mengambil karakter di antara spasi pertama dan kedua</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>TRIM - Bersihkan Spasi</h4>
+                                <p><strong>=TRIM(A2)</strong></p>
+                                <p>Menghapus spasi berlebih di awal, akhir, atau tengah</p>
+                            </div>
+                        </div>
+                        
+                        <div class="formula-examples">
+                            <div class="formula-example">
+                                <h4>Memisahkan Nama Depan</h4>
+                                <div class="formula-code">=LEFT(A2, FIND(" ", A2)-1)</div>
+                                <div class="formula-desc">Mengambil teks dari kiri sampai spasi pertama. Jika tidak ada spasi, akan error.</div>
+                            </div>
+                            
+                            <div class="formula-example">
+                                <h4>Memisahkan Nama Belakang</h4>
+                                <div class="formula-code">=RIGHT(A2, LEN(A2)-FIND(" ", A2))</div>
+                                <div class="formula-desc">Mengambil teks dari spasi pertama sampai akhir. Asumsi hanya ada 1 spasi.</div>
+                            </div>
+                            
+                            <div class="formula-example">
+                                <h4>Handle Multiple Spaces</h4>
+                                <div class="formula-code">=TRIM(A2)</div>
+                                <div class="formula-desc">Membersihkan spasi berlebih sebelum menggunakan formula lain.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Kelebihan Menggunakan Formula:</strong>
+                            <ul>
+                                <li><strong>Dinamis</strong> - Update otomatis ketika data sumber berubah</li>
+                                <li><strong>Fleksibel</strong> - Bisa handle berbagai pola dan kondisi</li>
+                                <li><strong>Reusable</strong> - Bisa dicopy ke sel lain</li>
+                                <li><strong>Kontrol penuh</strong> - Bisa custom logic dengan IF, ISERROR, dll</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="flash-fill">5. Flash Fill (Otomatis)</h2>
+                        
+                        <p>Flash Fill adalah fitur cerdas Excel yang secara otomatis mengenali pola pemisahan data setelah Anda memberikan contoh.</p>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Flash Fill</h3>
+                            <div class="worksheet-demo">
+                                <p>Cara kerja Flash Fill untuk memisahkan nama:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">Nama Lengkap</div>
+                                    <div class="grid-cell">Nama Depan</div>
+                                    <div class="grid-cell">Nama Belakang</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">Budi Santoso</div>
+                                    <div class="grid-cell result">Budi</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">Ani Wijaya</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">Cici Permata</div>
+                                    <div class="grid-cell"></div>
+                                    <div class="grid-cell"></div>
+                                </div>
+                                <p style="margin-top: 10px; font-size: 14px; color: #ccc;">↓ Setelah Flash Fill (Ctrl+E) ↓</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell original">Nama Lengkap</div>
+                                    <div class="grid-cell">Nama Depan</div>
+                                    <div class="grid-cell">Nama Belakang</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell original">Budi Santoso</div>
+                                    <div class="grid-cell result">Budi</div>
+                                    <div class="grid-cell result">Santoso</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell original">Ani Wijaya</div>
+                                    <div class="grid-cell result">Ani</div>
+                                    <div class="grid-cell result">Wijaya</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell original">Cici Permata</div>
+                                    <div class="grid-cell result">Cici</div>
+                                    <div class="grid-cell result">Permata</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🔢 Coba Flash Fill dengan Data Berbeda</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-flash="names">
+                                    <h4>Nama Lengkap</h4>
+                                    <p>Budi Santoso → Budi, Santoso</p>
+                                </div>
+                                <div class="demo-option" data-flash="emails">
+                                    <h4>Email</h4>
+                                    <p>budi@email.com → budi, email.com</p>
+                                </div>
+                                <div class="demo-option" data-flash="phones">
+                                    <h4>Nomor Telepon</h4>
+                                    <p>+62-812-3456-7890 → +62, 812, 3456, 7890</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="flashFillPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Data Asli</th>
+                                            <th>Hasil Flash Fill 1</th>
+                                            <th>Hasil Flash Fill 2</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="before">Budi Santoso</td>
+                                            <td class="after">Budi</td>
+                                            <td class="after">Santoso</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Ani Wijaya</td>
+                                            <td class="after">Ani</td>
+                                            <td class="after">Wijaya</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Cici Permata Sari</td>
+                                            <td class="after">Cici</td>
+                                            <td class="after">Permata Sari</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Metode</th>
+                                    <th>Kelebihan</th>
+                                    <th>Kekurangan</th>
+                                    <th>Rekomendasi Untuk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Text to Columns</strong></td>
+                                    <td>Cepat, sekali proses</td>
+                                    <td>Static, tidak update otomatis</td>
+                                    <td>Data sekali proses, tidak berubah</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Formula Text</strong></td>
+                                    <td>Dinamis, flexible</td>
+                                    <td>Rumit untuk pola kompleks</td>
+                                    <td>Data yang sering update</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Flash Fill</strong></td>
+                                    <td>Pintar, mudah digunakan</td>
+                                    <td>Tidak selalu akurat</td>
+                                    <td>Pola sederhana dan konsisten</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 id="tips-ahli">6. Tips dan Trik Ahli</h2>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Text to Columns Level Ahli:</strong>
+                            <ul>
+                                <li><strong>Backup data</strong> sebelum menggunakan Text to Columns</li>
+                                <li><strong>Gunakan TRIM</strong> untuk membersihkan spasi tidak perlu</li>
+                                <li><strong>Handle error</strong> dengan IFERROR untuk formula</li>
+                                <li><strong>Test dengan data sample</strong> sebelum proses massal</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Masalah Text to Columns yang Sering Terjadi:</h4>
+                            <ul>
+                                <li><strong>Data tertimpa</strong> - Pastikan kolom tujuan kosong</li>
+                                <li><strong>Pemisahan salah</strong> - Periksa delimiter yang digunakan</li>
+                                <li><strong>Format tanggal berubah</strong> - Atur format kolom dengan benar</li>
+                                <li><strong>Nama dengan multiple spaces</strong> - Gunakan TRIM terlebih dahulu</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="delimiter-examples">
+                            <div class="delimiter-example">
+                                <div class="delimiter-symbol">␣</div>
+                                <div>
+                                    <strong>Spasi</strong>
+                                    <div style="font-size: 12px; color: #666;">Budi Santoso</div>
+                                </div>
+                            </div>
+                            <div class="delimiter-example">
+                                <div class="delimiter-symbol">,</div>
+                                <div>
+                                    <strong>Koma</strong>
+                                    <div style="font-size: 12px; color: #666;">Jakarta, Indonesia</div>
+                                </div>
+                            </div>
+                            <div class="delimiter-example">
+                                <div class="delimiter-symbol">;</div>
+                                <div>
+                                    <strong>Titik Koma</strong>
+                                    <div style="font-size: 12px; color: #666;">HR;Marketing;IT</div>
+                                </div>
+                            </div>
+                            <div class="delimiter-example">
+                                <div class="delimiter-symbol">|</div>
+                                <div>
+                                    <strong>Pipe</strong>
+                                    <div style="font-size: 12px; color: #666;">Aktif|Nonaktif</div>
+                                </div>
+                            </div>
+                            <div class="delimiter-example">
+                                <div class="delimiter-symbol">/</div>
+                                <div>
+                                    <strong>Slash</strong>
+                                    <div style="font-size: 12px; color: #666;">01/06/2023</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Backup Data</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">C</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Selalu backup data sebelum Text to Columns</p>
+                                <div class="shortcut-tip">💡 Copy ke sheet baru atau file backup</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Undo</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">Z</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Undo jika hasil tidak sesuai</p>
+                                <div class="shortcut-tip">💡 Bekerja segera setelah proses</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Convert to Table</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">T</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Convert data ke Table untuk manage lebih mudah</p>
+                                <div class="shortcut-tip">💡 Auto-expand ketika ada data baru</div>
+                            </div>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p>Menguasai <strong>Text to Columns di Excel</strong> akan sangat meningkatkan efisiensi Anda dalam mengolah data teks. Dengan teknik-teknik yang telah dipelajari, Anda bisa:</p>
+                        
+                        <ul>
+                            <li>Memisahkan <strong>nama depan dan belakang</strong> dengan cepat</li>
+                            <li>Mengolah <strong>data import</strong> dari sistem lain</li>
+                            <li>Membersihkan <strong>data tidak terstruktur</strong></li>
+                            <li>Membuat <strong>data analysis</strong> yang lebih akurat</li>
+                            <li>Menghemat <strong>waktu processing</strong> data</li>
+                        </ul>
+                        
+                        <p><strong>Practice makes perfect!</strong> Coba buat worksheet latihan dan praktikkan semua teknik Text to Columns yang telah dipelajari. Mulai dari delimiter sederhana hingga formula kompleks.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba terapkan Text to Columns pada data Anda. Punya pertanyaan atau tips Text to Columns favorit? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Text to Columns</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Delimiter Basics</a></li>
+                        <li><a href="#"><span>2</span> Fixed Width</a></li>
+                        <li><a href="#"><span>3</span> Formula Text</a></li>
+                        <li><a href="#"><span>4</span> Flash Fill</a></li>
+                        <li><a href="#"><span>5</span> Tips Ahli</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Text to Columns</a></li>
+                        <li><a href="#">Group & Subtotal</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data Excel</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Text to Columns</a>
+                        <a href="#">Pisahkan Nama</a>
+                        <a href="#">Split Text</a>
+                        <a href="#">Delimiter</a>
+                        <a href="#">Fixed Width</a>
+                        <a href="#">Flash Fill</a>
+                        <a href="#">Tips Excel</a>
+                        <a href="#">Data Cleaning</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Download Cheat Sheet</h3>
+                    <p>Download panduan Text to Columns Excel:</p>
+                    <ul>
+                        <li><a href="#">📋 Formula Cheat Sheet</a></li>
+                        <li><a href="#">🎯 Delimiter Examples</a></li>
+                        <li><a href="#">💡 Flash Fill Guide</a></li>
+                        <li><a href="#">🚀 All TTC Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Text to Columns</a></li>
+                        <li><a href="#">Group & Subtotal</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Text to Columns Demos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delimiter Type Demo
+            const delimiterOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const delimiterPreview = document.getElementById('delimiterPreview');
+            
+            delimiterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    delimiterOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected delimiter
+                    const delimiterType = this.getAttribute('data-delimiter');
+                    updateDelimiterPreview(delimiterType);
+                });
+            });
+            
+            function updateDelimiterPreview(type) {
+                const tbody = delimiterPreview.querySelector('tbody');
+                const rows = tbody.querySelectorAll('tr');
+                
+                switch(type) {
+                    case 'space':
+                        // Space delimiter - names
+                        rows[0].cells[0].textContent = 'Budi Santoso';
+                        rows[0].cells[1].textContent = 'Budi';
+                        rows[0].cells[2].textContent = 'Santoso';
+                        rows[0].cells[3].textContent = '';
+                        
+                        rows[1].cells[0].textContent = 'Ani Wijaya Kusuma';
+                        rows[1].cells[1].textContent = 'Ani';
+                        rows[1].cells[2].textContent = 'Wijaya';
+                        rows[1].cells[3].textContent = 'Kusuma';
+                        
+                        rows[2].cells[0].textContent = 'Cici Permata';
+                        rows[2].cells[1].textContent = 'Cici';
+                        rows[2].cells[2].textContent = 'Permata';
+                        rows[2].cells[3].textContent = '';
+                        break;
+                    case 'comma':
+                        // Comma delimiter - addresses
+                        rows[0].cells[0].textContent = 'Jakarta, Indonesia';
+                        rows[0].cells[1].textContent = 'Jakarta';
+                        rows[0].cells[2].textContent = 'Indonesia';
+                        rows[0].cells[3].textContent = '';
+                        
+                        rows[1].cells[0].textContent = 'Bandung, Jawa Barat, Indonesia';
+                        rows[1].cells[1].textContent = 'Bandung';
+                        rows[1].cells[2].textContent = 'Jawa Barat';
+                        rows[1].cells[3].textContent = 'Indonesia';
+                        
+                        rows[2].cells[0].textContent = 'Surabaya, Jawa Timur';
+                        rows[2].cells[1].textContent = 'Surabaya';
+                        rows[2].cells[2].textContent = 'Jawa Timur';
+                        rows[2].cells[3].textContent = '';
+                        break;
+                    case 'semicolon':
+                        // Semicolon delimiter - departments
+                        rows[0].cells[0].textContent = 'HR;Marketing;IT';
+                        rows[0].cells[1].textContent = 'HR';
+                        rows[0].cells[2].textContent = 'Marketing';
+                        rows[0].cells[3].textContent = 'IT';
+                        
+                        rows[1].cells[0].textContent = 'Finance;Operations';
+                        rows[1].cells[1].textContent = 'Finance';
+                        rows[1].cells[2].textContent = 'Operations';
+                        rows[1].cells[3].textContent = '';
+                        
+                        rows[2].cells[0].textContent = 'Sales;Customer Service;Technical Support';
+                        rows[2].cells[1].textContent = 'Sales';
+                        rows[2].cells[2].textContent = 'Customer Service';
+                        rows[2].cells[3].textContent = 'Technical Support';
+                        break;
+                }
+            }
+            
+            // Flash Fill Demo
+            const flashOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const flashFillPreview = document.getElementById('flashFillPreview');
+            
+            flashOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    flashOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected flash type
+                    const flashType = this.getAttribute('data-flash');
+                    updateFlashFillPreview(flashType);
+                });
+            });
+            
+            function updateFlashFillPreview(type) {
+                const tbody = flashFillPreview.querySelector('tbody');
+                const rows = tbody.querySelectorAll('tr');
+                
+                switch(type) {
+                    case 'names':
+                        // Names with Flash Fill
+                        rows[0].cells[0].textContent = 'Budi Santoso';
+                        rows[0].cells[1].textContent = 'Budi';
+                        rows[0].cells[2].textContent = 'Santoso';
+                        
+                        rows[1].cells[0].textContent = 'Ani Wijaya';
+                        rows[1].cells[1].textContent = 'Ani';
+                        rows[1].cells[2].textContent = 'Wijaya';
+                        
+                        rows[2].cells[0].textContent = 'Cici Permata Sari';
+                        rows[2].cells[1].textContent = 'Cici';
+                        rows[2].cells[2].textContent = 'Permata Sari';
+                        break;
+                    case 'emails':
+                        // Emails with Flash Fill
+                        rows[0].cells[0].textContent = 'budi@email.com';
+                        rows[0].cells[1].textContent = 'budi';
+                        rows[0].cells[2].textContent = 'email.com';
+                        
+                        rows[1].cells[0].textContent = 'ani.wijaya@company.co.id';
+                        rows[1].cells[1].textContent = 'ani.wijaya';
+                        rows[1].cells[2].textContent = 'company.co.id';
+                        
+                        rows[2].cells[0].textContent = 'cici_permata@domain.org';
+                        rows[2].cells[1].textContent = 'cici_permata';
+                        rows[2].cells[2].textContent = 'domain.org';
+                        break;
+                    case 'phones':
+                        // Phone numbers with Flash Fill
+                        rows[0].cells[0].textContent = '+62-812-3456-7890';
+                        rows[0].cells[1].textContent = '+62';
+                        rows[0].cells[2].textContent = '812-3456-7890';
+                        
+                        rows[1].cells[0].textContent = '+62-813-9876-5432';
+                        rows[1].cells[1].textContent = '+62';
+                        rows[1].cells[2].textContent = '813-9876-5432';
+                        
+                        rows[2].cells[0].textContent = '+1-555-123-4567';
+                        rows[2].cells[1].textContent = '+1';
+                        rows[2].cells[2].textContent = '555-123-4567';
+                        break;
+                }
+            }
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Simulate text splitting animation
+            const originalCells = document.querySelectorAll('.grid-cell.original');
+            originalCells.forEach(cell => {
+                if (cell.textContent && cell.textContent.includes(' ')) {
+                    cell.addEventListener('click', function() {
+                        const originalText = this.textContent;
+                        const parts = originalText.split(' ');
+                        
+                        // Highlight the delimiter (space)
+                        this.style.background = '#a84300';
+                        this.textContent = parts.join(' | ');
+                        
+                        setTimeout(() => {
+                            this.style.background = '#1a5c38';
+                            this.textContent = originalText;
+                        }, 1000);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

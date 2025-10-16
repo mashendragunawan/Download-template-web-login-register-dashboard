@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menggunakan Find and Replace untuk Mencari dan Mengganti Data secara Massal | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap cara menggunakan Find and Replace di Excel untuk mencari dan mengganti data secara massal. Pelajari teknik wildcard, format matching, dan tips ahli.">
+    <meta name="keywords" content="find and replace excel, cari ganti data, replace massal, wildcard excel, tutorial excel, tips excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.basic { border-color: #27ae60; }
+        .feature-card.wildcard { border-color: #2980b9; }
+        .feature-card.format { border-color: #e74c3c; }
+        .feature-card.advanced { border-color: #f39c12; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Demo Sections */
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .worksheet-demo {
+            background: #2d2d2d;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1px;
+            background: #444;
+            margin-top: 15px;
+        }
+        
+        .grid-cell {
+            background: #222;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #ccc;
+            position: relative;
+        }
+        
+        .grid-cell.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.before {
+            background: #1a5c38;
+        }
+        
+        .grid-cell.after {
+            background: #7d6608;
+        }
+        
+        .grid-cell.highlight {
+            background: #a84300;
+            font-weight: bold;
+        }
+        
+        .replace-arrow {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .preview-table th, .preview-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .preview-table th {
+            background: #f0f7f4;
+        }
+        
+        .preview-table .before {
+            background: #e8f5e9;
+        }
+        
+        .preview-table .after {
+            background: #fff3e0;
+        }
+        
+        .preview-table .highlight {
+            background: #ffeb3b;
+            font-weight: bold;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Shortcut Grid */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .shortcut-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .shortcut-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #217346;
+        }
+        
+        .shortcut-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .shortcut-keys {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .key {
+            background: #217346;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .key.plus {
+            background: transparent;
+            color: #333;
+            padding: 5px 2px;
+        }
+        
+        .shortcut-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .shortcut-tip {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Wildcard Examples */
+        .wildcard-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .wildcard-example {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        
+        .wildcard-code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .wildcard-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        /* Format Examples */
+        .format-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .format-example {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .format-symbol {
+            background: #217346;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        
+        /* Find Replace Dialog */
+        .dialog-demo {
+            background: #f0f0f0;
+            border: 2px solid #217346;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .dialog-header {
+            background: #217346;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 6px 6px 0 0;
+            font-weight: bold;
+        }
+        
+        .dialog-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        
+        .dialog-label {
+            min-width: 120px;
+            font-weight: bold;
+        }
+        
+        .dialog-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .dialog-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .dialog-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dialog-btn.primary {
+            background: #217346;
+            color: white;
+        }
+        
+        .dialog-btn.secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: 10px;
+            }
+            
+            .wildcard-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .format-examples {
+                flex-direction: column;
+            }
+            
+            .dialog-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Find and Replace</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Menggunakan Find and Replace untuk Mencari dan Mengganti Data secara Massal</h1>
+                        <div class="article-meta">
+                            <span>📅 5 Juli 2023</span>
+                            <span>👁️ 9.1K Dilihat</span>
+                            <span>⏱️ 14 menit membaca</span>
+                            <span>🏷️ Find and Replace Excel, Cari Ganti Data, Replace Massal, Wildcard Excel, Tutorial Excel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Find and Replace</strong> adalah salah satu fitur paling powerful di Excel yang memungkinkan Anda mencari dan mengganti data secara massal dengan cepat dan akurat. Dengan fitur ini, Anda bisa melakukan koreksi data, update informasi, atau cleaning data dalam hitungan detik.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian-fr">Apa itu Find and Replace?</a></li>
+                                <li><a href="#dasar-fr">Dasar Find and Replace</a></li>
+                                <li><a href="#wildcard">Menggunakan Wildcard</a></li>
+                                <li><a href="#format">Find and Replace Format</a></li>
+                                <li><a href="#lanjutan">Teknik Lanjutan</a></li>
+                                <li><a href="#tips-ahli">Tips dan Trik Ahli</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian-fr">1. Apa itu Find and Replace di Excel?</h2>
+                        
+                        <p><strong>Find and Replace</strong> adalah tool di Excel yang memungkinkan Anda mencari teks, angka, atau format tertentu dalam worksheet dan menggantinya dengan konten baru. Fitur ini sangat berguna untuk:</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card basic">
+                                <div class="feature-icon">🔍</div>
+                                <h3>Pencarian Cepat</h3>
+                                <p>Temukan data spesifik dalam ribuan baris</p>
+                                <p><strong>Contoh:</strong> Cari semua "Jkt" ganti "Jakarta"</p>
+                            </div>
+                            
+                            <div class="feature-card wildcard">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Wildcard Search</h3>
+                                <p>Pencarian pola dengan karakter khusus</p>
+                                <p><strong>Contoh:</strong> Cari "Prod*" untuk semua produk</p>
+                            </div>
+                            
+                            <div class="feature-card format">
+                                <div class="feature-icon">🎨</div>
+                                <h3>Format Matching</h3>
+                                <p>Cari dan ganti berdasarkan format sel</p>
+                                <p><strong>Contoh:</strong> Ganti font merah menjadi biru</p>
+                            </div>
+                            
+                            <div class="feature-card advanced">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Replace Massal</h3>
+                                <p>Ganti semua kemunculan sekaligus</p>
+                                <p><strong>Contoh:</strong> Update kode produk untuk 1000 item</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>🎮 Demo Find and Replace</h4>
+                            <div class="worksheet-preview">
+                                <p>Contoh data sebelum dan setelah Find and Replace:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Kode</div>
+                                    <div class="grid-cell">Produk</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell before">PRD-001</div>
+                                    <div class="grid-cell before">Laptop</div>
+                                    <div class="grid-cell before">Active</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell before">PRD-002</div>
+                                    <div class="grid-cell before">Mouse</div>
+                                    <div class="grid-cell before">Inactive</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell before">PRD-003</div>
+                                    <div class="grid-cell before">Keyboard</div>
+                                    <div class="grid-cell before">Active</div>
+                                </div>
+                                <div class="replace-arrow">↓ Replace "Active" → "Aktif" ↓</div>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Kode</div>
+                                    <div class="grid-cell">Produk</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell before">PRD-001</div>
+                                    <div class="grid-cell before">Laptop</div>
+                                    <div class="grid-cell after">Aktif</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell before">PRD-002</div>
+                                    <div class="grid-cell before">Mouse</div>
+                                    <div class="grid-cell before">Inactive</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell before">PRD-003</div>
+                                    <div class="grid-cell before">Keyboard</div>
+                                    <div class="grid-cell after">Aktif</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>📌 Kapan Menggunakan Find and Replace:</strong>
+                            <ul>
+                                <li><strong>Koreksi typo</strong> atau kesalahan penulisan</li>
+                                <li><strong>Update informasi</strong> yang berubah</li>
+                                <li><strong>Standardisasi format</strong> data</li>
+                                <li><strong>Cleaning data</strong> sebelum analisis</li>
+                                <li><strong>Replace kode</strong> atau singkatan</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="dasar-fr">2. Dasar Find and Replace</h2>
+                        
+                        <p>Mari mulai dengan penggunaan dasar Find and Replace untuk melakukan pencarian dan penggantian sederhana.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Find and Replace Dasar</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Buka Dialog Find and Replace</h4>
+                                <p>Pergi ke <strong>Home tab → Editing → Find & Select → Replace</strong></p>
+                                <p>Atau gunakan shortcut <strong>Ctrl + H</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Masukkan Teks yang Dicari</h4>
+                                <p>Pada field <strong>Find what:</strong> masukkan teks yang ingin dicari</p>
+                                <p><strong>Contoh:</strong> "Jkt" untuk mencari semua singkatan Jakarta</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Masukkan Teks Pengganti</h4>
+                                <p>Pada field <strong>Replace with:</strong> masukkan teks pengganti</p>
+                                <p><strong>Contoh:</strong> "Jakarta" untuk mengganti singkatan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Eksekusi Replace</h4>
+                                <p>Klik <strong>Replace All</strong> untuk ganti semua sekaligus</p>
+                                <p>Atau <strong>Replace</strong> untuk ganti satu per satu dengan preview</p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🎯 Coba Berbagai Scenario Find and Replace</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-scenario="typo">
+                                    <h4>Koreksi Typo</h4>
+                                    <p>"recieve" → "receive"</p>
+                                </div>
+                                <div class="demo-option" data-scenario="abbreviation">
+                                    <h4>Singkatan</h4>
+                                    <p>"Jkt" → "Jakarta"</p>
+                                </div>
+                                <div class="demo-option" data-scenario="status">
+                                    <h4>Update Status</h4>
+                                    <p>"Active" → "Aktif"</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="basicPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Data Asli</th>
+                                            <th>Find What</th>
+                                            <th>Replace With</th>
+                                            <th>Hasil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="before">Saya recieve email</td>
+                                            <td class="highlight">recieve</td>
+                                            <td class="highlight">receive</td>
+                                            <td class="after">Saya receive email</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Kantor di Jkt</td>
+                                            <td class="highlight">Jkt</td>
+                                            <td class="highlight">Jakarta</td>
+                                            <td class="after">Kantor di Jakarta</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Status: Active</td>
+                                            <td class="highlight">Active</td>
+                                            <td class="highlight">Aktif</td>
+                                            <td class="after">Status: Aktif</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                <p><strong>Tips:</strong> Coba klik berbagai scenario di atas untuk melihat contoh penggunaan Find and Replace!</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="wildcard">3. Menggunakan Wildcard</h2>
+                        
+                        <p>Wildcard adalah karakter khusus yang memungkinkan pencarian pola daripada teks eksak. Excel mendukung tiga wildcard utama:</p>
+                        
+                        <div class="wildcard-examples">
+                            <div class="wildcard-example">
+                                <h4>Asterisk (*) - Multiple Characters</h4>
+                                <div class="wildcard-code">Prod*</div>
+                                <div class="wildcard-desc">Mencocokkan nol atau lebih karakter. Contoh: "Prod*" akan menemukan "Product", "Production", "Prod123"</div>
+                            </div>
+                            
+                            <div class="wildcard-example">
+                                <h4>Question Mark (?) - Single Character</h4>
+                                <div class="wildcard-code">PRD-00?</div>
+                                <div class="wildcard-desc">Mencocokkan tepat satu karakter. Contoh: "PRD-00?" akan menemukan "PRD-001", "PRD-002", tapi bukan "PRD-0001"</div>
+                            </div>
+                            
+                            <div class="wildcard-example">
+                                <h4>Tilde (~) - Escape Character</h4>
+                                <div class="wildcard-code">~*</div>
+                                <div class="wildcard-desc">Mencari karakter wildcard literal. Contoh: "~*" akan mencari "*", bukan sebagai wildcard</div>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Penggunaan Wildcard</h3>
+                            <div class="worksheet-demo">
+                                <p>Contoh pencarian dengan wildcard:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div-cell class="grid-cell header">C</div-cell>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Kode Produk</div>
+                                    <div class="grid-cell">Wildcard</div>
+                                    <div class="grid-cell">Hasil Pencarian</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell before">PRD-001-LAP</div>
+                                    <div class="grid-cell highlight">PRD-*</div>
+                                    <div class="grid-cell after">✅ Match</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell before">SVC-002-CON</div>
+                                    <div class="grid-cell highlight">PRD-*</div>
+                                    <div class="grid-cell after">❌ No Match</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell before">PRD-123-KBD</div>
+                                    <div class="grid-cell highlight">PRD-???</div>
+                                    <div class="grid-cell after">✅ Match</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Find Dialog</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">F</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Buka dialog Find</p>
+                                <div class="shortcut-tip">💡 Untuk pencarian tanpa replace</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Replace Dialog</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">H</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Buka dialog Find and Replace</p>
+                                <div class="shortcut-tip">💡 Untuk pencarian dan penggantian</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Find Next</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Shift</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">F4</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Temukan kemunculan berikutnya</p>
+                                <div class="shortcut-tip">💡 Setelah menggunakan Find sekali</div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="format">4. Find and Replace Format</h2>
+                        
+                        <p>Excel juga memungkinkan Anda mencari dan mengganti berdasarkan format sel, seperti warna font, background color, atau format angka.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah Find and Replace Format</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Buka Options</h4>
+                                <p>Di dialog Find and Replace, klik <strong>Options</strong></p>
+                                <p>Tombol format akan muncul di sebelah field Find dan Replace</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Pilih Format yang Dicari</h4>
+                                <p>Klik tombol <strong>Format</strong> di sebelah "Find what"</p>
+                                <p>Pilih format yang ingin dicari (font, border, fill, dll)</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Format Pengganti</h4>
+                                <p>Klik tombol <strong>Format</strong> di sebelah "Replace with"</p>
+                                <p>Pilih format baru yang ingin diterapkan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Eksekusi Replace</h4>
+                                <p>Klik <strong>Replace All</strong> untuk menerapkan perubahan</p>
+                                <p>Semua sel dengan format lama akan berubah ke format baru</p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🔢 Contoh Find and Replace Format</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-format="color">
+                                    <h4>Warna Font</h4>
+                                    <p>Merah → Biru</p>
+                                </div>
+                                <div class="demo-option" data-format="background">
+                                    <h4>Background</h4>
+                                    <p>Kuning → Hijau</p>
+                                </div>
+                                <div class="demo-option" data-format="number">
+                                    <h4>Format Angka</h4>
+                                    <p>General → Currency</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="formatPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Data Asli</th>
+                                            <th>Format Asli</th>
+                                            <th>Format Baru</th>
+                                            <th>Hasil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="before">Error Message</td>
+                                            <td><span style="color: red; font-weight: bold;">Font Merah</span></td>
+                                            <td><span style="color: blue; font-weight: bold;">Font Biru</span></td>
+                                            <td class="after"><span style="color: blue; font-weight: bold;">Error Message</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">Warning</td>
+                                            <td><span style="background-color: yellow;">Bg Kuning</span></td>
+                                            <td><span style="background-color: #90EE90;">Bg Hijau</span></td>
+                                            <td class="after"><span style="background-color: #90EE90;">Warning</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="before">1500000</td>
+                                            <td>General Format</td>
+                                            <td>Currency Format</td>
+                                            <td class="after">Rp 1,500,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Contoh Penggunaan Format Replace:</strong>
+                            <ul>
+                                <li><strong>Standardisasi warna</strong> untuk kategori tertentu</li>
+                                <li><strong>Update format currency</strong> untuk seluruh kolom</li>
+                                <li><strong>Ganti font company</strong> yang sudah berubah</li>
+                                <li><strong>Highlight kondisi</strong> dengan warna berbeda</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="lanjutan">5. Teknik Lanjutan</h2>
+                        
+                        <p>Berikut是一些 teknik lanjutan yang dapat meningkatkan efisiensi penggunaan Find and Replace.</p>
+                        
+                        <div class="dialog-demo">
+                            <div class="dialog-header">Find and Replace - Advanced Options</div>
+                            <div class="dialog-row">
+                                <div class="dialog-label">Find what:</div>
+                                <input type="text" class="dialog-input" value="Prod*" id="demoFind">
+                            </div>
+                            <div class="dialog-row">
+                                <div class="dialog-label">Replace with:</div>
+                                <input type="text" class="dialog-input" value="Product-$1" id="demoReplace">
+                            </div>
+                            <div class="dialog-row">
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoMatchCase">
+                                    <label for="demoMatchCase">Match case</label>
+                                </div>
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoMatchContents" checked>
+                                    <label for="demoMatchContents">Match entire cell contents</label>
+                                </div>
+                            </div>
+                            <div class="dialog-row">
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoUseWildcards" checked>
+                                    <label for="demoUseWildcards">Use wildcards</label>
+                                </div>
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoWithinSheet">
+                                    <label for="demoWithinSheet">Within: Sheet</label>
+                                </div>
+                            </div>
+                            <div class="dialog-row">
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoSearchByRows">
+                                    <label for="demoSearchByRows">Search: By Rows</label>
+                                </div>
+                                <div class="dialog-checkbox">
+                                    <input type="checkbox" id="demoLookInFormulas">
+                                    <label for="demoLookInFormulas">Look in: Formulas</label>
+                                </div>
+                            </div>
+                            <div class="dialog-buttons">
+                                <button class="dialog-btn secondary" onclick="demoFindAll()">Find All</button>
+                                <button class="dialog-btn secondary" onclick="demoReplace()">Replace</button>
+                                <button class="dialog-btn primary" onclick="demoReplaceAll()">Replace All</button>
+                                <button class="dialog-btn secondary" onclick="demoClose()">Close</button>
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Fungsi</th>
+                                    <th>Contoh Penggunaan</th>
+                                    <th>Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Match Case</strong></td>
+                                    <td>Membedakan huruf besar/kecil</td>
+                                    <td>Cari "Excel" tidak akan menemukan "excel"</td>
+                                    <td>Case-sensitive search</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Match Entire Cell</strong></td>
+                                    <td>Hanya cocok dengan sel lengkap</td>
+                                    <td>Cari "Apple" tidak cocok dengan "Apple Inc"</td>
+                                    <td>Exact match only</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Look in Formulas</strong></td>
+                                    <td>Cari dalam formula, bukan nilai</td>
+                                    <td>Cari "SUM" dalam formula, bukan hasil SUM</td>
+                                    <td>Formula search</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Within Workbook</strong></td>
+                                    <td>Cari di seluruh workbook</td>
+                                    <td>Replace di semua sheet sekaligus</td>
+                                    <td>Global replace</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 id="tips-ahli">6. Tips dan Trik Ahli</h2>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Find and Replace Level Ahli:</strong>
+                            <ul>
+                                <li><strong>Backup data</strong> sebelum Replace All</li>
+                                <li><strong>Test dengan Find First</strong> sebelum Replace All</li>
+                                <li><strong>Gunakan Selection</strong> untuk membatasi area replace</li>
+                                <li><strong>Kombinasikan dengan Wildcard</strong> untuk pola kompleks</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Masalah Find and Replace yang Sering Terjadi:</h4>
+                            <ul>
+                                <li><strong>Replace tidak bekerja</strong> - Periksa opsi Match Case/Entire Cell</li>
+                                <li><strong>Terlalu banyak match</strong> - Gunakan wildcard lebih spesifik</li>
+                                <li><strong>Format tidak terganti</strong> - Pastikan format dipilih dengan benar</li>
+                                <li><strong>Data rusak</strong> - Selalu backup sebelum Replace All</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="format-examples">
+                            <div class="format-example">
+                                <div class="format-symbol">Aa</div>
+                                <div>
+                                    <strong>Match Case</strong>
+                                    <div style="font-size: 12px; color: #666;">Beda huruf besar/kecil</div>
+                                </div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-symbol">🔍</div>
+                                <div>
+                                    <strong>Find Entire Cells</strong>
+                                    <div style="font-size: 12px; color: #666;">Cocokkan sel utuh</div>
+                                </div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-symbol">*</div>
+                                <div>
+                                    <strong>Use Wildcards</strong>
+                                    <div style="font-size: 12px; color: #666;">Pencarian pola</div>
+                                </div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-symbol">📊</div>
+                                <div>
+                                    <strong>Look in Formulas</strong>
+                                    <div style="font-size: 12px; color: #666;">Cari dalam formula</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Backup Data</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Select all → Copy ke sheet baru</p>
+                                <div class="shortcut-tip">💡 Selalu backup sebelum Replace All</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Undo</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">Z</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Undo jika hasil tidak sesuai</p>
+                                <div class="shortcut-tip">💡 Bekerja segera setelah Replace</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Find All Results</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">F</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Tampilkan semua hasil pencarian</p>
+                                <div class="shortcut-tip">💡 Preview sebelum Replace All</div>
+                            </div>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p>Menguasai <strong>Find and Replace di Excel</strong> akan menghemat waktu Anda secara signifikan dalam mengelola dan membersihkan data. Dengan teknik-teknik yang telah dipelajari, Anda bisa:</p>
+                        
+                        <ul>
+                            <li>Melakukan <strong>koreksi massal</strong> dengan cepat dan akurat</li>
+                            <li>Menggunakan <strong>wildcard</strong> untuk pencarian pola</li>
+                            <li>Mengganti <strong>format sel</strong> secara massal</li>
+                            <li>Menerapkan <strong>teknik lanjutan</strong> untuk skenario kompleks</li>
+                            <li>Menghindari <strong>kesalahan umum</strong> yang sering terjadi</li>
+                        </ul>
+                        
+                        <p><strong>Practice makes perfect!</strong> Coba buat worksheet latihan dan praktikkan semua teknik Find and Replace yang telah dipelajari. Mulai dari replace sederhana hingga wildcard kompleks.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba terapkan Find and Replace pada data Anda. Punya pertanyaan atau tips Find and Replace favorit? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Find and Replace</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Dasar Find & Replace</a></li>
+                        <li><a href="#"><span>2</span> Wildcard Search</a></li>
+                        <li><a href="#"><span>3</span> Format Replace</a></li>
+                        <li><a href="#"><span>4</span> Teknik Lanjutan</a></li>
+                        <li><a href="#"><span>5</span> Tips Ahli</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Find and Replace</a></li>
+                        <li><a href="#">Text to Columns</a></li>
+                        <li><a href="#">Group & Subtotal</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data Excel</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Find and Replace</a>
+                        <a href="#">Cari Ganti Data</a>
+                        <a href="#">Replace Massal</a>
+                        <a href="#">Wildcard Excel</a>
+                        <a href="#">Format Replace</a>
+                        <a href="#">Tips Excel</a>
+                        <a href="#">Data Cleaning</a>
+                        <a href="#">Excel Shortcuts</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Download Cheat Sheet</h3>
+                    <p>Download panduan Find and Replace Excel:</p>
+                    <ul>
+                        <li><a href="#">📋 Wildcard Cheat Sheet</a></li>
+                        <li><a href="#">🎯 Format Examples</a></li>
+                        <li><a href="#">💡 Advanced Techniques</a></li>
+                        <li><a href="#">🚀 All F&R Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Find and Replace</a></li>
+                        <li><a href="#">Text to Columns</a></li>
+                        <li><a href="#">Group & Subtotal</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Find and Replace Demos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Basic Scenario Demo
+            const scenarioOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const basicPreview = document.getElementById('basicPreview');
+            
+            scenarioOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    scenarioOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected scenario
+                    const scenarioType = this.getAttribute('data-scenario');
+                    updateBasicPreview(scenarioType);
+                });
+            });
+            
+            function updateBasicPreview(type) {
+                const tbody = basicPreview.querySelector('tbody');
+                const rows = tbody.querySelectorAll('tr');
+                
+                switch(type) {
+                    case 'typo':
+                        // Typo correction
+                        rows[0].cells[0].textContent = 'Saya recieve email';
+                        rows[0].cells[1].textContent = 'recieve';
+                        rows[0].cells[2].textContent = 'receive';
+                        rows[0].cells[3].textContent = 'Saya receive email';
+                        
+                        rows[1].cells[0].textContent = 'Please recieve this';
+                        rows[1].cells[1].textContent = 'recieve';
+                        rows[1].cells[2].textContent = 'receive';
+                        rows[1].cells[3].textContent = 'Please receive this';
+                        
+                        rows[2].cells[0].textContent = 'Recieved yesterday';
+                        rows[2].cells[1].textContent = 'Recieved';
+                        rows[2].cells[2].textContent = 'Received';
+                        rows[2].cells[3].textContent = 'Received yesterday';
+                        break;
+                    case 'abbreviation':
+                        // Abbreviation expansion
+                        rows[0].cells[0].textContent = 'Kantor di Jkt';
+                        rows[0].cells[1].textContent = 'Jkt';
+                        rows[0].cells[2].textContent = 'Jakarta';
+                        rows[0].cells[3].textContent = 'Kantor di Jakarta';
+                        
+                        rows[1].cells[0].textContent = 'Meeting di Jkt Pusat';
+                        rows[1].cells[1].textContent = 'Jkt';
+                        rows[1].cells[2].textContent = 'Jakarta';
+                        rows[1].cells[3].textContent = 'Meeting di Jakarta Pusat';
+                        
+                        rows[2].cells[0].textContent = 'Area Jkt dan sekitarnya';
+                        rows[2].cells[1].textContent = 'Jkt';
+                        rows[2].cells[2].textContent = 'Jakarta';
+                        rows[2].cells[3].textContent = 'Area Jakarta dan sekitarnya';
+                        break;
+                    case 'status':
+                        // Status update
+                        rows[0].cells[0].textContent = 'Status: Active';
+                        rows[0].cells[1].textContent = 'Active';
+                        rows[0].cells[2].textContent = 'Aktif';
+                        rows[0].cells[3].textContent = 'Status: Aktif';
+                        
+                        rows[1].cells[0].textContent = 'User is Active now';
+                        rows[1].cells[1].textContent = 'Active';
+                        rows[1].cells[2].textContent = 'Aktif';
+                        rows[1].cells[3].textContent = 'User is Aktif now';
+                        
+                        rows[2].cells[0].textContent = 'Active members only';
+                        rows[2].cells[1].textContent = 'Active';
+                        rows[2].cells[2].textContent = 'Aktif';
+                        rows[2].cells[3].textContent = 'Aktif members only';
+                        break;
+                }
+            }
+            
+            // Format Replace Demo
+            const formatOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const formatPreview = document.getElementById('formatPreview');
+            
+            formatOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    formatOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected format
+                    const formatType = this.getAttribute('data-format');
+                    updateFormatPreview(formatType);
+                });
+            });
+            
+            function updateFormatPreview(type) {
+                const tbody = formatPreview.querySelector('tbody');
+                const rows = tbody.querySelectorAll('tr');
+                
+                switch(type) {
+                    case 'color':
+                        // Font color change
+                        rows[0].cells[0].innerHTML = 'Error Message';
+                        rows[0].cells[1].innerHTML = '<span style="color: red; font-weight: bold;">Font Merah</span>';
+                        rows[0].cells[2].innerHTML = '<span style="color: blue; font-weight: bold;">Font Biru</span>';
+                        rows[0].cells[3].innerHTML = '<span style="color: blue; font-weight: bold;">Error Message</span>';
+                        
+                        rows[1].cells[0].innerHTML = 'Critical Error';
+                        rows[1].cells[1].innerHTML = '<span style="color: red; font-weight: bold;">Font Merah</span>';
+                        rows[1].cells[2].innerHTML = '<span style="color: blue; font-weight: bold;">Font Biru</span>';
+                        rows[1].cells[3].innerHTML = '<span style="color: blue; font-weight: bold;">Critical Error</span>';
+                        break;
+                    case 'background':
+                        // Background color change
+                        rows[0].cells[0].innerHTML = 'Warning';
+                        rows[0].cells[1].innerHTML = '<span style="background-color: yellow;">Bg Kuning</span>';
+                        rows[0].cells[2].innerHTML = '<span style="background-color: #90EE90;">Bg Hijau</span>';
+                        rows[0].cells[3].innerHTML = '<span style="background-color: #90EE90;">Warning</span>';
+                        
+                        rows[1].cells[0].innerHTML = 'Important Note';
+                        rows[1].cells[1].innerHTML = '<span style="background-color: yellow;">Bg Kuning</span>';
+                        rows[1].cells[2].innerHTML = '<span style="background-color: #90EE90;">Bg Hijau</span>';
+                        rows[1].cells[3].innerHTML = '<span style="background-color: #90EE90;">Important Note</span>';
+                        break;
+                    case 'number':
+                        // Number format change
+                        rows[0].cells[0].innerHTML = '1500000';
+                        rows[0].cells[1].innerHTML = 'General Format';
+                        rows[0].cells[2].innerHTML = 'Currency Format';
+                        rows[0].cells[3].innerHTML = 'Rp 1,500,000';
+                        
+                        rows[1].cells[0].innerHTML = '2750000';
+                        rows[1].cells[1].innerHTML = 'General Format';
+                        rows[1].cells[2].innerHTML = 'Currency Format';
+                        rows[1].cells[3].innerHTML = 'Rp 2,750,000';
+                        break;
+                }
+            }
+            
+            // Dialog Demo Functions
+            window.demoFindAll = function() {
+                alert('Menemukan 15 kemunculan untuk "Prod*"');
+            };
+            
+            window.demoReplace = function() {
+                alert('Mengganti satu kemunculan "Prod001" dengan "Product-001"');
+            };
+            
+            window.demoReplaceAll = function() {
+                alert('Berhasil mengganti 15 kemunculan');
+            };
+            
+            window.demoClose = function() {
+                alert('Dialog Find and Replace ditutup');
+            };
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Simulate find and replace animation
+            const beforeCells = document.querySelectorAll('.grid-cell.before');
+            beforeCells.forEach(cell => {
+                if (cell.textContent.includes('Active')) {
+                    cell.addEventListener('click', function() {
+                        const originalText = this.textContent;
+                        
+                        // Highlight the found text
+                        this.style.background = '#a84300';
+                        this.textContent = originalText.replace('Active', '>>>Aktif<<<');
+                        
+                        setTimeout(() => {
+                            this.style.background = '#1a5c38';
+                            this.textContent = originalText.replace('Active', 'Aktif');
+                        }, 1000);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

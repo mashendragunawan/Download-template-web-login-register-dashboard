@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Membuat Conditional Formatting Sederhana untuk Menyoroti Data Penting | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap cara menggunakan Conditional Formatting di Excel untuk menyoroti data penting. Pelajari teknik highlighting sel, baris, dan data dengan kriteria tertentu.">
+    <meta name="keywords" content="conditional formatting excel, sorot data excel, highlight data, format bersyarat, tutorial excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.highlight { border-color: #27ae60; }
+        .feature-card.data-bars { border-color: #2980b9; }
+        .feature-card.color-scales { border-color: #e74c3c; }
+        .feature-card.icon-sets { border-color: #f39c12; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Demo Sections */
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .worksheet-demo {
+            background: #2d2d2d;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 1px;
+            background: #444;
+            margin-top: 15px;
+        }
+        
+        .grid-cell {
+            background: #222;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #ccc;
+            position: relative;
+        }
+        
+        .grid-cell.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.highlighted {
+            background: #7d6608;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.data-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: #2980b9;
+            z-index: 1;
+        }
+        
+        .data-bar-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .preview-cell {
+            background: #f0f7f4;
+            border: 1px solid #217346;
+            border-radius: 3px;
+            padding: 8px 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .preview-cell.highlighted {
+            background: #ffeb3b;
+            border-color: #ffc107;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Shortcut Grid */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .shortcut-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .shortcut-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #217346;
+        }
+        
+        .shortcut-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .shortcut-keys {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .key {
+            background: #217346;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .key.plus {
+            background: transparent;
+            color: #333;
+            padding: 5px 2px;
+        }
+        
+        .shortcut-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .shortcut-tip {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Color Examples */
+        .color-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-example {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: 10px;
+            }
+            
+            .color-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Cara Membuat Conditional Formatting Sederhana untuk Menyoroti Data Penting di Excel</h1>
+                        <div class="article-meta">
+                            <span>📅 20 Juni 2023</span>
+                            <span>👁️ 7.2K Dilihat</span>
+                            <span>⏱️ 12 menit membaca</span>
+                            <span>🏷️ Conditional Formatting, Sorot Data, Highlight Excel, Tutorial Excel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Conditional Formatting</strong> adalah fitur Excel yang sangat powerful untuk menyoroti data penting secara visual. Dengan fitur ini, Anda bisa secara otomatis mengubah warna sel, font, atau border berdasarkan nilai atau kondisi tertentu. Panduan lengkap ini akan mengajarkan berbagai teknik Conditional Formatting untuk pemula.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian-cf">Apa itu Conditional Formatting?</a></li>
+                                <li><a href="#highlight-sel">Menyoroti Sel Berdasarkan Nilai</a></li>
+                                <li><a href="#data-bars">Data Bars (Bars Data)</a></li>
+                                <li><a href="#color-scales">Color Scales (Skala Warna)</a></li>
+                                <li><a href="#icon-sets">Icon Sets (Set Ikon)</a></li>
+                                <li><a href="#formula-kustom">Formula Kustom untuk Kondisi Kompleks</a></li>
+                                <li><a href="#tips-ahli">Tips dan Trik Ahli</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian-cf">1. Apa itu Conditional Formatting di Excel?</h2>
+                        
+                        <p><strong>Conditional Formatting</strong> adalah fitur Excel yang memungkinkan Anda menerapkan format khusus (seperti warna, font, atau border) ke sel berdasarkan kondisi tertentu. Format ini akan berubah otomatis ketika nilai sel berubah.</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card highlight">
+                                <div class="feature-icon">🎨</div>
+                                <h3>Highlight Cells</h3>
+                                <p>Menyoroti sel berdasarkan nilai</p>
+                                <p><strong>Contoh:</strong> > 100, = "Selesai", mengandung teks</p>
+                            </div>
+                            
+                            <div class="feature-card data-bars">
+                                <div class="feature-icon">📊</div>
+                                <h3>Data Bars</h3>
+                                <p>Menampilkan bar horizontal dalam sel</p>
+                                <p><strong>Contoh:</strong> Visualisasi nilai penjualan</p>
+                            </div>
+                            
+                            <div class="feature-card color-scales">
+                                <div class="feature-icon">🌈</div>
+                                <h3>Color Scales</h3>
+                                <p>Gradien warna berdasarkan nilai</p>
+                                <p><strong>Contoh:</strong> Hijau-kuning-merah untuk performa</p>
+                            </div>
+                            
+                            <div class="feature-card icon-sets">
+                                <div class="feature-icon">⭐</div>
+                                <h3>Icon Sets</h3>
+                                <p>Ikon berdasarkan kategori nilai</p>
+                                <p><strong>Contoh:</strong> Panah, bendera, bintang</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>🎮 Demo Conditional Formatting</h4>
+                            <div class="worksheet-preview">
+                                <p>Contoh data sebelum dan setelah Conditional Formatting:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell header">D</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Nama</div>
+                                    <div class="grid-cell">Penjualan</div>
+                                    <div class="grid-cell">Target</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell">85</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell">Belum</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">Ani</div>
+                                    <div class="grid-cell">120</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell">Selesai</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Cici</div>
+                                    <div class="grid-cell">95</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell">Belum</div>
+                                </div>
+                                <p style="margin-top: 10px; font-size: 14px; color: #ccc;">↓ Setelah Conditional Formatting ↓</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell header">D</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Nama</div>
+                                    <div class="grid-cell">Penjualan</div>
+                                    <div class="grid-cell">Target</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell highlighted">85</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell highlighted">Belum</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">Ani</div>
+                                    <div class="grid-cell">120</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell">Selesai</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Cici</div>
+                                    <div class="grid-cell highlighted">95</div>
+                                    <div class="grid-cell">100</div>
+                                    <div class="grid-cell highlighted">Belum</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>📌 Manfaat Conditional Formatting:</strong>
+                            <ul>
+                                <li><strong>Visualisasi data</strong> yang lebih mudah dipahami</li>
+                                <li><strong>Identifikasi tren</strong> dan pola dengan cepat</li>
+                                <li><strong>Highlight outlier</strong> dan nilai ekstrem</li>
+                                <li><strong>Monitoring KPI</strong> secara real-time</li>
+                                <li><strong>Meningkatkan readability</strong> laporan</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="highlight-sel">2. Menyoroti Sel Berdasarkan Nilai</h2>
+                        
+                        <p>Ini adalah penggunaan Conditional Formatting yang paling umum. Anda bisa menyoroti sel berdasarkan kriteria seperti nilai lebih besar dari, kurang dari, antara, atau sama dengan nilai tertentu.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Highlight Sel</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data</h4>
+                                <p>Pilih range data yang ingin diberi Conditional Formatting</p>
+                                <p><strong>Tips:</strong> Bisa satu kolom, beberapa kolom, atau seluruh tabel</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Menu Conditional Formatting</h4>
+                                <p>Pergi ke <strong>Home tab → Styles → Conditional Formatting</strong></p>
+                                <p>Pilih <strong>Highlight Cells Rules</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Kriteria</h4>
+                                <p>Pilih kriteria yang diinginkan:</p>
+                                <ul>
+                                    <li><strong>Greater Than</strong> (Lebih Besar Dari)</li>
+                                    <li><strong>Less Than</strong> (Lebih Kecil Dari)</li>
+                                    <li><strong>Between</strong> (Antara)</li>
+                                    <li><strong>Equal To</strong> (Sama Dengan)</li>
+                                    <li><strong>Text that Contains</strong> (Teks yang Mengandung)</li>
+                                </ul>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Atur Format</h4>
+                                <p>Masukkan nilai threshold dan pilih format yang diinginkan</p>
+                                <p>Klik <strong>OK</strong> untuk menerapkan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🎯 Coba Berbagai Jenis Highlight</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-type="greater">
+                                    <h4>> 100</h4>
+                                    <p>Highlight nilai > 100</p>
+                                </div>
+                                <div class="demo-option" data-type="less">
+                                    <h4>< 50</h4>
+                                    <p>Highlight nilai < 50</p>
+                                </div>
+                                <div class="demo-option" data-type="between">
+                                    <h4>50-100</h4>
+                                    <p>Highlight nilai antara 50-100</p>
+                                </div>
+                                <div class="demo-option" data-type="text">
+                                    <h4>Teks "Selesai"</h4>
+                                    <p>Highlight sel dengan teks "Selesai"</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview" id="highlightPreview">
+                                <div class="preview-cell">45</div>
+                                <div class="preview-cell">78</div>
+                                <div class="preview-cell">120</div>
+                                <div class="preview-cell">95</div>
+                                <div class="preview-cell">32</div>
+                                <div class="preview-cell">150</div>
+                            </div>
+                            <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                <p><strong>Tips:</strong> Coba klik berbagai opsi di atas untuk melihat hasil Conditional Formatting yang berbeda!</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="data-bars">3. Data Bars (Bars Data)</h2>
+                        
+                        <p>Data Bars menampilkan bar horizontal dalam sel yang panjangnya proporsional dengan nilai sel tersebut. Sangat berguna untuk visualisasi data numerik.</p>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Data Bars</h3>
+                            <div class="worksheet-demo">
+                                <p>Data dengan Data Bars untuk visualisasi penjualan:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Sales Rep</div>
+                                    <div class="grid-cell">Penjualan</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell data-bar">
+                                        <div class="data-bar-fill" style="width: 45%;"></div>
+                                        <div class="data-bar-text">45</div>
+                                    </div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">Ani</div>
+                                    <div class="grid-cell data-bar">
+                                        <div class="data-bar-fill" style="width: 80%;"></div>
+                                        <div class="data-bar-text">80</div>
+                                    </div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Cici</div>
+                                    <div class="grid-cell data-bar">
+                                        <div class="data-bar-fill" style="width: 65%;"></div>
+                                        <div class="data-bar-text">65</div>
+                                    </div>
+                                    <div class="grid-cell">5</div>
+                                    <div class="grid-cell">Dedi</div>
+                                    <div class="grid-cell data-bar">
+                                        <div class="data-bar-fill" style="width: 95%;"></div>
+                                        <div class="data-bar-text">95</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Gradient Fill</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Home</div>
+                                        <div class="key plus">→</div>
+                                        <div class="key">CF</div>
+                                        <div class="key plus">→</div>
+                                        <div class="key">Data Bars</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Data Bars dengan gradien warna</p>
+                                <div class="shortcut-tip">💡 Visualisasi halus dengan transisi warna</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Solid Fill</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Home</div>
+                                        <div class="key plus">→</div>
+                                        <div class="key">CF</div>
+                                        <div class="key plus">→</div>
+                                        <div class="key">Data Bars</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Data Bars dengan warna solid</p>
+                                <div class="shortcut-tip">💡 Lebih kontras dan mudah dibaca</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Custom Data Bars</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Manage</div>
+                                        <div class="key plus">→</div>
+                                        <div class="key">Rules</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Atur warna dan batas manual</p>
+                                <div class="shortcut-tip">💡 Kustomisasi penuh warna dan tampilan</div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="color-scales">4. Color Scales (Skala Warna)</h2>
+                        
+                        <p>Color Scales menerapkan gradien warna pada sel berdasarkan nilainya. Warna akan berubah secara gradual dari nilai terendah ke tertinggi.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah Membuat Color Scales</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data Numerik</h4>
+                                <p>Pilih range data numerik yang ingin diberi Color Scales</p>
+                                <p><strong>Tips:</strong> Works best dengan data yang memiliki variasi</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Color Scales</h4>
+                                <p><strong>Home → Conditional Formatting → Color Scales</strong></p>
+                                <p>Pilih skema warna yang diinginkan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Skema Warna</h4>
+                                <p>Pilih dari berbagai preset:</p>
+                                <ul>
+                                    <li><strong>Green-Yellow-Red</strong> (Hijau-Kuning-Merah)</li>
+                                    <li><strong>Red-Yellow-Green</strong> (Merah-Kuning-Hijau)</li>
+                                    <li><strong>Blue-White-Red</strong> (Biru-Putih-Merah)</li>
+                                </ul>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Kustomisasi (Opsional)</h4>
+                                <p>Untuk kustomisasi lebih lanjut:</p>
+                                <p><strong>Manage Rules → Edit Rule</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="color-examples">
+                            <div class="color-example">
+                                <div class="color-swatch" style="background: #63be7b;"></div>
+                                <span>Nilai Tertinggi (Hijau)</span>
+                            </div>
+                            <div class="color-example">
+                                <div class="color-swatch" style="background: #ffeb84;"></div>
+                                <span>Nilai Menengah (Kuning)</span>
+                            </div>
+                            <div class="color-example">
+                                <div class="color-swatch" style="background: #f8696b;"></div>
+                                <span>Nilai Terendah (Merah)</span>
+                            </div>
+                            <div class="color-example">
+                                <div class="color-swatch" style="background: linear-gradient(to right, #63be7b, #ffeb84, #f8696b);"></div>
+                                <span>Green-Yellow-Red Scale</span>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Contoh Penggunaan Color Scales:</strong>
+                            <ul>
+                                <li><strong>Kinerja Sales:</strong> Hijau untuk performa terbaik, merah untuk terendah</li>
+                                <li><strong>Tingkat Stok:</strong> Merah untuk stok rendah, hijau untuk stok aman</li>
+                                <li><strong>Nilai Siswa:</strong> Biru untuk nilai tinggi, merah untuk nilai rendah</li>
+                                <li><strong>Tingkat Kepuasan:</strong> Gradien dari sangat puas ke tidak puas</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="icon-sets">5. Icon Sets (Set Ikon)</h2>
+                        
+                        <p>Icon Sets menambahkan ikon visual ke sel berdasarkan kategorisasi nilai. Sangat efektif untuk dashboard dan laporan executive.</p>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Icon Sets</h3>
+                            <div class="worksheet-demo">
+                                <p>Data dengan Icon Sets untuk indikator performa:</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Metrik</div>
+                                    <div class="grid-cell">Nilai</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Kepuasan Pelanggan</div>
+                                    <div class="grid-cell">85%</div>
+                                    <div class="grid-cell">🟢</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">Retensi</div>
+                                    <div class="grid-cell">65%</div>
+                                    <div class="grid-cell">🟡</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Response Time</div>
+                                    <div class="grid-cell">45%</div>
+                                    <div class="grid-cell">🔴</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Icon Set</th>
+                                    <th>Jumlah Kategori</th>
+                                    <th>Contoh Penggunaan</th>
+                                    <th>Visual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>3 Arrows</strong></td>
+                                    <td>3 kategori</td>
+                                    <td>Naik, stabil, turun</td>
+                                    <td>⬆️ ➡️ ⬇️</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3 Traffic Lights</strong></td>
+                                    <td>3 kategori</td>
+                                    <td>Baik, sedang, buruk</td>
+                                    <td>🔴 🟡 🟢</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4 Ratings</strong></td>
+                                    <td>4 kategori</td>
+                                    <td>Kualitas produk</td>
+                                    <td>⭐ ⭐⭐ ⭐⭐⭐ ⭐⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5 Quarters</strong></td>
+                                    <td>5 kategori</td>
+                                    <td>Progress kuartalan</td>
+                                    <td>◔ ◑ ◕ ●</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="interactive-demo">
+                            <h4>🔢 Contoh Icon Sets Berdasarkan Nilai</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-iconset="arrows">
+                                    <h4>3 Arrows</h4>
+                                    <p>⬆️ > 80%, ➡️ 50-80%, ⬇️ < 50%</p>
+                                </div>
+                                <div class="demo-option" data-iconset="lights">
+                                    <h4>Traffic Lights</h4>
+                                    <p>🟢 > 75%, 🟡 50-75%, 🔴 < 50%</p>
+                                </div>
+                                <div class="demo-option" data-iconset="stars">
+                                    <h4>4 Stars</h4>
+                                    <p>Berdasarkan kuartil nilai</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview" id="iconPreview">
+                                <div style="text-align: center; width: 100%;">
+                                    <p><strong>Contoh:</strong> Nilai performa dengan 3 Arrows</p>
+                                    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                                        <div>
+                                            <h4>Nilai:</h4>
+                                            <p>92% ⬆️<br>67% ➡️<br>45% ⬇️<br>88% ⬆️</p>
+                                        </div>
+                                        <div>
+                                            <h4>Keterangan:</h4>
+                                            <p>Excellent<br>Average<br>Poor<br>Excellent</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="formula-kustom">6. Formula Kustom untuk Kondisi Kompleks</h2>
+                        
+                        <p>Untuk kondisi yang lebih kompleks, Anda bisa menggunakan formula kustom dalam Conditional Formatting. Ini membuka kemungkinan tak terbatas untuk logika formatting.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah Menggunakan Formula Kustom</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data</h4>
+                                <p>Pilih range yang ingin diberi Conditional Formatting</p>
+                                <p><strong>Tips:</strong> Perhatikan sel aktif dalam seleksi</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buat Rule Baru</h4>
+                                <p><strong>Conditional Formatting → New Rule</strong></p>
+                                <p>Pilih <strong>"Use a formula to determine which cells to format"</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Masukkan Formula</h4>
+                                <p>Tulis formula yang mengembalikan TRUE/FALSE</p>
+                                <p><strong>Contoh:</strong> =B2>AVERAGE($B$2:$B$10)</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Atur Format</h4>
+                                <p>Klik <strong>Format</strong> untuk memilih style</p>
+                                <p>Klik <strong>OK</strong> untuk menerapkan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="demo-section">
+                            <h3>🎯 Contoh Formula Kustom yang Berguna</h3>
+                            <div class="worksheet-demo">
+                                <p>Berbagai contoh formula untuk Conditional Formatting:</p>
+                                <div style="font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.8;">
+                                    <p><span style="color: #4caf50;">=A2>TODAY()</span>        <span style="color: #ccc; margin-left: 20px;"># Highlight tanggal masa depan</span></p>
+                                    <p><span style="color: #4caf50;">=AND(A2>MIN($A$2:$A$10), A2<MAX($A$2:$A$10))</span>  <span style="color: #ccc; margin-left: 20px;"># Highlight nilai bukan min/max</span></p>
+                                    <p><span style="color: #4caf50;">=MOD(ROW(),2)=0</span>   <span style="color: #ccc; margin-left: 20px;"># Zebra stripes (baris genap)</span></p>
+                                    <p><span style="color: #4caf50;">=ISERROR(A2)</span>       <span style="color: #ccc; margin-left: 20px;"># Highlight error cells</span></p>
+                                    <p><span style="color: #4caf50;">=COUNTIF($A$2:$A$10,A2)>1</span>  <span style="color: #ccc; margin-left: 20px;"># Highlight duplikat</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Highlight Weekend</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">=WEEKDAY</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">=OR(WEEKDAY(A2)=1,WEEKDAY(A2)=7)</p>
+                                <div class="shortcut-tip">💡 Sorot Sabtu dan Minggu</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Above Average</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">=A2></div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">=A2>AVERAGE($A$2:$A$10)</p>
+                                <div class="shortcut-tip">💡 Nilai di atas rata-rata</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>30 Days Past Due</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">=TODAY()</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">=AND(A2<>"",TODAY()-A2>30)</p>
+                                <div class="shortcut-tip">💡 Tenggat waktu lewat 30 hari</div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tips-ahli">7. Tips dan Trik Ahli</h2>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Conditional Formatting Level Ahli:</strong>
+                            <ul>
+                                <li><strong>Gunakan referensi absolut ($)</strong> untuk kriteria yang konsisten</li>
+                                <li><strong>Manage Rules</strong> untuk melihat dan mengedit semua rule</li>
+                                <li><strong>Stop If True</strong> untuk mengontrol urutan evaluasi rule</li>
+                                <li><strong>Copy formatting</strong> dengan Format Painter (brush icon)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Masalah Conditional Formatting yang Sering Terjadi:</h4>
+                            <ul>
+                                <li><strong>Performance lambat</strong> - Terlalu banyak rule kompleks</li>
+                                <li><strong>Rule tidak bekerja</strong> - Periksa urutan dan logika formula</li>
+                                <li><strong>Format bertumpuk</strong> - Multiple rule pada sel yang sama</li>
+                                <li><strong>Referensi salah</strong> - Periksa penggunaan $ dalam formula</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Manage Rules</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">O</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">D</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Buka Conditional Formatting Rules Manager</p>
+                                <div class="shortcut-tip">💡 Kelola semua rule dalam satu tempat</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Clear Rules</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">H</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">L</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">C</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Hapus Conditional Formatting</p>
+                                <div class="shortcut-tip">💡 Pilih: Selected Cells atau Entire Sheet</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Format Painter</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">Shift</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">C</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Copy formatting termasuk Conditional Formatting</p>
+                                <div class="shortcut-tip">💡 Double click untuk paste multiple</div>
+                            </div>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p>Menguasai <strong>Conditional Formatting di Excel</strong> akan mengubah cara Anda menganalisis dan mempresentasikan data. Dengan teknik-teknik yang telah dipelajari, Anda bisa:</p>
+                        
+                        <ul>
+                            <li>Menyoroti <strong>data penting</strong> secara otomatis</li>
+                            <li>Membuat <strong>visualisasi data</strong> yang powerful</li>
+                            <li>Mengidentifikasi <strong>pola dan tren</strong> dengan cepat</li>
+                            <li>Membuat <strong>dashboard</strong> yang informatif dan menarik</li>
+                            <li>Meningkatkan <strong>efisiensi analisis</strong> data</li>
+                        </ul>
+                        
+                        <p><strong>Practice makes perfect!</strong> Coba buat worksheet latihan dan praktikkan semua teknik Conditional Formatting yang telah dipelajari. Mulai dari highlight sel sederhana hingga formula kustom yang kompleks.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba terapkan Conditional Formatting pada data Anda. Punya pertanyaan atau tips Conditional Formatting favorit? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Conditional Formatting</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Highlight Cells</a></li>
+                        <li><a href="#"><span>2</span> Data Bars</a></li>
+                        <li><a href="#"><span>3</span> Color Scales</a></li>
+                        <li><a href="#"><span>4</span> Icon Sets</a></li>
+                        <li><a href="#"><span>5</span> Formula Kustom</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data Excel</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Tips Produktivitas</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Conditional Formatting</a>
+                        <a href="#">Sorot Data</a>
+                        <a href="#">Highlight Excel</a>
+                        <a href="#">Data Visualization</a>
+                        <a href="#">Excel Dashboard</a>
+                        <a href="#">Format Bersyarat</a>
+                        <a href="#">Tips Excel</a>
+                        <a href="#">Formula Excel</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Download Cheat Sheet</h3>
+                    <p>Download panduan Conditional Formatting Excel:</p>
+                    <ul>
+                        <li><a href="#">📋 CF Shortcuts</a></li>
+                        <li><a href="#">🎯 Formula Examples</a></li>
+                        <li><a href="#">💡 Color Guide</a></li>
+                        <li><a href="#">🚀 All CF Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Conditional Formatting</a></li>
+                        <li><a href="#">Sort Data</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                        <li><a href="#">Functions</a></li>
+                        <li><a href="#">Charts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Conditional Formatting Demos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight Type Demo
+            const highlightOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const highlightPreview = document.getElementById('highlightPreview');
+            
+            highlightOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    highlightOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected type
+                    const highlightType = this.getAttribute('data-type');
+                    updateHighlightPreview(highlightType);
+                });
+            });
+            
+            function updateHighlightPreview(type) {
+                const cells = highlightPreview.querySelectorAll('.preview-cell');
+                
+                // Reset all cells
+                cells.forEach(cell => {
+                    cell.classList.remove('highlighted');
+                    cell.textContent = cell.getAttribute('data-original') || cell.textContent;
+                });
+                
+                switch(type) {
+                    case 'greater':
+                        // Highlight values > 100
+                        cells.forEach(cell => {
+                            const value = parseInt(cell.textContent);
+                            if (value > 100) {
+                                cell.classList.add('highlighted');
+                            }
+                        });
+                        break;
+                    case 'less':
+                        // Highlight values < 50
+                        cells.forEach(cell => {
+                            const value = parseInt(cell.textContent);
+                            if (value < 50) {
+                                cell.classList.add('highlighted');
+                            }
+                        });
+                        break;
+                    case 'between':
+                        // Highlight values between 50-100
+                        cells.forEach(cell => {
+                            const value = parseInt(cell.textContent);
+                            if (value >= 50 && value <= 100) {
+                                cell.classList.add('highlighted');
+                            }
+                        });
+                        break;
+                    case 'text':
+                        // Change demo to text values and highlight "Selesai"
+                        const textValues = ["Belum", "Selesai", "Proses", "Selesai", "Belum", "Selesai"];
+                        cells.forEach((cell, index) => {
+                            cell.setAttribute('data-original', cell.textContent);
+                            cell.textContent = textValues[index];
+                            if (textValues[index] === "Selesai") {
+                                cell.classList.add('highlighted');
+                            }
+                        });
+                        break;
+                }
+            }
+            
+            // Icon Sets Demo
+            const iconOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const iconPreview = document.getElementById('iconPreview');
+            
+            iconOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    iconOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected iconset
+                    const iconsetType = this.getAttribute('data-iconset');
+                    updateIconPreview(iconsetType);
+                });
+            });
+            
+            function updateIconPreview(iconset) {
+                let previewHTML = '';
+                
+                switch(iconset) {
+                    case 'arrows':
+                        previewHTML = `
+                            <div style="text-align: center; width: 100%;">
+                                <p><strong>Contoh:</strong> Nilai performa dengan 3 Arrows</p>
+                                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                                    <div>
+                                        <h4>Nilai:</h4>
+                                        <p>92% ⬆️<br>67% ➡️<br>45% ⬇️<br>88% ⬆️</p>
+                                    </div>
+                                    <div>
+                                        <h4>Keterangan:</h4>
+                                        <p>Excellent<br>Average<br>Poor<br>Excellent</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'lights':
+                        previewHTML = `
+                            <div style="text-align: center; width: 100%;">
+                                <p><strong>Contoh:</strong> Status tugas dengan Traffic Lights</p>
+                                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                                    <div>
+                                        <h4>Progress:</h4>
+                                        <p>95% 🟢<br>60% 🟡<br>30% 🔴<br>85% 🟢</p>
+                                    </div>
+                                    <div>
+                                        <h4>Status:</h4>
+                                        <p>Selesai<br>Sedang<br>Terhambat<br>Selesai</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'stars':
+                        previewHTML = `
+                            <div style="text-align: center; width: 100%;">
+                                <p><strong>Contoh:</strong> Rating kualitas dengan Bintang</p>
+                                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                                    <div>
+                                        <h4>Skor:</h4>
+                                        <p>92 ⭐⭐⭐⭐<br>75 ⭐⭐⭐<br>55 ⭐⭐<br>35 ⭐</p>
+                                    </div>
+                                    <div>
+                                        <h4>Kualitas:</h4>
+                                        <p>Excellent<br>Good<br>Fair<br>Poor</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                }
+                
+                iconPreview.innerHTML = previewHTML;
+            }
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Simulate conditional formatting interaction
+            const gridCells = document.querySelectorAll('.grid-cell.highlighted');
+            gridCells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    this.style.background = '#ffeb3b';
+                    this.style.color = '#333';
+                    setTimeout(() => {
+                        this.style.background = '#7d6608';
+                        this.style.color = 'white';
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
