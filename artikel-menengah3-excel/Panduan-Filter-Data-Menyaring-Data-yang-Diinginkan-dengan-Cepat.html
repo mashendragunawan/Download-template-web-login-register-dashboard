@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Filter Data: Menyaring Data yang Diinginkan dengan Cepat | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap cara menggunakan filter data di Excel untuk menyaring data berdasarkan kriteria tertentu. Pelajari teknik filter teks, angka, tanggal, dan filter lanjutan.">
+    <meta name="keywords" content="filter data excel, autofilter, advanced filter, menyaring data, criteria filter, tutorial excel">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.autofilter { border-color: #27ae60; }
+        .feature-card.text-filter { border-color: #2980b9; }
+        .feature-card.number-filter { border-color: #e74c3c; }
+        .feature-card.date-filter { border-color: #f39c12; }
+        .feature-card.advanced { border-color: #9b59b6; }
+        .feature-card.custom { border-color: #1abc9c; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Demo Sections */
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .worksheet-demo {
+            background: #2d2d2d;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 1px;
+            background: #444;
+            margin-top: 15px;
+        }
+        
+        .grid-cell {
+            background: #222;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #ccc;
+            position: relative;
+        }
+        
+        .grid-cell.header {
+            background: #217346;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .grid-cell.filtered {
+            background: #1a5c38;
+            border: 2px solid #4caf50;
+        }
+        
+        .grid-cell.hidden {
+            background: #444;
+            color: #666;
+        }
+        
+        .filter-indicator {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+        }
+        
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .preview-table th {
+            background: #217346;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .preview-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .preview-table tr.filtered-out {
+            display: none;
+        }
+        
+        .preview-table tr.visible {
+            display: table-row;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Shortcut Grid */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .shortcut-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .shortcut-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #217346;
+        }
+        
+        .shortcut-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .shortcut-keys {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .key {
+            background: #217346;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .key.plus {
+            background: transparent;
+            color: #333;
+            padding: 5px 2px;
+        }
+        
+        .shortcut-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .shortcut-tip {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* Filter Criteria Styles */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .criteria-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .criteria-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .criteria-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .criteria-examples {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Filter Data</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Panduan Filter Data: Menyaring Data yang Diinginkan dengan Cepat di Excel</h1>
+                        <div class="article-meta">
+                            <span>📅 20 Juni 2023</span>
+                            <span>👁️ 6.5K Dilihat</span>
+                            <span>⏱️ 12 menit membaca</span>
+                            <span>🏷️ Filter Data Excel, AutoFilter, Advanced Filter, Menyaring Data, Tutorial Excel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Filter Data</strong> adalah salah satu fitur paling powerful di Excel untuk menganalisis dataset besar. Dengan filter, Anda bisa menyembunyikan data yang tidak diperlukan dan fokus hanya pada informasi yang relevan. Panduan komprehensif ini akan mengajarkan segala teknik filtering dari dasar hingga lanjutan.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengertian-filter">Apa itu Filter Data di Excel?</a></li>
+                                <li><a href="#auto-filter">AutoFilter Dasar</a></li>
+                                <li><a href="#filter-teks">Filter Data Teks</a></li>
+                                <li><a href="#filter-angka">Filter Data Angka</a></li>
+                                <li><a href="#filter-tanggal">Filter Data Tanggal</a></li>
+                                <li><a href="#multi-filter">Filter Berbagai Kriteria</a></li>
+                                <li><a href="#advanced-filter">Advanced Filter</a></li>
+                                <li><a href="#tips-ahli">Tips dan Trik Ahli</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengertian-filter">1. Apa itu Filter Data di Excel?</h2>
+                        
+                        <p><strong>Filter Data</strong> adalah proses menyembunyikan baris data yang tidak memenuhi kriteria tertentu, sehingga hanya menampilkan data yang relevan dengan analisis Anda. Excel menyediakan dua jenis filter utama: <strong>AutoFilter</strong> untuk filtering cepat dan <strong>Advanced Filter</strong> untuk kriteria kompleks.</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card autofilter">
+                                <div class="feature-icon">🔍</div>
+                                <h3>AutoFilter</h3>
+                                <p>Filter cepat dengan dropdown</p>
+                                <p><strong>Untuk:</strong> Kriteria sederhana</p>
+                            </div>
+                            
+                            <div class="feature-card text-filter">
+                                <div class="feature-icon">📝</div>
+                                <h3>Filter Teks</h3>
+                                <p>Filter data teks dengan pola</p>
+                                <p><strong>Contoh:</strong> Contains, Begins With</p>
+                            </div>
+                            
+                            <div class="feature-card number-filter">
+                                <div class="feature-icon">🔢</div>
+                                <h3>Filter Angka</h3>
+                                <p>Filter berdasarkan nilai angka</p>
+                                <p><strong>Contoh:</strong> Greater Than, Between</p>
+                            </div>
+                            
+                            <div class="feature-card date-filter">
+                                <div class="feature-icon">📅</div>
+                                <h3>Filter Tanggal</h3>
+                                <p>Filter berdasarkan periode</p>
+                                <p><strong>Contoh:</strong> This Month, Last Week</p>
+                            </div>
+                            
+                            <div class="feature-card advanced">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Advanced Filter</h3>
+                                <p>Filter dengan kriteria kompleks</p>
+                                <p><strong>Untuk:</strong> Multiple conditions</p>
+                            </div>
+                            
+                            <div class="feature-card custom">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Custom Filter</h3>
+                                <p>Kriteria filter khusus</p>
+                                <p><strong>Contoh:</strong> AND/OR conditions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>🎮 Demo Filter Data</h4>
+                            <div class="worksheet-preview">
+                                <p>Contoh data sebelum dan setelah difilter berdasarkan Departemen = "Marketing":</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell header">D</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell active">
+                                        Nama
+                                        <div class="filter-indicator"></div>
+                                    </div>
+                                    <div class="grid-cell active">Departemen</div>
+                                    <div class="grid-cell">Gaji</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell">Marketing</div>
+                                    <div class="grid-cell">8.000.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">Ani</div>
+                                    <div class="grid-cell">HR</div>
+                                    <div class="grid-cell">7.500.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Cici</div>
+                                    <div class="grid-cell">IT</div>
+                                    <div class="grid-cell">9.000.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                    <div class="grid-cell">5</div>
+                                    <div class="grid-cell">Dedi</div>
+                                    <div class="grid-cell">Marketing</div>
+                                    <div class="grid-cell">8.500.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                </div>
+                                <p style="margin-top: 10px; font-size: 14px; color: #ccc;">↓ Setelah Filter Departemen = "Marketing" ↓</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell header">D</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell active">
+                                        Nama
+                                        <div class="filter-indicator"></div>
+                                    </div>
+                                    <div class="grid-cell filtered">Departemen</div>
+                                    <div class="grid-cell">Gaji</div>
+                                    <div class="grid-cell">Status</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell filtered">Marketing</div>
+                                    <div class="grid-cell">8.000.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell hidden">Ani</div>
+                                    <div class="grid-cell hidden">HR</div>
+                                    <div class="grid-cell hidden">7.500.000</div>
+                                    <div class="grid-cell hidden">Aktif</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell hidden">Cici</div>
+                                    <div class="grid-cell hidden">IT</div>
+                                    <div class="grid-cell hidden">9.000.000</div>
+                                    <div class="grid-cell hidden">Aktif</div>
+                                    <div class="grid-cell">5</div>
+                                    <div class="grid-cell">Dedi</div>
+                                    <div class="grid-cell filtered">Marketing</div>
+                                    <div class="grid-cell">8.500.000</div>
+                                    <div class="grid-cell">Aktif</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>📌 Keuntungan Menggunakan Filter:</strong>
+                            <ul>
+                                <li><strong>Fokus analisis</strong> pada data yang relevan</li>
+                                <li><strong>Meningkatkan produktivitas</strong> dengan menghilangkan gangguan visual</li>
+                                <li><strong>Mudah beralih</strong> antara berbagai pandangan data</li>
+                                <li><strong>Tidak mengubah data asli</strong> - hanya menyembunyikan baris</li>
+                                <li><strong>Dapat dikombinasikan</strong> dengan fitur Excel lainnya</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="auto-filter">2. AutoFilter Dasar</h2>
+                        
+                        <p>AutoFilter adalah cara tercepat dan termudah untuk memfilter data di Excel. Fitur ini menambahkan dropdown filter ke setiap header kolom.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Mengaktifkan AutoFilter</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data</h4>
+                                <p>Pilih range data yang ingin difilter</p>
+                                <p><strong>Tips:</strong> Klik salah satu sel dalam dataset Anda</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Aktifkan Filter</h4>
+                                <p>Pergi ke <strong>Data tab → Sort & Filter</strong></p>
+                                <p>Klik tombol <strong>Filter</strong> atau gunakan <strong>Ctrl + Shift + L</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Dropdown Muncul</h4>
+                                <p>Panah dropdown akan muncul di setiap header kolom</p>
+                                <p>Ini menandakan filter sudah aktif</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Pilih Kriteria</h4>
+                                <p>Klik panah dropdown di kolom yang ingin difilter</p>
+                                <p>Pilih nilai yang ingin ditampilkan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-demo">
+                            <h4>🎯 Coba Filter Berbagai Tipe Data</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-type="teks">
+                                    <h4>📝 Filter Teks</h4>
+                                    <p>Berdasarkan nilai teks tertentu</p>
+                                </div>
+                                <div class="demo-option" data-type="angka">
+                                    <h4>🔢 Filter Angka</h4>
+                                    <p>Berdasarkan rentang angka</p>
+                                </div>
+                                <div class="demo-option" data-type="tanggal">
+                                    <h4>📅 Filter Tanggal</h4>
+                                    <p>Berdasarkan periode waktu</p>
+                                </div>
+                                <div class="demo-option" data-type="multiple">
+                                    <h4>🔀 Multiple Filter</h4>
+                                    <p>Beberapa kriteria sekaligus</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="filterPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Departemen</th>
+                                            <th>Gaji</th>
+                                            <th>Tanggal Masuk</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="visible">
+                                            <td>Budi Santoso</td>
+                                            <td>Marketing</td>
+                                            <td>8.000.000</td>
+                                            <td>15/03/2020</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Ani Wijaya</td>
+                                            <td>HR</td>
+                                            <td>7.500.000</td>
+                                            <td>22/06/2021</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Cici Permata</td>
+                                            <td>IT</td>
+                                            <td>9.000.000</td>
+                                            <td>10/01/2019</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Dedi Kurniawan</td>
+                                            <td>Marketing</td>
+                                            <td>8.500.000</td>
+                                            <td>05/11/2022</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Eka Sari</td>
+                                            <td>Finance</td>
+                                            <td>8.200.000</td>
+                                            <td>18/09/2020</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                    <p><strong>Status:</strong> Menampilkan semua data (tidak ada filter aktif)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="filter-teks">3. Filter Data Teks</h2>
+                        
+                        <p>Filter teks memungkinkan Anda menyaring data berdasarkan konten teks. Excel menyediakan berbagai opsi filter teks yang powerful.</p>
+                        
+                        <div class="criteria-grid">
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">🔍</div>
+                                    <h4>Equals</h4>
+                                </div>
+                                <p>Tampilkan baris dengan nilai teks persis sama</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    "Marketing" → hanya nilai "Marketing"
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">📁</div>
+                                    <h4>Contains</h4>
+                                </div>
+                                <p>Tampilkan baris yang mengandung teks tertentu</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    "ana" → "Diana", "Jonathan", "Bananа"
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">🚀</div>
+                                    <h4>Begins With</h4>
+                                </div>
+                                <p>Tampilkan baris yang dimulai dengan teks tertentu</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    "Mar" → "Marketing", "Martin", "Marsha"
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">🔚</div>
+                                    <h4>Ends With</h4>
+                                </div>
+                                <p>Tampilkan baris yang diakhiri dengan teks tertentu</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    "son" → "Johnson", "Jackson", "Wilson"
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Cara Menggunakan Text Filter</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Buka Dropdown Filter</h4>
+                                <p>Klik panah dropdown di header kolom teks</p>
+                                <p>Pilih <strong>Text Filters</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Pilih Jenis Filter</h4>
+                                <p>Pilih jenis filter teks yang diinginkan</p>
+                                <p>Contains, Begins With, Ends With, dll</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Masukkan Kriteria</h4>
+                                <p>Masukkan teks yang ingin dicari</p>
+                                <p>Gunakan wildcard (*) untuk pola tertentu</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Terapkan Filter</h4>
+                                <p>Klik <strong>OK</strong> untuk menerapkan filter</p>
+                                <p>Data akan tersaring sesuai kriteria</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Filter Teks:</strong>
+                            <ul>
+                                <li>Gunakan <strong>wildcard *</strong> untuk mewakili beberapa karakter</li>
+                                <li>Gunakan <strong>wildcard ?</strong> untuk mewakili satu karakter</li>
+                                <li><strong>Case-sensitive</strong> - Filter teks tidak membedakan huruf besar/kecil</li>
+                                <li>Untuk filter yang lebih kompleks, gunakan <strong>Custom Filter</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="filter-angka">4. Filter Data Angka</h2>
+                        
+                        <p>Filter angka memungkinkan Anda menyaring data berdasarkan nilai numerik dengan berbagai kondisi perbandingan.</p>
+                        
+                        <div class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Filter</th>
+                                    <th>Kriteria</th>
+                                    <th>Contoh</th>
+                                    <th>Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Equals</strong></td>
+                                    <td>Sama dengan</td>
+                                    <td>= 5000000</td>
+                                    <td>Nilai persis 5.000.000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Greater Than</strong></td>
+                                    <td>Lebih besar dari</td>
+                                    <td>> 7000000</td>
+                                    <td>Nilai di atas 7.000.000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Less Than</strong></td>
+                                    <td>Kurang dari</td>
+                                    <td>< 6000000</td>
+                                    <td>Nilai di bawah 6.000.000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Between</strong></td>
+                                    <td>Antara dua nilai</td>
+                                    <td>5000000 - 8000000</td>
+                                    <td>Nilai antara 5-8 juta</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Top 10</strong></td>
+                                    <td>Nilai tertinggi/terendah</td>
+                                    <td>Top 10 Items</td>
+                                    <td>10 nilai tertinggi</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>🎯 Contoh Filter Angka: Gaji > 8.000.000</h4>
+                            <div class="worksheet-preview">
+                                <div class="grid-container">
+                                    <div class="grid-cell header">A</div>
+                                    <div class="grid-cell header">B</div>
+                                    <div class="grid-cell header">C</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell active">Nama</div>
+                                    <div class="grid-cell">Departemen</div>
+                                    <div class="grid-cell active">Gaji</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Budi</div>
+                                    <div class="grid-cell">Marketing</div>
+                                    <div class="grid-cell">8.000.000</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell hidden">Ani</div>
+                                    <div class="grid-cell hidden">HR</div>
+                                    <div class="grid-cell hidden">7.500.000</div>
+                                    <div class="grid-cell">4</div>
+                                    <div class="grid-cell">Cici</div>
+                                    <div class="grid-cell">IT</div>
+                                    <div class="grid-cell filtered">9.000.000</div>
+                                    <div class="grid-cell">5</div>
+                                    <div class="grid-cell">Dedi</div>
+                                    <div class="grid-cell">Marketing</div>
+                                    <div class="grid-cell filtered">8.500.000</div>
+                                </div>
+                                <p style="margin-top: 10px; font-size: 14px; color: #ccc;">💡 Hanya menampilkan baris dengan Gaji > 8.000.000</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="filter-tanggal">5. Filter Data Tanggal</h2>
+                        
+                        <p>Excel secara pintar mengenali format tanggal dan menyediakan filter tanggal yang sangat user-friendly dengan pengelompokan otomatis.</p>
+                        
+                        <div class="criteria-grid">
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">📅</div>
+                                    <h4>Date Grouping</h4>
+                                </div>
+                                <p>Filter berdasarkan kelompok tanggal</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    • Tahun 2023<br>
+                                    • Kuartal 2<br>
+                                    • Bulan Juni
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">⏰</div>
+                                    <h4>Dynamic Ranges</h4>
+                                </div>
+                                <p>Filter berdasarkan periode dinamis</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    • Hari Ini<br>
+                                    • Minggu Ini<br>
+                                    • Bulan Ini
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-card">
+                                <div class="criteria-header">
+                                    <div class="criteria-icon">🔢</div>
+                                    <h4>Custom Range</h4>
+                                </div>
+                                <p>Filter dengan rentang tanggal khusus</p>
+                                <div class="criteria-examples">
+                                    <strong>Contoh:</strong><br>
+                                    • Sebelum 01/06/2023<br>
+                                    • Setelah 15/05/2023<br>
+                                    • Between dua tanggal
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Toggle Filter</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">Shift</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">L</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Aktifkan/nonaktifkan AutoFilter</p>
+                                <div class="shortcut-tip">💡 Cepat untuk toggle filter on/off</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Clear Filter</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">C</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Hapus filter dari kolom tertentu</p>
+                                <div class="shortcut-tip">💡 Bisa juga dari dropdown → Clear Filter</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Clear All Filters</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">C</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Hapus semua filter yang aktif</p>
+                                <div class="shortcut-tip">💡 Data → Clear (di Ribbon)</div>
+                            </div>
+                        </div>
+                        
+                        <h2 id="multi-filter">6. Filter Berbagai Kriteria</h2>
+                        
+                        <p>Anda dapat menerapkan filter pada beberapa kolom sekaligus untuk mendapatkan data yang sangat spesifik.</p>
+                        
+                        <div class="interactive-demo">
+                            <h4>🔀 Contoh Multi-Filter</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-filter="single">
+                                    <h4>Single Filter</h4>
+                                    <p>Departemen = "Marketing"</p>
+                                </div>
+                                <div class="demo-option" data-filter="double">
+                                    <h4>Double Filter</h4>
+                                    <p>Dept = "Marketing" AND Gaji > 8jt</p>
+                                </div>
+                                <div class="demo-option" data-filter="triple">
+                                    <h4>Triple Filter</h4>
+                                    <p>Dept = "Marketing" AND Gaji > 8jt AND Status = "Aktif"</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <table class="preview-table" id="multiFilterPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Departemen</th>
+                                            <th>Gaji</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="visible marketing">
+                                            <td>Budi Santoso</td>
+                                            <td>Marketing</td>
+                                            <td>8.000.000</td>
+                                            <td>Aktif</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Ani Wijaya</td>
+                                            <td>HR</td>
+                                            <td>7.500.000</td>
+                                            <td>Aktif</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Cici Permata</td>
+                                            <td>IT</td>
+                                            <td>9.000.000</td>
+                                            <td>Aktif</td>
+                                        </tr>
+                                        <tr class="visible marketing high-salary">
+                                            <td>Dedi Kurniawan</td>
+                                            <td>Marketing</td>
+                                            <td>8.500.000</td>
+                                            <td>Aktif</td>
+                                        </tr>
+                                        <tr class="visible">
+                                            <td>Eka Sari</td>
+                                            <td>Finance</td>
+                                            <td>8.200.000</td>
+                                            <td>Aktif</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                    <p><strong>Status:</strong> Menampilkan semua data (tidak ada filter aktif)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Cara Kerja Multi-Filter:</strong>
+                            <ul>
+                                <li>Filter di beberapa kolom bekerja dengan <strong>logika AND</strong></li>
+                                <li>Baris harus memenuhi <strong>semua kriteria</strong> dari semua filter yang aktif</li>
+                                <li>Untuk logika OR dalam satu kolom, gunakan <strong>multiple selection</strong> dalam dropdown</li>
+                                <li>Untuk logika OR antar kolom, gunakan <strong>Advanced Filter</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="advanced-filter">7. Advanced Filter</h2>
+                        
+                        <p>Advanced Filter adalah fitur powerful untuk kriteria filter yang kompleks yang tidak bisa ditangani oleh AutoFilter biasa.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Menggunakan Advanced Filter</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Siapkan Criteria Range</h4>
+                                <p>Buat area terpisah untuk kriteria filter</p>
+                                <p>Gunakan header yang sama dengan data utama</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Definisikan Kriteria</h4>
+                                <p>Masukkan kriteria di bawah header yang sesuai</p>
+                                <p>Baris = OR conditions, Kolom = AND conditions</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Buka Advanced Filter</h4>
+                                <p><strong>Data → Sort & Filter → Advanced</strong></p>
+                                <p>Pilih <strong>Filter the list, in-place</strong> atau <strong>Copy to another location</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Atur Range</h4>
+                                <p>Set <strong>List range</strong> (data utama)</p>
+                                <p>Set <strong>Criteria range</strong> (kriteria filter)</p>
+                                <p>Klik <strong>OK</strong> untuk menerapkan</p>
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-demo">
+                            <h4>📊 Contoh Advanced Filter Criteria</h4>
+                            <div class="worksheet-preview">
+                                <p>Criteria Range untuk: (Departemen = "Marketing" OR "IT") AND (Gaji > 8.000.000)</p>
+                                <div class="grid-container">
+                                    <div class="grid-cell header">F</div>
+                                    <div class="grid-cell header">G</div>
+                                    <div class="grid-cell">1</div>
+                                    <div class="grid-cell">Departemen</div>
+                                    <div class="grid-cell">Gaji</div>
+                                    <div class="grid-cell">2</div>
+                                    <div class="grid-cell">Marketing</div>
+                                    <div class="grid-cell">>8000000</div>
+                                    <div class="grid-cell">3</div>
+                                    <div class="grid-cell">IT</div>
+                                    <div class="grid-cell">>8000000</div>
+                                </div>
+                                <p style="margin-top: 10px; font-size: 14px; color: #ccc;">💡 Baris 2 & 3 = OR condition, Kolom F & G = AND condition</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="tips-ahli">8. Tips dan Trik Ahli</h2>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Tips Filter Data Level Ahli:</strong>
+                            <ul>
+                                <li>Gunakan <strong>Tables (Ctrl+T)</strong> untuk filter otomatis dan dinamis</li>
+                                <li><strong>Filter by Color</strong> - Filter berdasarkan warna sel atau font</li>
+                                <li><strong>Filter by Selection</strong> - Klik kanan sel → Filter → Filter by Selected Cell's Value</li>
+                                <li>Gunakan <strong>Slicers</strong> untuk filter visual yang user-friendly</li>
+                                <li><strong>Save filtered views</strong> dengan Custom Views untuk analisis berulang</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Masalah Filter yang Sering Terjadi:</h4>
+                            <ul>
+                                <li><strong>Filter tidak bekerja</strong> - Pastikan tidak ada merged cells dalam data</li>
+                                <li><strong>Data terpotong</strong> - Pastikan memilih seluruh range data sebelum mengaktifkan filter</li>
+                                <li><strong>Header ikut terfilter</strong> - Pastikan "My data has headers" dicentang</li>
+                                <li><strong>Filter hilang setelah save</strong> - Filter tersimpan dalam file Excel</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="shortcut-grid">
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Convert to Table</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Ctrl</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">T</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Ubah data menjadi table untuk filter otomatis</p>
+                                <div class="shortcut-tip">💡 Auto-filter dan formatting konsisten</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Reapply Filter</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Alt</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">A</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">R</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Terapkan ulang filter setelah perubahan data</p>
+                                <div class="shortcut-tip">💡 Data → Reapply (di Ribbon)</div>
+                            </div>
+                            
+                            <div class="shortcut-card">
+                                <div class="shortcut-header">
+                                    <h4>Filter by Selection</h4>
+                                    <div class="shortcut-keys">
+                                        <div class="key">Right</div>
+                                        <div class="key plus">+</div>
+                                        <div class="key">Click</div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-desc">Filter berdasarkan nilai sel yang dipilih</p>
+                                <div class="shortcut-tip">💡 Klik kanan sel → Filter → Filter by Selected Cell's Value</div>
+                            </div>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p>Menguasai <strong>Filter Data di Excel</strong> adalah keterampilan essential untuk analisis data yang efisien. Dengan teknik-teknik yang telah dipelajari, Anda bisa:</p>
+                        
+                        <ul>
+                            <li>Menggunakan <strong>AutoFilter</strong> untuk filtering cepat dan sederhana</li>
+                            <li>Menerapkan <strong>filter teks</strong> dengan berbagai pola dan kriteria</li>
+                            <li>Menyaring <strong>data angka</strong> dengan kondisi perbandingan</li>
+                            <li>Menggunakan <strong>filter tanggal</strong> dengan pengelompokan otomatis</li>
+                            <li>Menerapkan <strong>multi-filter</strong> dengan beberapa kriteria sekaligus</li>
+                            <li>Menggunakan <strong>Advanced Filter</strong> untuk kriteria kompleks</li>
+                        </ul>
+                        
+                        <p><strong>Practice makes perfect!</strong> Coba buat worksheet latihan dan praktikkan semua teknik filtering yang telah dipelajari. Mulai dari filter sederhana hingga advanced filter dengan kriteria kompleks.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba filter data Anda. Punya pertanyaan atau tips filtering favorit? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Filter Data</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> AutoFilter Dasar</a></li>
+                        <li><a href="#"><span>2</span> Filter Teks</a></li>
+                        <li><a href="#"><span>3</span> Filter Angka</a></li>
+                        <li><a href="#"><span>4</span> Filter Tanggal</a></li>
+                        <li><a href="#"><span>5</span> Advanced Filter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Filter Data Excel</a></li>
+                        <li><a href="#">Sort Data</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Tips Produktivitas</a></li>
+                        <li><a href="#">Untuk Pemula</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Filter Data</a>
+                        <a href="#">AutoFilter</a>
+                        <a href="#">Advanced Filter</a>
+                        <a href="#">Menyaring Data</a>
+                        <a href="#">Criteria Filter</a>
+                        <a href="#">Excel Tips</a>
+                        <a href="#">Data Analysis</a>
+                        <a href="#">Excel Pemula</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Download Cheat Sheet</h3>
+                    <p>Download panduan Filter Data Excel:</p>
+                    <ul>
+                        <li><a href="#">📋 Filter Shortcuts</a></li>
+                        <li><a href="#">🎯 Advanced Filter Guide</a></li>
+                        <li><a href="#">💡 Text Filter Examples</a></li>
+                        <li><a href="#">🚀 All Filtering Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Filter Data</a></li>
+                        <li><a href="#">Sort Data</a></li>
+                        <li><a href="#">Functions</a></li>
+                        <li><a href="#">Charts</a></li>
+                        <li><a href="#">Tips & Trik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Filter Demos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter Type Demo
+            const demoOptions = document.querySelectorAll('.demo-option');
+            const filterPreview = document.getElementById('filterPreview');
+            
+            demoOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    demoOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected type
+                    const dataType = this.getAttribute('data-type');
+                    updateFilterPreview(dataType);
+                });
+            });
+            
+            function updateFilterPreview(type) {
+                const rows = filterPreview.querySelectorAll('tbody tr');
+                const statusText = filterPreview.parentElement.querySelector('div:last-child p');
+                
+                // Reset all rows to visible
+                rows.forEach(row => {
+                    row.classList.remove('filtered-out');
+                    row.classList.add('visible');
+                });
+                
+                switch(type) {
+                    case 'teks':
+                        // Filter: Departemen = "Marketing"
+                        rows.forEach(row => {
+                            const dept = row.cells[1].textContent;
+                            if (dept !== 'Marketing') {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Menampilkan hanya Departemen = "Marketing"';
+                        break;
+                    case 'angka':
+                        // Filter: Gaji > 8.000.000
+                        rows.forEach(row => {
+                            const gaji = parseInt(row.cells[2].textContent.replace(/\./g, ''));
+                            if (gaji <= 8000000) {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Menampilkan hanya Gaji > 8.000.000';
+                        break;
+                    case 'tanggal':
+                        // Filter: Tanggal Masuk tahun 2020
+                        rows.forEach(row => {
+                            const tanggal = row.cells[3].textContent;
+                            if (!tanggal.includes('2020')) {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Menampilkan hanya Tanggal Masuk tahun 2020';
+                        break;
+                    case 'multiple':
+                        // Multiple filter: Marketing OR IT
+                        rows.forEach(row => {
+                            const dept = row.cells[1].textContent;
+                            if (dept !== 'Marketing' && dept !== 'IT') {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Menampilkan Departemen = "Marketing" OR "IT"';
+                        break;
+                }
+            }
+            
+            // Multi-Filter Demo
+            const multiFilterOptions = document.querySelectorAll('.interactive-demo .demo-option');
+            const multiFilterPreview = document.getElementById('multiFilterPreview');
+            
+            multiFilterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    multiFilterOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update preview based on selected filter
+                    const filterType = this.getAttribute('data-filter');
+                    updateMultiFilterPreview(filterType);
+                });
+            });
+            
+            function updateMultiFilterPreview(filterType) {
+                const rows = multiFilterPreview.querySelectorAll('tbody tr');
+                const statusText = multiFilterPreview.parentElement.querySelector('div:last-child p');
+                
+                // Reset all rows to visible
+                rows.forEach(row => {
+                    row.classList.remove('filtered-out');
+                    row.classList.add('visible');
+                });
+                
+                switch(filterType) {
+                    case 'single':
+                        // Single filter: Departemen = "Marketing"
+                        rows.forEach(row => {
+                            const dept = row.cells[1].textContent;
+                            if (dept !== 'Marketing') {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Departemen = "Marketing"';
+                        break;
+                    case 'double':
+                        // Double filter: Marketing AND Gaji > 8jt
+                        rows.forEach(row => {
+                            const dept = row.cells[1].textContent;
+                            const gaji = parseInt(row.cells[2].textContent.replace(/\./g, ''));
+                            if (dept !== 'Marketing' || gaji <= 8000000) {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Departemen = "Marketing" AND Gaji > 8.000.000';
+                        break;
+                    case 'triple':
+                        // Triple filter: Marketing AND Gaji > 8jt AND Status = "Aktif"
+                        rows.forEach(row => {
+                            const dept = row.cells[1].textContent;
+                            const gaji = parseInt(row.cells[2].textContent.replace(/\./g, ''));
+                            const status = row.cells[3].textContent;
+                            if (dept !== 'Marketing' || gaji <= 8000000 || status !== 'Aktif') {
+                                row.classList.remove('visible');
+                                row.classList.add('filtered-out');
+                            }
+                        });
+                        statusText.textContent = 'Status: Filter aktif - Departemen = "Marketing" AND Gaji > 8.000.000 AND Status = "Aktif"';
+                        break;
+                }
+            }
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Add hover effects to criteria cards
+            const criteriaCards = document.querySelectorAll('.criteria-card');
+            criteriaCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Simulate filter interaction
+            const gridCells = document.querySelectorAll('.grid-cell.active');
+            gridCells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    this.style.background = '#1a5c38';
+                    setTimeout(() => {
+                        this.style.background = '#1a5c38';
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
