@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengertian Rumus dan Fungsi di Excel serta Perbedaannya | Panduan Lengkap</title>
-    <meta name="description" content="Panduan lengkap memahami perbedaan rumus dan fungsi di Excel. Pelajari pengertian, contoh, dan cara penggunaan rumus dan fungsi untuk analisis data yang efektif.">
-    <meta name="keywords" content="rumus excel, fungsi excel, perbedaan rumus dan fungsi, tutorial excel, formula excel, belajar excel">
+    <title>Panduan Lengkap Fungsi AVERAGE, MAX, dan MIN untuk Analisis Sederhana di Excel</title>
+    <meta name="description" content="Panduan lengkap menggunakan fungsi AVERAGE, MAX, dan MIN di Excel untuk analisis data sederhana. Pelajari cara menghitung rata-rata, nilai tertinggi, dan terendah dengan mudah.">
+    <meta name="keywords" content="fungsi AVERAGE excel, fungsi MAX excel, fungsi MIN excel, analisis data excel, tutorial excel, rumus excel">
     <meta name="author" content="Excel Tutorial">
     <style>
         /* Reset dan Base Styles */
@@ -214,15 +214,15 @@
             text-decoration: underline;
         }
         
-        /* Concept Visualization */
-        .concept-types {
+        /* Function Types Visualization */
+        .function-types {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin: 25px 0;
         }
         
-        .concept-card {
+        .function-card {
             background: white;
             border: 2px solid #e9ecef;
             border-radius: 8px;
@@ -231,18 +231,19 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .concept-card:hover {
+        .function-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .concept-icon {
+        .function-icon {
             font-size: 48px;
             margin-bottom: 15px;
         }
         
-        .concept-card.formula { border-color: #217346; }
-        .concept-card.function { border-color: #ff9800; }
+        .function-card.average { border-color: #4caf50; }
+        .function-card.max { border-color: #2196f3; }
+        .function-card.min { border-color: #ff9800; }
         
         /* Step by Step */
         .step-by-step {
@@ -382,37 +383,41 @@
             display: none;
         }
         
-        /* Formula Demo */
-        .formula-demo {
-            background: #2d2d2d;
+        /* Excel Table Demo */
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .excel-table th {
+            background: #217346;
             color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
         }
         
-        .formula-icon {
-            margin-right: 10px;
-            font-size: 20px;
+        .excel-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
         }
         
-        .formula-items {
-            display: flex;
-            gap: 15px;
+        .excel-table tr:nth-child(even) {
+            background: #f9f9f9;
         }
         
-        .formula-item {
-            padding: 5px 10px;
-            background: #444;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background 0.3s;
+        .excel-table .formula-cell {
+            background: #e8f5e9;
+            font-style: italic;
         }
         
-        .formula-item:hover {
-            background: #555;
+        .excel-table .result-cell {
+            background: #e8f5e9;
+            font-weight: bold;
         }
         
         /* Sidebar Widgets */
@@ -598,7 +603,7 @@
                 margin-bottom: 5px;
             }
             
-            .concept-types {
+            .function-types {
                 grid-template-columns: 1fr;
             }
             
@@ -643,7 +648,7 @@
                     <ul>
                         <li><a href="#">Beranda</a></li>
                         <li><a href="#">Tutorial</a></li>
-                        <li><a href="#">Rumus & Fungsi</a></li>
+                        <li><a href="#">Fungsi Excel</a></li>
                         <li><a href="#">Template</a></li>
                         <li><a href="#">Tips</a></li>
                         <li><a href="#">Kontak</a></li>
@@ -660,396 +665,415 @@
             <div class="content">
                 <article>
                     <div class="article-header">
-                        <h1>Pengertian Rumus dan Fungsi di Excel serta Perbedaannya: Panduan Lengkap</h1>
+                        <h1>Panduan Lengkap Fungsi AVERAGE, MAX, dan MIN untuk Analisis Sederhana di Excel</h1>
                         <div class="article-meta">
-                            <span>📅 15 Mei 2023</span>
-                            <span>👁️ 5.7K Dilihat</span>
+                            <span>📅 15 Juni 2023</span>
+                            <span>👁️ 8.7K Dilihat</span>
                             <span>⏱️ 12 menit membaca</span>
-                            <span>🏷️ Rumus Excel, Fungsi Excel, Perbedaan Rumus dan Fungsi, Tutorial Excel, Formula Excel</span>
+                            <span>🏷️ Fungsi AVERAGE Excel, Fungsi MAX Excel, Fungsi MIN Excel, Analisis Data Excel</span>
                         </div>
                     </div>
                     
                     <div class="article-body">
-                        <p>Apakah Anda sering menggunakan Excel tetapi masih bingung dengan perbedaan antara <strong>rumus</strong> dan <strong>fungsi</strong>? Anda tidak sendirian! Banyak pengguna Excel yang masih menganggap keduanya sama. Dalam panduan komprehensif ini, kita akan membahas secara detail pengertian, contoh, dan perbedaan mendasar antara rumus dan fungsi di Excel.</p>
+                        <p>Excel menjadi alat yang powerful untuk analisis data, dan tiga fungsi paling dasar yang wajib dikuasai pemula adalah <strong>AVERAGE, MAX, dan MIN</strong>. Fungsi-fungsi ini merupakan pondasi untuk memahami statistik deskriptif sederhana dalam pengolahan data.</p>
                         
                         <div class="table-of-contents">
                             <h3>Daftar Isi</h3>
                             <ol>
-                                <li><a href="#pengertian-rumus">Apa Itu Rumus di Excel?</a></li>
-                                <li><a href="#pengertian-fungsi">Apa Itu Fungsi di Excel?</a></li>
-                                <li><a href="#perbedaan-utama">Perbedaan Utama Rumus dan Fungsi</a></li>
-                                <li><a href="#contoh-penggunaan">Contoh Penggunaan Rumus dan Fungsi</a></li>
-                                <li><a href="#kapan-menggunakan">Kapan Menggunakan Rumus vs Fungsi</a></li>
-                                <li><a href="#tips-penggunaan">Tips Penggunaan Rumus dan Fungsi</a></li>
-                                <li><a href="#kesalahan-umum">Kesalahan Umum dan Cara Mengatasinya</a></li>
+                                <li><a href="#pengertian-fungsi">Pengertian dan Kegunaan</a></li>
+                                <li><a href="#syntax-dasar">Syntax Dasar</a></li>
+                                <li><a href="#contoh-praktis">Contoh Penggunaan Praktis</a></li>
+                                <li><a href="#analisis-nilai">Analisis Nilai Siswa</a></li>
+                                <li><a href="#analisis-penjualan">Analisis Data Penjualan</a></li>
+                                <li><a href="#tips-penting">Tips dan Trik Penting</a></li>
+                                <li><a href="#troubleshooting">Pemecahan Masalah Umum</a></li>
+                                <li><a href="#kesimpulan">Kesimpulan</a></li>
                             </ol>
                         </div>
                         
-                        <h2 id="pengertian-rumus">1. Apa Itu Rumus di Excel?</h2>
+                        <h2 id="pengertian-fungsi">1. Pengertian dan Kegunaan</h2>
                         
-                        <p><strong>Rumus (Formula)</strong> di Excel adalah ekspresi yang melakukan perhitungan pada nilai dalam sel atau range sel. Rumus selalu dimulai dengan tanda sama dengan (=) dan dapat mencakup:</p>
-                        
-                        <ul>
-                            <li>Operator matematika (+, -, *, /)</li>
-                            <li>Referensi sel (A1, B2, C3)</li>
-                            <li>Nilai konstan (angka, teks)</li>
-                            <li>Fungsi Excel (SUM, AVERAGE, IF, dll)</li>
-                        </ul>
-                        
-                        <div class="concept-types">
-                            <div class="concept-card formula">
-                                <div class="concept-icon">=</div>
-                                <h4>RUMUS</h4>
-                                <p><strong>Ekspresi Perhitungan</strong><br>Dimulai dengan tanda =<br>Bisa sederhana atau kompleks<br>Dapat mengandung fungsi</p>
+                        <div class="function-types">
+                            <div class="function-card average">
+                                <div class="function-icon">=AVERAGE()</div>
+                                <h4>FUNGSI AVERAGE</h4>
+                                <p><strong>Menghitung nilai rata-rata</strong><br>Digunakan untuk mencari nilai tengah dari sekumpulan data numerik</p>
                             </div>
                             
-                            <div class="concept-card function">
-                                <div class="concept-icon">ƒx</div>
-                                <h4>FUNGSI</h4>
-                                <p><strong>Formula Bawaan</strong><br>Sudah diprogram di Excel<br>Menyederhanakan perhitungan<br>Bagian dari rumus</p>
+                            <div class="function-card max">
+                                <div class="function-icon">=MAX()</div>
+                                <h4>FUNGSI MAX</h4>
+                                <p><strong>Mencari nilai tertinggi</strong><br>Menemukan nilai maksimum dalam sebuah range data</p>
                             </div>
-                        </div>
-                        
-                        <div class="example">
-                            <h4>Contoh Rumus Sederhana:</h4>
-                            <div class="code-block">
-                                =A1+B1          // Menjumlahkan nilai di sel A1 dan B1
-                                =C5*10%         // Mengalikan nilai di C5 dengan 10%
-                                =(D2+E2)/F2     // Menjumlahkan D2 dan E2, lalu dibagi F2
-                            </div>
-                        </div>
-                        
-                        <div class="tip-box">
-                            <strong>Fakta:</strong> Semua fungsi adalah bagian dari rumus, tetapi tidak semua rumus mengandung fungsi. Rumus bisa sangat sederhana seperti =A1+B1 tanpa menggunakan fungsi apapun.
-                        </div>
-                        
-                        <h2 id="pengertian-fungsi">2. Apa Itu Fungsi di Excel?</h2>
-                        
-                        <p><strong>Fungsi (Function)</strong> di Excel adalah rumus yang sudah diprogram sebelumnya yang melakukan perhitungan menggunakan nilai tertentu (argumen) dalam urutan atau struktur tertentu. Fungsi menyederhanakan rumus kompleks menjadi lebih mudah digunakan.</p>
-                        
-                        <div class="step-by-step">
-                            <h3>Struktur Dasar Fungsi Excel</h3>
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <h4>Tanda Sama Dengan (=)</h4>
-                                <p>Semua fungsi diawali dengan tanda =</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <h4>Nama Fungsi</h4>
-                                <p>Nama fungsi yang menggambarkan operasinya (SUM, AVERAGE, dll)</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <h4>Kurung Pembuka</h4>
-                                <p>Setelah nama fungsi selalu diikuti kurung buka (</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">4</div>
-                                <h4>Argumen</h4>
-                                <p>Nilai, referensi sel, atau range yang diproses oleh fungsi</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">5</div>
-                                <h4>Kurung Penutup</h4>
-                                <p>Menutup fungsi dengan kurung tutup )</p>
-                            </div>
-                        </div>
-                        
-                        <div class="example">
-                            <h4>Contoh Fungsi Excel Populer:</h4>
-                            <div class="code-block">
-                                =SUM(A1:A10)        // Menjumlahkan nilai dari A1 sampai A10
-                                =AVERAGE(B1:B5)     // Menghitung rata-rata B1 sampai B5
-                                =IF(C1>50,"Lulus","Gagal")  // Percabangan kondisi
-                                =VLOOKUP(D1,E1:F10,2,FALSE) // Pencarian vertikal
-                            </div>
-                        </div>
-                        
-                        <div class="note-box">
-                            <strong>Catatan:</strong> Excel memiliki lebih dari 400 fungsi yang dikategorikan dalam berbagai kelompok seperti Financial, Logical, Text, Date & Time, Lookup & Reference, Math & Trig, Statistical, Engineering, Cube, Information, Compatibility, dan Web.
-                        </div>
-                        
-                        <h2 id="perbedaan-utama">3. Perbedaan Utama Rumus dan Fungsi</h2>
-                        
-                        <p>Meskipun sering digunakan secara bergantian, rumus dan fungsi memiliki perbedaan mendasar. Berikut perbandingan lengkapnya:</p>
-                        
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>Aspek</th>
-                                    <th>Rumus (Formula)</th>
-                                    <th>Fungsi (Function)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Definisi</strong></td>
-                                    <td>Ekspresi yang dibuat pengguna untuk melakukan perhitungan</td>
-                                    <td>Rumus bawaan Excel yang sudah diprogram sebelumnya</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Kompleksitas</strong></td>
-                                    <td>Bisa sangat sederhana atau sangat kompleks</td>
-                                    <td>Sudah distandarisasi dan disederhanakan</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Fleksibilitas</strong></td>
-                                    <td>Sangat fleksibel, dapat dikustomisasi sepenuhnya</td>
-                                    <td>Terbatas pada parameter yang sudah ditentukan</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Kemudahan Penggunaan</strong></td>
-                                    <td>Membutuhkan pemahaman logika dan sintaks</td>
-                                    <td>Lebih mudah dengan bantuan Function Wizard</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Contoh</strong></td>
-                                    <td>=A1+B1-C1*D1</td>
-                                    <td>=SUM(A1:A10)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Hubungan</strong></td>
-                                    <td>Dapat berdiri sendiri tanpa fungsi</td>
-                                    <td>Selalu menjadi bagian dari rumus</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="process-flow">
-                            <div class="process-step">
-                                <div class="process-circle">R</div>
-                                <h4>RUMUS</h4>
-                                <p>Ekspresi perhitungan yang dibuat pengguna</p>
-                            </div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step">
-                                <div class="process-circle">D</div>
-                                <h4>DAPAT BERISI</h4>
-                                <p>Dapat mengandung satu atau banyak fungsi</p>
-                            </div>
-                            <div class="process-arrow">→</div>
-                            <div class="process-step">
-                                <div class="process-circle">F</div>
-                                <h4>FUNGSI</h4>
-                                <p>Rumus bawaan yang menyederhanakan perhitungan</p>
+                            
+                            <div class="function-card min">
+                                <div class="function-icon">=MIN()</div>
+                                <h4>FUNGSI MIN</h4>
+                                <p><strong>Mencari nilai terendah</strong><br>Menemukan nilai minimum dalam sebuah range data</p>
                             </div>
                         </div>
                         
                         <div class="tip-box">
-                            <strong>Analoginya:</strong> Jika rumus adalah kalimat lengkap, maka fungsi adalah kata-kata khusus dalam kalimat tersebut. Anda bisa membuat kalimat tanpa kata khusus, tetapi kata khusus membuat kalimat lebih efektif.
+                            <strong>Fakta Penting:</strong> Ketiga fungsi ini mengabaikan sel kosong dan teks dalam range yang dipilih. Hanya nilai numerik yang akan diproses.
                         </div>
                         
-                        <h2 id="contoh-penggunaan">4. Contoh Penggunaan Rumus dan Fungsi</h2>
+                        <h2 id="syntax-dasar">2. Syntax Dasar</h2>
                         
-                        <p>Mari kita lihat contoh konkret penggunaan rumus dan fungsi dalam skenario nyata:</p>
+                        <p>Berikut adalah syntax dasar untuk ketiga fungsi ini:</p>
                         
-                        <div class="step-by-step">
-                            <h3>Contoh 1: Perhitungan Gaji Karyawan</h3>
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <h4>Rumus Sederhana (Tanpa Fungsi)</h4>
-                                <div class="code-block">
-                                    =C2*D2  // Gaji Pokok × Jumlah Hari Kerja
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <h4>Rumus dengan Satu Fungsi</h4>
-                                <div class="code-block">
-                                    =SUM(E2:E10)  // Total gaji semua karyawan
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <h4>Rumus Kompleks dengan Banyak Fungsi</h4>
-                                <div class="code-block">
-                                    =IF(SUM(E2:E10)>10000000, "Target Terpenuhi", "Target Belum Terpenuhi")
-                                </div>
-                            </div>
+                        <div class="code-block">
+                            =AVERAGE(number1, [number2], ...)<br>
+                            =MAX(number1, [number2], ...)<br>
+                            =MIN(number1, [number2], ...)
                         </div>
                         
-                        <div class="example">
-                            <h4>Contoh 2: Analisis Data Penjualan</h4>
-                            <div class="code-block">
-                                // Rumus tanpa fungsi untuk margin per unit
-                                =C2-B2
-                                
-                                // Fungsi untuk total penjualan
-                                =SUM(E2:E100)
-                                
-                                // Fungsi untuk rata-rata penjualan
-                                =AVERAGE(E2:E100)
-                                
-                                // Rumus kompleks dengan multiple functions
-                                =IF(AND(E2>1000, F2="Ya"), "Bonus", "Tidak Bonus")
-                            </div>
-                        </div>
-                        
-                        <div class="formula-demo">
-                            <div class="formula-icon">ƒx</div>
-                            <div class="formula-items">
-                                <div class="formula-item">SUM</div>
-                                <div class="formula-item">AVERAGE</div>
-                                <div class="formula-item">IF</div>
-                                <div class="formula-item">VLOOKUP</div>
-                                <div class="formula-item">COUNTIF</div>
-                            </div>
-                        </div>
-                        
-                        <div class="note-box">
-                            <strong>Penting:</strong> Dalam contoh di atas, perhatikan bahwa fungsi selalu menjadi bagian dari rumus (diawali dengan =), tetapi rumus bisa berdiri sendiri tanpa fungsi.
-                        </div>
-                        
-                        <h2 id="kapan-menggunakan">5. Kapan Menggunakan Rumus vs Fungsi</h2>
-                        
-                        <p>Pemahaman kapan menggunakan rumus sederhana versus fungsi akan meningkatkan efisiensi kerja Anda:</p>
-                        
-                        <div class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>Skenario</th>
-                                    <th>Gunakan Rumus Sederhana</th>
-                                    <th>Gunakan Fungsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Perhitungan dasar</strong></td>
-                                    <td>✅ Operasi matematika sederhana (+, -, *, /)</td>
-                                    <td>❌ Tidak perlu</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Penjumlahan banyak sel</strong></td>
-                                    <td>❌ Tidak efisien</td>
-                                    <td>✅ Gunakan SUM()</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Perhitungan statistik</strong></td>
-                                    <td>❌ Sangat rumit</td>
-                                    <td>✅ Gunakan AVERAGE(), MAX(), MIN()</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Analisis kondisi</strong></td>
-                                    <td>❌ Tidak mungkin</td>
-                                    <td>✅ Gunakan IF(), AND(), OR()</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Pencarian data</strong></td>
-                                    <td>❌ Sangat sulit</td>
-                                    <td>✅ Gunakan VLOOKUP(), HLOOKUP(), INDEX()+MATCH()</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Manipulasi teks</strong></td>
-                                    <td>❌ Terbatas</td>
-                                    <td>✅ Gunakan LEFT(), RIGHT(), MID(), CONCATENATE()</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="tip-box">
-                            <strong>Aturan Praktis:</strong> Gunakan rumus sederhana untuk perhitungan dasar dengan sedikit sel. Beralihlah ke fungsi ketika perhitungan melibatkan banyak sel, kondisi kompleks, atau operasi khusus seperti pencarian dan analisis statistik.
-                        </div>
-                        
-                        <h2 id="tips-penggunaan">6. Tips Penggunaan Rumus dan Fungsi</h2>
-                        
-                        <div class="step-by-step">
-                            <h3>Best Practices untuk Rumus dan Fungsi Excel</h3>
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <h4>Selalu Mulai dengan Tanda Sama Dengan (=)</h4>
-                                <p>Excel tidak akan mengenali rumus atau fungsi tanpa = di awalnya</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <h4>Gunakan Referensi Sel, Bukan Nilai Langsung</h4>
-                                <p>=A1+B1 lebih baik daripada =5+10 karena bisa di-update otomatis</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <h4>Manfaatkan Function Wizard</h4>
-                                <p>Gunakan Insert Function (fx) untuk membantu menyusun fungsi kompleks</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">4</div>
-                                <h4>Gunakan Nama Range untuk Kejelasan</h4>
-                                <p>=SUM(Penjualan_Q1) lebih mudah dipahami daripada =SUM(A1:A90)</p>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">5</div>
-                                <h4>Test dengan Data Sampel</h4>
-                                <p>Selalu verifikasi rumus/fungsi dengan data uji sebelum diterapkan</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tip-box">
-                            <strong>Shortcut Mastery:</strong><br>
-                            <strong>F2</strong> = Edit sel aktif<br>
-                            <strong>Ctrl + `</strong> = Tampilkan/sembunyikan rumus<br>
-                            <strong>Shift + F3</strong> = Buka Insert Function dialog<br>
-                            <strong>Ctrl + Shift + Enter</strong> = Enter rumus array (untuk fungsi array)
-                        </div>
-                        
-                        <h2 id="kesalahan-umum">7. Kesalahan Umum dan Cara Mengatasinya</h2>
-                        
-                        <div class="warning-box">
-                            <h4>❌ #VALUE! Error</h4>
-                            <p><strong>Penyebab:</strong> Tipe data tidak sesuai dengan yang diharapkan fungsi</p>
-                            <p><strong>Solusi:</strong></p>
-                            <ul>
-                                <li>Pastikan sel berisi angka, bukan teks</li>
-                                <li>Gunakan VALUE() untuk konversi teks ke angka</li>
-                                <li>Cek format sel (Number vs Text)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="warning-box">
-                            <h4>❌ #NAME? Error</h4>
-                            <p><strong>Penyebab:</strong> Excel tidak mengenali nama fungsi atau range</p>
-                            <p><strong>Solusi:</strong></p>
-                            <ul>
-                                <li>Periksa ejaan nama fungsi</li>
-                                <li>Pastikan fungsi tersedia di versi Excel Anda</li>
-                                <li>Cek referensi named range apakah sudah didefinisikan</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="warning-box">
-                            <h4>❌ #REF! Error</h4>
-                            <p><strong>Penyebab:</strong> Referensi sel tidak valid (sel dihapus atau dipindahkan)</p>
-                            <p><strong>Solusi:</strong></p>
-                            <ul>
-                                <li>Perbarui referensi sel yang tidak valid</li>
-                                <li>Gunakan referensi absolute ($A$1) jika perlu</li>
-                                <li>Hindari menghapus sel yang direferensikan rumus lain</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="warning-box">
-                            <h4>❌ #N/A Error</h4>
-                            <p><strong>Penyebab:</strong> Nilai tidak tersedia (sering di fungsi lookup)</p>
-                            <p><strong>Solusi:</strong></p>
-                            <ul>
-                                <li>Pastikan nilai yang dicari ada dalam range</li>
-                                <li>Gunakan IFERROR() untuk menangani error dengan elegan</li>
-                                <li>Verifikasi kriteria pencarian</li>
-                            </ul>
-                        </div>
-                        
-                        <h2>Kesimpulan</h2>
-                        
-                        <p>Memahami <strong>perbedaan antara rumus dan fungsi di Excel</strong> adalah langkah penting untuk menguasai aplikasi spreadsheet ini. Secara singkat:</p>
-                        
+                        <p>Keterangan:</p>
                         <ul>
-                            <li><strong>Rumus</strong> adalah ekspresi perhitungan yang dibuat pengguna, selalu diawali dengan =</li>
-                            <li><strong>Fungsi</strong> adalah rumus bawaan Excel yang sudah diprogram untuk menyederhanakan operasi kompleks</li>
-                            <li>Semua fungsi adalah bagian dari rumus, tetapi tidak semua rumus mengandung fungsi</li>
-                            <li>Gunakan rumus sederhana untuk perhitungan dasar, dan fungsi untuk operasi yang lebih kompleks</li>
+                            <li><strong>number1</strong>: Angka pertama, referensi sel, atau range yang ingin dihitung</li>
+                            <li><strong>[number2]</strong>: (Opsional) Angka tambahan, referensi sel, atau range</li>
+                            <li><strong>...</strong>: Dapat menambahkan hingga 255 argumen</li>
                         </ul>
                         
-                        <p><strong>Kunci mahir Excel adalah praktik!</strong> Coba buat berbagai jenis rumus dan eksperimen dengan fungsi-fungsi yang berbeda. Mulailah dengan fungsi sederhana seperti SUM dan AVERAGE, kemudian tingkatkan ke fungsi yang lebih kompleks seperti VLOOKUP dan IF bersarang.</p>
+                        <h2 id="contoh-praktis">3. Contoh Penggunaan Praktis</h2>
                         
-                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba buat rumus pertama Anda. Punya pertanyaan tentang rumus atau fungsi tertentu? <strong>Bagikan pengalaman Anda di kolom komentar</strong> - kami siap membantu perjalanan belajar Excel Anda!</p>
+                        <div class="step-by-step">
+                            <h3>Cara Menggunakan Fungsi AVERAGE, MAX, dan MIN</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Sel untuk Hasil</h4>
+                                <p>Klik sel tempat Anda ingin menampilkan hasil perhitungan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Ketik Rumus</h4>
+                                <p>Ketik <code>=AVERAGE(</code>, <code>=MAX(</code>, atau <code>=MIN(</code> di sel yang dipilih</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Range Data</h4>
+                                <p>Pilih range sel yang berisi data numerik yang ingin dianalisis</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Tutup dengan Kurung</h4>
+                                <p>Tutup rumus dengan <code>)</code> dan tekan Enter</p>
+                            </div>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>Contoh Penggunaan Dasar:</h4>
+                            <table class="excel-table">
+                                <tr>
+                                    <th></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>85</td>
+                                    <td>92</td>
+                                    <td class="formula-cell">=AVERAGE(A1:B1)</td>
+                                    <td class="result-cell">88.5</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>78</td>
+                                    <td>65</td>
+                                    <td class="formula-cell">=MAX(A2:B2)</td>
+                                    <td class="result-cell">78</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>90</td>
+                                    <td>88</td>
+                                    <td class="formula-cell">=MIN(A3:B3)</td>
+                                    <td class="result-cell">88</td>
+                                </tr>
+                            </table>
+                            <p><em>Hasil di C1 adalah rata-rata 85 dan 92, C2 adalah nilai tertinggi antara 78 dan 65, dan C3 adalah nilai terendah antara 90 dan 88.</em></p>
+                        </div>
+                        
+                        <h2 id="analisis-nilai">4. Analisis Nilai Siswa</h2>
+                        
+                        <p>Mari kita lihat contoh praktis penggunaan ketiga fungsi ini untuk menganalisis nilai siswa:</p>
+                        
+                        <div class="example">
+                            <h4>Analisis Nilai Kelas Matematika:</h4>
+                            <table class="excel-table">
+                                <tr>
+                                    <th></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Nama Siswa</strong></td>
+                                    <td><strong>Nilai Matematika</strong></td>
+                                    <td><strong>Rumus</strong></td>
+                                    <td><strong>Hasil</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Andi</td>
+                                    <td>85</td>
+                                    <td class="formula-cell">=AVERAGE(B2:B6)</td>
+                                    <td class="result-cell">79.4</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Budi</td>
+                                    <td>92</td>
+                                    <td class="formula-cell">=MAX(B2:B6)</td>
+                                    <td class="result-cell">92</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Citra</td>
+                                    <td>78</td>
+                                    <td class="formula-cell">=MIN(B2:B6)</td>
+                                    <td class="result-cell">65</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Dewi</td>
+                                    <td>77</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Eko</td>
+                                    <td>65</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <p><em>Dari tabel di atas, kita dapat melihat bahwa nilai rata-rata kelas adalah 79.4, nilai tertinggi adalah 92 (Budi), dan nilai terendah adalah 65 (Eko).</em></p>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>Tips:</strong> Anda dapat menggunakan ketiga fungsi ini secara bersamaan dalam satu worksheet untuk mendapatkan gambaran lengkap tentang data Anda.
+                        </div>
+                        
+                        <h2 id="analisis-penjualan">5. Analisis Data Penjualan</h2>
+                        
+                        <p>Fungsi AVERAGE, MAX, dan MIN sangat berguna untuk menganalisis data penjualan bisnis:</p>
+                        
+                        <div class="example">
+                            <h4>Laporan Penjualan Bulanan:</h4>
+                            <table class="excel-table">
+                                <tr>
+                                    <th></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Bulan</strong></td>
+                                    <td><strong>Penjualan (Juta)</strong></td>
+                                    <td><strong>Metrik</strong></td>
+                                    <td><strong>Hasil</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Januari</td>
+                                    <td>125</td>
+                                    <td class="formula-cell">Rata-rata Penjualan:</td>
+                                    <td class="formula-cell">=AVERAGE(B2:B13)</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Februari</td>
+                                    <td>138</td>
+                                    <td class="formula-cell">Penjualan Tertinggi:</td>
+                                    <td class="formula-cell">=MAX(B2:B13)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Maret</td>
+                                    <td>142</td>
+                                    <td class="formula-cell">Penjualan Terendah:</td>
+                                    <td class="formula-cell">=MIN(B2:B13)</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>April</td>
+                                    <td>131</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Mei</td>
+                                    <td>156</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Juni</td>
+                                    <td>148</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Juli</td>
+                                    <td>162</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Agustus</td>
+                                    <td>155</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>September</td>
+                                    <td>143</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Oktober</td>
+                                    <td>158</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>November</td>
+                                    <td>167</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Desember</td>
+                                    <td>175</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <p><em>Dengan data ini, kita dapat menghitung bahwa rata-rata penjualan bulanan adalah 149.75 juta, penjualan tertinggi adalah 175 juta (Desember), dan penjualan terendah adalah 125 juta (Januari).</em></p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Analisis Lanjutan:</strong> Kombinasikan fungsi AVERAGE, MAX, dan MIN dengan fungsi lainnya seperti IF untuk analisis yang lebih mendalam, misalnya menghitung rata-rata penjualan hanya untuk bulan-bulan tertentu.
+                        </div>
+                        
+                        <h2 id="tips-penting">6. Tips dan Trik Penting</h2>
+                        
+                        <div class="step-by-step">
+                            <h3>Tips Menggunakan AVERAGE, MAX, dan MIN</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Gunakan AutoSum untuk Cepat</h4>
+                                <p>Pilih sel di bawah data, lalu klik <strong>AutoSum</strong> di tab Home untuk menerapkan fungsi dengan cepat</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Periksa Range yang Dipilih</h4>
+                                <p>Pastikan range yang dipilih hanya berisi data numerik yang relevan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Kombinasi dengan Fungsi Lain</h4>
+                                <p>Gabungkan dengan fungsi IF untuk analisis bersyarat</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Gunakan Status Bar</h4>
+                                <p>Pilih range data, lalu lihat info AVERAGE, COUNT, dan SUM di Status Bar bawah</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>Shortcut Mastery:</strong><br>
+                            <strong>Alt + =</strong> - AutoSum<br>
+                            <strong>Ctrl + Shift + ↓</strong> - Pilih hingga akhir data<br>
+                            <strong>F2</strong> - Edit sel aktif<br>
+                            <strong>Ctrl + Enter</strong> - Isi rumus ke multiple sel
+                        </div>
+                        
+                        <h2 id="troubleshooting">7. Pemecahan Masalah Umum</h2>
+                        
+                        <div class="warning-box">
+                            <h4>❌ Masalah: Hasil #DIV/0! pada AVERAGE</h4>
+                            <p><strong>Penyebab:</strong> Tidak ada data numerik dalam range</p>
+                            <p><strong>Solusi:</strong></p>
+                            <ul>
+                                <li>Pastikan range berisi setidaknya satu nilai numerik</li>
+                                <li>Periksa apakah data diformat sebagai teks</li>
+                                <li>Gunakan IFERROR untuk menangani error dengan elegan</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>❌ Masalah: Hasil 0 pada MAX atau MIN</h4>
+                            <p><strong>Penyebab:</strong> Data berupa teks atau sel kosong</p>
+                            <p><strong>Solusi:</strong></p>
+                            <ul>
+                                <li>Pastikan data numerik diformat sebagai Number</li>
+                                <li>Periksa apakah ada spasi tambahan di data</li>
+                                <li>Gunakan fungsi VALUE() untuk mengonversi teks ke angka</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>❌ Masalah: Hasil Tidak Sesuai</h4>
+                            <p><strong>Penyebab:</strong> Ada sel tersembunyi atau terfilter</p>
+                            <p><strong>Solusi:</strong></p>
+                            <ul>
+                                <li>Periksa filter dan pastikan semua data terlihat</li>
+                                <li>Gunakan SUBTOTAL untuk mengabaikan sel tersembunyi</li>
+                                <li>Pastikan tidak ada baris atau kolom yang disembunyikan</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>❌ Masalah: #VALUE! Error</h4>
+                            <p><strong>Penyebab:</strong> Ada data non-numerik dalam range</p>
+                            <p><strong>Solusi:</strong></p>
+                            <ul>
+                                <li>Periksa range untuk sel berisi teks atau error</li>
+                                <li>Bersihkan data sebelum menganalisis</li>
+                                <li>Gunakan IF dan ISNUMBER untuk memeriksa data</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="kesimpulan">8. Kesimpulan</h2>
+                        
+                        <p>Fungsi <strong>AVERAGE, MAX, dan MIN</strong> adalah alat fundamental di Excel untuk analisis data sederhana yang, ketika dikuasai, dapat memberikan wawasan berharga tentang data Anda. Dengan memahami berbagai cara penggunaannya, Anda dapat:</p>
+                        
+                        <ul>
+                            <li>Menganalisis data dengan <strong>lebih efisien</strong></li>
+                            <li>Mengidentifikasi <strong>pola dan tren</strong> dalam data</li>
+                            <li>Membuat <strong>laporan yang lebih informatif</strong></li>
+                            <li>Mengambil <strong>keputusan berdasarkan data</strong> yang akurat</li>
+                        </ul>
+                        
+                        <p><strong>Kunci penguasaan fungsi AVERAGE, MAX, dan MIN:</strong></p>
+                        <ul>
+                            <li><strong>Pahami perbedaan dan kegunaan</strong> masing-masing fungsi</li>
+                            <li><strong>Gunakan AutoSum</strong> untuk penerapan cepat</li>
+                            <li><strong>Selalu periksa range</strong> yang dipilih sebelum menerapkan rumus</li>
+                            <li><strong>Kombinasikan dengan fungsi lain</strong> untuk analisis yang lebih mendalam</li>
+                        </ul>
+                        
+                        <p><strong>Praktik adalah kunci sukses!</strong> Coba terapkan berbagai teknik yang telah dipelajari pada data Anda sendiri. Semakin sering Anda berlatih, semakin mahir Anda menggunakan fungsi-fungsi penting ini.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel dan coba berbagai cara menggunakan fungsi AVERAGE, MAX, dan MIN. Punya pertanyaan atau tips tambahan? <strong>Bagikan di kolom komentar</strong> - kami senang bisa membantu dan belajar bersama!</p>
                     </div>
                 </article>
             </div>
@@ -1059,48 +1083,48 @@
                 <div class="widget">
                     <h3>Tutorial Populer</h3>
                     <ul class="popular-tutorials">
-                        <li><a href="#"><span>1</span> Rumus dan Fungsi Excel</a></li>
-                        <li><a href="#"><span>2</span> Fungsi IF dan Logika</a></li>
-                        <li><a href="#"><span>3</span> VLOOKUP dan HLOOKUP</a></li>
-                        <li><a href="#"><span>4</span> Fungsi Teks Excel</a></li>
-                        <li><a href="#"><span>5</span> Pivot Table Dasar</a></li>
+                        <li><a href="#"><span>1</span> Fungsi SUM Excel</a></li>
+                        <li><a href="#"><span>2</span> Fungsi AVERAGE, MAX, MIN</a></li>
+                        <li><a href="#"><span>3</span> Fungsi VLOOKUP</a></li>
+                        <li><a href="#"><span>4</span> Pivot Table Dasar</a></li>
+                        <li><a href="#"><span>5</span> Conditional Formatting</a></li>
                     </ul>
                 </div>
                 
                 <div class="widget">
                     <h3>Kategori Fungsi Excel</h3>
                     <ul>
-                        <li><a href="#">Fungsi Logika (IF, AND, OR)</a></li>
-                        <li><a href="#">Fungsi Teks (LEFT, RIGHT, MID)</a></li>
-                        <li><a href="#">Fungsi Tanggal & Waktu</a></li>
-                        <li><a href="#">Fungsi Lookup & Reference</a></li>
                         <li><a href="#">Fungsi Matematika</a></li>
                         <li><a href="#">Fungsi Statistik</a></li>
+                        <li><a href="#">Fungsi Logika</a></li>
+                        <li><a href="#">Fungsi Tanggal & Waktu</a></li>
+                        <li><a href="#">Fungsi Lookup & Referensi</a></li>
+                        <li><a href="#">Fungsi Teks</a></li>
                     </ul>
                 </div>
                 
                 <div class="widget tags-widget">
                     <h3>Tags</h3>
                     <div class="tags">
+                        <a href="#">Fungsi AVERAGE</a>
+                        <a href="#">Fungsi MAX</a>
+                        <a href="#">Fungsi MIN</a>
+                        <a href="#">Analisis Data</a>
+                        <a href="#">Statistik Excel</a>
                         <a href="#">Rumus Excel</a>
-                        <a href="#">Fungsi Excel</a>
-                        <a href="#">Perbedaan Rumus Fungsi</a>
-                        <a href="#">Formula Excel</a>
-                        <a href="#">SUM</a>
-                        <a href="#">AVERAGE</a>
-                        <a href="#">IF</a>
-                        <a href="#">VLOOKUP</a>
+                        <a href="#">Tutorial Excel</a>
+                        <a href="#">Tips Excel</a>
                     </div>
                 </div>
                 
                 <div class="widget">
-                    <h3>Cheat Sheet</h3>
-                    <p>Download cheat sheet fungsi Excel populer:</p>
+                    <h3>Download Template</h3>
+                    <p>Template Excel dengan fungsi statistik:</p>
                     <ul>
-                        <li><a href="#">📊 50 Fungsi Excel Terpopuler</a></li>
-                        <li><a href="#">📈 Fungsi Statistik Lengkap</a></li>
-                        <li><a href="#">📋 Rumus Keuangan Excel</a></li>
-                        <li><a href="#">📅 Fungsi Tanggal & Waktu</a></li>
+                        <li><a href="#">📊 Analisis Nilai Siswa</a></li>
+                        <li><a href="#">📈 Laporan Penjualan</a></li>
+                        <li><a href="#">📋 Dashboard Kinerja</a></li>
+                        <li><a href="#">📅 Tracker Proyek</a></li>
                     </ul>
                 </div>
                 
@@ -1134,9 +1158,9 @@
                 <div class="footer-column">
                     <h3>Tutorial Excel</h3>
                     <ul>
-                        <li><a href="#">Rumus & Fungsi</a></li>
-                        <li><a href="#">Formatting</a></li>
-                        <li><a href="#">Chart & Grafik</a></li>
+                        <li><a href="#">Fungsi Dasar</a></li>
+                        <li><a href="#">Rumus Excel</a></li>
+                        <li><a href="#">Fungsi Lanjutan</a></li>
                         <li><a href="#">Pivot Table</a></li>
                         <li><a href="#">Tips & Trik</a></li>
                     </ul>
