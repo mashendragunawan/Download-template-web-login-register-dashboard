@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning Path - From Zero to Expert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --light: #f0f9ff;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            --html-orange: #e34c26;
+            --css-blue: #264de4;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: white;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--html-orange);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .level-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .level {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .level:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .level-header {
+            padding: 25px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-header:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .level-beginner .level-header {
+            background: linear-gradient(135deg, var(--success) 0%, #34d399 100%);
+        }
+
+        .level-intermediate .level-header {
+            background: linear-gradient(135deg, var(--info) 0%, #22d3ee 100%);
+        }
+
+        .level-advanced .level-header {
+            background: linear-gradient(135deg, var(--warning) 0%, #fbbf24 100%);
+        }
+
+        .level-expert .level-header {
+            background: linear-gradient(135deg, var(--html-orange) 0%, #ea580c 100%);
+        }
+
+        .level-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .level-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .level-header i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .level-content {
+            padding: 25px;
+        }
+
+        .topic {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .topic:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .topic h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .topic ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .topic li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .topic li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .resources {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .resources h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 2.2rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+            border: 1px solid #e2e8f0;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .resource-card h3 i {
+            margin-right: 10px;
+        }
+
+        .roadmap {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .roadmap h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-size: 2.2rem;
+        }
+
+        .roadmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--secondary);
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .roadmap-item {
+            display: flex;
+            width: 100%;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        .roadmap-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        .roadmap-content {
+            width: 45%;
+            background: var(--light);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--light);
+            transform: rotate(45deg);
+            right: -10px;
+            top: 25px;
+            border-right: 1px solid #e2e8f0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--light);
+            transform: rotate(45deg);
+            left: -10px;
+            top: 25px;
+            border-left: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .roadmap-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .roadmap-content h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .roadmap-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--success);
+            border: 4px solid white;
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+        .roadmap-item:nth-child(even):before {
+            background: var(--warning);
+        }
+
+        .roadmap-item:nth-child(3):before {
+            background: var(--info);
+        }
+
+        .roadmap-item:nth-child(4):before {
+            background: var(--html-orange);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .skill-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .projects {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .projects h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 2.2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .project-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .roadmap-container:before {
+                left: 31px;
+            }
+
+            .roadmap-item {
+                justify-content: flex-start !important;
+            }
+
+            .roadmap-content {
+                width: 85%;
+                margin-left: 60px;
+            }
+
+            .roadmap-item:nth-child(odd) .roadmap-content:after,
+            .roadmap-item:nth-child(even) .roadmap-content:after {
+                left: -10px;
+                right: auto;
+                border-left: 1px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
+                border-right: none;
+                border-top: none;
+            }
+
+            .roadmap-item:before {
+                left: 21px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-html5"></i>
+                </div>
+                <h1>HTML Learning Path</h1>
+                <p>Panduan lengkap belajar HTML dari dasar hingga tingkat expert. Kuasai bahasa markup web yang fundamental.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Level</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">40+</div>
+                        <div class="stat-label">Topik</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3-9</div>
+                        <div class="stat-label">Bulan</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="level-container">
+            <!-- Level 1: Beginner -->
+            <div class="level level-beginner">
+                <div class="level-header">
+                    <div class="level-header-content">
+                        <i class="fas fa-seedling"></i>
+                        <h2>Pemula (Beginner)</h2>
+                        <p>0 - 1 Bulan</p>
+                    </div>
+                </div>
+                <div class="level-content">
+                    <div class="topic">
+                        <h3><i class="fas fa-code"></i> Dasar HTML</h3>
+                        <ul>
+                            <li>Apa itu HTML dan fungsinya</li>
+                            <li>Struktur dasar dokumen HTML</li>
+                            <li>Tag, elemen, dan atribut</li>
+                            <li>Heading, paragraph, dan line breaks</li>
+                            <li>Format teks (bold, italic, underline)</li>
+                            <li>Komentar dalam HTML</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-link"></i> Link & Media</h3>
+                        <ul>
+                            <li>Membuat hyperlink (internal & external)</li>
+                            <li>Menambahkan gambar</li>
+                            <li>Atribut alt dan title</li>
+                            <li>Membuat list (ordered & unordered)</li>
+                            <li>Special characters (entities)</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-table"></i> Tabel & Form</h3>
+                        <ul>
+                            <li>Membuat tabel sederhana</li>
+                            <li>Rowspan dan colspan</li>
+                            <li>Form elements (input, textarea, select)</li>
+                            <li>Button dan submit form</li>
+                            <li>Atribut form dasar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 2: Intermediate -->
+            <div class="level level-intermediate">
+                <div class="level-header">
+                    <div class="level-header-content">
+                        <i class="fas fa-rocket"></i>
+                        <h2>Menengah (Intermediate)</h2>
+                        <p>1 - 3 Bulan</p>
+                    </div>
+                </div>
+                <div class="level-content">
+                    <div class="topic">
+                        <h3><i class="fas fa-sitemap"></i> Struktur Lanjutan</h3>
+                        <ul>
+                            <li>Semantic HTML5 (header, nav, section)</li>
+                            <li>HTML5 structural elements</li>
+                            <li>Div dan span untuk grouping</li>
+                            <li>Iframe untuk embed konten</li>
+                            <li>Meta tags untuk SEO</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-edit"></i> Form Lanjutan</h3>
+                        <ul>
+                            <li>Input types (email, url, number, date)</li>
+                            <li>Form validation attributes</li>
+                            <li>Fieldset dan legend</li>
+                            <li>Dropdown lists lanjutan</li>
+                            <li>File uploads</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-table"></i> Tabel Kompleks</h3>
+                        <ul>
+                            <li>Tabel dengan thead, tbody, tfoot</li>
+                            <li>Colgroup dan col</li>
+                            <li>Responsive tables</li>
+                            <li>Table styling considerations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 3: Advanced -->
+            <div class="level level-advanced">
+                <div class="level-header">
+                    <div class="level-header-content">
+                        <i class="fas fa-chart-line"></i>
+                        <h2>Lanjutan (Advanced)</h2>
+                        <p>3 - 6 Bulan</p>
+                    </div>
+                </div>
+                <div class="level-content">
+                    <div class="topic">
+                        <h3><i class="fas fa-bolt"></i> HTML5 APIs</h3>
+                        <ul>
+                            <li>Canvas untuk grafik</li>
+                            <li>SVG integration</li>
+                            <li>Audio dan video elements</li>
+                            <li>Geolocation API</li>
+                            <li>Local Storage</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                        <ul>
+                            <li>Viewport meta tag</li>
+                            <li>Picture element dan srcset</li>
+                            <li>Responsive images</li>
+                            <li>Mobile-first markup</li>
+                            <li>Accessibility considerations</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-cogs"></i> Integrasi</h3>
+                        <ul>
+                            <li>Working dengan CSS frameworks</li>
+                            <li>JavaScript integration</li>
+                            <li>Web Components basics</li>
+                            <li>Microdata dan structured data</li>
+                            <li>Open Graph tags</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 4: Expert -->
+            <div class="level level-expert">
+                <div class="level-header">
+                    <div class="level-header-content">
+                        <i class="fas fa-crown"></i>
+                        <h2>Expert</h2>
+                        <p>6+ Bulan</p>
+                    </div>
+                </div>
+                <div class="level-content">
+                    <div class="topic">
+                        <h3><i class="fas fa-project-diagram"></i> Arsitektur</h3>
+                        <ul>
+                            <li>HTML architecture patterns</li>
+                            <li>Component-based markup</li>
+                            <li>Template engines</li>
+                            <li>Progressive Web App markup</li>
+                            <li>AMP HTML</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-tachometer-alt"></i> Performance</h3>
+                        <ul>
+                            <li>Critical rendering path optimization</li>
+                            <li>Lazy loading techniques</li>
+                            <li>HTML minification</li>
+                            <li>Resource prioritization</li>
+                            <li>Browser rendering optimization</li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <h3><i class="fas fa-shield-alt"></i> Best Practices</h3>
+                        <ul>
+                            <li>Web standards compliance</li>
+                            <li>Cross-browser compatibility</li>
+                            <li>Security considerations</li>
+                            <li>Internationalization (i18n)</li>
+                            <li>Future HTML specifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Fundamental Tags</h3>
+                <ul class="skill-list">
+                    <li>Structural Elements</li>
+                    <li>Text Formatting</li>
+                    <li>Links & Navigation</li>
+                    <li>Images & Media</li>
+                    <li>Lists & Tables</li>
+                    <li>Forms & Inputs</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-cube"></i> HTML5 Features</h3>
+                <ul class="skill-list">
+                    <li>Semantic Elements</li>
+                    <li>Audio & Video</li>
+                    <li>Canvas & SVG</li>
+                    <li>Local Storage</li>
+                    <li>Geolocation</li>
+                    <li>Form Enhancements</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Advanced Concepts</h3>
+                <ul class="skill-list">
+                    <li>Accessibility (ARIA)</li>
+                    <li>SEO Optimization</li>
+                    <li>Performance</li>
+                    <li>Web Components</li>
+                    <li>Progressive Enhancement</li>
+                    <li>Cross-browser Compatibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="projects">
+            <h2><i class="fas fa-laptop-code"></i> Project Ideas</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Personal Portfolio</h3>
+                    <p>Website portfolio sederhana dengan HTML murni</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-blog"></i>
+                    <h3>Blog Template</h3>
+                    <p>Template blog dengan semantic HTML</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Product Page</h3>
+                    <p>Halaman produk e-commerce dengan form</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resources">
+            <h2><i class="fas fa-book-open"></i> Sumber Belajar</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><i class="fas fa-globe"></i> Website</h3>
+                    <ul>
+                        <li>MDN Web Docs</li>
+                        <li>W3Schools</li>
+                        <li>freeCodeCamp</li>
+                        <li>HTML.com</li>
+                        <li>Web.dev</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h3><i class="fas fa-book"></i> Buku</h3>
+                    <ul>
+                        <li>HTML and CSS: Design and Build Websites</li>
+                        <li>Learning Web Design</li>
+                        <li>HTML5: The Missing Manual</li>
+                        <li>Responsive Web Design with HTML5 and CSS</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h3><i class="fas fa-video"></i> Video & Kursus</h3>
+                    <ul>
+                        <li>freeCodeCamp YouTube</li>
+                        <li>Traversy Media</li>
+                        <li>The Net Ninja</li>
+                        <li>Udemy HTML Courses</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h3><i class="fas fa-tools"></i> Tools & Practice</h3>
+                    <ul>
+                        <li>CodePen</li>
+                        <li>JSFiddle</li>
+                        <li>HTML Validator</li>
+                        <li>Browser DevTools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap">
+            <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3><i class="fas fa-play-circle"></i> Minggu 1-2: Dasar</h3>
+                        <p>Memahami struktur HTML, tag dasar, link, gambar, dan form sederhana. Membuat halaman web pertama.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3><i class="fas fa-layer-group"></i> Minggu 3-4: Struktur</h3>
+                        <p>Mempelajari semantic HTML, tabel kompleks, form lanjutan, dan elemen HTML5.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3><i class="fas fa-mobile"></i> Bulan 2: Responsive</h3>
+                        <p>Membuat markup yang responsive, mengoptimalkan untuk mobile, dan aksesibilitas.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3><i class="fas fa-bolt"></i> Bulan 3+: Advanced</h3>
+                        <p>HTML5 APIs, integrasi dengan JavaScript, performance optimization, dan best practices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 HTML Learning Path. Dibuat dengan <i class="fas fa-heart" style="color: var(--accent);"></i> untuk developer web pemula.</p>
+            <p><strong>Tips:</strong> Praktekkan setiap konsep dengan membuat proyek nyata dan validasi kode Anda!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animasi scroll untuk roadmap
+        document.addEventListener('DOMContentLoaded', function() {
+            const roadmapItems = document.querySelectorAll('.roadmap-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            roadmapItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                if (index % 2 === 0) {
+                    item.style.transform = 'translateX(-50px)';
+                } else {
+                    item.style.transform = 'translateX(50px)';
+                }
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+            
+            // Animasi untuk level cards
+            const levels = document.querySelectorAll('.level');
+            levels.forEach((level, index) => {
+                level.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>

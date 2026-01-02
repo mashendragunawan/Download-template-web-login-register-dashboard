@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel TEXT Functions Advanced: Complete Guide 2024 | Kelasexcel.net</title>
+    <meta name="description" content="Master advanced Excel TEXT functions: TEXT, CONCAT, TEXTJOIN, LEFT, RIGHT, MID, LEN, FIND, SUBSTITUTE. Learn text manipulation, data cleaning, and dynamic formatting with real-world examples.">
+    <meta name="keywords" content="excel text functions, excel text formula, excel string functions, excel text manipulation, excel data cleaning, textjoin, concat, substitute">
+    <meta name="author" content="Lisa Chen - Excel Text Processing Specialist">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://kelasexcel.net/excel-text-functions-advanced">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kelasexcel.net">
+    <meta property="og:title" content="Excel TEXT Functions Advanced: Complete Guide 2024">
+    <meta property="og:description" content="Master advanced Excel TEXT functions: TEXT, CONCAT, TEXTJOIN, LEFT, RIGHT, MID, LEN, FIND, SUBSTITUTE. Learn text manipulation, data cleaning, and dynamic formatting with real-world examples.">
+    <meta property="og:image" content="https://kelasexcel.net/images/excel-text-functions-guide-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Excel TEXT Functions Advanced Guide">
+    <meta property="og:url" content="https://kelasexcel.net/excel-text-functions-advanced">
+    <meta property="og:locale" content="en_US">
+    
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kelas Excel Online",
+  "alternateName": "KelasExcel",
+  "url": "https://kelasexcel.net",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://kelasexcel.net/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is the difference between CONCAT and TEXTJOIN functions?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p><strong>CONCAT</strong> simply combines text strings without any delimiters. <strong>TEXTJOIN</strong> is more powerful as it allows you to specify a delimiter and optionally ignore empty cells. TEXTJOIN is generally preferred for advanced text concatenation tasks where you need separators between values.</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "How do I extract text between two specific characters in Excel?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>Use the MID function combined with FIND to extract text between characters. For example, to extract text between parentheses: =MID(A1,FIND('(',A1)+1,FIND(')',A1)-FIND('(',A1)-1). This finds the positions of both characters and extracts the text between them.</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "What is the most powerful text function in Excel for data cleaning?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p><strong>SUBSTITUTE</strong> is extremely powerful for data cleaning as it can replace specific text patterns. Combined with <strong>TRIM</strong> (removes extra spaces) and <strong>PROPER</strong> (capitalizes words), you can clean and standardize text data efficiently. TEXTJOIN is also invaluable for restructuring data.</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "How can I convert numbers to text with custom formatting in Excel?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>Use the <strong>TEXT</strong> function to convert numbers to text with custom formatting. For example: =TEXT(1234.56,'$#,##0.00') displays '$1,234.56'. You can use any custom number format code within the TEXT function to control how numbers appear as text.</p>"
+    }
+  }]
+}
+</script>
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #217346;
+            --secondary-color: #2d9e64;
+            --accent-color: #1e5c3a;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray: #666;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --code-bg: #2d3748;
+            --code-color: #e2e8f0;
+            --extraction-color: #e53e3e;
+            --combination-color: #3182ce;
+            --cleaning-color: #38a169;
+            --formatting-color: #805ad5;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2b6cb0;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #2c5282;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-main {
+            padding: 1rem 0;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.15);
+            text-decoration: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #e2e8f0;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #4a5568;
+        }
+
+        .breadcrumb a:hover {
+            color: #2b6cb0;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin: 2rem 0;
+        }
+
+        .content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+            align-items: center;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Rating Stars */
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .review-count {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* Author Bio */
+        .author-bio {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .author-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .author-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-body h2 {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+        }
+
+        .article-body h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .code-block::before {
+            content: "Excel";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .code-comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        .code-function {
+            color: #68d391;
+            font-weight: bold;
+        }
+
+        .code-text {
+            color: #fbb6ce;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        /* Text Visual Demo */
+        .text-visual {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .text-visual::before {
+            content: "Text Processing Demo";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .text-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .text-step {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .text-arrow {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 0.5rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--extraction-color) 0%, var(--combination-color) 50%, var(--cleaning-color) 100%);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .table-of-contents::before {
+            content: "TEXT Functions";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .table-of-contents ol {
+            padding-left: 1.5rem;
+        }
+
+        .table-of-contents li {
+            margin-bottom: 0.75rem;
+        }
+
+        .table-of-contents a {
+            color: #2b6cb0;
+            font-weight: 500;
+        }
+
+        .table-of-contents a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-card.extraction::before {
+            background: var(--extraction-color);
+        }
+
+        .concept-card.combination::before {
+            background: var(--combination-color);
+        }
+
+        .concept-card.cleaning::before {
+            background: var(--cleaning-color);
+        }
+
+        .concept-card.formatting::before {
+            background: var(--formatting-color);
+        }
+
+        .concept-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .concept-card.extraction:hover {
+            border-color: var(--extraction-color);
+        }
+
+        .concept-card.combination:hover {
+            border-color: var(--combination-color);
+        }
+
+        .concept-card.cleaning:hover {
+            border-color: var(--cleaning-color);
+        }
+
+        .concept-card.formatting:hover {
+            border-color: var(--formatting-color);
+        }
+
+        .concept-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .concept-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .concept-icon.extraction {
+            background: var(--extraction-color);
+        }
+
+        .concept-icon.combination {
+            background: var(--combination-color);
+        }
+
+        .concept-icon.cleaning {
+            background: var(--cleaning-color);
+        }
+
+        .concept-icon.formatting {
+            background: var(--formatting-color);
+        }
+
+        .concept-desc {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .concept-tip {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 4px solid;
+        }
+
+        .concept-tip.extraction {
+            background: #fff5f5;
+            color: var(--extraction-color);
+            border-left-color: var(--extraction-color);
+        }
+
+        .concept-tip.combination {
+            background: #f0fff4;
+            color: var(--combination-color);
+            border-left-color: var(--combination-color);
+        }
+
+        .concept-tip.cleaning {
+            background: #f0fff4;
+            color: var(--cleaning-color);
+            border-left-color: var(--cleaning-color);
+        }
+
+        .concept-tip.formatting {
+            background: #faf5ff;
+            color: var(--formatting-color);
+            border-left-color: var(--formatting-color);
+        }
+
+        /* Tips and Notes */
+        .tip-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border-left: 4px solid #48bb78;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note-box {
+            background: #f0fff4;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Function Comparison */
+        .function-comparison {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .function-comparison th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .function-comparison td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .function-comparison tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .function-comparison tr:hover {
+            background: #edf2f7;
+        }
+
+        .extraction-row {
+            border-left: 3px solid var(--extraction-color);
+        }
+
+        .combination-row {
+            border-left: 3px solid var(--combination-color);
+        }
+
+        .cleaning-row {
+            border-left: 3px solid var(--cleaning-color);
+        }
+
+        .formatting-row {
+            border-left: 3px solid var(--formatting-color);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 3rem 0;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #1e5c3a;
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Social Sharing */
+        .social-sharing {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-share-btn.facebook { background: #3b5998; }
+        .social-share-btn.twitter { background: #1da1f2; }
+        .social-share-btn.linkedin { background: #0077b5; }
+        .social-share-btn.whatsapp { background: #25d366; }
+
+        .social-share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2d3748;
+            color: #cbd5e0;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul li a {
+            color: #a0aec0;
+            transition: all 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #4a5568;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-of-contents {
+                padding: 1.5rem;
+            }
+            
+            .social-sharing {
+                flex-wrap: wrap;
+            }
+            
+            .faq-section {
+                padding: 1.5rem;
+            }
+            
+            .function-comparison {
+                font-size: 0.9rem;
+            }
+            
+            .text-flow {
+                flex-direction: column;
+            }
+            
+            .text-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .concept-card {
+                padding: 1rem;
+            }
+            
+            .concept-header {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <a href="http://kelasexcel.net"><h1>Kelasexcel.net</h1></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="https://kelasexcel.net">Home</a></li>
+                        <li><a href="https://kelasexcel.net/tutorials">Tutorials</a></li>
+                        <li><a href="https://kelasexcel.net/formulas">Formulas</a></li>
+                        <li><a href="https://kelasexcel.net/shortcuts">Shortcuts</a></li>
+                        <li><a href="https://kelasexcel.net/tips">Tips</a></li>
+                        <li><a href="https://kelasexcel.net/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="https://kelasexcel.net">Home</a> &raquo; 
+            <a href="https://kelasexcel.net/artikel">Tutorials</a> &raquo; 
+            <a href="https://kelasexcel.net/artikel/excel-formulas">Excel Formulas</a> &raquo; 
+            <span>Excel TEXT Functions Advanced</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article itemscope itemtype="https://schema.org/Article">
+                    <div class="article-header">
+                        <h1 itemprop="headline">Excel TEXT Functions Advanced: Complete Guide 2024</h1>
+                        
+                        <!-- Rating Stars -->
+                        <div class="rating-stars">
+                            <div class="stars">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <span class="rating-value" itemprop="ratingValue">4.9</span>
+                            <span class="review-count">
+                                (<span itemprop="reviewCount">217</span> reviews) | 
+                                <span itemprop="bestRating">5</span> star rating
+                            </span>
+                        </div>
+                        
+                        <div class="article-meta">
+                            <span>📅 <time datetime="2024-01-20" itemprop="datePublished">January 20, 2024</time></span>
+                            <span>👁️ 31.5K Views</span>
+                            <span>⏱️ <span itemprop="timeRequired">22 minutes</span> reading</span>
+                            <span>⭐ Rating 4.9/5 (217 reviews)</span>
+                            <span>🏷️ Excel TEXT Functions, Text Manipulation, Data Cleaning, TEXTJOIN, CONCAT</span>
+                        </div>
+                        
+                        <!-- Author Bio -->
+                        <div class="author-bio" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <div class="author-avatar">LC</div>
+                            <div class="author-info">
+                                <h4 itemprop="name">Written by Lisa Chen</h4>
+                                <p><span itemprop="jobTitle">Excel Text Processing Specialist & Data Analyst</span> with <span itemprop="experienceYears">9+ years</span> experience. Microsoft Certified Professional specializing in advanced text manipulation and data cleaning techniques.</p>
+                                <div class="author-stats">
+                                    <span>🎓 8,900+ students</span>
+                                    <span>⭐ 4.9/5 rating</span>
+                                    <span>📚 35+ courses</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body" itemprop="articleBody">
+                        <p>Mastering <strong>Excel TEXT functions</strong> transforms you from a basic user to a data processing expert. This advanced guide covers text extraction, combination, cleaning, and dynamic formatting techniques that will revolutionize how you work with text data in Excel.</p>
+                        
+                        <!-- Social Sharing -->
+                        <div class="social-sharing">
+                            <a href="#" class="social-share-btn facebook" onclick="shareOnFacebook()">
+                                📘 Share Facebook
+                            </a>
+                            <a href="#" class="social-share-btn twitter" onclick="shareOnTwitter()">
+                                🐦 Share Twitter
+                            </a>
+                            <a href="#" class="social-share-btn linkedin" onclick="shareOnLinkedIn()">
+                                💼 Share LinkedIn
+                            </a>
+                            <a href="#" class="social-share-btn whatsapp" onclick="shareOnWhatsApp()">
+                                💬 Share WhatsApp
+                            </a>
+                        </div>
+                        
+                        <!-- Featured Image -->
+                        <div class="featured-image" itemprop="image">
+                            Excel TEXT Functions Advanced: Complete Guide 2024
+                        </div>
+                        
+                        <div class="table-of-contents">
+                            <h3>Table of Contents</h3>
+                            <ol>
+                                <li><a href="#text-extraction">Text Extraction Functions</a></li>
+                                <li><a href="#text-combination">Text Combination Functions</a></li>
+                                <li><a href="#text-cleaning">Text Cleaning & Transformation</a></li>
+                                <li><a href="#text-formatting">Dynamic Text Formatting</a></li>
+                                <li><a href="#advanced-techniques">Advanced Combination Techniques</a></li>
+                                <li><a href="#real-world-examples">Real-World Text Processing</a></li>
+                                <li><a href="#best-practices">Best Practices & Optimization</a></li>
+                                <li><a href="#faq">TEXT Functions FAQ</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="text-extraction">1. Text Extraction Functions</h2>
+                        
+                        <p><strong>Text extraction functions</strong> allow you to pull specific parts of text from cells. These are essential for data parsing, cleaning, and restructuring.</p>
+                        
+                        <div class="text-visual">
+                            <div class="text-flow">
+                                <div class="text-step">
+                                    <div class="step-box">"John Doe (Manager)"</div>
+                                    <div class="step-label">Original Text</div>
+                                </div>
+                                <div class="text-arrow">→</div>
+                                <div class="text-step">
+                                    <div class="step-box">LEFT, MID, RIGHT</div>
+                                    <div class="step-label">Extraction Functions</div>
+                                </div>
+                                <div class="text-arrow">→</div>
+                                <div class="text-step">
+                                    <div class="step-box">"John Doe"</div>
+                                    <div class="step-label">Clean Result</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept-grid">
+                            <div class="concept-card extraction">
+                                <div class="concept-header">
+                                    <h4>LEFT Function</h4>
+                                    <div class="concept-icon extraction">L</div>
+                                </div>
+                                <p class="concept-desc">Extracts a specified number of characters from the start of a text string.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Extract first 5 characters</span><br>
+                                    =<span class="code-function">LEFT</span>(<span class="code-text">"Hello World"</span>, <span class="code-number">5</span>)<br>
+                                    <span class="code-comment">→ Returns "Hello"</span>
+                                </div>
+                                <div class="concept-tip extraction">💡 Perfect for extracting codes, prefixes, or fixed-length identifiers</div>
+                            </div>
+                            
+                            <div class="concept-card extraction">
+                                <div class="concept-header">
+                                    <h4>RIGHT Function</h4>
+                                    <div class="concept-icon extraction">R</div>
+                                </div>
+                                <p class="concept-desc">Extracts a specified number of characters from the end of a text string.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Extract last 5 characters</span><br>
+                                    =<span class="code-function">RIGHT</span>(<span class="code-text">"Hello World"</span>, <span class="code-number">5</span>)<br>
+                                    <span class="code-comment">→ Returns "World"</span>
+                                </div>
+                                <div class="concept-tip extraction">💡 Ideal for file extensions, suffixes, or end-position data</div>
+                            </div>
+                            
+                            <div class="concept-card extraction">
+                                <div class="concept-header">
+                                    <h4>MID Function</h4>
+                                    <div class="concept-icon extraction">M</div>
+                                </div>
+                                <p class="concept-desc">Extracts characters from the middle of a text string, starting at any position.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Extract 5 chars starting from position 7</span><br>
+                                    =<span class="code-function">MID</span>(<span class="code-text">"Hello World"</span>, <span class="code-number">7</span>, <span class="code-number">5</span>)<br>
+                                    <span class="code-comment">→ Returns "World"</span>
+                                </div>
+                                <div class="concept-tip extraction">💡 Essential for extracting data from fixed-position formats</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Pro Extraction Tip:</strong> Combine MID with FIND to extract text between specific characters. Example: =MID(A1,FIND("(",A1)+1,FIND(")",A1)-FIND("(",A1)-1) extracts text between parentheses.
+                        </div>
+                        
+                        <h2 id="text-combination">2. Text Combination Functions</h2>
+                        
+                        <p><strong>Text combination functions</strong> merge multiple text strings into one. Modern Excel offers powerful functions that surpass the old CONCATENATE.</p>
+                        
+                        <div class="concept-grid">
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>CONCAT Function</h4>
+                                    <div class="concept-icon combination">C</div>
+                                </div>
+                                <p class="concept-desc">Combines text strings without any delimiters. Replaces the old CONCATENATE function.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Combine first and last name</span><br>
+                                    =<span class="code-function">CONCAT</span>(A2, <span class="code-text">" "</span>, B2)<br>
+                                    <span class="code-comment">→ "John" + " " + "Doe" = "John Doe"</span>
+                                </div>
+                                <div class="concept-tip combination">💡 Simpler syntax than CONCATENATE, accepts ranges</div>
+                            </div>
+                            
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>TEXTJOIN Function</h4>
+                                    <div class="concept-icon combination">TJ</div>
+                                </div>
+                                <p class="concept-desc">The ultimate text combination function with delimiter control and empty cell handling.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Join with comma, ignore empty cells</span><br>
+                                    =<span class="code-function">TEXTJOIN</span>(<span class="code-text">", "</span>, <span class="code-text">TRUE</span>, A2:A10)<br>
+                                    <span class="code-comment">→ Creates clean comma-separated lists</span>
+                                </div>
+                                <div class="concept-tip combination">💡 Most powerful text combination function in Excel</div>
+                            </div>
+                            
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>& Operator</h4>
+                                    <div class="concept-icon combination">&</div>
+                                </div>
+                                <p class="concept-desc">The ampersand operator provides quick, simple text concatenation for basic needs.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Simple text combination</span><br>
+                                    =A2 & <span class="code-text">" - "</span> & B2<br>
+                                    <span class="code-comment">→ "Product" + " - " + "Code" = "Product - Code"</span>
+                                </div>
+                                <div class="concept-tip combination">💡 Fastest method for simple, fixed combinations</div>
+                            </div>
+                        </div>
+
+                        <h2 id="text-cleaning">3. Text Cleaning & Transformation</h2>
+
+                        <p><strong>Text cleaning functions</strong> prepare messy data for analysis by standardizing formatting and removing unwanted characters.</p>
+
+                        <div class="concept-grid">
+                            <div class="concept-card cleaning">
+                                <div class="concept-header">
+                                    <h4>TRIM Function</h4>
+                                    <div class="concept-icon cleaning">T</div>
+                                </div>
+                                <p class="concept-desc">Removes all spaces from text except for single spaces between words.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Clean extra spaces</span><br>
+                                    =<span class="code-function">TRIM</span>(<span class="code-text">"  Hello   World  "</span>)<br>
+                                    <span class="code-comment">→ Returns "Hello World"</span>
+                                </div>
+                                <div class="concept-tip cleaning">💡 Essential first step for cleaning imported data</div>
+                            </div>
+                            
+                            <div class="concept-card cleaning">
+                                <div class="concept-header">
+                                    <h4>SUBSTITUTE Function</h4>
+                                    <div class="concept-icon cleaning">S</div>
+                                </div>
+                                <p class="concept-desc">Replaces specific text in a text string with new text.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Replace dashes with slashes</span><br>
+                                    =<span class="code-function">SUBSTITUTE</span>(A2, <span class="code-text">"-"</span>, <span class="code-text">"/"</span>)<br>
+                                    <span class="code-comment">→ "01-01-2024" becomes "01/01/2024"</span>
+                                </div>
+                                <div class="concept-tip cleaning">💡 Case-sensitive - use LOWER/UPPER first if needed</div>
+                            </div>
+                            
+                            <div class="concept-card cleaning">
+                                <div class="concept-header">
+                                    <h4>PROPER Function</h4>
+                                    <div class="concept-icon cleaning">P</div>
+                                </div>
+                                <p class="concept-desc">Capitalizes the first letter of each word in a text string.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Proper case names</span><br>
+                                    =<span class="code-function">PROPER</span>(<span class="code-text">"john doe"</span>)<br>
+                                    <span class="code-comment">→ Returns "John Doe"</span>
+                                </div>
+                                <div class="concept-tip cleaning">💡 Perfect for standardizing names and titles</div>
+                            </div>
+                        </div>
+
+                        <h2 id="text-formatting">4. Dynamic Text Formatting</h2>
+
+                        <p><strong>Dynamic text formatting functions</strong> convert values to text with specific formatting, creating professional-looking outputs.</p>
+
+                        <table class="function-comparison">
+                            <thead>
+                                <tr>
+                                    <th>Function</th>
+                                    <th>Purpose</th>
+                                    <th>Syntax</th>
+                                    <th>Example</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="formatting-row">
+                                    <td><strong>TEXT</strong></td>
+                                    <td>Format numbers/dates as text</td>
+                                    <td><code>TEXT(value, format)</code></td>
+                                    <td><code>=TEXT(1234.5,"$#,##0.00")</code></td>
+                                    <td>$1,234.50</td>
+                                </tr>
+                                <tr class="formatting-row">
+                                    <td><strong>FIXED</strong></td>
+                                    <td>Format numbers with decimals</td>
+                                    <td><code>FIXED(number, decimals)</code></td>
+                                    <td><code>=FIXED(1234.567,2)</code></td>
+                                    <td>1,234.57</td>
+                                </tr>
+                                <tr class="formatting-row">
+                                    <td><strong>DOLLAR</strong></td>
+                                    <td>Convert to currency format</td>
+                                    <td><code>DOLLAR(number, decimals)</code></td>
+                                    <td><code>=DOLLAR(1234.5,2)</code></td>
+                                    <td>$1,234.50</td>
+                                </tr>
+                                <tr class="formatting-row">
+                                    <td><strong>UPPER/LOWER</strong></td>
+                                    <td>Change text case</td>
+                                    <td><code>UPPER(text)</code></td>
+                                    <td><code>=UPPER("hello")</code></td>
+                                    <td>HELLO</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="concept-grid">
+                            <div class="concept-card formatting">
+                                <div class="concept-header">
+                                    <h4>TEXT Function Mastery</h4>
+                                    <div class="concept-icon formatting">F</div>
+                                </div>
+                                <p class="concept-desc">The TEXT function is incredibly powerful for dynamic formatting in reports and dashboards.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Various TEXT function examples</span><br>
+                                    =<span class="code-function">TEXT</span>(TODAY(),<span class="code-text">"mmmm d, yyyy"</span>)<br>
+                                    <span class="code-comment">→ "January 20, 2024"</span><br>
+                                    =<span class="code-function">TEXT</span>(0.15,<span class="code-text">"0%"</span>)<br>
+                                    <span class="code-comment">→ "15%"</span><br>
+                                    =<span class="code-function">TEXT</span>(1234,<span class="code-text">"#,##0"</span>)<br>
+                                    <span class="code-comment">→ "1,234"</span>
+                                </div>
+                                <div class="concept-tip formatting">💡 Use any custom number format code as the second argument</div>
+                            </div>
+                            
+                            <div class="concept-card formatting">
+                                <div class="concept-header">
+                                    <h4>Advanced TEXT Formats</h4>
+                                    <div class="concept-icon formatting">A</div>
+                                </div>
+                                <p class="concept-desc">Create professional displays with custom format codes in the TEXT function.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Custom number formats</span><br>
+                                    =<span class="code-function">TEXT</span>(A2,<span class="code-text">"$#,##0.00_);($#,##0.00)"</span>)<br>
+                                    <span class="code-comment">→ Accounting format</span><br>
+                                    =<span class="code-function">TEXT</span>(A2,<span class="code-text">"00000"</span>)<br>
+                                    <span class="code-comment">→ 5-digit code with leading zeros</span><br>
+                                    =<span class="code-function">TEXT</span>(A2,<span class="code-text">"# ?/?"</span>)<br>
+                                    <span class="code-comment">→ Fraction format</span>
+                                </div>
+                                <div class="concept-tip formatting">💡 Combine with other text for dynamic labels: ="Sales: "&TEXT(B2,"$#,##0")</div>
+                            </div>
+                        </div>
+
+                        <h2 id="advanced-techniques">5. Advanced Combination Techniques</h2>
+
+                        <p>Combine multiple text functions to solve complex data processing challenges.</p>
+
+                        <div class="concept-grid">
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>Nested Text Processing</h4>
+                                    <div class="concept-icon combination">⚡</div>
+                                </div>
+                                <p class="concept-desc">Chain multiple functions together for sophisticated text manipulation.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Extract and format email from messy data</span><br>
+                                    =<span class="code-function">LOWER</span>(<span class="code-function">TRIM</span>(<br>
+                                    &nbsp;&nbsp;<span class="code-function">SUBSTITUTE</span>(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">MID</span>(A2,<span class="code-function">FIND</span>(<span class="code-text">"@"</span>,A2)-5,15),<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-text">" "</span>,<span class="code-text">""</span><br>
+                                    &nbsp;&nbsp;)<br>
+                                    ))
+                                </div>
+                                <div class="concept-tip combination">💡 Work from the inside out when building nested formulas</div>
+                            </div>
+                            
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>TEXTJOIN with FILTER</h4>
+                                    <div class="concept-icon combination">🔍</div>
+                                </div>
+                                <p class="concept-desc">Combine TEXTJOIN with FILTER for dynamic list creation.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Create comma-separated list of active items</span><br>
+                                    =<span class="code-function">TEXTJOIN</span>(<span class="code-text">", "</span>, TRUE,<br>
+                                    &nbsp;&nbsp;<span class="code-function">FILTER</span>(A2:A100, B2:B100=<span class="code-text">"Active"</span>)<br>
+                                    )
+                                </div>
+                                <div class="concept-tip combination">💡 Perfect for dynamic summaries and reports</div>
+                            </div>
+                        </div>
+
+                        <h2 id="real-world-examples">6. Real-World Text Processing</h2>
+
+                        <p>Apply text functions to solve common business data challenges.</p>
+
+                        <div class="concept-grid">
+                            <div class="concept-card">
+                                <div class="concept-header">
+                                    <h4>Email Extraction</h4>
+                                    <div class="concept-icon">📧</div>
+                                </div>
+                                <p class="concept-desc">Extract email addresses from unstructured text data.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Extract email from text</span><br>
+                                    =<span class="code-function">TRIM</span>(<span class="code-function">MID</span>(A2,<br>
+                                    &nbsp;&nbsp;<span class="code-function">FIND</span>(<span class="code-text">"@"</span>,A2)-<span class="code-function">FIND</span>(<span class="code-text">" "</span>,<span class="code-function">SUBSTITUTE</span>(A2,<span class="code-text">"@"</span>,<span class="code-text">" "</span>,<span class="code-function">LEN</span>(A2)-<span class="code-function">LEN</span>(<span class="code-function">SUBSTITUTE</span>(A2,<span class="code-text">"@"</span>,<span class="code-text">""</span>))))+1,<br>
+                                    &nbsp;&nbsp;<span class="code-function">FIND</span>(<span class="code-text">" "</span>,A2&<span class="code-text">" "</span>,<span class="code-function">FIND</span>(<span class="code-text">"@"</span>,A2))-<span class="code-function">FIND</span>(<span class="code-text">"@"</span>,A2)+1<br>
+                                    ))
+                                </div>
+                                <div class="concept-tip">💡 Complex but handles various email formats automatically</div>
+                            </div>
+                            
+                            <div class="concept-card">
+                                <div class="concept-header">
+                                    <h4>Dynamic Report Headers</h4>
+                                    <div class="concept-icon">📊</div>
+                                </div>
+                                <p class="concept-desc">Create intelligent headers that update automatically.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Dynamic report title</span><br>
+                                    =<span class="code-function">TEXTJOIN</span>(<span class="code-text">" "</span>, TRUE, <br>
+                                    &nbsp;&nbsp;<span class="code-text">"Sales Report -"</span>,<br>
+                                    &nbsp;&nbsp;<span class="code-function">TEXT</span>(TODAY(),<span class="code-text">"mmmm yyyy"</span>),<br>
+                                    &nbsp;&nbsp;<span class="code-text">"("</span>, <span class="code-function">TEXT</span>(B2,<span class="code-text">"$#,##0"</span>), <span class="code-text">" Revenue)"</span><br>
+                                    )
+                                </div>
+                                <div class="concept-tip">💡 Creates: "Sales Report - January 2024 ($1,234,567 Revenue)"</div>
+                            </div>
+                        </div>
+
+                        <h2>Conclusion: Master Excel Text Processing</h2>
+                        
+                        <p>Mastering <strong>advanced Excel TEXT functions</strong> empowers you to handle any text processing challenge with confidence and efficiency. By combining these functions strategically, you can:</p>
+                        
+                        <ul>
+                            <li>Automate data cleaning and standardization processes</li>
+                            <li>Extract valuable information from unstructured text data</li>
+                            <li>Create dynamic, professional-looking reports and dashboards</li>
+                            <li>Combine data from multiple sources into coherent formats</li>
+                            <li>Save hours of manual text editing and formatting</li>
+                            <li>Build robust data processing workflows</li>
+                        </ul>
+                        
+                        <p><strong>Next Steps:</strong> Start implementing these text functions in your daily Excel work. Begin with simple TRIM and PROPER functions for data cleaning, then progress to TEXTJOIN for combining data, and finally master complex nested formulas for advanced text extraction.</p>
+                        
+                        <div class="tip-box">
+                            <strong>💬 Text Processing Challenge:</strong> Take a dataset with messy text data and apply the techniques from this guide. Share your before/after results in the comments below. What was the most transformative text function you discovered?
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelasexcel.net</h3>
+                    <p>Your complete resource for Microsoft Excel tutorials, from absolute beginner to advanced expert level.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/kelasexcel" title="Facebook">📘</a>
+                        <a href="https://twitter.com/kelasexcel" title="Twitter">🐦</a>
+                        <a href="https://instagram.com/kelasexcel" title="Instagram">📷</a>
+                        <a href="https://youtube.com/kelasexcel" title="YouTube">📹</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Excel Tutorials</h3>
+                    <ul>
+                        <li><a href="https://kelasexcel.net/basics">Excel Basics</a></li>
+                        <li><a href="https://kelasexcel.net/formulas">Formulas & Functions</a></li>
+                        <li><a href="https://kelasexcel.net/charts">Charts & Graphs</a></li>
+                        <li><a href="https://kelasexcel.net/pivot-tables">Pivot Tables</a></li>
+                        <li><a href="https://kelasexcel.net/data-analysis">Data Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://kelasexcel.net">Home</a></li>
+                        <li><a href="https://kelasexcel.net/about">About Us</a></li>
+                        <li><a href="https://kelasexcel.net/contact">Contact</a></li>
+                        <li><a href="https://kelasexcel.net/privacy">Privacy Policy</a></li>
+                        <li><a href="https://kelasexcel.net/disclaimer">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📧 info@kelasexcel.net</li>
+                        <li>📱 +1 (555) 123-4567</li>
+                        <li>📍 New York, USA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kelasexcel.net. All rights reserved. | Optimized for SEO & User Experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for table of contents
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.table-of-contents a');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add interactive effects to cards
+            const cards = document.querySelectorAll('.concept-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Initialize FAQ functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    toggleFAQ(this);
+                });
+            });
+        });
+
+        // FAQ Toggle Function with smooth animation
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span:last-child');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('span:last-child').textContent = '+';
+                }
+            });
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                answer.classList.add('active');
+                icon.textContent = '-';
+            }
+        }
+
+        // Social Sharing Functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Excel TEXT Functions Advanced: Complete Guide 2024!");
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Excel TEXT Functions Advanced: Complete Guide 2024! " + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>

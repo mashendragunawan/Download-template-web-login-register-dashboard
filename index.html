@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas Excel - Belajar Microsoft Excel dari Pemula hingga Mahir</title>
+    <meta name="description" content="Kelas Excel menyediakan tutorial lengkap Microsoft Excel untuk semua level. Pelajari rumus, fungsi, analisis data, dan visualisasi dengan panduan step-by-step.">
+    <meta name="keywords" content="kelas excel, tutorial excel, belajar excel, microsoft excel, rumus excel, fungsi excel, analisis data, visualisasi data, pivot table, vlookup">
+    <meta name="author" content="Kelas Excel">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Kelas Excel - Belajar Microsoft Excel dari Pemula hingga Mahir">
+    <meta property="og:description" content="Tutorial lengkap Microsoft Excel untuk semua level dengan panduan step-by-step dan contoh praktis.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kelasexcel.com">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kelas Excel",
+      "url": "https://kelasexcel.com",
+      "description": "Platform belajar Microsoft Excel terlengkap untuk pemula hingga mahir",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kelas Excel",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kelasexcel.com/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #217346 0%, #1e5e3b 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.6rem;
+        }
+        
+        .logo span {
+            color: #a3e4a3;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: #a3e4a3;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #217346 0%, #1e5e3b 100%);
+            color: white;
+            padding: 70px 0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .hero.scrolled {
+            padding: 50px 0;
+        }
+        
+        .hero h2 {
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #f8c42f;
+            color: #333;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e6b325;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Category Navigation */
+        .category-nav {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+        
+        .category-tabs {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            justify-content: center;
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .category-tabs::-webkit-scrollbar-thumb {
+            background-color: #217346;
+            border-radius: 3px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border-radius: 30px;
+            margin-right: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .tab.active {
+            background-color: #217346;
+            color: white;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+        
+        /* Cards Section */
+        .cards-section {
+            padding: 35px 0 50px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: #217346;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card-img {
+            height: 170px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #217346;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .card-desc {
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .level-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-block;
+            user-select: none;
+        }
+        
+        .level-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .level-all {
+            background-color: #e8eaf6;
+            color: #3f51b5;
+        }
+        
+        .level-pemula {
+            background-color: #e8f5e9;
+            color: #217346;
+        }
+        
+        .level-menengah {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .level-expert {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 5px;
+        }
+        
+        .pagination button {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: #333;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+            min-width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .pagination button:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .pagination button.active {
+            background-color: #217346;
+            color: white;
+            border-color: #217346;
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination button:disabled:hover {
+            background-color: white;
+        }
+        
+        .pagination-dots {
+            padding: 8px 5px;
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0 15px;
+            margin-top: 25px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a3e4a3;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a3e4a3;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #217346;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 12px 0;
+            background-color: #f8f9fa;
+            margin-bottom: 15px;
+        }
+        
+        .breadcrumb a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-tabs {
+                padding-bottom: 12px;
+                justify-content: flex-start;
+            }
+            
+            .tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+                gap: 3px;
+            }
+            
+            .pagination button {
+                padding: 6px 10px;
+                min-width: 36px;
+            }
+        }
+        
+        /* Hidden category sections */
+        .category-section {
+            display: none;
+        }
+        
+        .category-section.active {
+            display: block;
+        }
+        
+        /* Hidden page sections */
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-excel"></i>
+                    <h1>Kelas<span>Excel</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="template.html">Template</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+   
+
+    <!-- Hero Section -->
+    <section class="hero" id="main-hero">
+        <div class="container">
+            <h2>Belajar Excel dari Nol hingga Mahir</h2>
+            <p>Panduan lengkap Microsoft Excel untuk semua level dengan penjelasan step-by-step, contoh praktis, dan template gratis.</p>
+            <a href="#tutorial" class="btn">Mulai Belajar Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Category Navigation -->
+    <section class="category-nav">
+        <div class="container">
+            <div class="category-tabs">
+                <div class="tab active" data-category="all">ALL</div>
+                <div class="tab" data-category="pemula">PEMULA</div>
+                <div class="tab" data-category="menengah">MENENGAH</div>
+                <div class="tab" data-category="expert">EXPERT</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Sections -->
+    <div class="container" id="tutorial">
+        <!-- All Levels -->
+        <section class="category-section active" id="all">
+            <h2 class="section-title">Semua Tutorial Excel</h2>
+            
+            <!-- Page 1 -->
+            <div class="page-section active" id="all-page-1">
+                <div class="cards-container">
+                    <!-- Card 1 - Pemula -->
+                    <div class="card">
+                        <a href="pengertian-excel-dan-fungsi-dasar.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Pengertian Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Pengertian Excel dan Fungsi Dasar yang Wajib Diketahui Pemula</h3>
+                                <p class="card-desc">Memahami apa itu Excel, kegunaannya, dan fungsi dasar yang harus dikuasai pemula.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 2 - Pemula -->
+                    <div class="card">
+                        <a href="memahami-ribbon-tab-menu-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Ribbon Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Memahami Ribbon, Tab, dan Menu di Excel untuk Pemula</h3>
+                                <p class="card-desc">Mengenal antarmuka Excel, ribbon, tab menu, dan fungsinya masing-masing.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 3 - Menengah -->
+                    <div class="card">
+                        <a href="membuat-menyimpan-membuka-workbook.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Workbook Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cara Membuat, Menyimpan, dan Membuka File Workbook Excel</h3>
+                                <p class="card-desc">Cara membuat file Excel baru, menyimpan dengan benar, dan membuka file yang sudah ada.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-menengah">MENENGAH</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 4 - Pemula -->
+                    <div class="card">
+                        <a href="panduan-sel-kolom-baris-worksheet.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Struktur Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Panduan Lengkap Sel, Kolom, Baris, dan Worksheet untuk Pemula</h3>
+                                <p class="card-desc">Memahami struktur dasar Excel: sel, kolom, baris, dan worksheet beserta operasinya.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 5 - Expert -->
+                    <div class="card">
+                        <a href="perbedaan-workbook-worksheet.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Workbook vs Worksheet">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Memahami Perbedaan Workbook dan Worksheet di Excel</h3>
+                                <p class="card-desc">Memahami perbedaan antara workbook (buku kerja) dan worksheet (lembar kerja) di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-expert">EXPERT</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 6 - Pemula -->
+                    <div class="card">
+                        <a href="shortcut-keyboard-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Shortcut Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">10 Shortcut Keyboard Excel Paling Berguna untuk Pemula</h3>
+                                <p class="card-desc">Shortcut keyboard Excel yang paling sering digunakan untuk meningkatkan produktivitas.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Page 2 -->
+            <div class="page-section" id="all-page-2">
+                <div class="cards-container">
+                    <!-- Card 7 - Menengah -->
+                    <div class="card">
+                        <a href="zoom-scroll-navigasi-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Navigasi Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cara Menggunakan Zoom, Scroll, dan Navigasi di Excel dengan Cepat</h3>
+                                <p class="card-desc">Teknik menggunakan zoom, scroll, dan navigasi untuk bekerja lebih efisien di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-menengah">MENENGAH</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 8 - Expert -->
+                    <div class="card">
+                        <a href="status-bar-view-mode-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="View Mode Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Memahami Status Bar dan Berbagai View Mode di Excel</h3>
+                                <p class="card-desc">Memahami status bar dan berbagai view mode (Normal, Page Layout) di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-expert">EXPERT</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 9 - Menengah -->
+                    <div class="card">
+                        <a href="cetak-file-excel-rapi.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Print Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cara Mencetak File Excel Agar Rapi dan Tidak Terpotong</h3>
+                                <p class="card-desc">Tips mencetak file Excel agar hasilnya rapi, tidak terpotong, dan mudah dibaca.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-menengah">MENENGAH</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 10 - Pemula -->
+                    <div class="card">
+                        <a href="page-setup-margin-header-footer.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Page Setup Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Mengatur Page Setup, Margin, dan Header/Footer untuk Pemula</h3>
+                                <p class="card-desc">Mengatur halaman, margin, header, dan footer untuk kebutuhan pencetakan profesional.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 11 - Pemula -->
+                    <div class="card">
+                        <a href="input-data-teks-angka-tanggal.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Input Data Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Input Data Teks, Angka, dan Tanggal yang Benar di Excel</h3>
+                                <p class="card-desc">Cara menginput berbagai jenis data dengan benar di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 12 - Menengah -->
+                    <div class="card">
+                        <a href="teknik-menengah-analisis-data.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Advanced Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Teknik Menengah Excel untuk Analisis Data</h3>
+                                <p class="card-desc">Teknik Excel tingkat menengah untuk analisis data yang kompleks.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-menengah">MENENGAH</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="all-pagination">
+                <button class="pagination-prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="pagination-number active" data-page="1">1</button>
+                <button class="pagination-number" data-page="2">2</button>
+                <button class="pagination-next">
+                    Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Level Pemula -->
+        <section class="category-section" id="pemula">
+            <h2 class="section-title">Tutorial Excel Level Pemula</h2>
+            
+            <!-- Page 1 -->
+            <div class="page-section active" id="pemula-page-1">
+                <div class="cards-container">
+                    <!-- Card 1 - Pemula -->
+                    <div class="card">
+                        <a href="pengertian-excel-dan-fungsi-dasar.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Pengertian Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Pengertian Excel dan Fungsi Dasar yang Wajib Diketahui Pemula</h3>
+                                <p class="card-desc">Memahami apa itu Excel, kegunaannya, dan fungsi dasar yang harus dikuasai pemula.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 2 - Pemula -->
+                    <div class="card">
+                        <a href="memahami-ribbon-tab-menu-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Ribbon Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Memahami Ribbon, Tab, dan Menu di Excel untuk Pemula</h3>
+                                <p class="card-desc">Mengenal antarmuka Excel, ribbon, tab menu, dan fungsinya masing-masing.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 3 - Pemula -->
+                    <div class="card">
+                        <a href="panduan-sel-kolom-baris-worksheet.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Struktur Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Panduan Lengkap Sel, Kolom, Baris, dan Worksheet untuk Pemula</h3>
+                                <p class="card-desc">Memahami struktur dasar Excel: sel, kolom, baris, dan worksheet beserta operasinya.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 4 - Pemula -->
+                    <div class="card">
+                        <a href="shortcut-keyboard-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Shortcut Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">10 Shortcut Keyboard Excel Paling Berguna untuk Pemula</h3>
+                                <p class="card-desc">Shortcut keyboard Excel yang paling sering digunakan untuk meningkatkan produktivitas.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 5 - Pemula -->
+                    <div class="card">
+                        <a href="page-setup-margin-header-footer.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Page Setup Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Mengatur Page Setup, Margin, dan Header/Footer untuk Pemula</h3>
+                                <p class="card-desc">Mengatur halaman, margin, header, dan footer untuk kebutuhan pencetakan profesional.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 6 - Pemula -->
+                    <div class="card">
+                        <a href="input-data-teks-angka-tanggal.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Input Data Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Input Data Teks, Angka, dan Tanggal yang Benar di Excel</h3>
+                                <p class="card-desc">Cara menginput berbagai jenis data dengan benar di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Page 2 -->
+            <div class="page-section" id="pemula-page-2">
+                <div class="cards-container">
+                    <!-- Card 7 - Pemula -->
+                    <div class="card">
+                        <a href="panduan-format-cell.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Format Cell">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Panduan Format Cell untuk Pemula</h3>
+                                <p class="card-desc">Memahami berbagai format cell dan cara menggunakannya dengan benar.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 8 - Pemula -->
+                    <div class="card">
+                        <a href="membuat-tabel-sederhana.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tabel Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cara Membuat Tabel Sederhana di Excel</h3>
+                                <p class="card-desc">Langkah-langkah membuat tabel yang rapi dan profesional di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 9 - Pemula -->
+                    <div class="card">
+                        <a href="teknik-sorting-filtering.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1591696205602-2f950c417dad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sorting Filtering">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Teknik Dasar Sorting dan Filtering</h3>
+                                <p class="card-desc">Cara mengurutkan dan menyaring data dengan mudah di Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 10 - Pemula -->
+                    <div class="card">
+                        <a href="formula-dasar-excel.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Formula Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Memahami Formula Dasar Excel</h3>
+                                <p class="card-desc">Pengenalan formula dasar dan cara penggunaannya dalam Excel.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 11 - Pemula -->
+                    <div class="card">
+                        <a href="membuat-grafik-sederhana.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Grafik Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cara Membuat Grafik Sederhana</h3>
+                                <p class="card-desc">Panduan membuat grafik dan chart dasar untuk visualisasi data.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Card 12 - Pemula -->
+                    <div class="card">
+                        <a href="tips-trik-excel-pemula.html" class="card-link">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tips Excel">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Tips dan Trik Excel untuk Pemula</h3>
+                                <p class="card-desc">Kumpulan tips dan trik berguna untuk pengguna Excel pemula.</p>
+                                <div class="card-meta">
+                                    <span class="level-tag level-pemula">PEMULA</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pemula-pagination">
+                <button class="pagination-prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="pagination-number active" data-page="1">1</button>
+                <button class="pagination-number" data-page="2">2</button>
+                <button class="pagination-next">
+                    Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Level Menengah & Expert (disederhanakan) -->
+        <section class="category-section" id="menengah">
+            <h2 class="section-title">Tutorial Excel Level Menengah</h2>
+            <div class="cards-container">
+                <!-- Card Menengah 1 -->
+                <div class="card">
+                    <a href="membuat-menyimpan-membuka-workbook.html" class="card-link">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Workbook Excel">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Cara Membuat, Menyimpan, dan Membuka File Workbook Excel</h3>
+                            <p class="card-desc">Cara membuat file Excel baru, menyimpan dengan benar, dan membuka file yang sudah ada.</p>
+                            <div class="card-meta">
+                                <span class="level-tag level-menengah">MENENGAH</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Card Menengah 2 -->
+                <div class="card">
+                    <a href="zoom-scroll-navigasi-excel.html" class="card-link">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Navigasi Excel">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Cara Menggunakan Zoom, Scroll, dan Navigasi di Excel dengan Cepat</h3>
+                            <p class="card-desc">Teknik menggunakan zoom, scroll, dan navigasi untuk bekerja lebih efisien di Excel.</p>
+                            <div class="card-meta">
+                                <span class="level-tag level-menengah">MENENGAH</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Card Menengah 3 -->
+                <div class="card">
+                    <a href="cetak-file-excel-rapi.html" class="card-link">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Print Excel">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Cara Mencetak File Excel Agar Rapi dan Tidak Terpotong</h3>
+                            <p class="card-desc">Tips mencetak file Excel agar hasilnya rapi, tidak terpotong, dan mudah dibaca.</p>
+                            <div class="card-meta">
+                                <span class="level-tag level-menengah">MENENGAH</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Pagination Sederhana -->
+            <div class="pagination" id="menengah-pagination">
+                <button class="pagination-prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="pagination-number active" data-page="1">1</button>
+                <button class="pagination-next">
+                    Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="category-section" id="expert">
+            <h2 class="section-title">Tutorial Excel Level Expert</h2>
+            <div class="cards-container">
+                <!-- Card Expert 1 -->
+                <div class="card">
+                    <a href="perbedaan-workbook-worksheet.html" class="card-link">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Workbook vs Worksheet">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Memahami Perbedaan Workbook dan Worksheet di Excel</h3>
+                            <p class="card-desc">Memahami perbedaan antara workbook (buku kerja) dan worksheet (lembar kerja) di Excel.</p>
+                            <div class="card-meta">
+                                <span class="level-tag level-expert">EXPERT</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Card Expert 2 -->
+                <div class="card">
+                    <a href="status-bar-view-mode-excel.html" class="card-link">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="View Mode Excel">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Memahami Status Bar dan Berbagai View Mode di Excel</h3>
+                            <p class="card-desc">Memahami status bar dan berbagai view mode (Normal, Page Layout) di Excel.</p>
+                            <div class="card-meta">
+                                <span class="level-tag level-expert">EXPERT</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Pagination Sederhana -->
+            <div class="pagination" id="expert-pagination">
+                <button class="pagination-prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="pagination-number active" data-page="1">1</button>
+                <button class="pagination-next">
+                    Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelas Excel</h3>
+                    <p>Platform belajar Microsoft Excel terlengkap untuk pemula dan tingkat lanjut. Materi disusun secara sistematis dengan contoh praktis.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kategori Tutorial</h3>
+                    <ul class="footer-links">
+                        <li><a href="dasar-excel.html">Dasar-Dasar Excel</a></li>
+                        <li><a href="rumus-fungsi.html">Rumus & Fungsi</a></li>
+                        <li><a href="analisis-data.html">Analisis Data</a></li>
+                        <li><a href="visualisasi-data.html">Visualisasi Data</a></li>
+                        <li><a href="tips-trik.html">Tips & Trik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Template Gratis</h3>
+                    <ul class="footer-links">
+                        <li><a href="template-laporan-keuangan.html">Laporan Keuangan</a></li>
+                        <li><a href="template-to-do-list.html">To-Do List</a></li>
+                        <li><a href="template-daftar-hadir.html">Daftar Hadir</a></li>
+                        <li><a href="template-invoice.html">Invoice & Faktur</a></li>
+                        <li><a href="template-budgeting.html">Budgeting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak & Bantuan</h3>
+                    <ul class="footer-links">
+                        <li><a href="pusat-bantuan.html">Pusat Bantuan</a></li>
+                        <li><a href="tanya-jawab.html">Tanya Jawab</a></li>
+                        <li><a href="kontak.html">Kontak Kami</a></li>
+                        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+                        <li><a href="terms.html">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 KelasExcel.com. Semua hak cipta dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll effect for header and hero
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            const hero = document.getElementById('main-hero');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 50) {
+                header.classList.add('scrolled');
+                hero.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+                hero.classList.remove('scrolled');
+            }
+        });
+
+        // Category Tab Navigation - FIXED VERSION
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            // Function to switch category
+            function switchCategory(category) {
+                // Remove active class from all tabs and sections
+                tabs.forEach(t => t.classList.remove('active'));
+                categorySections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to target tab
+                document.querySelector(`.tab[data-category="${category}"]`).classList.add('active');
+                
+                // Show corresponding section
+                document.getElementById(category).classList.add('active');
+                
+                // Reset to first page when switching category
+                resetToFirstPage(category);
+                
+                // Scroll to top of tutorial section for better UX
+                document.getElementById('tutorial').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            
+            // Reset to first page when switching category
+            function resetToFirstPage(categoryId) {
+                const pageSections = document.querySelectorAll(`#${categoryId} .page-section`);
+                if (pageSections.length > 0) {
+                    pageSections.forEach((section, index) => {
+                        section.classList.toggle('active', index === 0);
+                    });
+                }
+                
+                // Reset pagination buttons to first page
+                const paginationContainer = document.getElementById(`${categoryId}-pagination`);
+                if (paginationContainer) {
+                    const paginationNumbers = paginationContainer.querySelectorAll('.pagination-number');
+                    paginationNumbers.forEach(button => {
+                        button.classList.toggle('active', button.getAttribute('data-page') === '1');
+                    });
+                    
+                    const prevButton = paginationContainer.querySelector('.pagination-prev');
+                    const nextButton = paginationContainer.querySelector('.pagination-next');
+                    if (prevButton) prevButton.disabled = true;
+                    if (nextButton) nextButton.disabled = pageSections.length <= 1;
+                }
+            }
+            
+            // Tab click event
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category');
+                    switchCategory(categoryId);
+                });
+            });
+            
+            // Make function globally available for onclick attributes
+            window.switchToCategory = switchCategory;
+            
+            // Add click event to all level tags (including spans)
+            document.querySelectorAll('.level-tag').forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Determine category from class
+                    let category = 'pemula'; // default
+                    if (this.classList.contains('level-menengah')) category = 'menengah';
+                    if (this.classList.contains('level-expert')) category = 'expert';
+                    if (this.classList.contains('level-all')) category = 'all';
+                    
+                    switchCategory(category);
+                });
+            });
+            
+            // Setup pagination for all categories
+            setupPagination('all');
+            setupPagination('pemula');
+            setupPagination('menengah');
+            setupPagination('expert');
+        });
+
+        // Improved Pagination Functionality
+        function setupPagination(categoryId) {
+            const paginationContainer = document.getElementById(`${categoryId}-pagination`);
+            if (!paginationContainer) return;
+            
+            const pageSections = document.querySelectorAll(`#${categoryId} .page-section`);
+            const paginationNumbers = paginationContainer.querySelectorAll('.pagination-number');
+            const prevButton = paginationContainer.querySelector('.pagination-prev');
+            const nextButton = paginationContainer.querySelector('.pagination-next');
+            
+            let currentPage = 1;
+            const totalPages = pageSections.length;
+            
+            // Function to update pagination state
+            function updatePagination() {
+                // Update page sections
+                pageSections.forEach((section, index) => {
+                    section.classList.toggle('active', index + 1 === currentPage);
+                });
+                
+                // Update pagination numbers
+                paginationNumbers.forEach(button => {
+                    const pageNum = parseInt(button.getAttribute('data-page'));
+                    button.classList.toggle('active', pageNum === currentPage);
+                });
+                
+                // Update prev/next buttons
+                if (prevButton) prevButton.disabled = currentPage === 1;
+                if (nextButton) nextButton.disabled = currentPage === totalPages;
+            }
+            
+            // Number button click event
+            paginationNumbers.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentPage = parseInt(this.getAttribute('data-page'));
+                    updatePagination();
+                });
+            });
+            
+            // Previous button click event
+            if (prevButton) {
+                prevButton.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        updatePagination();
+                    }
+                });
+            }
+            
+            // Next button click event
+            if (nextButton) {
+                nextButton.addEventListener('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        updatePagination();
+                    }
+                });
+            }
+            
+            // Initialize pagination
+            updatePagination();
+        }
+    </script>
+</body>
+</html>

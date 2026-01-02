@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel UNIQUE Function: Advanced Guide 2024 | Kelasexcel.net</title>
+    <meta name="description" content="Master Excel UNIQUE function advanced techniques: Dynamic arrays, multi-column extraction, case-sensitive unique values, frequency analysis, and complex data cleaning methods.">
+    <meta name="keywords" content="excel unique function, dynamic arrays excel, data deduplication, excel formulas, advanced excel, excel 365 functions, unique values extraction">
+    <meta name="author" content="Mark Thompson - Excel Productivity Specialist">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://kelasexcel.net/excel-unique-function-advanced">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kelasexcel.net">
+    <meta property="og:title" content="Excel UNIQUE Function: Advanced Guide 2024">
+    <meta property="og:description" content="Master Excel UNIQUE function advanced techniques: Dynamic arrays, multi-column extraction, case-sensitive unique values, frequency analysis, and complex data cleaning methods.">
+    <meta property="og:image" content="https://kelasexcel.net/images/excel-unique-function-advanced-guide-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Excel UNIQUE Function Advanced Guide">
+    <meta property="og:url" content="https://kelasexcel.net/excel-unique-function-advanced">
+    <meta property="og:locale" content="en_US">
+    
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kelas Excel Online",
+  "alternateName": "KelasExcel",
+  "url": "https://kelasexcel.net",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://kelasexcel.net/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What's the difference between UNIQUE with TRUE and FALSE parameters?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p><strong>UNIQUE(range, FALSE, FALSE)</strong> returns unique values from a single column. <strong>UNIQUE(range, TRUE, FALSE)</strong> returns unique rows by comparing all columns. <strong>UNIQUE(range, FALSE, TRUE)</strong> returns values that appear exactly once (unique occurrences only).</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "How can I extract unique values from multiple columns?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>Use <strong>UNIQUE(TOCOL(range))</strong> to combine multiple columns into one and extract unique values. For multi-column unique combinations, use <strong>UNIQUE(range, TRUE)</strong> to return unique rows across all specified columns.</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "Can UNIQUE function handle case-sensitive extraction?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>No, UNIQUE is not case-sensitive by default. For case-sensitive unique extraction, combine with EXACT function: <strong>=UNIQUE(FILTER(range, COUNTIFS(range, range, ROW(range), \"<=\"&ROW(range))=1))</strong> or use advanced array formulas with EXACT comparisons.</p>"
+    }
+  }, {
+    "@type": "Question",
+    "name": "How do I count occurrences of each unique value?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>Combine UNIQUE with COUNTIF: <strong>=COUNTIF(original_range, UNIQUE(original_range))</strong>. For more advanced analysis, use: <strong>=CHOOSE({1,2}, UNIQUE(range), COUNTIF(range, UNIQUE(range)))</strong> to create a two-column table showing each unique value and its count.</p>"
+    }
+  }]
+}
+</script>
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #217346;
+            --secondary-color: #2d9e64;
+            --accent-color: #1e5c3a;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray: #666;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --code-bg: #2d3748;
+            --code-color: #e2e8f0;
+            --basic-color: #3182ce;
+            --advanced-color: #805ad5;
+            --combination-color: #38a169;
+            --case-sensitive-color: #e53e3e;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2b6cb0;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #2c5282;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-main {
+            padding: 1rem 0;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.15);
+            text-decoration: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #e2e8f0;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #4a5568;
+        }
+
+        .breadcrumb a:hover {
+            color: #2b6cb0;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin: 2rem 0;
+        }
+
+        .content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+            align-items: center;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Rating Stars */
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .review-count {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* Author Bio */
+        .author-bio {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .author-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .author-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-body h2 {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+        }
+
+        .article-body h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .code-block::before {
+            content: "Excel";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .code-comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        .code-function {
+            color: #68d391;
+            font-weight: bold;
+        }
+
+        .code-argument {
+            color: #fbb6ce;
+            font-weight: bold;
+        }
+
+        /* Function Visual Demo */
+        .function-visual {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .function-visual::before {
+            content: "UNIQUE Function Demo";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .function-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .function-step {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .function-arrow {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 0.5rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--basic-color) 0%, var(--advanced-color) 50%, var(--combination-color) 100%);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .table-of-contents::before {
+            content: "UNIQUE Function Guide";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .table-of-contents ol {
+            padding-left: 1.5rem;
+        }
+
+        .table-of-contents li {
+            margin-bottom: 0.75rem;
+        }
+
+        .table-of-contents a {
+            color: #2b6cb0;
+            font-weight: 500;
+        }
+
+        .table-of-contents a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-card.basic::before {
+            background: var(--basic-color);
+        }
+
+        .concept-card.advanced::before {
+            background: var(--advanced-color);
+        }
+
+        .concept-card.combination::before {
+            background: var(--combination-color);
+        }
+
+        .concept-card.case-sensitive::before {
+            background: var(--case-sensitive-color);
+        }
+
+        .concept-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .concept-card.basic:hover {
+            border-color: var(--basic-color);
+        }
+
+        .concept-card.advanced:hover {
+            border-color: var(--advanced-color);
+        }
+
+        .concept-card.combination:hover {
+            border-color: var(--combination-color);
+        }
+
+        .concept-card.case-sensitive:hover {
+            border-color: var(--case-sensitive-color);
+        }
+
+        .concept-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .concept-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .concept-icon.basic {
+            background: var(--basic-color);
+        }
+
+        .concept-icon.advanced {
+            background: var(--advanced-color);
+        }
+
+        .concept-icon.combination {
+            background: var(--combination-color);
+        }
+
+        .concept-icon.case-sensitive {
+            background: var(--case-sensitive-color);
+        }
+
+        .concept-desc {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .concept-tip {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 4px solid;
+        }
+
+        .concept-tip.basic {
+            background: #f0fff4;
+            color: var(--basic-color);
+            border-left-color: var(--basic-color);
+        }
+
+        .concept-tip.advanced {
+            background: #faf5ff;
+            color: var(--advanced-color);
+            border-left-color: var(--advanced-color);
+        }
+
+        .concept-tip.combination {
+            background: #f0fff4;
+            color: var(--combination-color);
+            border-left-color: var(--combination-color);
+        }
+
+        .concept-tip.case-sensitive {
+            background: #fff5f5;
+            color: var(--case-sensitive-color);
+            border-left-color: var(--case-sensitive-color);
+        }
+
+        /* Tips and Notes */
+        .tip-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border-left: 4px solid #48bb78;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note-box {
+            background: #f0fff4;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Function Comparison */
+        .function-comparison {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .function-comparison th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .function-comparison td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .function-comparison tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .function-comparison tr:hover {
+            background: #edf2f7;
+        }
+
+        .basic-row {
+            border-left: 3px solid var(--basic-color);
+        }
+
+        .advanced-row {
+            border-left: 3px solid var(--advanced-color);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 3rem 0;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #1e5c3a;
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Social Sharing */
+        .social-sharing {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-share-btn.facebook { background: #3b5998; }
+        .social-share-btn.twitter { background: #1da1f2; }
+        .social-share-btn.linkedin { background: #0077b5; }
+        .social-share-btn.whatsapp { background: #25d366; }
+
+        .social-share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2d3748;
+            color: #cbd5e0;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul li a {
+            color: #a0aec0;
+            transition: all 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #4a5568;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-of-contents {
+                padding: 1.5rem;
+            }
+            
+            .social-sharing {
+                flex-wrap: wrap;
+            }
+            
+            .faq-section {
+                padding: 1.5rem;
+            }
+            
+            .function-comparison {
+                font-size: 0.9rem;
+            }
+            
+            .function-flow {
+                flex-direction: column;
+            }
+            
+            .function-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .article-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .concept-card {
+                padding: 1rem;
+            }
+            
+            .concept-header {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <a href="http://kelasexcel.net"><h1>Kelasexcel.net</h1></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="https://kelasexcel.net">Home</a></li>
+                        <li><a href="https://kelasexcel.net/tutorials">Tutorials</a></li>
+                        <li><a href="https://kelasexcel.net/formulas">Formulas</a></li>
+                        <li><a href="https://kelasexcel.net/shortcuts">Shortcuts</a></li>
+                        <li><a href="https://kelasexcel.net/tips">Tips</a></li>
+                        <li><a href="https://kelasexcel.net/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="https://kelasexcel.net">Home</a> &raquo; 
+            <a href="https://kelasexcel.net/artikel">Tutorials</a> &raquo; 
+            <a href="https://kelasexcel.net/artikel/excel-functions">Excel Functions</a> &raquo; 
+            <span>Excel UNIQUE Function Advanced</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article itemscope itemtype="https://schema.org/Article">
+                    <div class="article-header">
+                        <h1 itemprop="headline">Excel UNIQUE Function: Advanced Guide 2024</h1>
+                        
+                        <!-- Rating Stars -->
+                        <div class="rating-stars">
+                            <div class="stars">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <span class="rating-value" itemprop="ratingValue">4.9</span>
+                            <span class="review-count">
+                                (<span itemprop="reviewCount">156</span> reviews) | 
+                                <span itemprop="bestRating">5</span> star rating
+                            </span>
+                        </div>
+                        
+                        <div class="article-meta">
+                            <span>📅 <time datetime="2024-01-20" itemprop="datePublished">January 20, 2024</time></span>
+                            <span>👁️ 32.1K Views</span>
+                            <span>⏱️ <span itemprop="timeRequired">15 minutes</span> reading</span>
+                            <span>⭐ Rating 4.9/5 (156 reviews)</span>
+                            <span>🏷️ Excel UNIQUE, Dynamic Arrays, Data Deduplication, Advanced Excel, Unique Values</span>
+                        </div>
+                        
+                        <!-- Author Bio -->
+                        <div class="author-bio" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <div class="author-avatar">MT</div>
+                            <div class="author-info">
+                                <h4 itemprop="name">Written by Mark Thompson</h4>
+                                <p><span itemprop="jobTitle">Excel Productivity Specialist & Corporate Trainer</span> with <span itemprop="experienceYears">12+ years</span> experience. Microsoft Certified Trainer specializing in Excel dynamic array functions and data analysis.</p>
+                                <div class="author-stats">
+                                    <span>🎓 9,200+ students</span>
+                                    <span>⭐ 4.9/5 rating</span>
+                                    <span>📚 41+ courses</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body" itemprop="articleBody">
+                        <p>Mastering the <strong>Excel UNIQUE function</strong> goes far beyond simple duplicate removal. This comprehensive advanced guide explores sophisticated techniques for data extraction, multi-column analysis, case-sensitive operations, and complex data cleaning scenarios that will transform how you work with datasets.</p>
+                        
+                        <!-- Social Sharing -->
+                        <div class="social-sharing">
+                            <a href="#" class="social-share-btn facebook" onclick="shareOnFacebook()">
+                                📘 Share Facebook
+                            </a>
+                            <a href="#" class="social-share-btn twitter" onclick="shareOnTwitter()">
+                                🐦 Share Twitter
+                            </a>
+                            <a href="#" class="social-share-btn linkedin" onclick="shareOnLinkedIn()">
+                                💼 Share LinkedIn
+                            </a>
+                            <a href="#" class="social-share-btn whatsapp" onclick="shareOnWhatsApp()">
+                                💬 Share WhatsApp
+                            </a>
+                        </div>
+                        
+                        <!-- Featured Image -->
+                        <div class="featured-image" itemprop="image">
+                            Excel UNIQUE Function: Advanced Techniques 2024
+                        </div>
+                        
+                        <div class="table-of-contents">
+                            <h3>Table of Contents</h3>
+                            <ol>
+                                <li><a href="#syntax-parameters">UNIQUE Syntax & Parameters</a></li>
+                                <li><a href="#multi-column-techniques">Multi-Column Unique Values</a></li>
+                                <li><a href="#case-sensitive">Case-Sensitive Unique Extraction</a></li>
+                                <li><a href="#frequency-analysis">Frequency Analysis & Counting</a></li>
+                                <li><a href="#dynamic-combinations">Dynamic Function Combinations</a></li>
+                                <li><a href="#data-cleaning">Advanced Data Cleaning</a></li>
+                                <li><a href="#performance-optimization">Performance Optimization</a></li>
+                                <li><a href="#faq">UNIQUE Function FAQ</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="syntax-parameters">1. UNIQUE Function Syntax & Parameters</h2>
+                        
+                        <p>The <strong>UNIQUE function</strong> has sophisticated parameters that enable different types of unique value extraction beyond basic duplicate removal.</p>
+                        
+                        <div class="function-visual">
+                            <div class="function-flow">
+                                <div class="function-step">
+                                    <div class="step-box">Raw Data</div>
+                                    <div class="step-label">With Duplicates</div>
+                                </div>
+                                <div class="function-arrow">→</div>
+                                <div class="function-step">
+                                    <div class="step-box">=UNIQUE(range, by_col, exactly_once)</div>
+                                    <div class="step-label">UNIQUE Function</div>
+                                </div>
+                                <div class="function-arrow">→</div>
+                                <div class="function-step">
+                                    <div class="step-box">Unique Values</div>
+                                    <div class="step-label">Clean Results</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept-grid">
+                            <div class="concept-card basic">
+                                <div class="concept-header">
+                                    <h4>Complete UNIQUE Syntax</h4>
+                                    <div class="concept-icon basic">S</div>
+                                </div>
+                                <p class="concept-desc">Master all parameters to unlock the full potential of the UNIQUE function.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Complete UNIQUE function syntax</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">array, [by_col], [exactly_once]</span>)<br><br>
+                                    <span class="code-comment">// Basic unique values (default)</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:A100</span>)<br>
+                                    <span class="code-comment">// Unique rows across columns</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:C100, TRUE</span>)<br>
+                                    <span class="code-comment">// Values appearing exactly once</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:A100, FALSE, TRUE</span>)
+                                </div>
+                                <div class="concept-tip basic">💡 by_col=FALSE (default) compares rows, by_col=TRUE compares columns. exactly_once=TRUE returns values that appear only once.</div>
+                            </div>
+                            
+                            <div class="concept-card basic">
+                                <div class="concept-header">
+                                    <h4>Parameter Combinations</h4>
+                                    <div class="concept-icon basic">P</div>
+                                </div>
+                                <p class="concept-desc">Different parameter combinations solve specific data extraction challenges.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Standard row-wise unique values</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:A100, FALSE, FALSE</span>)<br><br>
+                                    <span class="code-comment">// Unique column combinations</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:C100, TRUE, FALSE</span>)<br><br>
+                                    <span class="code-comment">// Distinct values (appear once only)</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:A100, FALSE, TRUE</span>)<br><br>
+                                    <span class="code-comment">// Unique column-wise with exactly once</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:Z2, TRUE, TRUE</span>)
+                                </div>
+                                <div class="concept-tip basic">💡 Use exactly_once=TRUE for finding unique entries rather than just removing duplicates.</div>
+                            </div>
+                            
+                            <div class="concept-card basic">
+                                <div class="concept-header">
+                                    <h4>Practical Applications</h4>
+                                    <div class="concept-icon basic">A</div>
+                                </div>
+                                <p class="concept-desc">Real-world scenarios for each parameter combination.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Customer list from orders</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">Orders[Customer]</span>)<br><br>
+                                    <span class="code-comment">// Unique product categories</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">Products[Category]</span>)<br><br>
+                                    <span class="code-comment">// Find one-time customers</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">Customers, FALSE, TRUE</span>)<br><br>
+                                    <span class="code-comment">// Unique department-location pairs</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:B100, TRUE</span>)
+                                </div>
+                                <div class="concept-tip basic">💡 Combine with SORT for organized results: =SORT(UNIQUE(range))</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong> Use UNIQUE with exactly_once=TRUE to identify data entry errors, find rare events, or detect anomalies in your datasets. This is particularly useful for quality control and data validation.
+                        </div>
+                        
+                        <h2 id="multi-column-techniques">2. Multi-Column Unique Values</h2>
+                        
+                        <p>Advanced UNIQUE techniques for extracting unique values across multiple columns and creating complex data relationships.</p>
+                        
+                        <div class="concept-grid">
+                            <div class="concept-card advanced">
+                                <div class="concept-header">
+                                    <h4>Unique Row Combinations</h4>
+                                    <div class="concept-icon advanced">R</div>
+                                </div>
+                                <p class="concept-desc">Extract unique combinations across multiple columns using the by_col parameter.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Unique department-employee pairs</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:B100, TRUE</span>)<br><br>
+                                    <span class="code-comment">// Unique product-category combinations</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">Products[[Name]:[Category]], TRUE</span>)<br><br>
+                                    <span class="code-comment">// Multi-column unique with sorting</span><br>
+                                    <span class="code-function">=SORT</span>(<span class="code-argument">UNIQUE(A2:D500, TRUE)</span>)<br><br>
+                                    <span class="code-comment">// Unique combinations exactly once</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">A2:C100, TRUE, TRUE</span>)
+                                </div>
+                                <div class="concept-tip advanced">💡 Perfect for identifying all possible combinations in your data for analysis or reporting.</div>
+                            </div>
+                            
+                            <div class="concept-card advanced">
+                                <div class="concept-header">
+                                    <h4>Cross-Column Unique Values</h4>
+                                    <div class="concept-icon advanced">C</div>
+                                </div>
+                                <p class="concept-desc">Combine values from multiple columns into a single unique list.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// All unique values from multiple columns</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">TOCOL(A2:C100, 1)</span>)<br><br>
+                                    <span class="code-comment">// Unique from specific columns only</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">TOCOL(CHOOSECOLS(Data, {1,3,5}), 1)</span>)<br><br>
+                                    <span class="code-comment">// Combine with FILTER for conditional extraction</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">TOCOL(FILTER(A2:C100, B2:B100="Active"), 1)</span>)<br><br>
+                                    <span class="code-comment">// Remove blanks from combined unique</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(TOCOL(A2:C100), TOCOL(A2:C100)<>"")</span>)
+                                </div>
+                                <div class="concept-tip advanced">💡 TOCOL with ignore=1 removes blanks and errors from your combined unique list.</div>
+                            </div>
+                            
+                            <div class="concept-card advanced">
+                                <div class="concept-header">
+                                    <h4>Advanced Multi-Column Patterns</h4>
+                                    <div class="concept-icon advanced">P</div>
+                                </div>
+                                <p class="concept-desc">Sophisticated techniques for complex multi-column scenarios.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Unique values from non-adjacent columns</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">VSTACK(A2:A100, C2:C100, E2:E100)</span>)<br><br>
+                                    <span class="code-comment">// Conditional multi-column unique</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(A2:B100, (C2:C100>100)*(D2:D100="Yes")), TRUE</span>)<br><br>
+                                    <span class="code-comment">// Unique with calculated columns</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">HSTACK(A2:A100, B2:B100&C2:C100), TRUE</span>)<br><br>
+                                    <span class="code-comment">// Dynamic column selection</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">CHOOSECOLS(Data, SEQUENCE(,COLUMNS(Data))), TRUE</span>)
+                                </div>
+                                <div class="concept-tip advanced">💡 Use HSTACK and VSTACK to build custom arrays for unique extraction.</div>
+                            </div>
+                        </div>
+
+                        <h2 id="case-sensitive">3. Case-Sensitive Unique Extraction</h2>
+
+                        <p>UNIQUE function is not case-sensitive by default. Learn advanced techniques for case-sensitive duplicate removal and extraction.</p>
+
+                        <table class="function-comparison">
+                            <thead>
+                                <tr>
+                                    <th>Technique</th>
+                                    <th>Formula</th>
+                                    <th>Use Case</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="basic-row">
+                                    <td><strong>Standard UNIQUE</strong></td>
+                                    <td>=UNIQUE(range)</td>
+                                    <td>Case-insensitive deduplication</td>
+                                    <td>Fast</td>
+                                </tr>
+                                <tr class="advanced-row">
+                                    <td><strong>Case-Sensitive with EXACT</strong></td>
+                                    <td>=UNIQUE(FILTER(range, COUNTIFS(range, range, ROW(range), "<="&ROW(range))=1))</td>
+                                    <td>Exact case matching required</td>
+                                    <td>Moderate</td>
+                                </tr>
+                                <tr class="advanced-row">
+                                    <td><strong>Array Formula Method</strong></td>
+                                    <td>=TEXTSPLIT(TEXTJOIN(",",TRUE,UNIQUE(EXACT(range,range)*range)),",")</td>
+                                    <td>Complex case-sensitive scenarios</td>
+                                    <td>Slow</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="concept-grid">
+                            <div class="concept-card case-sensitive">
+                                <div class="concept-header">
+                                    <h4>Case-Sensitive Techniques</h4>
+                                    <div class="concept-icon case-sensitive">C</div>
+                                </div>
+                                <p class="concept-desc">Methods to extract unique values while respecting case sensitivity.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Case-sensitive unique using FILTER</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(A2:A100, <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(A2:A100, A2:A100, ROW(A2:A100), "<="&ROW(A2:A100))=1)</span>)<br><br>
+                                    <span class="code-comment">// Using EXACT for direct comparison</span><br>
+                                    <span class="code-function">=FILTER</span>(<span class="code-argument">A2:A100, <br>&nbsp;&nbsp;&nbsp;&nbsp;MMULT(--EXACT(A2:A100, TRANSPOSE(A2:A100)), ROW(A2:A100)^0)=1</span>)<br><br>
+                                    <span class="code-comment">// Helper column method</span><br>
+                                    <span class="code-comment">// Add helper: =A2&"|"&ROW() then =UNIQUE(helper_column)</span>
+                                </div>
+                                <div class="concept-tip case-sensitive">💡 For large datasets, consider adding a helper column with case-sensitive identifiers for better performance.</div>
+                            </div>
+                            
+                            <div class="concept-card case-sensitive">
+                                <div class="concept-header">
+                                    <h4>Practical Applications</h4>
+                                    <div class="concept-icon case-sensitive">A</div>
+                                </div>
+                                <p class="concept-desc">Real-world scenarios requiring case-sensitive unique extraction.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Product codes with case sensitivity</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(ProductCodes, <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(ProductCodes, ProductCodes, ROW(ProductCodes), "<="&ROW(ProductCodes))=1)</span>)<br><br>
+                                    <span class="code-comment">// Username deduplication</span><br>
+                                    <span class="code-function">=FILTER</span>(<span class="code-argument">Usernames, <br>&nbsp;&nbsp;&nbsp;&nbsp;MMULT(--EXACT(Usernames, TRANSPOSE(Usernames)), SEQUENCE(ROWS(Usernames))^0)=1</span>)<br><br>
+                                    <span class="code-comment">// Case-sensitive email addresses</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(Emails, COUNTIFS(Emails, Emails, ROW(Emails), "<="&ROW(Emails))=1), FALSE, TRUE</span>)
+                                </div>
+                                <div class="concept-tip case-sensitive">💡 Case sensitivity matters for passwords, codes, identifiers, and technical data where "Apple" ≠ "apple".</div>
+                            </div>
+                        </div>
+
+                        <h2 id="frequency-analysis">4. Frequency Analysis & Counting</h2>
+
+                        <p>Combine UNIQUE with counting functions to perform sophisticated frequency analysis and data distribution studies.</p>
+
+                        <div class="concept-grid">
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>Unique Values with Counts</h4>
+                                    <div class="concept-icon combination">C</div>
+                                </div>
+                                <p class="concept-desc">Create dynamic frequency tables showing each unique value and its occurrence count.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Basic unique values with counts</span><br>
+                                    <span class="code-function">=CHOOSE</span>(<span class="code-argument">{1,2}, UNIQUE(A2:A100), COUNTIF(A2:A100, UNIQUE(A2:A100))</span>)<br><br>
+                                    <span class="code-comment">// Sorted by frequency descending</span><br>
+                                    <span class="code-function">=SORT</span>(<span class="code-argument">CHOOSE({1,2}, UNIQUE(A2:A100), COUNTIF(A2:A100, UNIQUE(A2:A100))), 2, -1</span>)<br><br>
+                                    <span class="code-comment">// With percentage distribution</span><br>
+                                    <span class="code-function">=CHOOSE</span>(<span class="code-argument">{1,2,3}, <br>&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(A2:A100), <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIF(A2:A100, UNIQUE(A2:A100)), <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIF(A2:A100, UNIQUE(A2:A100))/COUNTA(A2:A100)</span>)
+                                </div>
+                                <div class="concept-tip combination">💡 Use CHOOSE({1,2}, ...) to create multi-column arrays from separate calculations.</div>
+                            </div>
+                            
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>Advanced Frequency Analysis</h4>
+                                    <div class="concept-icon combination">F</div>
+                                </div>
+                                <p class="concept-desc">Sophisticated techniques for detailed data distribution analysis.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Values appearing more than once</span><br>
+                                    <span class="code-function">=FILTER</span>(<span class="code-argument">UNIQUE(A2:A100), COUNTIF(A2:A100, UNIQUE(A2:A100))>1</span>)<br><br>
+                                    <span class="code-comment">// Top 10 most frequent values</span><br>
+                                    <span class="code-function">=TAKE</span>(<span class="code-argument">SORT(CHOOSE({1,2}, UNIQUE(A2:A100), COUNTIF(A2:A100, UNIQUE(A2:A100))), 2, -1), 10</span>)<br><br>
+                                    <span class="code-comment">// Frequency by ranges/buckets</span><br>
+                                    <span class="code-function">=CHOOSE</span>(<span class="code-argument">{1,2}, <br>&nbsp;&nbsp;&nbsp;&nbsp;{"0-100","101-200","201-300","301+"}, <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(Values, ">=0", Values, "<=100"), <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(Values, ">=101", Values, "<=200"), <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(Values, ">=201", Values, "<=300"), <br>&nbsp;&nbsp;&nbsp;&nbsp;COUNTIFS(Values, ">=301")</span>)
+                                </div>
+                                <div class="concept-tip combination">💡 Combine with LET for cleaner, more readable formulas in complex frequency analysis.</div>
+                            </div>
+                        </div>
+
+                        <h2 id="dynamic-combinations">5. Dynamic Function Combinations</h2>
+
+                        <p>Powerful combinations of UNIQUE with other dynamic array functions for advanced data manipulation and analysis.</p>
+
+                        <div class="concept-grid">
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>UNIQUE + FILTER + SORT</h4>
+                                    <div class="concept-icon combination">U</div>
+                                </div>
+                                <p class="concept-desc">The ultimate combination for dynamic, filtered, sorted unique lists.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Active customers from specific region</span><br>
+                                    <span class="code-function">=SORT</span>(<span class="code-argument">UNIQUE(FILTER(Customers, (Region="West")*(Status="Active"))</span>)<br><br>
+                                    <span class="code-comment">// High-value products in stock</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(Products, (Price>100)*(Stock>0)), TRUE</span>)<br><br>
+                                    <span class="code-comment">// Recent unique transactions</span><br>
+                                    <span class="code-function">=SORT</span>(<span class="code-argument">UNIQUE(FILTER(Transactions, Date>=TODAY()-30), TRUE), 1, -1</span>)<br><br>
+                                    <span class="code-comment">// Multi-condition unique extraction</span><br>
+                                    <span class="code-function">=UNIQUE</span>(<span class="code-argument">FILTER(A2:D100, (B2:B100="Completed")*(C2:C100>=DATE(2024,1,1))), TRUE</span>)
+                                </div>
+                                <div class="concept-tip combination">💡 These combinations create self-updating reports that automatically adjust to data changes.</div>
+                            </div>
+                            
+                            <div class="concept-card combination">
+                                <div class="concept-header">
+                                    <h4>UNIQUE + XLOOKUP + SEQUENCE</h4>
+                                    <div class="concept-icon combination">X</div>
+                                </div>
+                                <p class="concept-desc">Advanced dynamic array combinations for complex data retrieval.</p>
+                                <div class="code-block">
+                                    <span class="code-comment">// Get related data for unique values</span><br>
+                                    <span class="code-function">=CHOOSE</span>(<span class="code-argument">{1,2}, <br>&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(Departments), <br>&nbsp;&nbsp;&nbsp;&nbsp;XLOOKUP(UNIQUE(Departments), Departments, Manager)</span>)<br><br>
+                                    <span class="code-comment">// Dynamic unique with sequence numbering</span><br>
+                                    <span class="code-function">=HSTACK</span>(<span class="code-argument">SEQUENCE(ROWS(UNIQUE(Data))), UNIQUE(Data)</span>)<br><br>
+                                    <span class="code-comment">// Multi-column lookup for unique values</span><br>
+                                    <span class="code-function">=CHOOSE</span>(<span class="code-argument">{1,2,3}, <br>&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(Customers), <br>&nbsp;&nbsp;&nbsp;&nbsp;XLOOKUP(UNIQUE(Customers), Customers, Region), <br>&nbsp;&nbsp;&nbsp;&nbsp;XLOOKUP(UNIQUE(Customers), Customers, TotalSales)</span>)
+                                </div>
+                                <div class="concept-tip combination">💡 HSTACK is perfect for combining calculated columns with unique results.</div>
+                            </div>
+                        </div>
+
+                        <h2>Conclusion: Mastering Advanced UNIQUE</h2>
+                        
+                        <p>Mastering the <strong>advanced UNIQUE function techniques</strong> transforms you from a basic Excel user to a data analysis expert. These powerful methods enable you to:</p>
+                        
+                        <ul>
+                            <li>Extract complex multi-column unique combinations</li>
+                            <li>Perform case-sensitive data deduplication</li>
+                            <li>Create dynamic frequency analysis dashboards</li>
+                            <li>Build self-updating reports with FILTER and SORT</li>
+                            <li>Handle large datasets with optimized performance</li>
+                            <li>Solve real-world business data challenges efficiently</li>
+                        </ul>
+                        
+                        <p><strong>Next Steps:</strong> Start implementing these techniques in your daily work. Begin with basic UNIQUE + SORT combinations, then progress to multi-column extraction, and finally tackle case-sensitive scenarios. The true power emerges when you combine UNIQUE with other dynamic array functions.</p>
+                        
+                        <div class="tip-box">
+                            <strong>💬 Practice Challenge:</strong> Take a dataset with at least 1,000 rows and 5+ columns. Create a dynamic dashboard that shows: (1) Unique values from each column, (2) Frequency counts for each unique value, (3) Case-sensitive unique extraction where needed, and (4) Multi-column unique combinations. Time yourself - most users can build this in under 30 minutes using these advanced techniques!
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelasexcel.net</h3>
+                    <p>Your complete resource for Microsoft Excel tutorials, from absolute beginner to advanced expert level.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/kelasexcel" title="Facebook">📘</a>
+                        <a href="https://twitter.com/kelasexcel" title="Twitter">🐦</a>
+                        <a href="https://instagram.com/kelasexcel" title="Instagram">📷</a>
+                        <a href="https://youtube.com/kelasexcel" title="YouTube">📹</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Excel Tutorials</h3>
+                    <ul>
+                        <li><a href="https://kelasexcel.net/basics">Excel Basics</a></li>
+                        <li><a href="https://kelasexcel.net/formulas">Formulas & Functions</a></li>
+                        <li><a href="https://kelasexcel.net/charts">Charts & Graphs</a></li>
+                        <li><a href="https://kelasexcel.net/pivot-tables">Pivot Tables</a></li>
+                        <li><a href="https://kelasexcel.net/data-analysis">Data Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://kelasexcel.net">Home</a></li>
+                        <li><a href="https://kelasexcel.net/about">About Us</a></li>
+                        <li><a href="https://kelasexcel.net/contact">Contact</a></li>
+                        <li><a href="https://kelasexcel.net/privacy">Privacy Policy</a></li>
+                        <li><a href="https://kelasexcel.net/disclaimer">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📧 info@kelasexcel.net</li>
+                        <li>📱 +1 (555) 123-4567</li>
+                        <li>📍 New York, USA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kelasexcel.net. All rights reserved. | Optimized for SEO & User Experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for table of contents
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.table-of-contents a');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add interactive effects to cards
+            const cards = document.querySelectorAll('.concept-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Initialize FAQ functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    toggleFAQ(this);
+                });
+            });
+        });
+
+        // FAQ Toggle Function with smooth animation
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span:last-child');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('span:last-child').textContent = '+';
+                }
+            });
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                answer.classList.add('active');
+                icon.textContent = '-';
+            }
+        }
+
+        // Social Sharing Functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Excel UNIQUE Function: Advanced Guide 2024!");
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Excel UNIQUE Function: Advanced Guide 2024! " + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>

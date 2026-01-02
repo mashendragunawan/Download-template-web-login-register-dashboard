@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.47059;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 44px;
+        }
+        
+        .nav-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 0 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        .nav-actions a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 0 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-actions a:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 60px 20px 40px;
+            padding-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .hero h2 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .cta-links {
+            margin-top: 20px;
+        }
+        
+        .cta-links a {
+            color: #2997ff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 21px;
+        }
+        
+        .cta-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 980px;
+            margin: 10px auto;
+            padding: 0 22px;
+        }
+        
+        .product-item {
+            background: #000;
+            color: white;
+            border-radius: 18px;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .product-item h3 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .product-item p {
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+        
+        .product-links a {
+            color: #2997ff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 17px;
+        }
+        
+        .product-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #f5f5f7;
+            color: #6e6e73;
+            font-size: 12px;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #d2d2d7;
+        }
+        
+        .footer-column h4 {
+            color: #1d1d1f;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #424245;
+            text-decoration: none;
+        }
+        
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-legal {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .footer-legal a {
+            color: #424245;
+            text-decoration: none;
+            margin-right: 20px;
+            border-right: 1px solid #d2d2d7;
+            padding-right: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .footer-legal a:last-child {
+            border-right: none;
+        }
+        
+        .footer-legal a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-locale {
+            color: #424245;
+        }
+        
+        .footer-locale a {
+            color: #424245;
+            text-decoration: none;
+        }
+        
+        .footer-locale a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero h2 {
+                font-size: 24px;
+            }
+            
+            .product-item h3 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#"><i class="fab fa-apple"></i></a>
+                <a href="#">Store</a>
+                <a href="#">Mac</a>
+                <a href="#">iPad</a>
+                <a href="#">iPhone</a>
+                <a href="#">Watch</a>
+                <a href="#">AirPods</a>
+                <a href="#">TV & Home</a>
+                <a href="#">Entertainment</a>
+                <a href="#">Accessories</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-shopping-bag"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>iPhone 15 Pro</h1>
+            <h2>Titanium. So strong. So light. So Pro.</h2>
+            <div class="cta-links">
+                <a href="#">Learn more <i class="fas fa-chevron-right"></i></a>
+                <a href="#">Buy <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section class="product-grid">
+            <div class="product-item" style="background: #fbfbfd; color: #1d1d1f;">
+                <h3>iPhone 15</h3>
+                <p>New camera. New design. Newphoria.</p>
+                <div class="product-links">
+                    <a href="#">Learn more <i class="fas fa-chevron-right"></i></a>
+                    <a href="#">Buy <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="product-item" style="background: #000;">
+                <h3>Apple Watch</h3>
+                <p>Smarter. Brighter. Mightier.</p>
+                <div class="product-links">
+                    <a href="#">Learn more <i class="fas fa-chevron-right"></i></a>
+                    <a href="#">Buy <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="product-item" style="background: #fbfbfd; color: #1d1d1f;">
+                <h3>MacBook Pro</h3>
+                <p>Mind-blowing. Head-turning.</p>
+                <div class="product-links">
+                    <a href="#">Learn more <i class="fas fa-chevron-right"></i></a>
+                    <a href="#">Buy <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="product-item" style="background: #000;">
+                <h3>AirPods Pro</h3>
+                <p>Adaptive Audio. Now playing.</p>
+                <div class="product-links">
+                    <a href="#">Learn more <i class="fas fa-chevron-right"></i></a>
+                    <a href="#">Buy <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Shop and Learn</h4>
+                    <ul>
+                        <li><a href="#">Store</a></li>
+                        <li><a href="#">Mac</a></li>
+                        <li><a href="#">iPad</a></li>
+                        <li><a href="#">iPhone</a></li>
+                        <li><a href="#">Watch</a></li>
+                        <li><a href="#">AirPods</a></li>
+                        <li><a href="#">TV & Home</a></li>
+                        <li><a href="#">AirTag</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Apple Music</a></li>
+                        <li><a href="#">Apple TV+</a></li>
+                        <li><a href="#">Apple Fitness+</a></li>
+                        <li><a href="#">Apple News+</a></li>
+                        <li><a href="#">Apple Arcade</a></li>
+                        <li><a href="#">iCloud</a></li>
+                        <li><a href="#">Apple One</a></li>
+                        <li><a href="#">Apple Card</a></li>
+                        <li><a href="#">Apple Books</a></li>
+                        <li><a href="#">Apple Podcasts</a></li>
+                        <li><a href="#">App Store</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Apple Store</h4>
+                    <ul>
+                        <li><a href="#">Find a Store</a></li>
+                        <li><a href="#">Genius Bar</a></li>
+                        <li><a href="#">Today at Apple</a></li>
+                        <li><a href="#">Apple Camp</a></li>
+                        <li><a href="#">Apple Store App</a></li>
+                        <li><a href="#">Financing</a></li>
+                        <li><a href="#">Apple Trade In</a></li>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Shopping Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>For Business</h4>
+                    <ul>
+                        <li><a href="#">Apple and Business</a></li>
+                        <li><a href="#">Shop for Business</a></li>
+                    </ul>
+                    <h4>For Education</h4>
+                    <ul>
+                        <li><a href="#">Apple and Education</a></li>
+                        <li><a href="#">Shop for K-12</a></li>
+                        <li><a href="#">Shop for College</a></li>
+                    </ul>
+                    <h4>For Healthcare</h4>
+                    <ul>
+                        <li><a href="#">Apple in Healthcare</a></li>
+                        <li><a href="#">Health on Apple Watch</a></li>
+                        <li><a href="#">Health Records on iPhone</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Apple Values</h4>
+                    <ul>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Environment</a></li>
+                        <li><a href="#">Inclusion and Diversity</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Racial Equity and Justice</a></li>
+                        <li><a href="#">Supplier Responsibility</a></li>
+                    </ul>
+                    <h4>About Apple</h4>
+                    <ul>
+                        <li><a href="#">Newsroom</a></li>
+                        <li><a href="#">Apple Leadership</a></li>
+                        <li><a href="#">Career Opportunities</a></li>
+                        <li><a href="#">Investors</a></li>
+                        <li><a href="#">Ethics & Compliance</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Contact Apple</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Copyright © 2023 Apple Inc. All rights reserved.</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Sales and Refunds</a>
+                    <a href="#">Legal</a>
+                    <a href="#">Site Map</a>
+                </div>
+                <div class="footer-locale">
+                    <a href="#">United States</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

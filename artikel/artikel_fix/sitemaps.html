@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Lengkap - Kelas Excel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #217346 0%, #1e5e3b 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.6rem;
+        }
+        
+        .logo span {
+            color: #a3e4a3;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: #a3e4a3;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Sitemap Content */
+        .sitemap-content {
+            padding: 50px 0;
+        }
+        
+        .sitemap-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .sitemap-header h2 {
+            font-size: 2.2rem;
+            color: #217346;
+            margin-bottom: 10px;
+        }
+        
+        .sitemap-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #217346;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .sitemap-category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .sitemap-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #217346, #1e5e3b);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            margin-right: 15px;
+        }
+        
+        .category-title {
+            font-size: 1.4rem;
+            color: #217346;
+            font-weight: 600;
+        }
+        
+        .category-count {
+            background: #217346;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        .sitemap-links {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .sitemap-links::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sitemap-links::-webkit-scrollbar-thumb {
+            background: #217346;
+            border-radius: 3px;
+        }
+        
+        .sitemap-links li {
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+        
+        .sitemap-links li:hover {
+            border-left-color: #217346;
+            background-color: #f8f9fa;
+            padding-left: 15px;
+        }
+        
+        .sitemap-links a {
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .sitemap-links a:hover {
+            color: #217346;
+        }
+        
+        .sitemap-links i {
+            margin-right: 8px;
+            font-size: 0.8rem;
+            color: #217346;
+            min-width: 12px;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        
+        .level-pemula {
+            background-color: #e8f5e9;
+            color: #217346;
+        }
+        
+        .level-menengah {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .level-expert {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #217346;
+            box-shadow: 0 0 0 3px rgba(33, 115, 70, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0 15px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a3e4a3;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a3e4a3;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-excel"></i>
+                    <h1>Kelas<span>Excel</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="template.html">Template</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="sitemap.html" style="color: #a3e4a3;">Sitemap</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sitemap Content -->
+    <div class="container">
+        <div class="sitemap-content">
+            <div class="sitemap-header">
+                <h2>Sitemap Lengkap Kelas Excel</h2>
+                <p>Navigasi komprehensif untuk semua 300+ tutorial Excel kami yang terorganisir berdasarkan level kesulitan</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Total Tutorial</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100</div>
+                        <div class="stat-label">Level Pemula</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100</div>
+                        <div class="stat-label">Level Menengah</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100</div>
+                        <div class="stat-label">Level Expert</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Cari tutorial Excel... (Ctrl+K)" id="searchInput">
+            </div>
+            
+            <div class="sitemap-grid">
+                <!-- Level Pemula -->
+                <div class="sitemap-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="category-title">Level Pemula <span class="category-count">100 Tutorial</span></div>
+                    </div>
+                    <ul class="sitemap-links">
+                        <li><a href="excel-basic-tutorial.html"><i class="fas fa-chevron-right"></i>Excel Basic Tutorial for Absolute Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-vlookup-tutorial.html"><i class="fas fa-chevron-right"></i>Excel VLOOKUP Step by Step Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="pivot-tables-beginners.html"><i class="fas fa-chevron-right"></i>Pivot Tables Excel Complete Guide Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-if-function.html"><i class="fas fa-chevron-right"></i>Excel IF Function Simple Examples <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="data-validation-dropdown.html"><i class="fas fa-chevron-right"></i>Data Validation Excel Drop Down Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="conditional-formatting-basic.html"><i class="fas fa-chevron-right"></i>Conditional Formatting Excel Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-macros-beginners.html"><i class="fas fa-chevron-right"></i>Excel Macros for Absolute Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-chart-tutorial.html"><i class="fas fa-chevron-right"></i>Excel Chart Tutorial for Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-budget-template.html"><i class="fas fa-chevron-right"></i>Excel Budget Template Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-shortcuts-beginners.html"><i class="fas fa-chevron-right"></i>Excel Essential Shortcuts Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-sum-function.html"><i class="fas fa-chevron-right"></i>Excel SUM Function Tutorial Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-average-max-min.html"><i class="fas fa-chevron-right"></i>Excel AVERAGE MAX MIN Functions <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-count-counta.html"><i class="fas fa-chevron-right"></i>Excel COUNT COUNTA Functions <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-hlookup-basic.html"><i class="fas fa-chevron-right"></i>Excel HLOOKUP Basic Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-sumif-countif.html"><i class="fas fa-chevron-right"></i>Excel SUMIF COUNTIF Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-text-functions.html"><i class="fas fa-chevron-right"></i>Excel LEFT RIGHT MID Text Functions <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-concatenate-textjoin.html"><i class="fas fa-chevron-right"></i>Excel CONCATENATE TEXTJOIN Formulas <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-date-time-functions.html"><i class="fas fa-chevron-right"></i>Excel DATE TIME Functions Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-cell-formatting.html"><i class="fas fa-chevron-right"></i>Excel Cell Formatting Number Text <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-borders-shading.html"><i class="fas fa-chevron-right"></i>Excel Borders and Shading Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-merge-cells.html"><i class="fas fa-chevron-right"></i>Excel Merge Cells Wrap Text <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-freeze-panes.html"><i class="fas fa-chevron-right"></i>Excel Freeze Panes Split Windows <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-find-replace.html"><i class="fas fa-chevron-right"></i>Excel Find and Replace Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-data-entry.html"><i class="fas fa-chevron-right"></i>Excel Data Entry Best Practices <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-autofill-flashfill.html"><i class="fas fa-chevron-right"></i>Excel AutoFill Flash Fill Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-sort-data.html"><i class="fas fa-chevron-right"></i>Excel Sort Data Alphabetically <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-filter-data.html"><i class="fas fa-chevron-right"></i>Excel Filter Data Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-remove-duplicates.html"><i class="fas fa-chevron-right"></i>Excel Remove Duplicates Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-text-to-columns.html"><i class="fas fa-chevron-right"></i>Excel Text to Columns Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-comments-notes.html"><i class="fas fa-chevron-right"></i>Excel Comments and Notes <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-column-chart.html"><i class="fas fa-chevron-right"></i>Excel Column Chart Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-pie-chart.html"><i class="fas fa-chevron-right"></i>Excel Pie Chart Beginners Guide <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-line-chart.html"><i class="fas fa-chevron-right"></i>Excel Line Chart Basic Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-bar-chart.html"><i class="fas fa-chevron-right"></i>Excel Bar Chart Simple Guide <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-chart-colors.html"><i class="fas fa-chevron-right"></i>Excel Chart Colors and Styles <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-sparklines.html"><i class="fas fa-chevron-right"></i>Excel Sparklines Mini Charts <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-todo-list.html"><i class="fas fa-chevron-right"></i>Excel To-Do List Simple Template <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-expense-tracker.html"><i class="fas fa-chevron-right"></i>Excel Expense Tracker Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-gradebook.html"><i class="fas fa-chevron-right"></i>Excel Gradebook Template Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-inventory-list.html"><i class="fas fa-chevron-right"></i>Excel Inventory List Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-attendance-tracker.html"><i class="fas fa-chevron-right"></i>Excel Attendance Tracker Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-loan-calculator.html"><i class="fas fa-chevron-right"></i>Excel Loan Calculator Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-sales-report.html"><i class="fas fa-chevron-right"></i>Excel Sales Report Template <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-project-timeline.html"><i class="fas fa-chevron-right"></i>Excel Project Timeline Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-contact-list.html"><i class="fas fa-chevron-right"></i>Excel Contact List Template <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-basic-data-analysis.html"><i class="fas fa-chevron-right"></i>Excel Basic Data Analysis Tools <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-subtotal-function.html"><i class="fas fa-chevron-right"></i>Excel Subtotal Function Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-group-outline.html"><i class="fas fa-chevron-right"></i>Excel Group and Outline Data <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-what-if-analysis.html"><i class="fas fa-chevron-right"></i>Excel What-If Analysis Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-goal-seek.html"><i class="fas fa-chevron-right"></i>Excel Goal Seek Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-keyboard-shortcuts.html"><i class="fas fa-chevron-right"></i>Excel Keyboard Shortcuts Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-mouse-tricks.html"><i class="fas fa-chevron-right"></i>Excel Mouse Tricks for Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-time-saving-tips.html"><i class="fas fa-chevron-right"></i>Excel Time Saving Tips Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-common-errors.html"><i class="fas fa-chevron-right"></i>Excel Common Errors Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-formula-auditing.html"><i class="fas fa-chevron-right"></i>Excel Formula Auditing Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-save-pdf.html"><i class="fas fa-chevron-right"></i>Excel Save As PDF Tutorial <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-export-csv.html"><i class="fas fa-chevron-right"></i>Excel Export to CSV Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-import-text.html"><i class="fas fa-chevron-right"></i>Excel Import Text File Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-share-workbook.html"><i class="fas fa-chevron-right"></i>Excel Share Workbook Basic <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-track-changes.html"><i class="fas fa-chevron-right"></i>Excel Track Changes Beginners <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-personal-budget.html"><i class="fas fa-chevron-right"></i>Excel Personal Budget Case Study <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-student-gradebook.html"><i class="fas fa-chevron-right"></i>Excel Student Gradebook Project <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-small-business.html"><i class="fas fa-chevron-right"></i>Excel Small Business Inventory <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-home-expense.html"><i class="fas fa-chevron-right"></i>Excel Home Expense Tracking <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-simple-sales.html"><i class="fas fa-chevron-right"></i>Excel Simple Sales Analysis <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-basic-data-entry.html"><i class="fas fa-chevron-right"></i>Excel Basic Data Entry Project <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-attendance-system.html"><i class="fas fa-chevron-right"></i>Excel Attendance System Simple <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-loan-calculation.html"><i class="fas fa-chevron-right"></i>Excel Loan Calculation Project <span class="level-badge level-pemula">Pemula</span></a></li>
+                        <li><a href="excel-contact-management.html"><i class="fas fa-chevron-right"></i>Excel Contact Management System <span class="level-badge level-pemula">Pemula</span></a></li>
+                    </ul>
+                </div>
+                
+                <!-- Level Menengah -->
+                <div class="sitemap-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="category-title">Level Menengah <span class="category-count">100 Tutorial</span></div>
+                    </div>
+                    <ul class="sitemap-links">
+                        <li><a href="excel-index-match.html"><i class="fas fa-chevron-right"></i>Excel INDEX MATCH Advanced Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-xlookup.html"><i class="fas fa-chevron-right"></i>Excel XLOOKUP Complete Guide <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-sumifs-countifs.html"><i class="fas fa-chevron-right"></i>Excel SUMIFS COUNTIFS Multiple Criteria <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-iferror-iserror.html"><i class="fas fa-chevron-right"></i>Excel IFERROR ISERROR Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-and-or-not.html"><i class="fas fa-chevron-right"></i>Excel AND OR NOT Logical Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-text-functions-advanced.html"><i class="fas fa-chevron-right"></i>Excel TEXT Functions Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-date-functions.html"><i class="fas fa-chevron-right"></i>Excel DATE Functions Complex Formulas <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-networkdays.html"><i class="fas fa-chevron-right"></i>Excel NETWORKDAYS WORKDAY Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-round-functions.html"><i class="fas fa-chevron-right"></i>Excel ROUND ROUNDUP ROUNDDOWN <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-choose-function.html"><i class="fas fa-chevron-right"></i>Excel CHOOSE Function Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-offset-function.html"><i class="fas fa-chevron-right"></i>Excel OFFSET Function Dynamic Ranges <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-indirect-function.html"><i class="fas fa-chevron-right"></i>Excel INDIRECT Function Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-match-function.html"><i class="fas fa-chevron-right"></i>Excel MATCH Function Exact Approximate <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-index-array.html"><i class="fas fa-chevron-right"></i>Excel INDEX Function Array Formulas <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-formulatext.html"><i class="fas fa-chevron-right"></i>Excel FORMULATEXT Function Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-hyperlink-dynamic.html"><i class="fas fa-chevron-right"></i>Excel HYPERLINK Function Dynamic <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-transpose-function.html"><i class="fas fa-chevron-right"></i>Excel TRANSPOSE Function Arrays <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-getpivotdata.html"><i class="fas fa-chevron-right"></i>Excel GETPIVOTDATA Function <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-row-column.html"><i class="fas fa-chevron-right"></i>Excel ROW COLUMN Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-address-function.html"><i class="fas fa-chevron-right"></i>Excel ADDRESS Function Dynamic <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-pivottable-advanced.html"><i class="fas fa-chevron-right"></i>Excel PivotTable Advanced Techniques <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-pivotchart.html"><i class="fas fa-chevron-right"></i>Excel PivotChart Complete Guide <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-slicers-timelines.html"><i class="fas fa-chevron-right"></i>Excel Slicers and Timelines <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query.html"><i class="fas fa-chevron-right"></i>Excel Power Query Data Transformation <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-data-model.html"><i class="fas fa-chevron-right"></i>Excel Data Model Relationships <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-what-if-data-tables.html"><i class="fas fa-chevron-right"></i>Excel What-If Analysis Data Tables <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-scenario-manager.html"><i class="fas fa-chevron-right"></i>Excel Scenario Manager Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-goal-seek-complex.html"><i class="fas fa-chevron-right"></i>Excel Goal Seek Complex Models <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-solver-optimization.html"><i class="fas fa-chevron-right"></i>Excel Solver Optimization Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-forecast-sheet.html"><i class="fas fa-chevron-right"></i>Excel Forecast Sheet Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-combo-chart.html"><i class="fas fa-chevron-right"></i>Excel Combo Chart Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-waterfall-chart.html"><i class="fas fa-chevron-right"></i>Excel Waterfall Chart Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-histogram-chart.html"><i class="fas fa-chevron-right"></i>Excel Histogram Chart Guide <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-pareto-chart.html"><i class="fas fa-chevron-right"></i>Excel Pareto Chart Analysis <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-gauge-chart.html"><i class="fas fa-chevron-right"></i>Excel Gauge Chart Dashboard <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-thermometer-chart.html"><i class="fas fa-chevron-right"></i>Excel Thermometer Chart Progress <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-dynamic-chart.html"><i class="fas fa-chevron-right"></i>Excel Dynamic Chart Range <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-interactive-chart.html"><i class="fas fa-chevron-right"></i>Excel Interactive Chart Controls <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-map-chart.html"><i class="fas fa-chevron-right"></i>Excel Map Chart Geographic Data <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-stock-chart.html"><i class="fas fa-chevron-right"></i>Excel Stock Chart Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-import.html"><i class="fas fa-chevron-right"></i>Excel Power Query Import Data <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-transform.html"><i class="fas fa-chevron-right"></i>Excel Power Query Transform Data <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-merge.html"><i class="fas fa-chevron-right"></i>Excel Power Query Merge Queries <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-append.html"><i class="fas fa-chevron-right"></i>Excel Power Query Append Queries <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-pivot.html"><i class="fas fa-chevron-right"></i>Excel Power Query Pivot Unpivot <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-custom.html"><i class="fas fa-chevron-right"></i>Excel Power Query Custom Columns <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-parameters.html"><i class="fas fa-chevron-right"></i>Excel Power Query Parameters <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-error.html"><i class="fas fa-chevron-right"></i>Excel Power Query Error Handling <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-power-query-refresh.html"><i class="fas fa-chevron-right"></i>Excel Power Query Refresh Automation <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-data-validation-custom.html"><i class="fas fa-chevron-right"></i>Excel Data Validation Custom Rules <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-data-validation-dynamic.html"><i class="fas fa-chevron-right"></i>Excel Data Validation Dynamic Lists <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-input-message.html"><i class="fas fa-chevron-right"></i>Excel Input Message Error Alert <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-worksheet-protection.html"><i class="fas fa-chevron-right"></i>Excel Worksheet Protection Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-workbook-protection.html"><i class="fas fa-chevron-right"></i>Excel Workbook Protection Password <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-digital-signature.html"><i class="fas fa-chevron-right"></i>Excel Digital Signature Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-mark-as-final.html"><i class="fas fa-chevron-right"></i>Excel Mark as Final Feature <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-inspect-document.html"><i class="fas fa-chevron-right"></i>Excel Inspect Document Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-custom-number.html"><i class="fas fa-chevron-right"></i>Excel Custom Number Formats <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-conditional-formatting-formulas.html"><i class="fas fa-chevron-right"></i>Excel Conditional Formatting Formulas <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-data-bars.html"><i class="fas fa-chevron-right"></i>Excel Data Bars Color Scales <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-icon-sets.html"><i class="fas fa-chevron-right"></i>Excel Icon Sets Conditional Formatting <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-sparklines-advanced.html"><i class="fas fa-chevron-right"></i>Excel Sparklines Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-camera-tool.html"><i class="fas fa-chevron-right"></i>Excel Camera Tool Dynamic Images <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-themes-templates.html"><i class="fas fa-chevron-right"></i>Excel Themes and Templates Custom <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-cell-styles.html"><i class="fas fa-chevron-right"></i>Excel Cell Styles Custom Creation <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-page-layout.html"><i class="fas fa-chevron-right"></i>Excel Page Layout Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-header-footer.html"><i class="fas fa-chevron-right"></i>Excel Header Footer Custom <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-npv-irr.html"><i class="fas fa-chevron-right"></i>Excel NPV IRR Financial Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-pmt-ppmt.html"><i class="fas fa-chevron-right"></i>Excel PMT PPMT IPMT Loan Functions <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-depreciation.html"><i class="fas fa-chevron-right"></i>Excel Depreciation Functions SLN DB DDB <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-financial-ratios.html"><i class="fas fa-chevron-right"></i>Excel Financial Ratios Analysis <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-cash-flow.html"><i class="fas fa-chevron-right"></i>Excel Cash Flow Statement Template <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-break-even.html"><i class="fas fa-chevron-right"></i>Excel Break Even Analysis Model <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-investment-appraisal.html"><i class="fas fa-chevron-right"></i>Excel Investment Appraisal Tools <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-portfolio-management.html"><i class="fas fa-chevron-right"></i>Excel Portfolio Management Basic <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-risk-analysis.html"><i class="fas fa-chevron-right"></i>Excel Risk Analysis Financial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-sensitivity-analysis.html"><i class="fas fa-chevron-right"></i>Excel Sensitivity Analysis Financial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-descriptive-statistics.html"><i class="fas fa-chevron-right"></i>Excel Descriptive Statistics Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-regression-analysis.html"><i class="fas fa-chevron-right"></i>Excel Regression Analysis Basic <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-correlation-analysis.html"><i class="fas fa-chevron-right"></i>Excel Correlation Analysis <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-histogram-analysis.html"><i class="fas fa-chevron-right"></i>Excel Histogram Analysis Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-random-number.html"><i class="fas fa-chevron-right"></i>Excel Random Number Generation <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-sampling-analysis.html"><i class="fas fa-chevron-right"></i>Excel Sampling Analysis Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-moving-average.html"><i class="fas fa-chevron-right"></i>Excel Moving Average Forecast <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-exponential-smoothing.html"><i class="fas fa-chevron-right"></i>Excel Exponential Smoothing <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-anova-single.html"><i class="fas fa-chevron-right"></i>Excel ANOVA Single Factor <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-t-test.html"><i class="fas fa-chevron-right"></i>Excel t-Test Analysis Tools <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-macro-recording.html"><i class="fas fa-chevron-right"></i>Excel Macro Recording Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-quick-analysis.html"><i class="fas fa-chevron-right"></i>Excel Quick Analysis Tool <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-flash-fill-advanced.html"><i class="fas fa-chevron-right"></i>Excel Flash Fill Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-autocorrect.html"><i class="fas fa-chevron-right"></i>Excel AutoCorrect Options <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-custom-lists.html"><i class="fas fa-chevron-right"></i>Excel Custom Lists Creation <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-template-creation.html"><i class="fas fa-chevron-right"></i>Excel Template Creation Advanced <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-workbook-connections.html"><i class="fas fa-chevron-right"></i>Excel Workbook Connections <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-external-data.html"><i class="fas fa-chevron-right"></i>Excel External Data Connections <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-web-query.html"><i class="fas fa-chevron-right"></i>Excel Web Query Tutorial <span class="level-badge level-menengah">Menengah</span></a></li>
+                        <li><a href="excel-xml-data.html"><i class="fas fa-chevron-right"></i>Excel XML Data Import Export <span class="level-badge level-menengah">Menengah</span></a></li>
+                    </ul>
+                </div>
+                
+                <!-- Level Expert -->
+                <div class="sitemap-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="category-title">Level Expert <span class="category-count">100 Tutorial</span></div>
+                    </div>
+                    <ul class="sitemap-links">
+                        <li><a href="excel-dynamic-array.html"><i class="fas fa-chevron-right"></i>Excel Dynamic Array Formulas Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-lambda-function.html"><i class="fas fa-chevron-right"></i>Excel LAMBDA Function Custom <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-let-function.html"><i class="fas fa-chevron-right"></i>Excel LET Function Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-filter-function.html"><i class="fas fa-chevron-right"></i>Excel FILTER Function Complex <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sort-sortby.html"><i class="fas fa-chevron-right"></i>Excel SORT SORTBY Functions <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-unique-function.html"><i class="fas fa-chevron-right"></i>Excel UNIQUE Function Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sequence-randarray.html"><i class="fas fa-chevron-right"></i>Excel SEQUENCE RANDARRAY Functions <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-xmatch-xlookup.html"><i class="fas fa-chevron-right"></i>Excel XMATCH XLOOKUP Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-array-constants.html"><i class="fas fa-chevron-right"></i>Excel Array Constants Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-implicit-intersection.html"><i class="fas fa-chevron-right"></i>Excel Implicit Intersection Operator <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-pivot-expert.html"><i class="fas fa-chevron-right"></i>Excel Power Pivot Data Model Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dax-formulas.html"><i class="fas fa-chevron-right"></i>Excel DAX Formulas Complete Guide <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-calculate-function.html"><i class="fas fa-chevron-right"></i>Excel CALCULATE Function DAX <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-filter-dax.html"><i class="fas fa-chevron-right"></i>Excel FILTER Function DAX <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-related-dax.html"><i class="fas fa-chevron-right"></i>Excel RELATED RELATEDTABLE DAX <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-time-intelligence.html"><i class="fas fa-chevron-right"></i>Excel Time Intelligence DAX <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-row-context.html"><i class="fas fa-chevron-right"></i>Excel Row Context vs Filter Context <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dax-variables.html"><i class="fas fa-chevron-right"></i>Excel DAX Variables VAR <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dax-iterator.html"><i class="fas fa-chevron-right"></i>Excel DAX Iterator Functions <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dax-statistical.html"><i class="fas fa-chevron-right"></i>Excel DAX Statistical Functions <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-object-model.html"><i class="fas fa-chevron-right"></i>Excel VBA Object Model Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-userform.html"><i class="fas fa-chevron-right"></i>Excel VBA UserForm Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-class-modules.html"><i class="fas fa-chevron-right"></i>Excel VBA Class Modules <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-api-integration.html"><i class="fas fa-chevron-right"></i>Excel VBA API Integration <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-error-handling.html"><i class="fas fa-chevron-right"></i>Excel VBA Error Handling Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-dictionary.html"><i class="fas fa-chevron-right"></i>Excel VBA Dictionary Object <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-collection.html"><i class="fas fa-chevron-right"></i>Excel VBA Collection Object <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-xml-http.html"><i class="fas fa-chevron-right"></i>Excel VBA XML HTTP Requests <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-sql-database.html"><i class="fas fa-chevron-right"></i>Excel VBA SQL Database Connection <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-windows-api.html"><i class="fas fa-chevron-right"></i>Excel VBA Windows API Calls <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-interactive-dashboard.html"><i class="fas fa-chevron-right"></i>Excel Interactive Dashboard Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dynamic-chart-controls.html"><i class="fas fa-chevron-right"></i>Excel Dynamic Chart Controls <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-view.html"><i class="fas fa-chevron-right"></i>Excel Power View Reports <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-3d-map.html"><i class="fas fa-chevron-right"></i>Excel 3D Map Data Visualization <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-custom-chart.html"><i class="fas fa-chevron-right"></i>Excel Custom Chart Templates <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-infographic-charts.html"><i class="fas fa-chevron-right"></i>Excel Infographic Charts Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-realtime-dashboard.html"><i class="fas fa-chevron-right"></i>Excel Real-time Data Dashboards <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-kpi-dashboard.html"><i class="fas fa-chevron-right"></i>Excel KPI Dashboard Creation <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-executive-dashboard.html"><i class="fas fa-chevron-right"></i>Excel Executive Dashboard Reports <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-mobile-dashboard.html"><i class="fas fa-chevron-right"></i>Excel Mobile Dashboard Optimization <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-machine-learning.html"><i class="fas fa-chevron-right"></i>Excel Machine Learning Regression <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-ai-predictive.html"><i class="fas fa-chevron-right"></i>Excel AI Predictive Models <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-azure-ml.html"><i class="fas fa-chevron-right"></i>Excel Azure ML Integration <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-python-integration.html"><i class="fas fa-chevron-right"></i>Excel Python Integration Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-r-integration.html"><i class="fas fa-chevron-right"></i>Excel R Integration Statistical <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-cognitive-services.html"><i class="fas fa-chevron-right"></i>Excel Cognitive Services API <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-natural-language.html"><i class="fas fa-chevron-right"></i>Excel Natural Language Processing <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-image-recognition.html"><i class="fas fa-chevron-right"></i>Excel Image Recognition Analysis <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sentiment-analysis.html"><i class="fas fa-chevron-right"></i>Excel Sentiment Analysis Data <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-anomaly-detection.html"><i class="fas fa-chevron-right"></i>Excel Anomaly Detection Models <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-three-statement-model.html"><i class="fas fa-chevron-right"></i>Excel Three Statement Financial Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dcf-valuation.html"><i class="fas fa-chevron-right"></i>Excel DCF Valuation Model Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-ma-financial-model.html"><i class="fas fa-chevron-right"></i>Excel M&A Financial Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-lbo-model.html"><i class="fas fa-chevron-right"></i>Excel LBO Model Leveraged Buyout <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-real-estate-financial.html"><i class="fas fa-chevron-right"></i>Excel Real Estate Financial Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-startup-financial.html"><i class="fas fa-chevron-right"></i>Excel Startup Financial Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-ipo-valuation.html"><i class="fas fa-chevron-right"></i>Excel IPO Valuation Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-budgeting-forecasting.html"><i class="fas fa-chevron-right"></i>Excel Budgeting Forecasting Model <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-cash-flow-forecasting.html"><i class="fas fa-chevron-right"></i>Excel Cash Flow Forecasting Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sensitivity-monte-carlo.html"><i class="fas fa-chevron-right"></i>Excel Sensitivity Analysis Monte Carlo <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-desktop.html"><i class="fas fa-chevron-right"></i>Excel Power BI Desktop Integration <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dax-studio.html"><i class="fas fa-chevron-right"></i>Excel DAX Studio Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-tabular-editor.html"><i class="fas fa-chevron-right"></i>Excel Tabular Editor Power BI <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dataflows.html"><i class="fas fa-chevron-right"></i>Excel Dataflows Power BI <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-service.html"><i class="fas fa-chevron-right"></i>Excel Power BI Service Publishing <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-mobile.html"><i class="fas fa-chevron-right"></i>Excel Power BI Mobile Reports <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-embedded.html"><i class="fas fa-chevron-right"></i>Excel Power BI Embedded Analytics <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-security.html"><i class="fas fa-chevron-right"></i>Excel Power BI Row Level Security <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-directquery.html"><i class="fas fa-chevron-right"></i>Excel Power BI DirectQuery Live <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-power-bi-premium.html"><i class="fas fa-chevron-right"></i>Excel Power BI Premium Features <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sql-server.html"><i class="fas fa-chevron-right"></i>Excel SQL Server Integration Expert <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-oracle-database.html"><i class="fas fa-chevron-right"></i>Excel Oracle Database Connection <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-mysql-database.html"><i class="fas fa-chevron-right"></i>Excel MySQL Database Queries <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-postgresql.html"><i class="fas fa-chevron-right"></i>Excel PostgreSQL Integration <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-access-database.html"><i class="fas fa-chevron-right"></i>Excel Access Database Automation <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-odbc-connections.html"><i class="fas fa-chevron-right"></i>Excel ODBC Connections Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-oledb-provider.html"><i class="fas fa-chevron-right"></i>Excel OLEDB Provider Configuration <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-sql-stored.html"><i class="fas fa-chevron-right"></i>Excel SQL Stored Procedures <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-database-transactions.html"><i class="fas fa-chevron-right"></i>Excel Database Transactions <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-data-warehouse.html"><i class="fas fa-chevron-right"></i>Excel Data Warehouse Queries <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-vba-web-scraping.html"><i class="fas fa-chevron-right"></i>Excel VBA Web Scraping Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-api-integration.html"><i class="fas fa-chevron-right"></i>Excel API Integration RESTful <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-json-xml.html"><i class="fas fa-chevron-right"></i>Excel JSON XML Data Processing <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-email-automation.html"><i class="fas fa-chevron-right"></i>Excel Email Automation Outlook <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-file-system.html"><i class="fas fa-chevron-right"></i>Excel File System Object Automation <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-task-scheduler.html"><i class="fas fa-chevron-right"></i>Excel Windows Task Scheduler <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-com-addins.html"><i class="fas fa-chevron-right"></i>Excel COM Add-ins Development <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-dll-integration.html"><i class="fas fa-chevron-right"></i>Excel DLL Integration Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-cross-platform.html"><i class="fas fa-chevron-right"></i>Excel Cross-Platform Automation <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-cloud-automation.html"><i class="fas fa-chevron-right"></i>Excel Cloud Automation Azure AWS <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-supply-chain.html"><i class="fas fa-chevron-right"></i>Excel Supply Chain Optimization <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-risk-management.html"><i class="fas fa-chevron-right"></i>Excel Risk Management Models <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-quality-control.html"><i class="fas fa-chevron-right"></i>Excel Quality Control SPC <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-six-sigma.html"><i class="fas fa-chevron-right"></i>Excel Six Sigma Analysis Tools <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-project-management.html"><i class="fas fa-chevron-right"></i>Excel Project Management Advanced <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-resource-allocation.html"><i class="fas fa-chevron-right"></i>Excel Resource Allocation Models <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-portfolio-optimization.html"><i class="fas fa-chevron-right"></i>Excel Portfolio Optimization MPT <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-algorithmic-trading.html"><i class="fas fa-chevron-right"></i>Excel Algorithmic Trading Systems <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-blockchain-data.html"><i class="fas fa-chevron-right"></i>Excel Blockchain Data Analysis <span class="level-badge level-expert">Expert</span></a></li>
+                        <li><a href="excel-iot-analytics.html"><i class="fas fa-chevron-right"></i>Excel IoT Data Analytics <span class="level-badge level-expert">Expert</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelas Excel</h3>
+                    <p>Platform belajar Microsoft Excel terlengkap untuk pemula dan tingkat lanjut. Materi disusun secara sistematis dengan contoh praktis.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kategori Tutorial</h3>
+                    <ul class="footer-links">
+                        <li><a href="dasar-excel.html">Dasar-Dasar Excel</a></li>
+                        <li><a href="rumus-fungsi.html">Rumus & Fungsi</a></li>
+                        <li><a href="analisis-data.html">Analisis Data</a></li>
+                        <li><a href="visualisasi-data.html">Visualisasi Data</a></li>
+                        <li><a href="tips-trik.html">Tips & Trik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Template Gratis</h3>
+                    <ul class="footer-links">
+                        <li><a href="template-laporan-keuangan.html">Laporan Keuangan</a></li>
+                        <li><a href="template-to-do-list.html">To-Do List</a></li>
+                        <li><a href="template-daftar-hadir.html">Daftar Hadir</a></li>
+                        <li><a href="template-invoice.html">Invoice & Faktur</a></li>
+                        <li><a href="template-budgeting.html">Budgeting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak & Bantuan</h3>
+                    <ul class="footer-links">
+                        <li><a href="pusat-bantuan.html">Pusat Bantuan</a></li>
+                        <li><a href="tanya-jawab.html">Tanya Jawab</a></li>
+                        <li><a href="kontak.html">Kontak Kami</a></li>
+                        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+                        <li><a href="terms.html">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 KelasExcel.com. Semua hak cipta dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const links = document.querySelectorAll('.sitemap-links a');
+            
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const listItem = link.parentElement;
+                
+                if (text.includes(searchTerm)) {
+                    listItem.style.display = 'block';
+                } else {
+                    listItem.style.display = 'none';
+                }
+            });
+        });
+
+        // Keyboard shortcut for search
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>

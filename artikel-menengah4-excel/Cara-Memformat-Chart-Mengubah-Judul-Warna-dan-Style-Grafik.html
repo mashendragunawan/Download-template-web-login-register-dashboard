@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Memformat Chart: Mengubah Judul, Warna, dan Style Grafik | Excel Tutorial</title>
+    <meta name="description" content="Panduan lengkap cara memformat grafik Excel. Pelajari cara mengubah judul, warna, style, font, dan elemen grafik lainnya untuk visualisasi data yang profesional.">
+    <meta name="keywords" content="format grafik excel, kustomisasi chart, style grafik, warna chart, judul grafik, tutorial excel, visualisasi data">
+    <meta name="author" content="Excel Tutorial">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #217346;
+        }
+        
+        a:hover {
+            color: #1a5c38;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: #217346;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #217346;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #217346;
+            background-color: #f0f7f4;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 30px 0;
+            gap: 30px;
+        }
+        
+        .content {
+            flex: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: 28px;
+            color: #217346;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 22px;
+            color: #217346;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-body h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 10px;
+        }
+        
+        .article-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .article-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f0f7f4;
+            border-left: 4px solid #217346;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .table-of-contents ol {
+            padding-left: 20px;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        
+        .table-of-contents a {
+            color: #217346;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card.title { border-color: #27ae60; }
+        .feature-card.colors { border-color: #2980b9; }
+        .feature-card.style { border-color: #e74c3c; }
+        .feature-card.elements { border-color: #f39c12; }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        /* Formatting Demo */
+        .formatting-demo {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .demo-option:hover {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        .demo-option.active {
+            border-color: #217346;
+            background: #217346;
+            color: white;
+        }
+        
+        .demo-preview {
+            background: white;
+            border: 2px solid #217346;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Chart Preview */
+        .chart-preview {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            width: 100%;
+            border-bottom: 2px solid #333;
+            padding: 0 10px;
+        }
+        
+        .chart-bar {
+            width: 40px;
+            background: #3498db;
+            margin: 0 5px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+        
+        .chart-labels {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0 10px;
+            margin-top: 10px;
+        }
+        
+        .chart-label {
+            font-size: 12px;
+            text-align: center;
+            width: 40px;
+            margin: 0 5px;
+        }
+        
+        .chart-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        /* Color Palette */
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        /* Style Options */
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .style-option {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .style-option:hover {
+            border-color: #217346;
+        }
+        
+        .style-option.active {
+            border-color: #217346;
+            background: #f0f7f4;
+        }
+        
+        /* Step by Step */
+        .step-by-step {
+            background: #f0f7f4;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-left: 60px;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #217346;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #217346;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Tips and Warnings */
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .note-box {
+            background: #e7f3ff;
+            border-left: 4px solid #217346;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        /* Before After */
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .before-after-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .before-after-item h4 {
+            margin-bottom: 15px;
+            color: #217346;
+        }
+        
+        /* Formatting Options */
+        .formatting-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .formatting-option {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .formatting-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .formatting-icon {
+            font-size: 32px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0f7f4;
+        }
+        
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .widget h3 {
+            font-size: 18px;
+            color: #217346;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .widget ul {
+            list-style: none;
+        }
+        
+        .widget ul li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .widget ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-tutorials li a {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular-tutorials li a span {
+            background: #217346;
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tags-widget .tags a {
+            background: #f0f7f4;
+            color: #217346;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .tags-widget .tags a:hover {
+            background: #217346;
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #217346;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #217346;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main .container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .article-header h1 {
+                font-size: 24px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .formatting-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .style-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .step {
+                padding-left: 50px;
+            }
+            
+            .chart-container {
+                height: 200px;
+            }
+            
+            .chart-bar {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span>📧 info@exceltutorial.com</span>
+                </div>
+                <div class="header-social">
+                    <span>📱 Ikuti Kami: </span>
+                    <a href="#">FB</a> |
+                    <a href="#">TW</a> |
+                    <a href="#">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Excel Tutorial</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">Grafik Excel</a></li>
+                        <li><a href="#">Tips</a></li>
+                        <li><a href="#">Template</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Content Area -->
+            <div class="content">
+                <article>
+                    <div class="article-header">
+                        <h1>Cara Memformat Chart: Mengubah Judul, Warna, dan Style Grafik</h1>
+                        <div class="article-meta">
+                            <span>📅 25 Juli 2023</span>
+                            <span>👁️ 8.2K Dilihat</span>
+                            <span>⏱️ 18 menit membaca</span>
+                            <span>🏷️ Format Grafik Excel, Kustomisasi Chart, Style Grafik, Warna Chart, Judul Grafik</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p><strong>Memformat grafik</strong> adalah langkah penting untuk membuat visualisasi data yang profesional dan mudah dipahami. Dengan formatting yang tepat, grafik biasa bisa berubah menjadi visual yang powerful dan menarik. Dalam panduan ini, Anda akan belajar cara mengubah judul, warna, style, dan elemen grafik lainnya di Excel.</p>
+                        
+                        <div class="table-of-contents">
+                            <h3>Daftar Isi</h3>
+                            <ol>
+                                <li><a href="#pengenalan">Pengenalan Formatting Grafik</a></li>
+                                <li><a href="#judul">Mengubah Judul dan Teks Grafik</a></li>
+                                <li><a href="#warna">Mengubah Warna dan Skema</a></li>
+                                <li><a href="#style">Mengubah Style dan Layout</a></li>
+                                <li><a href="#elemen">Menambah dan Memformat Elemen Grafik</a></li>
+                                <li><a href="#tips-ahli">Tips dan Trik Ahli</a></li>
+                            </ol>
+                        </div>
+                        
+                        <h2 id="pengenalan">1. Pengenalan Formatting Grafik</h2>
+                        
+                        <p>Excel menyediakan berbagai opsi formatting untuk menyesuaikan tampilan grafik sesuai kebutuhan Anda. Formatting yang baik dapat meningkatkan readability dan impact visual dari data Anda.</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card title">
+                                <div class="feature-icon">📝</div>
+                                <h3>Judul & Teks</h3>
+                                <p>Format judul, label sumbu, dan legenda</p>
+                                <p><strong>Termasuk:</strong> Font, size, color, alignment</p>
+                            </div>
+                            
+                            <div class="feature-card colors">
+                                <div class="feature-icon">🎨</div>
+                                <h3>Warna & Fill</h3>
+                                <p>Ubah warna series, background, dan border</p>
+                                <p><strong>Termasuk:</strong> Solid colors, gradients, patterns</p>
+                            </div>
+                            
+                            <div class="feature-card style">
+                                <div class="feature-icon">💫</div>
+                                <h3>Style & Effects</h3>
+                                <p>Terapkan style preset dan efek visual</p>
+                                <p><strong>Termasuk:</strong> Shadows, glow, bevel, 3D</p>
+                            </div>
+                            
+                            <div class="feature-card elements">
+                                <div class="feature-icon">⚙️</div>
+                                <h3>Elemen Grafik</h3>
+                                <p>Tambah dan format elemen grafik</p>
+                                <p><strong>Termasuk:</strong> Gridlines, trendlines, data labels</p>
+                            </div>
+                        </div>
+                        
+                        <div class="before-after">
+                            <div class="before-after-item">
+                                <h4>❌ SEBELUM: Grafik Basic</h4>
+                                <div class="chart-preview">
+                                    <div class="chart-container">
+                                        <div class="chart-bars">
+                                            <div class="chart-bar" style="height: 60%; background: #3498db;"></div>
+                                            <div class="chart-bar" style="height: 85%; background: #3498db;"></div>
+                                            <div class="chart-bar" style="height: 45%; background: #3498db;"></div>
+                                            <div class="chart-bar" style="height: 75%; background: #3498db;"></div>
+                                        </div>
+                                        <div class="chart-labels">
+                                            <div class="chart-label">Q1</div>
+                                            <div class="chart-label">Q2</div>
+                                            <div class="chart-label">Q3</div>
+                                            <div class="chart-label">Q4</div>
+                                        </div>
+                                    </div>
+                                    <p>Grafik default tanpa formatting</p>
+                                </div>
+                            </div>
+                            
+                            <div class="before-after-item">
+                                <h4>✅ SETELAH: Grafik Terformat</h4>
+                                <div class="chart-preview">
+                                    <div class="chart-title" style="color: #2c3e50; font-family: 'Segoe UI', sans-serif;">Penjualan Triwulan 2023</div>
+                                    <div class="chart-container">
+                                        <div class="chart-bars" style="border-bottom: 2px solid #34495e;">
+                                            <div class="chart-bar" style="height: 60%; background: linear-gradient(to top, #3498db, #2980b9); border-radius: 4px 4px 0 0;"></div>
+                                            <div class="chart-bar" style="height: 85%; background: linear-gradient(to top, #2ecc71, #27ae60); border-radius: 4px 4px 0 0;"></div>
+                                            <div class="chart-bar" style="height: 45%; background: linear-gradient(to top, #e74c3c, #c0392b); border-radius: 4px 4px 0 0;"></div>
+                                            <div class="chart-bar" style="height: 75%; background: linear-gradient(to top, #f39c12, #d35400); border-radius: 4px 4px 0 0;"></div>
+                                        </div>
+                                        <div class="chart-labels">
+                                            <div class="chart-label" style="font-weight: bold;">Q1</div>
+                                            <div class="chart-label" style="font-weight: bold;">Q2</div>
+                                            <div class="chart-label" style="font-weight: bold;">Q3</div>
+                                            <div class="chart-label" style="font-weight: bold;">Q4</div>
+                                        </div>
+                                    </div>
+                                    <p>Grafik dengan formatting profesional</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="note-box">
+                            <strong>🎯 Manfaat Formatting Grafik:</strong>
+                            <ul>
+                                <li><strong>Meningkatkan readability</strong> - Memudahkan pembacaan data</li>
+                                <li><strong>Memperkuat pesan</strong> - Highlight informasi penting</li>
+                                <li><strong>Profesionalisme</strong> - Tampilan yang lebih polished</li>
+                                <li><strong>Konsistensi branding</strong> - Sesuai dengan warna dan style perusahaan</li>
+                                <li><strong>Engagement</strong> - Visual yang lebih menarik perhatian</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="judul">2. Mengubah Judul dan Teks Grafik</h2>
+                        
+                        <p>Judul dan teks adalah elemen pertama yang dilihat orang dalam grafik Anda. Formatting yang tepat dapat membuat grafik lebih mudah dipahami.</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Langkah-langkah Memformat Teks Grafik</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Klik Elemen Teks</h4>
+                                <p>Klik pada judul grafik, label sumbu, atau legenda yang ingin diubah</p>
+                                <p><strong>Tip:</strong> Double-click untuk langsung masuk ke mode editing</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Format Pane</h4>
+                                <p>Klik kanan → <strong>Format Chart Title</strong> atau <strong>Ctrl + 1</strong></p>
+                                <p>Atau gunakan <strong>Chart Tools → Format</strong> di ribbon</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Atur Format Teks</h4>
+                                <p>Di Format Pane, pilih <strong>Text Options</strong></p>
+                                <p>Atur fill, outline, efek, dan properti teks lainnya</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Gunakan Home Tab</h4>
+                                <p>Untuk perubahan cepat, gunakan formatting tools di <strong>Home tab</strong></p>
+                                <p>Font, size, color, bold, italic, alignment</p>
+                            </div>
+                        </div>
+                        
+                        <div class="formatting-demo">
+                            <h4>🎮 Coba Format Teks Berbeda</h4>
+                            <div class="demo-controls">
+                                <div class="demo-option active" data-format="basic">
+                                    <h4>Basic Title</h4>
+                                    <p>Judul standar tanpa formatting</p>
+                                </div>
+                                <div class="demo-option" data-format="styled">
+                                    <h4>Styled Title</h4>
+                                    <p>Judul dengan formatting menarik</p>
+                                </div>
+                                <div class="demo-option" data-format="custom">
+                                    <h4>Custom Font</h4>
+                                    <p>Font dan warna kustom</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <div class="chart-preview">
+                                    <div class="chart-title" id="demoTitle">Penjualan Triwulan 2023</div>
+                                    <div class="chart-container">
+                                        <div class="chart-bars">
+                                            <div class="chart-bar" style="height: 60%; background: #3498db;"></div>
+                                            <div class="chart-bar" style="height: 85%; background: #2ecc71;"></div>
+                                            <div class="chart-bar" style="height: 45%; background: #e74c3c;"></div>
+                                            <div class="chart-bar" style="height: 75%; background: #f39c12;"></div>
+                                        </div>
+                                        <div class="chart-labels">
+                                            <div class="chart-label">Q1</div>
+                                            <div class="chart-label">Q2</div>
+                                            <div class="chart-label">Q3</div>
+                                            <div class="chart-label">Q4</div>
+                                        </div>
+                                    </div>
+                                    <p id="formatDesc">Judul grafik dengan formatting dasar</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Elemen Teks</th>
+                                    <th>Formatting Options</th>
+                                    <th>Best Practices</th>
+                                    <th>Shortcut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Chart Title</strong></td>
+                                    <td>Font, size, color, fill, effects</td>
+                                    <td>Gunakan font yang mudah dibaca, size 14-18pt</td>
+                                    <td>Ctrl + 1 (Format)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Axis Titles</strong></td>
+                                    <td>Font, alignment, orientation</td>
+                                    <td>Jelaskan unit pengukuran dengan jelas</td>
+                                    <td>Alt + J + C + A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Data Labels</strong></td>
+                                    <td>Number format, position, font</td>
+                                    <td>Posisikan agar tidak menutupi data</td>
+                                    <td>Ctrl + 1 → Label Options</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Legend</strong></td>
+                                    <td>Position, font, border</td>
+                                    <td>Letakkan di posisi yang tidak ganggu chart</td>
+                                    <td>Drag untuk reposisi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 id="warna">3. Mengubah Warna dan Skema</h2>
+                        
+                        <p>Warna adalah elemen visual paling powerful dalam grafik. Pemilihan warna yang tepat dapat meningkatkan pemahaman dan retention data.</p>
+                        
+                        <div class="formatting-demo">
+                            <h4>🎨 Coba Skema Warna Berbeda</h4>
+                            <div class="color-palette">
+                                <div class="color-option active" style="background: #3498db;" data-palette="default"></div>
+                                <div class="color-option" style="background: #e74c3c;" data-palette="warm"></div>
+                                <div class="color-option" style="background: #2ecc71;" data-palette="cool"></div>
+                                <div class="color-option" style="background: #f39c12;" data-palette="autumn"></div>
+                                <div class="color-option" style="background: #9b59b6;" data-palette="pastel"></div>
+                                <div class="color-option" style="background: #1abc9c;" data-palette="ocean"></div>
+                            </div>
+                            <div class="demo-preview">
+                                <div class="chart-preview">
+                                    <div class="chart-title">Penjualan per Produk</div>
+                                    <div class="chart-container">
+                                        <div class="chart-bars" id="colorBars">
+                                            <!-- Bars akan di-update oleh JavaScript -->
+                                        </div>
+                                        <div class="chart-labels">
+                                            <div class="chart-label">Produk A</div>
+                                            <div class="chart-label">Produk B</div>
+                                            <div class="chart-label">Produk C</div>
+                                            <div class="chart-label">Produk D</div>
+                                        </div>
+                                    </div>
+                                    <p id="colorDesc">Skema warna default - Professional Blue</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="formatting-options">
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">🎯</div>
+                                    <h3>Color Schemes</h3>
+                                </div>
+                                <p><strong>Monochromatic</strong> - Variasi satu warna (baik untuk gradasi)</p>
+                                <p><strong>Complementary</strong> - Warna berlawanan (baik untuk kontras)</p>
+                                <p><strong>Analogous</strong> - Warna berdekatan (harmonis dan natural)</p>
+                                <p><strong>Custom</strong> - Warna brand atau tema khusus</p>
+                            </div>
+                            
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">💡</div>
+                                    <h3>Tips Pemilihan Warna</h3>
+                                </div>
+                                <p><strong>Kontras yang cukup</strong> - Pastikan warna bisa dibedakan</p>
+                                <p><strong>Konsistensi</strong> - Gunakan warna sama untuk kategori sama</p>
+                                <p><strong>Aksesibilitas</strong> - Pertimbangkan color blindness</p>
+                                <p><strong>Emosi warna</strong> - Merah untuk perhatian, hijau untuk positif</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Cara Mengubah Warna Grafik di Excel</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Pilih Data Series</h4>
+                                <p>Klik pada bar, line, atau pie slice yang ingin diubah warnanya</p>
+                                <p><strong>Tip:</strong> Klik sekali untuk pilih semua series, klik dua kali untuk satu series</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Buka Format Data Series</h4>
+                                <p>Klik kanan → <strong>Format Data Series</strong> atau <strong>Ctrl + 1</strong></p>
+                                <p>Atau gunakan <strong>Chart Tools → Format</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Pilih Fill & Line</h4>
+                                <p>Di Format Pane, pilih <strong>Fill & Line</strong> (bucket icon)</p>
+                                <p>Pilih <strong>Solid fill</strong>, <strong>Gradient fill</strong>, atau <strong>Pattern fill</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Atur Warna</h4>
+                                <p>Pilih warna dari palette atau gunakan custom color</p>
+                                <p>Atur transparency untuk efek transparansi</p>
+                            </div>
+                        </div>
+                        
+                        <h2 id="style">4. Mengubah Style dan Layout</h2>
+                        
+                        <p>Excel menyediakan berbagai style dan layout preset yang bisa diaplikasikan dengan satu klik, plus opsi kustomisasi lanjutan.</p>
+                        
+                        <div class="formatting-demo">
+                            <h4>💫 Coba Style Grafik Berbeda</h4>
+                            <div class="style-options">
+                                <div class="style-option active" data-style="basic">
+                                    <h4>Style Basic</h4>
+                                    <p>Tampilan standar</p>
+                                </div>
+                                <div class="style-option" data-style="modern">
+                                    <h4>Style Modern</h4>
+                                    <p>Clean dan profesional</p>
+                                </div>
+                                <div class="style-option" data-style="elegant">
+                                    <h4>Style Elegant</h4>
+                                    <p>Dengan shadow dan effects</p>
+                                </div>
+                                <div class="style-option" data-style="colorful">
+                                    <h4>Style Colorful</h4>
+                                    <p>Warna vibrant dan bold</p>
+                                </div>
+                            </div>
+                            <div class="demo-preview">
+                                <div class="chart-preview">
+                                    <div class="chart-title">Trend Penjualan 2023</div>
+                                    <div class="chart-container" id="styleChart">
+                                        <!-- Chart style akan di-update oleh JavaScript -->
+                                    </div>
+                                    <p id="styleDesc">Grafik dengan style basic - clean dan sederhana</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Quick Style vs Custom Formatting:</strong>
+                            <ul>
+                                <li><strong>Quick Style</strong> - Cepat dan konsisten, baik untuk pemula</li>
+                                <li><strong>Custom Formatting</strong> - Fleksibel dan unik, baik untuk brand identity</li>
+                                <li><strong>Kombinasi</strong> - Gunakan Quick Style sebagai base, lalu kustomisasi</li>
+                                <li><strong>Template</strong> - Simpan formatting favorit sebagai template</li>
+                            </ul>
+                        </div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Style Element</th>
+                                    <th>Options</th>
+                                    <th>Effect</th>
+                                    <th>Best For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Chart Style</strong></td>
+                                    <td>Color schemes, effects</td>
+                                    <td>Mengubah tampilan keseluruhan</td>
+                                    <td>Quick formatting</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chart Layout</strong></td>
+                                    <td>Element position, titles</td>
+                                    <td>Mengatur tata letak elemen</td>
+                                    <td>Standardized reports</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Shape Effects</strong></td>
+                                    <td>Shadow, glow, bevel</td>
+                                    <td>Menambah depth dan dimension</td>
+                                    <td>Presentations</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3D Format</strong></td>
+                                    <td>Depth, contour, lighting</td>
+                                    <td>Membuat efek 3D</td>
+                                    <td>Visual impact (gunakan sparingly)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 id="elemen">5. Menambah dan Memformat Elemen Grafik</h2>
+                        
+                        <p>Elemen tambahan seperti gridlines, trendlines, dan data labels dapat meningkatkan functionality dan readability grafik.</p>
+                        
+                        <div class="formatting-options">
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">📏</div>
+                                    <h3>Gridlines dan Axes</h3>
+                                </div>
+                                <p><strong>Major Gridlines</strong> - Garis bantu utama untuk membaca nilai</p>
+                                <p><strong>Minor Gridlines</strong> - Garis bantu detail untuk precision</p>
+                                <p><strong>Axis Formatting</strong> - Skala, units, number format</p>
+                                <p><strong>Tips:</strong> Gunakan gridlines subtle agar tidak ganggu data</p>
+                            </div>
+                            
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">📈</div>
+                                    <h3>Trendlines dan Annotations</h3>
+                                </div>
+                                <p><strong>Trendlines</strong> - Menunjukkan pola dan prediksi</p>
+                                <p><strong>Data Labels</strong> - Menampilkan nilai langsung pada chart</p>
+                                <p><strong>Text Boxes</strong> - Menambah penjelasan atau highlight</p>
+                                <p><strong>Tips:</strong> Gunakan untuk emphasis poin penting</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Menambah Elemen Grafik</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h4>Buka Chart Elements</h4>
+                                <p>Klik grafik → <strong>Chart Elements</strong> (+) di pojok kanan atas</p>
+                                <p>Atau <strong>Chart Tools → Design → Add Chart Element</strong></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h4>Pilih Elemen</h4>
+                                <p>Checklist elemen yang ingin ditambah</p>
+                                <p><strong>Options:</strong> Axes, Axis Titles, Chart Title, Data Labels, dll.</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h4>Atur Posisi dan Format</h4>
+                                <p>Klik panah untuk pilih posisi atau opsi lanjutan</p>
+                                <p>Format setiap elemen sesuai kebutuhan</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h4>Custom Elements</h4>
+                                <p>Gunakan <strong>Insert → Shapes</strong> untuk elemen kustom</p>
+                                <p>Atau <strong>Insert → Text Box</strong> untuk anotasi</p>
+                            </div>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Hindari Over-Formatting:</h4>
+                            <ul>
+                                <li><strong>Terlalu banyak efek</strong> - Dapat mengalihkan perhatian dari data</li>
+                                <li><strong>Warna berlebihan</strong> - Membuat grafik terlihat berantakan</li>
+                                <li><strong>Font yang sulit dibaca</strong> - Utamakan readability daripada style</li>
+                                <li><strong>3D yang tidak perlu</strong> - Dapat mendistorsi persepsi data</li>
+                                <li><strong>Elemen redundan</strong> - Hanya tambah elemen yang bernilai tambah</li>
+                            </ul>
+                        </div>
+                        
+                        <h2 id="tips-ahli">6. Tips dan Trik Ahli</h2>
+                        
+                        <div class="formatting-options">
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">💾</div>
+                                    <h3>Template dan Defaults</h3>
+                                </div>
+                                <p><strong>Save as Template</strong> - Simpan formatting favorit untuk digunakan kembali</p>
+                                <p><strong>Set as Default Chart</strong> - Jadikan style pilihan sebagai default</p>
+                                <p><strong>Theme Colors</strong> - Gunakan theme colors untuk konsistensi</p>
+                                <p><strong>Tips:</strong> Buat template untuk setiap jenis laporan</p>
+                            </div>
+                            
+                            <div class="formatting-option">
+                                <div class="formatting-header">
+                                    <div class="formatting-icon">⚡</div>
+                                    <h3>Shortcuts dan Efficiency</h3>
+                                </div>
+                                <p><strong>Format Painter</strong> - Copy formatting antar elemen</p>
+                                <p><strong>Selection Pane</strong> - Kelola elemen yang overlap</p>
+                                <p><strong>Quick Access Toolbar</strong> - Customize tools yang sering digunakan</p>
+                                <p><strong>Tips:</strong> Gunakan Alt key shortcuts untuk navigasi cepat</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>🎯 Checklist Formatting Profesional:</strong>
+                            <ol>
+                                <li><strong>Judul yang jelas dan descriptive</strong></li>
+                                <li><strong>Warna yang meaningful dan accessible</strong></li>
+                                <li><strong>Font yang readable dan konsisten</strong></li>
+                                <li><strong>Gridlines yang helpful tapi tidak distracting</strong></li>
+                                <li><strong>Data labels ketika diperlukan</strong></li>
+                                <li><strong>Legenda yang informatif dan well-positioned</strong></li>
+                                <li><strong>Axis labels yang jelas dengan units</strong></li>
+                                <li><strong>Consistent styling across all charts</strong></li>
+                            </ol>
+                        </div>
+                        
+                        <h2>Kesimpulan</h2>
+                        
+                        <p>Memformat grafik di Excel adalah seni dan ilmu. Dengan menguasai teknik-teknik formatting, Anda dapat:</p>
+                        
+                        <ul>
+                            <li><strong>Meningkatkan clarity</strong> dan memahami data</li>
+                            <li><strong>Menyoroti insights</strong> dan pola penting</li>
+                            <li><strong>Menciptakan visual</strong> yang professional dan engaging</li>
+                            <li><strong>Menyampaikan cerita data</strong> dengan lebih efektif</li>
+                            <li><strong>Membangun konsistensi</strong> dalam reporting</li>
+                        </ul>
+                        
+                        <p><strong>Remember: Less is often more!</strong> Formatting terbaik adalah yang meningkatkan understanding tanpa distracting dari data itu sendiri.</p>
+                        
+                        <p><strong>Sekarang giliran Anda!</strong> Buka Excel, pilih grafik, dan eksperimen dengan berbagai formatting options. Punya tips formatting favorit? <strong>Bagikan di komentar!</strong></p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget">
+                    <h3>Tutorial Formatting Grafik</h3>
+                    <ul class="popular-tutorials">
+                        <li><a href="#"><span>1</span> Format Dasar</a></li>
+                        <li><a href="#"><span>2</span> Warna & Style</a></li>
+                        <li><a href="#"><span>3</span> Judul & Teks</a></li>
+                        <li><a href="#"><span>4</span> Elemen Tambahan</a></li>
+                        <li><a href="#"><span>5</span> Tips Ahli</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Kategori Tutorial</h3>
+                    <ul>
+                        <li><a href="#">Formatting Grafik</a></li>
+                        <li><a href="#">Jenis Grafik</a></li>
+                        <li><a href="#">Grafik Excel</a></li>
+                        <li><a href="#">Pivot Table</a></li>
+                        <li><a href="#">Formulas Excel</a></li>
+                        <li><a href="#">Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget tags-widget">
+                    <h3>Tags Populer</h3>
+                    <div class="tags">
+                        <a href="#">Format Grafik</a>
+                        <a href="#">Kustomisasi Chart</a>
+                        <a href="#">Style Grafik</a>
+                        <a href="#">Warna Chart</a>
+                        <a href="#">Judul Grafik</a>
+                        <a href="#">Tips Excel</a>
+                        <a href="#">Visualisasi Data</a>
+                        <a href="#">Excel Tutorial</a>
+                    </div>
+                </div>
+                
+                <div class="widget">
+                    <h3>Download Template</h3>
+                    <p>Download template grafik terformat:</p>
+                    <ul>
+                        <li><a href="#">🎨 Color Palettes</a></li>
+                        <li><a href="#">📊 Chart Styles</a></li>
+                        <li><a href="#">💫 Effect Templates</a></li>
+                        <li><a href="#">🚀 Professional Charts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Dapatkan tips Excel terbaru langsung ke email Anda.</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    </div>
+                    <button style="width: 100%; margin-top: 10px; padding: 10px; background: #217346; color: white; border: none; border-radius: 3px; cursor: pointer;">Berlangganan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Excel Tutorial</h3>
+                    <p>Website tutorial Microsoft Excel terlengkap dengan panduan step by step untuk pemula hingga mahir.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">ig</a>
+                        <a href="#" title="YouTube">YT</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tutorial Excel</h3>
+                    <ul>
+                        <li><a href="#">Formatting Grafik</a></li>
+                        <li><a href="#">Jenis Grafik</a></li>
+                        <li><a href="#">Grafik Excel</a></li>
+                        <li><a href="#">Pivot Table</a></li>
+                        <li><a href="#">Dashboard Excel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>📧 info@exceltutorial.com</li>
+                        <li>📱 +62 812-3456-7890</li>
+                        <li>📍 Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Excel Tutorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Formatting Demo Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Text Formatting Demo
+            const formatOptions = document.querySelectorAll('.demo-option');
+            const demoTitle = document.getElementById('demoTitle');
+            const formatDesc = document.getElementById('formatDesc');
+            
+            formatOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    formatOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update title formatting based on selected option
+                    const formatType = this.getAttribute('data-format');
+                    updateTitleFormatting(formatType);
+                });
+            });
+            
+            function updateTitleFormatting(type) {
+                switch(type) {
+                    case 'basic':
+                        demoTitle.style.cssText = `
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            font-size: 18px;
+                            color: #333;
+                            font-weight: bold;
+                            text-align: center;
+                        `;
+                        formatDesc.textContent = 'Judul grafik dengan formatting dasar - clean dan profesional';
+                        break;
+                    case 'styled':
+                        demoTitle.style.cssText = `
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            font-size: 20px;
+                            color: #217346;
+                            font-weight: bold;
+                            text-align: center;
+                            background: linear-gradient(135deg, #217346, #2ecc71);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            padding: 5px;
+                        `;
+                        formatDesc.textContent = 'Judul dengan gradient effect - modern dan eye-catching';
+                        break;
+                    case 'custom':
+                        demoTitle.style.cssText = `
+                            font-family: 'Georgia', serif;
+                            font-size: 22px;
+                            color: #e74c3c;
+                            font-weight: bold;
+                            font-style: italic;
+                            text-align: center;
+                            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+                            border-bottom: 2px solid #e74c3c;
+                            padding-bottom: 5px;
+                        `;
+                        formatDesc.textContent = 'Judul dengan font kustom dan efek khusus - elegant dan distinctive';
+                        break;
+                }
+            }
+            
+            // Color Palette Demo
+            const colorOptions = document.querySelectorAll('.color-option');
+            const colorBars = document.getElementById('colorBars');
+            const colorDesc = document.getElementById('colorDesc');
+            
+            // Color palettes data
+            const colorPalettes = {
+                default: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12'],
+                warm: ['#e74c3c', '#e67e22', '#f39c12', '#d35400'],
+                cool: ['#3498db', '#2980b9', '#1abc9c', '#16a085'],
+                autumn: ['#d35400', '#e67e22', '#f39c12', '#f1c40f'],
+                pastel: ['#9b59b6', '#e74c3c', '#3498db', '#2ecc71'],
+                ocean: ['#1abc9c', '#3498db', '#2980b9', '#2c3e50']
+            };
+            
+            const paletteNames = {
+                default: 'Professional Blue',
+                warm: 'Warm Tones',
+                cool: 'Cool Blues',
+                autumn: 'Autumn Colors',
+                pastel: 'Pastel Palette',
+                ocean: 'Ocean Theme'
+            };
+            
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update colors based on selected palette
+                    const palette = this.getAttribute('data-palette');
+                    updateColorPalette(palette);
+                });
+            });
+            
+            function updateColorPalette(palette) {
+                const colors = colorPalettes[palette];
+                const paletteName = paletteNames[palette];
+                
+                // Clear existing bars
+                colorBars.innerHTML = '';
+                
+                // Create new bars with selected colors
+                const values = [60, 85, 45, 75];
+                values.forEach((value, index) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.height = `${value}%`;
+                    bar.style.background = colors[index];
+                    bar.style.transition = 'all 0.3s ease';
+                    colorBars.appendChild(bar);
+                });
+                
+                colorDesc.textContent = `Skema warna ${paletteName} - ${getPaletteDescription(palette)}`;
+            }
+            
+            function getPaletteDescription(palette) {
+                const descriptions = {
+                    default: 'klasik dan profesional',
+                    warm: 'energik dan perhatian',
+                    cool: 'tenang dan dapat dipercaya',
+                    autumn: 'hangat dan inviting',
+                    pastel: 'soft dan modern',
+                    ocean: 'segar dan calming'
+                };
+                return descriptions[palette];
+            }
+            
+            // Initialize with default palette
+            updateColorPalette('default');
+            
+            // Style Demo
+            const styleOptions = document.querySelectorAll('.style-option');
+            const styleChart = document.getElementById('styleChart');
+            const styleDesc = document.getElementById('styleDesc');
+            
+            styleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    styleOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update chart style based on selected option
+                    const styleType = this.getAttribute('data-style');
+                    updateChartStyle(styleType);
+                });
+            });
+            
+            function updateChartStyle(style) {
+                // Clear existing chart
+                styleChart.innerHTML = '';
+                
+                switch(style) {
+                    case 'basic':
+                        createBasicChart();
+                        styleDesc.textContent = 'Grafik dengan style basic - clean dan sederhana';
+                        break;
+                    case 'modern':
+                        createModernChart();
+                        styleDesc.textContent = 'Grafik dengan style modern - minimalist dan profesional';
+                        break;
+                    case 'elegant':
+                        createElegantChart();
+                        styleDesc.textContent = 'Grafik dengan style elegant - sophisticated dengan efek';
+                        break;
+                    case 'colorful':
+                        createColorfulChart();
+                        styleDesc.textContent = 'Grafik dengan style colorful - vibrant dan eye-catching';
+                        break;
+                }
+            }
+            
+            function createBasicChart() {
+                const barsContainer = document.createElement('div');
+                barsContainer.className = 'chart-bars';
+                
+                const labelsContainer = document.createElement('div');
+                labelsContainer.className = 'chart-labels';
+                
+                const values = [60, 85, 45, 75];
+                const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12'];
+                
+                values.forEach((value, index) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.height = `${value}%`;
+                    bar.style.background = colors[index];
+                    barsContainer.appendChild(bar);
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = `Q${index + 1}`;
+                    labelsContainer.appendChild(label);
+                });
+                
+                styleChart.appendChild(barsContainer);
+                styleChart.appendChild(labelsContainer);
+            }
+            
+            function createModernChart() {
+                const barsContainer = document.createElement('div');
+                barsContainer.className = 'chart-bars';
+                barsContainer.style.borderBottom = '2px solid #34495e';
+                
+                const labelsContainer = document.createElement('div');
+                labelsContainer.className = 'chart-labels';
+                
+                const values = [60, 85, 45, 75];
+                const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12'];
+                
+                values.forEach((value, index) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.height = `${value}%`;
+                    bar.style.background = `linear-gradient(to top, ${colors[index]}, ${darkenColor(colors[index], 20)})`;
+                    bar.style.borderRadius = '4px 4px 0 0';
+                    bar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                    barsContainer.appendChild(bar);
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = `Q${index + 1}`;
+                    label.style.fontWeight = 'bold';
+                    label.style.color = '#2c3e50';
+                    labelsContainer.appendChild(label);
+                });
+                
+                styleChart.appendChild(barsContainer);
+                styleChart.appendChild(labelsContainer);
+            }
+            
+            function createElegantChart() {
+                const barsContainer = document.createElement('div');
+                barsContainer.className = 'chart-bars';
+                barsContainer.style.borderBottom = '2px solid #7f8c8d';
+                
+                const labelsContainer = document.createElement('div');
+                labelsContainer.className = 'chart-labels';
+                
+                const values = [60, 85, 45, 75];
+                const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12'];
+                
+                values.forEach((value, index) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.height = `${value}%`;
+                    bar.style.background = `linear-gradient(135deg, ${colors[index]}, ${darkenColor(colors[index], 30)})`;
+                    bar.style.borderRadius = '8px 8px 0 0';
+                    bar.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1)';
+                    barsContainer.appendChild(bar);
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = `Q${index + 1}`;
+                    label.style.fontWeight = 'bold';
+                    label.style.fontStyle = 'italic';
+                    label.style.color = '#34495e';
+                    labelsContainer.appendChild(label);
+                });
+                
+                styleChart.appendChild(barsContainer);
+                styleChart.appendChild(labelsContainer);
+            }
+            
+            function createColorfulChart() {
+                const barsContainer = document.createElement('div');
+                barsContainer.className = 'chart-bars';
+                barsContainer.style.borderBottom = '3px solid #2c3e50';
+                
+                const labelsContainer = document.createElement('div');
+                labelsContainer.className = 'chart-labels';
+                
+                const values = [60, 85, 45, 75];
+                const colors = ['#e74c3c', '#9b59b6', '#1abc9c', '#f1c40f'];
+                
+                values.forEach((value, index) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.height = `${value}%`;
+                    bar.style.background = `radial-gradient(circle at top, ${lightenColor(colors[index], 20)}, ${colors[index]})`;
+                    bar.style.borderRadius = '6px 6px 0 0';
+                    bar.style.boxShadow = '0 3px 6px rgba(0,0,0,0.3)';
+                    bar.style.border = `2px solid ${darkenColor(colors[index], 20)}`;
+                    barsContainer.appendChild(bar);
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = `Q${index + 1}`;
+                    label.style.fontWeight = 'bold';
+                    label.style.color = '#e74c3c';
+                    label.style.fontSize = '13px';
+                    labelsContainer.appendChild(label);
+                });
+                
+                styleChart.appendChild(barsContainer);
+                styleChart.appendChild(labelsContainer);
+            }
+            
+            // Initialize with basic style
+            createBasicChart();
+            
+            // Helper functions for color manipulation
+            function darkenColor(color, percent) {
+                const num = parseInt(color.replace("#", ""), 16);
+                const amt = Math.round(2.55 * percent);
+                const R = (num >> 16) - amt;
+                const G = (num >> 8 & 0x00FF) - amt;
+                const B = (num & 0x0000FF) - amt;
+                return "#" + (
+                    0x1000000 +
+                    (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+                    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+                    (B < 255 ? B < 1 ? 0 : B : 255)
+                ).toString(16).slice(1);
+            }
+            
+            function lightenColor(color, percent) {
+                const num = parseInt(color.replace("#", ""), 16);
+                const amt = Math.round(2.55 * percent);
+                const R = (num >> 16) + amt;
+                const G = (num >> 8 & 0x00FF) + amt;
+                const B = (num & 0x0000FF) + amt;
+                return "#" + (
+                    0x1000000 +
+                    (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+                    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+                    (B < 255 ? B < 1 ? 0 : B : 255)
+                ).toString(16).slice(1);
+            }
+            
+            // Add hover effects to feature cards
+            const featureCards = document.querySelectorAll('.feature-card, .formatting-option');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Interactive chart bars
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach(bar => {
+                bar.addEventListener('mouseover', function() {
+                    this.style.opacity = '0.8';
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                bar.addEventListener('mouseout', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
