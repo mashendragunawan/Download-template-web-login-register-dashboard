@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Hitung HPP Produk Makanan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 25px;
+        }
+        
+        .section {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9fafc;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #3498db;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-primary {
+            background-color: #2ecc71;
+        }
+        
+        .btn-primary:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f6fc;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .total-row {
+            font-weight: 700;
+            background-color: #e8f4fc;
+        }
+        
+        .result-box {
+            background-color: #e8f6f3;
+            border-left: 5px solid #2ecc71;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-size: 1.3rem;
+        }
+        
+        .success {
+            color: #27ae60;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Sistem Hitung HPP Produk Makanan</h1>
+            <p class="subtitle">Hitung Harga Pokok Produksi dan tentukan harga jual yang tepat untuk produk makanan Anda dengan mudah</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Input Bahan Baku -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-apple-alt"></i> Bahan Baku</h2>
+                
+                <div class="input-group">
+                    <label for="ingredientName">Nama Bahan</label>
+                    <input type="text" id="ingredientName" placeholder="Contoh: Tepung Terigu">
+                </div>
+                
+                <div class="input-group">
+                    <label for="ingredientQty">Jumlah</label>
+                    <input type="number" id="ingredientQty" placeholder="0" min="0" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label for="ingredientUnit">Satuan</label>
+                    <select id="ingredientUnit">
+                        <option value="gram">Gram</option>
+                        <option value="kg">Kilogram</option>
+                        <option value="ml">Mililiter</option>
+                        <option value="liter">Liter</option>
+                        <option value="pcs">Buah/Pcs</option>
+                        <option value="bungkus">Bungkus</option>
+                        <option value="sdm">Sendok Makan</option>
+                        <option value="sdt">Sendok Teh</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="ingredientPrice">Harga (Rp)</label>
+                    <input type="number" id="ingredientPrice" placeholder="0" min="0">
+                </div>
+                
+                <button class="btn btn-primary" id="addIngredientBtn">
+                    <i class="fas fa-plus"></i> Tambah Bahan
+                </button>
+                
+                <div class="table-container">
+                    <h3 style="margin-top: 25px; margin-bottom: 10px;">Daftar Bahan Baku</h3>
+                    <table id="ingredientsTable">
+                        <thead>
+                            <tr>
+                                <th>Bahan</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>Subtotal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ingredientsList">
+                            <!-- Data bahan akan ditampilkan di sini -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="total-row">
+                                <td colspan="3">Total Biaya Bahan Baku</td>
+                                <td id="totalIngredientsCost">Rp 0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Biaya Tambahan dan Kalkulasi -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Biaya Tambahan & Kalkulasi</h2>
+                
+                <div class="input-group">
+                    <label for="productName">Nama Produk</label>
+                    <input type="text" id="productName" placeholder="Contoh: Brownies Cokelat">
+                </div>
+                
+                <div class="input-group">
+                    <label for="productQty">Jumlah Produksi (pcs)</label>
+                    <input type="number" id="productQty" placeholder="0" min="1" value="1">
+                </div>
+                
+                <h3 style="margin: 25px 0 15px; color: #2c3e50;">Biaya Tambahan</h3>
+                
+                <div class="input-group">
+                    <label for="laborCost">Biaya Tenaga Kerja (Rp)</label>
+                    <input type="number" id="laborCost" placeholder="0" min="0" value="0">
+                </div>
+                
+                <div class="input-group">
+                    <label for="packagingCost">Biaya Kemasan (Rp)</label>
+                    <input type="number" id="packagingCost" placeholder="0" min="0" value="0">
+                </div>
+                
+                <div class="input-group">
+                    <label for="otherCost">Biaya Lainnya (Rp)</label>
+                    <input type="number" id="otherCost" placeholder="0" min="0" value="0">
+                </div>
+                
+                <div class="input-group">
+                    <label for="markupPercentage">Markup Harga Jual (%)</label>
+                    <input type="number" id="markupPercentage" placeholder="30" min="0" value="30" step="0.1">
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="calculateBtn">
+                        <i class="fas fa-calculator"></i> Hitung HPP
+                    </button>
+                    <button class="btn" id="resetBtn">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <!-- Hasil Kalkulasi -->
+                <div id="resultContainer" style="display: none;">
+                    <div class="result-box">
+                        <h3 style="margin-bottom: 15px; color: #2c3e50;">Hasil Perhitungan HPP</h3>
+                        
+                        <div class="result-item">
+                            <span>Nama Produk:</span>
+                            <span class="result-value" id="resultProductName">-</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Total Biaya Bahan Baku:</span>
+                            <span class="result-value" id="resultIngredientsCost">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Total Biaya Tambahan:</span>
+                            <span class="result-value" id="resultAdditionalCost">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Total Biaya Produksi:</span>
+                            <span class="result-value" id="resultTotalCost">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>HPP per Unit:</span>
+                            <span class="result-value highlight" id="resultHppPerUnit">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Markup (<span id="resultMarkupPercentage">0</span>%):</span>
+                            <span class="result-value" id="resultMarkupValue">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Harga Jual per Unit:</span>
+                            <span class="result-value highlight success" id="resultSellingPrice">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Total Pendapatan:</span>
+                            <span class="result-value success" id="resultTotalRevenue">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Catatan -->
+                <div style="margin-top: 30px; padding: 15px; background-color: #fffde7; border-radius: 8px; border-left: 5px solid #ffd54f;">
+                    <h4><i class="fas fa-lightbulb"></i> Catatan Penting:</h4>
+                    <p style="margin-top: 10px;">HPP (Harga Pokok Penjualan) adalah total biaya yang dikeluarkan untuk membuat suatu produk, termasuk bahan baku dan biaya tambahan seperti tenaga kerja dan kemasan.</p>
+                    <p style="margin-top: 5px;"><strong>Rumus HPP per Unit = Total Biaya Produksi ÷ Jumlah Unit Diproduksi</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Sistem Hitung HPP Produk Makanan | Dibuat untuk memudahkan perhitungan bisnis kuliner</p>
+        </div>
+    </div>
+
+    <script>
+        // Data penyimpanan bahan
+        let ingredients = [];
+        let totalIngredientsCost = 0;
+        
+        // DOM Elements
+        const ingredientNameInput = document.getElementById('ingredientName');
+        const ingredientQtyInput = document.getElementById('ingredientQty');
+        const ingredientUnitSelect = document.getElementById('ingredientUnit');
+        const ingredientPriceInput = document.getElementById('ingredientPrice');
+        const addIngredientBtn = document.getElementById('addIngredientBtn');
+        const ingredientsList = document.getElementById('ingredientsList');
+        const totalIngredientsCostCell = document.getElementById('totalIngredientsCost');
+        
+        const productNameInput = document.getElementById('productName');
+        const productQtyInput = document.getElementById('productQty');
+        const laborCostInput = document.getElementById('laborCost');
+        const packagingCostInput = document.getElementById('packagingCost');
+        const otherCostInput = document.getElementById('otherCost');
+        const markupPercentageInput = document.getElementById('markupPercentage');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        
+        // Result elements
+        const resultProductName = document.getElementById('resultProductName');
+        const resultIngredientsCost = document.getElementById('resultIngredientsCost');
+        const resultAdditionalCost = document.getElementById('resultAdditionalCost');
+        const resultTotalCost = document.getElementById('resultTotalCost');
+        const resultHppPerUnit = document.getElementById('resultHppPerUnit');
+        const resultMarkupPercentage = document.getElementById('resultMarkupPercentage');
+        const resultMarkupValue = document.getElementById('resultMarkupValue');
+        const resultSellingPrice = document.getElementById('resultSellingPrice');
+        const resultTotalRevenue = document.getElementById('resultTotalRevenue');
+        
+        // Format angka ke format Rupiah
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        // Tambah bahan ke daftar
+        function addIngredient() {
+            const name = ingredientNameInput.value.trim();
+            const qty = parseFloat(ingredientQtyInput.value);
+            const unit = ingredientUnitSelect.value;
+            const price = parseInt(ingredientPriceInput.value) || 0;
+            
+            if (!name || qty <= 0 || price <= 0) {
+                alert('Harap isi semua field bahan dengan nilai yang valid!');
+                return;
+            }
+            
+            const subtotal = qty * price;
+            const ingredient = {
+                id: Date.now(),
+                name,
+                qty,
+                unit,
+                price,
+                subtotal
+            };
+            
+            ingredients.push(ingredient);
+            updateIngredientsList();
+            updateTotalIngredientsCost();
+            
+            // Reset input fields
+            ingredientNameInput.value = '';
+            ingredientQtyInput.value = '';
+            ingredientPriceInput.value = '';
+            ingredientNameInput.focus();
+        }
+        
+        // Update daftar bahan di tabel
+        function updateIngredientsList() {
+            ingredientsList.innerHTML = '';
+            
+            if (ingredients.length === 0) {
+                ingredientsList.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #999; padding: 20px;">
+                            Belum ada bahan yang ditambahkan. Silakan tambahkan bahan baku.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            ingredients.forEach(ingredient => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ingredient.name}</td>
+                    <td>${ingredient.qty} ${ingredient.unit}</td>
+                    <td>${formatRupiah(ingredient.price)}</td>
+                    <td>${formatRupiah(ingredient.subtotal)}</td>
+                    <td>
+                        <button class="btn btn-danger btn-small" onclick="removeIngredient(${ingredient.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                ingredientsList.appendChild(row);
+            });
+        }
+        
+        // Hapus bahan dari daftar
+        function removeIngredient(id) {
+            ingredients = ingredients.filter(ingredient => ingredient.id !== id);
+            updateIngredientsList();
+            updateTotalIngredientsCost();
+        }
+        
+        // Update total biaya bahan baku
+        function updateTotalIngredientsCost() {
+            totalIngredientsCost = ingredients.reduce((total, ingredient) => total + ingredient.subtotal, 0);
+            totalIngredientsCostCell.textContent = formatRupiah(totalIngredientsCost);
+        }
+        
+        // Hitung HPP
+        function calculateHPP() {
+            const productName = productNameInput.value.trim() || "Produk Saya";
+            const productQty = parseInt(productQtyInput.value) || 1;
+            const laborCost = parseInt(laborCostInput.value) || 0;
+            const packagingCost = parseInt(packagingCostInput.value) || 0;
+            const otherCost = parseInt(otherCostInputInput.value) || 0;
+            const markupPercentage = parseFloat(markupPercentageInput.value) || 0;
+            
+            if (ingredients.length === 0) {
+                alert('Harap tambahkan bahan baku terlebih dahulu!');
+                return;
+            }
+            
+            if (productQty <= 0) {
+                alert('Jumlah produksi harus lebih dari 0!');
+                return;
+            }
+            
+            // Hitung total biaya tambahan
+            const totalAdditionalCost = laborCost + packagingCost + otherCost;
+            
+            // Hitung total biaya produksi
+            const totalProductionCost = totalIngredientsCost + totalAdditionalCost;
+            
+            // Hitung HPP per unit
+            const hppPerUnit = totalProductionCost / productQty;
+            
+            // Hitung markup dan harga jual
+            const markupValue = hppPerUnit * (markupPercentage / 100);
+            const sellingPrice = hppPerUnit + markupValue;
+            
+            // Hitung total pendapatan
+            const totalRevenue = sellingPrice * productQty;
+            
+            // Tampilkan hasil
+            resultProductName.textContent = productName;
+            resultIngredientsCost.textContent = formatRupiah(totalIngredientsCost);
+            resultAdditionalCost.textContent = formatRupiah(totalAdditionalCost);
+            resultTotalCost.textContent = formatRupiah(totalProductionCost);
+            resultHppPerUnit.textContent = formatRupiah(hppPerUnit);
+            resultMarkupPercentage.textContent = markupPercentage;
+            resultMarkupValue.textContent = formatRupiah(markupValue);
+            resultSellingPrice.textContent = formatRupiah(sellingPrice);
+            resultTotalRevenue.textContent = formatRupiah(totalRevenue);
+            
+            // Tampilkan container hasil
+            resultContainer.style.display = 'block';
+            
+            // Scroll ke hasil
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Reset semua data
+        function resetAll() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data?')) {
+                // Reset bahan
+                ingredients = [];
+                updateIngredientsList();
+                updateTotalIngredientsCost();
+                
+                // Reset input
+                ingredientNameInput.value = '';
+                ingredientQtyInput.value = '';
+                ingredientPriceInput.value = '';
+                productNameInput.value = '';
+                productQtyInput.value = '1';
+                laborCostInput.value = '0';
+                packagingCostInput.value = '0';
+                otherCostInput.value = '0';
+                markupPercentageInput.value = '30';
+                
+                // Sembunyikan hasil
+                resultContainer.style.display = 'none';
+                
+                // Fokus ke input pertama
+                ingredientNameInput.focus();
+            }
+        }
+        
+        // Event Listeners
+        addIngredientBtn.addEventListener('click', addIngredient);
+        
+        // Tambah bahan dengan Enter
+        ingredientNameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addIngredient();
+        });
+        
+        ingredientQtyInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addIngredient();
+        });
+        
+        ingredientPriceInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addIngredient();
+        });
+        
+        calculateBtn.addEventListener('click', calculateHPP);
+        resetBtn.addEventListener('click', resetAll);
+        
+        // Inisialisasi daftar bahan
+        updateIngredientsList();
+        
+        // Tambahkan beberapa contoh bahan untuk demo
+        window.addEventListener('load', function() {
+            // Contoh data untuk demo
+            ingredients = [
+                {id: 1, name: "Tepung Terigu", qty: 500, unit: "gram", price: 10000, subtotal: 5000},
+                {id: 2, name: "Gula Pasir", qty: 250, unit: "gram", price: 15000, subtotal: 3750},
+                {id: 3, name: "Telur Ayam", qty: 4, unit: "pcs", price: 2500, subtotal: 10000},
+                {id: 4, name: "Cokelat Bubuk", qty: 100, unit: "gram", price: 20000, subtotal: 2000}
+            ];
+            
+            updateIngredientsList();
+            updateTotalIngredientsCost();
+            
+            // Isi contoh data lainnya
+            productNameInput.value = "Brownies Cokelat";
+            productQtyInput.value = "20";
+            laborCostInput.value = "15000";
+            packagingCostInput.value = "5000";
+            otherCostInput.value = "3000";
+            
+            // Hitung otomatis untuk demo
+            setTimeout(calculateHPP, 500);
+        });
+    </script>
+</body>
+</html>
